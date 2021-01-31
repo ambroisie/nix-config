@@ -7,5 +7,6 @@
     ./matrix.nix
     ./media.nix
     ./nginx.nix
+    ./pirate.nix
   ];
 }

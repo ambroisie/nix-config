@@ -78,6 +78,8 @@
     jellyfin.enable = true;
     # Matrix backend and Element chat front-end
     matrix.enable = true;
+    # The whole *arr software suite
+    pirate.enable = true;
   };
 
   programs.gnupg.agent = {
