@@ -69,6 +69,8 @@
 
   # List services that you want to enable:
   my.services = {
+    # Gitea forge
+    gitea.enable = true;
     # Matrix backend and Element chat front-end
     matrix.enable = true;
   };
