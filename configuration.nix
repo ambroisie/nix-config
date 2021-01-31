@@ -68,6 +68,11 @@
   ];
 
   # List services that you want to enable:
+  my.services = {
+    # Matrix backend and Element chat front-end
+    matrix.enable = true;
+  };
+
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
