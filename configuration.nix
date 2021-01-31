@@ -51,10 +51,13 @@
   users.users.ambroisie = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    openssh.authorizedKeys.keys = [
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC+lrntygUjRA7X6AXRXoV0BMbmZI9bzxR7M++temU1N1WQ7sEGu4zHNIeWaqCKtVbdjvuN5nC8IqC5iV+8KBdT2d+iH165yeEh9mYqSOS9wn0oPr6cSvOZOGqWi7twl0/lrkUxuFl3Qr4gr3Y04PDBK/7JM6+KAS00OOaxhlD9M57TO1lE2Wk6KQWsiyCZe3lczz6MNWUSSRfHOXCCMoiN588hBfdCikNy7Js7+Uz0R/8c86Yn8iu4EpRGpGMJi06KOJi8EPyUvolaeUFpn51IeoD2QcW7Hc3MDyZ+DJj5GV4NQPq46RkMZ7vqEMT+Ix5dJi5kFvnQH3KhJuvNuiXHNbWYqd/o/MbANMRoS2IfRN2jA/NtcFXYXBsRYpKpHhCgzTacY8YxqSJepFOx3vLMVKTXjTrO2IDIjie1y2nhicnzBzglEa3TP2S1FJZdwJzeBfIOWZiMcoIBrxYXdufOpHPjEfQiGETchHJHUxMPX64LxU2bCYfOK36zX8MKCYE1eyt0lRuZZ8s44aQHSIvyYTSnuvgPSAG6Il32J+vnumeTu16ory+WrONO4x395T+OFp0EGXZ4SovVP0mF2ZCxpJX1Vdw0GWkIwsz64E01kGLcYn0bPo+ltAF1tCJ77DvjQS+X92dXIGYKohueT/+A+rfpcB4sW4x57RZZv+gQww== ambroisie@aramis"
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC8Zns4/86+oz1tdM5E+GKUHcxPuShqcxCrqxCGJ9qgeVkefvnEsRFCbTysjYYUz5d1wPHgazjzyTWQYFrKUOEFbqFhs5vnxEezokGrCPhE61sZ7wIM3gx2S/aCxk7hPmBtdBi624qxa0QdrrKF04ZGDGBvO/bEAuJLqBs9xagS7e0jzwcuOKZVTB9VA15n8aLvC/HuaHTG7SWfMYlD+HfbCBSo8UNjsrTWOFyakHP8zEJEzXD83SBp5q5V7JNiCyYxlTmNLKzCdSBFjoUaqxuiGb4O8YaUh9ttsrhj3CaJUrCqNyY6mvIAXIcyLow+o3h9iWApI1LBEQgP3A9nBTktdOJlv2UUFIb4tjiu6as1dLVJ/iQuym885irIVYHcUaWFVCtIREUU3NMwXGxnAm9E6S/zk2O8hY6QT+YU+03Ll+ctrLLMHrw0Ow/6ryi63trBMN5xl97SHkl2K0XkC2rNgaSiVoziVBi8CKgc2FENkprpJTlHwTQeXAP09m8+bhqpwjhKG1dI/t1y4adr+yvChnOAaAFrMAIP7uXaX8xt/LjYNeZ7+w6O7+kwA2XOE3Ucus+a8AUt+bS8JXmh3Vpwg2SfCmn/AmLsNXrwynelVpYO/t0cZIp1uS3OcUQYxuSO++DI6SiKazE47yP0qxK0qIi9Pm9gX1w6SnE0oQcQ6w== ambroisie@shared-key"
-    ];
+    openssh.authorizedKeys.keys = with builtins; let
+      contents = readDir ./ssh;
+      names = attrNames contents;
+      files = filter (name: contents.${name} == "regular") names;
+      keys = map (basename: readFile (./ssh + "/${basename}")) files;
+    in
+    keys;
   };
 
   # List packages installed in system profile. To search, run:
