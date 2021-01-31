@@ -74,6 +74,8 @@
   my.services = {
     # Gitea forge
     gitea.enable = true;
+    # Jellyfin media server
+    jellyfin.enable = true;
     # Matrix backend and Element chat front-end
     matrix.enable = true;
   };
