@@ -3,7 +3,7 @@
 { config, lib, ... }:
 let
   needed = with config.my.services;
-    jellyfin.enable || pirate.enable || transmission.enable;
+    jellyfin.enable || pirate.enable || sabnzbd.enable || transmission.enable;
 in
 {
   config.users.groups.media = lib.mkIf needed { };

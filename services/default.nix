@@ -8,6 +8,7 @@
     ./media.nix
     ./nginx.nix
     ./pirate.nix
+    ./sabnzbd.nix
     ./transmission.nix
   ];
 }

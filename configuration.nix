@@ -80,6 +80,8 @@
     matrix.enable = true;
     # The whole *arr software suite
     pirate.enable = true;
+    # Usenet client
+    sabnzbd.enable = true;
     # Torrent client and webui
     transmission = {
       enable = true;
