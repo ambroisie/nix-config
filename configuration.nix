@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports =
@@ -84,7 +84,7 @@
     transmission = {
       enable = true;
       username = "Ambroisie";
-      password = pkgs.lib.removeSuffix "\n" (builtins.readFile ./secrets/transmission/password.txt);
+      password = lib.fileContents ./secrets/transmission/password.txt;
     };
   };
 
