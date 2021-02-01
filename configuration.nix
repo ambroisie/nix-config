@@ -81,6 +81,11 @@
       enable = true;
       secret = lib.fileContents ./secrets/matrix/secret.txt;
     };
+    # Nextcloud self-hosted cloud
+    nextcloud = {
+      enable = true;
+      password = lib.fileContents ./secrets/nextcloud/password.txt;
+    };
     # The whole *arr software suite
     pirate.enable = true;
     # Usenet client
