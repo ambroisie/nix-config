@@ -80,6 +80,12 @@
     matrix.enable = true;
     # The whole *arr software suite
     pirate.enable = true;
+    # Torrent client and webui
+    transmission = {
+      enable = true;
+      username = "Ambroisie";
+      password = pkgs.lib.removeSuffix "\n" (builtins.readFile ./secrets/transmission/password.txt);
+    };
   };
 
   programs.gnupg.agent = {
