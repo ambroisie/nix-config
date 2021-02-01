@@ -4,6 +4,7 @@
   imports = [
     ./backup.nix
     ./blog.nix
+    ./drone.nix
     ./gitea.nix
     ./indexers.nix
     ./jellyfin.nix
