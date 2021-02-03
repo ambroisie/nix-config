@@ -6,38 +6,60 @@ let
   giteaDomain = "gitea.${config.networking.domain}";
 in
 {
-  options.my.services.gitea = {
-    enable = lib.mkEnableOption "Gitea";
+  options.my.services.gitea = with lib; {
+    enable = mkEnableOption "Gitea";
+    port = mkOption {
+      type = types.port;
+      default = 3000;
+      example = 8080;
+      description = "Internal port";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     services.gitea = {
       enable = true;
-      appName = "Ambroisie's Gitea";
+
+      appName = "Ambroisie's forge";
+      httpPort = cfg.port;
       domain = "${giteaDomain}";
       rootUrl = "https://${giteaDomain}";
+
+      user = "git";
+      lfs.enable = true;
+
       useWizard = true;
       disableRegistration = true;
-      lfs.enable = true;
+
+      # only send cookies via HTTPS
+      cookieSecure = true;
+
+      database = {
+        type = "postgres"; # Automatic setup
+        user = "git"; # User needs to be the same as gitea user
+      };
     };
 
-    # Enable DB
-    services.postgresql = {
-      enable = true;
-      authentication = ''
-        local gitea all ident map=gitea-users
-      '';
-      identMap = '' # Map the gitea user to postgresql
-        gitea-users gitea gitea
-      '';
+    users.users.git = {
+      description = "Gitea Service";
+      home = config.services.gitea.stateDir;
+      useDefaultShell = true;
+      group = "git";
+
+      # The service for gitea seems to hardcode the group as
+      # gitea, so, uh, just in case?
+      extraGroups = [ "gitea" ];
+
+      isSystemUser = true;
     };
+    users.groups.git = { };
 
     # Proxy to Gitea
     services.nginx.virtualHosts."${giteaDomain}" = {
       forceSSL = true;
       useACMEHost = "${domain}";
 
-      locations."/".proxyPass = "http://localhost:3000/";
+      locations."/".proxyPass = "http://localhost:${toString cfg.port}/";
     };
   };
 }
