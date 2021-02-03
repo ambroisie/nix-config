@@ -3,6 +3,7 @@
 {
   imports = [
     ./gitea.nix
+    ./indexers.nix
     ./jellyfin.nix
     ./matrix.nix
     ./media.nix

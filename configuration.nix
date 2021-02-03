@@ -86,6 +86,11 @@
   my.services = {
     # Gitea forge
     gitea.enable = true;
+    # Meta-indexers
+    indexers = {
+      jackett.enable = true;
+      nzbhydra.enable = true;
+    };
     # Jellyfin media server
     jellyfin.enable = true;
     # Matrix backend and Element chat front-end
