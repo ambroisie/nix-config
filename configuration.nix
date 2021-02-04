@@ -77,7 +77,10 @@
     # Jellyfin media server
     jellyfin.enable = true;
     # Matrix backend and Element chat front-end
-    matrix.enable = true;
+    matrix = {
+      enable = true;
+      secret = lib.fileContents ./secrets/matrix/secret.txt;
+    };
     # The whole *arr software suite
     pirate.enable = true;
     # Usenet client
