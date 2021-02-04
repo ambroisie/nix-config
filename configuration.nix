@@ -93,6 +93,8 @@
     };
     # The whole *arr software suite
     pirate.enable = true;
+    # Regular backups
+    postgresql-backup.enable = true;
     # Usenet client
     sabnzbd.enable = true;
     # Torrent client and webui
