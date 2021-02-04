@@ -47,8 +47,10 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
+  users.mutableUsers = false; # I want it to be declarative.
+
   # Define user accounts and passwords.
-  users.users.root.hashedPassword  = lib.fileContents ./secrets/users/root/password.txt;
+  users.users.root.hashedPassword = lib.fileContents ./secrets/users/root/password.txt;
   users.users.ambroisie = {
     hashedPassword = lib.fileContents ./secrets/users/ambroisie/password.txt;
     description = "Bruno BELANYI";
