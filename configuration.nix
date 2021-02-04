@@ -47,8 +47,11 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define user accounts and passwords.
+  users.users.root.hashedPassword  = lib.fileContents ./secrets/users/root/password.txt;
   users.users.ambroisie = {
+    hashedPassword = lib.fileContents ./secrets/users/ambroisie/password.txt;
+    description = "Bruno BELANYI";
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     openssh.authorizedKeys.keys = with builtins; let
