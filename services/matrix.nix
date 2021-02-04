@@ -38,13 +38,6 @@ in
       '';
     };
 
-    services.postgresqlBackup = {
-      enable = true;
-      databases = [ "matrix-synapse" ];
-      # FIXME: best times for backup ?
-      startAt = "*-*-* 23:30:00";
-    };
-
     services.matrix-synapse = {
       enable = true;
       server_name = domain;
