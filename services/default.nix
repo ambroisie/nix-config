@@ -11,6 +11,7 @@
     ./nginx.nix
     ./pirate.nix
     ./postgresql-backup.nix
+    ./rss-bridge.nix
     ./sabnzbd.nix
     ./transmission.nix
   ];
