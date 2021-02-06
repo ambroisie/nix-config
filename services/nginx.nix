@@ -1,7 +1,7 @@
 # Configuration shamelessly stolen from [1]
 #
 # [1]: https://github.com/delroth/infra.delroth.net/blob/master/common/nginx.nix
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Whenever something defines an nginx vhost, ensure that nginx defaults are
@@ -29,12 +29,14 @@
       certs =
         let
           domain = config.networking.domain;
+          key = config.my.secrets.acme.key;
         in
+        with pkgs;
         {
           "${domain}" = {
             extraDomainNames = [ "*.${domain}" ];
             dnsProvider = "gandiv5";
-            credentialsFile = ../secrets/acme/key.env;
+            credentialsFile = writeText "key.env" key; # Unsecure, I don't care.
           };
         };
     };

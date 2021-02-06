@@ -4,11 +4,16 @@
 
 { config, lib, pkgs, ... }:
 
+let
+  my = config.my;
+in
 {
   imports =
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # Include my secrets
+      ./secrets
       # Include my services
       ./services
     ];
@@ -57,9 +62,9 @@
   users.mutableUsers = false; # I want it to be declarative.
 
   # Define user accounts and passwords.
-  users.users.root.hashedPassword = lib.fileContents ./secrets/users/root/password.txt;
+  users.users.root.hashedPassword = my.secrets.users.root.hashedPassword;
   users.users.ambroisie = {
-    hashedPassword = lib.fileContents ./secrets/users/ambroisie/password.txt;
+    hashedPassword = my.secrets.users.ambroisie.hashedPassword;
     description = "Bruno BELANYI";
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
@@ -96,12 +101,12 @@
     # Matrix backend and Element chat front-end
     matrix = {
       enable = true;
-      secret = lib.fileContents ./secrets/matrix/secret.txt;
+      secret = my.secrets.matrix.secret;
     };
     # Nextcloud self-hosted cloud
     nextcloud = {
       enable = true;
-      password = lib.fileContents ./secrets/nextcloud/password.txt;
+      password = my.secrets.nextcloud.password;
     };
     # The whole *arr software suite
     pirate.enable = true;
@@ -117,7 +122,7 @@
     transmission = {
       enable = true;
       username = "Ambroisie";
-      password = lib.fileContents ./secrets/transmission/password.txt;
+      password = my.secrets.transmission.password;
     };
   };
 
