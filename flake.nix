@@ -19,7 +19,7 @@
               else throw "Refusing to build from a dirty Git tree!";
           })
           { nixpkgs.overlays = [ nur.overlay ]; }
-          ./configuration.nix
+          ./porthos.nix
         ];
     };
   };
