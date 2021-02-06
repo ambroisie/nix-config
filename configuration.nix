@@ -107,6 +107,8 @@
     pirate.enable = true;
     # Regular backups
     postgresql-backup.enable = true;
+    # An IRC client daemon
+    quassel.enable = true;
     # RSS provider for websites that do not provide any feeds
     rss-bridge.enable = true;
     # Usenet client
