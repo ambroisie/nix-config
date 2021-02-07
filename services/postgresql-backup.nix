@@ -11,6 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     services.postgresqlBackup = {
       enable = true;
+      backupAll = true;
       location = "/var/backup/postgresql";
     };
 
