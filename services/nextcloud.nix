@@ -64,5 +64,11 @@ in
 
       locations."/".proxyPass = "http://localhost:3000/";
     };
+
+    my.services.backup = {
+      paths = [
+        config.services.nextcloud.home
+      ];
+    };
   };
 }
