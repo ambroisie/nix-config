@@ -21,6 +21,8 @@ in
       credentialsFile =
         builtins.toFile "creds.env" my.secrets.backup.credentials;
     };
+    # My blog and related hosts
+    blog.enable = true;
     # Gitea forge
     gitea.enable = true;
     # Meta-indexers
