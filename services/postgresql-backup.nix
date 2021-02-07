@@ -11,6 +11,17 @@ in
   config = lib.mkIf cfg.enable {
     services.postgresqlBackup = {
       enable = true;
+      location = "/var/backup/postgresql";
+    };
+
+    my.services.backup = {
+      paths = [
+        config.services.postgresqlBackup.location
+      ];
+      # No need to store previous backups thanks to `restic`
+      exclude = [
+        (config.services.postgresqlBackup.location + "/*.prev.sql.gz")
+      ];
     };
   };
 }
