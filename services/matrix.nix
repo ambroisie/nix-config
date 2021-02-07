@@ -177,5 +177,11 @@ in
       clientPort.public
       federationPort.public
     ];
+
+    my.services.backup = {
+      paths = [
+        config.services.matrix-synapse.dataDir
+      ];
+    };
   };
 }
