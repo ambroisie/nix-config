@@ -32,6 +32,7 @@ in
       enable = true;
       package = pkgs.nextcloud20; # Nextcloud 19.0.6 is marked as insecure
       hostName = nextcloudDomain;
+      home = "/var/lib/nextcloud";
       maxUploadSize = cfg.maxSize;
       config = {
         adminuser = cfg.admin;
