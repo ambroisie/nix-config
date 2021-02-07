@@ -3,6 +3,7 @@
 {
   imports = [
     ./backup.nix
+    ./blog.nix
     ./gitea.nix
     ./indexers.nix
     ./jellyfin.nix
