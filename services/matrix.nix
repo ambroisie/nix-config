@@ -40,6 +40,7 @@ in
 
     services.matrix-synapse = {
       enable = true;
+      dataDir = "/var/lib/matrix-synapse";
       server_name = domain;
       public_baseurl = "https://matrix.${domain}";
 
