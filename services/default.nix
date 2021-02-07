@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./backup.nix
     ./gitea.nix
     ./indexers.nix
     ./jellyfin.nix
