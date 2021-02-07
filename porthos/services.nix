@@ -6,6 +6,21 @@ in
 {
   # List services that you want to enable:
   my.services = {
+    # Backblaze B2 backup
+    backup = {
+      enable = true;
+      repository = "b2:porthos-backup";
+      # Backup every 6 hours
+      timerConfig = {
+        OnActiveSec = "6h";
+        OnUnitActiveSec = "6h";
+      };
+      # Insecure, I don't care.
+      passwordFile =
+        builtins.toFile "password.txt" my.secrets.backup.password;
+      credentialsFile =
+        builtins.toFile "creds.env" my.secrets.backup.credentials;
+    };
     # Gitea forge
     gitea.enable = true;
     # Meta-indexers
