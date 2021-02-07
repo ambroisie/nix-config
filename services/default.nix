@@ -14,6 +14,7 @@
     ./quassel.nix
     ./rss-bridge.nix
     ./sabnzbd.nix
+    ./ssh-server.nix
     ./transmission.nix
   ];
 }

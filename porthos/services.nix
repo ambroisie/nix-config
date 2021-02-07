@@ -35,6 +35,8 @@ in
     rss-bridge.enable = true;
     # Usenet client
     sabnzbd.enable = true;
+    # Because I stilll need to play sysadmin
+    ssh-server.enable = true;
     # Torrent client and webui
     transmission = {
       enable = true;
@@ -47,11 +49,4 @@ in
     enable = true;
     enableSSHSupport = true;
   };
-
-  programs.mosh.enable = true; # Opens the relevant UDP ports.
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.permitRootLogin = "no";
-  services.openssh.passwordAuthentication = false;
 }
