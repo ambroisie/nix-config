@@ -23,6 +23,8 @@ let
       forceSSL = true;
       useACMEHost = "${domain}";
       inherit root;
+      # Make my blog the default landing site
+      default = (name == domain);
     };
 in
 {
