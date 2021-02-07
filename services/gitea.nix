@@ -38,6 +38,11 @@ in
         type = "postgres"; # Automatic setup
         user = "git"; # User needs to be the same as gitea user
       };
+
+      # NixOS module uses `gitea dump` to backup repositories and the database,
+      # but it produces a single .zip file that's not very backup friendly.
+      # I configure my backup system manually below.
+      dump.enable = false;
     };
 
     users.users.git = {
@@ -60,6 +65,13 @@ in
       useACMEHost = "${domain}";
 
       locations."/".proxyPass = "http://localhost:${toString cfg.port}/";
+    };
+
+    my.services.backup = {
+      paths = [
+        config.services.gitea.lfs.contentDir
+        config.services.gitea.repositoryRoot
+      ];
     };
   };
 }
