@@ -4,7 +4,7 @@
 {
   networking = {
     hostName = "porthos"; # Define your hostname.
-    domain = "test.belanyi.fr"; # Define your domain.
+    domain = "belanyi.fr"; # Define your domain.
 
 
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
