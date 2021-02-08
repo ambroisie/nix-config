@@ -28,7 +28,7 @@ in
       user = "git";
       lfs.enable = true;
 
-      useWizard = true;
+      useWizard = false;
       disableRegistration = true;
 
       # only send cookies via HTTPS
