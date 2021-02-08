@@ -8,7 +8,7 @@ in
     description = "Blog Publisher";
     isNormalUser = true;
     group = "nginx";
-    createHome = true; # Ensures correct permissions
+    createHome = false; # Messes with permissions
     home = "/var/www/";
     openssh.authorizedKeys.keys = [ my.secrets.drone.ssh.publicKey ];
   };
