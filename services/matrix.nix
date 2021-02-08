@@ -44,6 +44,7 @@ in
       server_name = domain;
       public_baseurl = "https://matrix.${domain}";
 
+      enable_registration = false;
       registration_shared_secret = cfg.secret;
 
       listeners = [
