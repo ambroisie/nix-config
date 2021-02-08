@@ -23,6 +23,15 @@ in
     };
     # My blog and related hosts
     blog.enable = true;
+    drone = {
+      enable = true;
+      runners = [ "exec" ];
+      # Insecure, I don't care.
+      secretFile =
+        builtins.toFile "gitea.env" my.secrets.drone.gitea;
+      sharedSecretFile =
+        builtins.toFile "rpc.env" my.secrets.drone.secret;
+    };
     # Gitea forge
     gitea.enable = true;
     # Meta-indexers
