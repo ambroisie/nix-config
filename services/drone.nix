@@ -12,12 +12,33 @@ let
   hasRunner = (name: builtins.elem name cfg.runners);
 
   execPkg = pkgs.nur.repos.mic92.drone-runner-exec;
+
+  dockerPkg = with pkgs; with stdenv; buildGoModule rec {
+    pname = "drone-runner-docker";
+    version = "2020-04-19";
+
+    src = fetchFromGitHub {
+      owner = "drone-runners";
+      repo = "drone-runner-docker";
+      rev = "v1.6.3";
+      sha256 = "sha256-WI3pr0t6EevIBOQwCAI+CY2O8Q7+W/CLDT/5Y0+tduQ=";
+    };
+
+    vendorSha256 = "sha256-tQPM91jMH2/nJ2pq8ExS/dneeLNb/vcL9kmEjyNtl5Y=";
+
+    meta = with lib; {
+      description = "Drone pipeline runner that executes builds using docker";
+      homepage = "https://github.com/drone-runners/drone-runner-docker";
+      # https://polyformproject.org/licenses/small-business/1.0.0/
+      license = licenses.unfree;
+    };
+  };
 in
 {
   options.my.services.drone = with lib; {
     enable = mkEnableOption "Drone CI";
     runners = mkOption {
-      type = with types; listOf (enum [ "exec" ]); # NOTE: add docker
+      type = with types; listOf (enum [ "exec" "docker" ]);
       default = [ ];
       example = [ "exec" "docker" ];
       description = "Types of runners to enable";
@@ -91,6 +112,41 @@ in
 
       locations."/".proxyPass = "http://localhost:${toString cfg.port}";
     };
+
+    # Docker runner
+    systemd.services.drone-runner-docker = lib.mkIf (hasRunner "docker") {
+      wantedBy = [ "multi-user.target" ];
+      # might break deployment
+      restartIfChanged = false;
+      confinement.enable = true;
+      serviceConfig = {
+        Environment = [
+          "DRONE_SERVER_HOST=${droneDomain}"
+          "DRONE_SERVER_PROTO=https"
+          "DRONE_RUNNER_CAPACITY=10"
+          "CLIENT_DRONE_RPC_HOST=127.0.0.1:${toString cfg.port}"
+        ];
+        BindPaths = [
+          "/var/run/docker.sock"
+        ];
+        EnvironmentFile = [
+          cfg.sharedSecretFile
+        ];
+        ExecStart = "${dockerPkg}/bin/drone-runner-docker";
+        User = "drone-runner-docker";
+        Group = "drone-runner-docker";
+      };
+    };
+
+    # Make sure it is activated in that case
+    virtualisation.docker.enable = lib.mkIf (hasRunner "docker") true;
+
+    users.users.drone-runner-docker = lib.mkIf (hasRunner "docker") {
+      isSystemUser = true;
+      group = "drone-runner-docker";
+      extraGroups = [ "docker" ]; # Give access to the daemon
+    };
+    users.groups.drone-runner-docker = lib.mkIf (hasRunner "docker") { };
 
     # Exec runner
     systemd.services.drone-runner-exec = lib.mkIf (hasRunner "exec") {
