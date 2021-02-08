@@ -82,6 +82,8 @@ in
           "DRONE_DATABASE_DRIVER=postgres"
           "DRONE_SERVER_PORT=:${toString cfg.port}"
           "DRONE_USER_CREATE=username:${cfg.admin},admin:true"
+          "DRONE_JSONNET_ENABLED=true"
+          "DRONE_STARLARK_ENABLED=true"
         ];
         ExecStart = "${pkgs.drone}/bin/drone-server";
         User = "drone";
