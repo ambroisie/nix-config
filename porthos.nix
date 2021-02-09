@@ -6,7 +6,7 @@
     # Include generic settings
     ./modules
     # Include porthos-specific modules
-    ./porthos
+    ./machines/porthos
     # Include my secrets
     ./secrets
     # Include my services
