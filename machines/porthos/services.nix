@@ -25,7 +25,7 @@ in
     blog.enable = true;
     drone = {
       enable = true;
-      runners = [ "docker" ];
+      runners = [ "docker" "exec" ];
       # Insecure, I don't care.
       secretFile =
         builtins.toFile "gitea.env" my.secrets.drone.gitea;
