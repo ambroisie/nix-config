@@ -12,5 +12,7 @@
     wget
   ];
 
+  programs.vim.defaultEditor = true; # Modal editing is life
+
   nixpkgs.config.allowUnfree = true; # Because I don't care *that* much.
 }
