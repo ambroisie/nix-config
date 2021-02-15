@@ -32,6 +32,8 @@ else {
 
     matrix.secret = fileContents ./matrix/secret.txt;
 
+    miniflux.password = fileContents ./miniflux/password.txt;
+
     nextcloud.password = fileContents ./nextcloud/password.txt;
 
     transmission.password = fileContents ./transmission/password.txt;

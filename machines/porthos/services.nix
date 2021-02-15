@@ -46,6 +46,10 @@ in
       enable = true;
       secret = my.secrets.matrix.secret;
     };
+    miniflux = {
+      enable = true;
+      password = my.secrets.miniflux.password;
+    };
     # Nextcloud self-hosted cloud
     nextcloud = {
       enable = true;
