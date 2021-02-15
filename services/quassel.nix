@@ -31,5 +31,17 @@ in
 
     # Open port for Quassel
     networking.firewall.allowedTCPPorts = [ cfg.port ];
+
+    # Create storage DB
+    services.postgresql = {
+      enable = true;
+      ensureDatabases = [ "quassel" ];
+      ensureUsers = [
+        {
+          name = "quassel";
+          ensurePermissions."DATABASE quassel" = "ALL PRIVILEGES";
+        }
+      ];
+    };
   };
 }
