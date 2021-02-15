@@ -14,7 +14,7 @@ in
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     openssh.authorizedKeys.keys = with builtins; let
-      keyDir = ../ssh;
+      keyDir = ./ssh;
       contents = readDir keyDir;
       names = attrNames contents;
       files = filter (name: contents.${name} == "regular") names;
