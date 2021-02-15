@@ -42,6 +42,9 @@ in
           ensurePermissions."DATABASE quassel" = "ALL PRIVILEGES";
         }
       ];
+      # Insecure, I don't care.
+      # Because Quassel does not use the socket, I simply trust its connection
+      authentication = "host quassel quassel localhost trust";
     };
   };
 }
