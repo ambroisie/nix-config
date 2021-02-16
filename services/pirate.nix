@@ -11,6 +11,7 @@ let
     sonarr = 8989;
     radarr = 7878;
     bazarr = 6767;
+    lidarr = 8686;
   };
 
   managers = with lib.attrsets;
