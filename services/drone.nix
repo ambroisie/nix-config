@@ -184,6 +184,8 @@ in
           "/run/nscd/socket"
         ];
         BindReadOnlyPaths = [
+          "/etc/resolv.conf:/etc/resolv.conf"
+          "/etc/resolvconf.conf:/etc/resolvconf.conf"
           "/etc/passwd:/etc/passwd"
           "/etc/group:/etc/group"
           "/nix/var/nix/profiles/system/etc/nix:/etc/nix"
