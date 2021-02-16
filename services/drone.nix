@@ -182,7 +182,6 @@ in
         BindPaths = [
           "/nix/var/nix/daemon-socket/socket"
           "/run/nscd/socket"
-          "/var/lib/drone"
         ];
         BindReadOnlyPaths = [
           "/etc/passwd:/etc/passwd"
