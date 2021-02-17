@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 with lib;
 let
@@ -42,5 +42,7 @@ else {
       ambroisie.hashedPassword = fileContents ./users/ambroisie/password.txt;
       root.hashedPassword = fileContents ./users/root/password.txt;
     };
+
+    wireguard = pkgs.callPackage ./wireguard { };
   };
 }
