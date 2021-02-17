@@ -20,5 +20,6 @@
     ./sabnzbd.nix
     ./ssh-server.nix
     ./transmission.nix
+    ./wireguard.nix
   ];
 }
