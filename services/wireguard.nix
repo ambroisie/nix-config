@@ -61,11 +61,10 @@ in
     };
   };
 
-
   config.networking = lib.mkIf cfg.enable {
-    wireguard.interfaces."${cfg.iface}" = {
+    wg-quick.interfaces."${cfg.iface}" = {
       listenPort = cfg.port;
-      ips = with cfg.net; with lib; [
+      address = with cfg.net; with lib; [
         "${v4.subnet}.${toString thisPeer.clientNum}/${toString v4.mask}"
         "${v6.subnet}::${toString thisPeer.clientNum}/${toHexString v6.mask}"
       ];
@@ -92,19 +91,25 @@ in
           ];
           # Roaming clients need to keep NAT-ing active
           persistentKeepalive = 10;
+          # Use server DNS
         })
         otherPeers;
     } // lib.optionalAttrs (thisPeer ? externalIp) {
       # Setup forwarding on server
       # FIXME: 'eth0' should not hard-coded
-      postSetup = with cfg.net; ''
-        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${v4.subnet}.0/${toString v4.mask} -o eth0 -j MASQUERADE
-        ${pkgs.iptables}/bin/ip6tables -t nat -A POSTROUTING -s ${v6.subnet}::0/${toString v6.mask} -o eth0 -j MASQUERADE
+      postUp = with cfg.net; ''
+        ${pkgs.iptables}/bin/iptables -A FORWARD -i ${cfg.iface} -j ACCEPT
+        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${v4.subnet}.1/${toString v4.mask} -o eth0 -j MASQUERADE
+        ${pkgs.iptables}/bin/ip6tables -A FORWARD -i ${cfg.iface} -j ACCEPT
+        ${pkgs.iptables}/bin/ip6tables -t nat -A POSTROUTING -s ${v6.subnet}::1/${toString v6.mask} -o eth0 -j MASQUERADE
       '';
-      postShutdown = with cfg.net; ''
-        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s ${v4.subnet}.0/${toString v4.mask} -o eth0 -j MASQUERADE
-        ${pkgs.iptables}/bin/ip6tables -t nat -D POSTROUTING -s ${v6.subnet}::0/${toString v6.mask} -o eth0 -j MASQUERADE
+      preDown = with cfg.net; ''
+        ${pkgs.iptables}/bin/iptables -D FORWARD -i ${cfg.iface} -j ACCEPT
+        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s ${v4.subnet}.1/${toString v4.mask} -o eth0 -j MASQUERADE
+        ${pkgs.iptables}/bin/ip6tables -D FORWARD -i ${cfg.iface} -j ACCEPT
+        ${pkgs.iptables}/bin/ip6tables -t nat -D POSTROUTING -s ${v6.subnet}::1/${toString v6.mask} -o eth0 -j MASQUERADE
       '';
+
     };
 
     nat = lib.optionalAttrs (thisPeer ? externalIp) {
@@ -113,6 +118,6 @@ in
       internalInterfaces = [ cfg.iface ];
     };
 
-    firewall.allowedUDPPorts = lib.optional (thisPeer ? externalIp) cfg.port;
+    firewall.allowedUDPPorts = [ cfg.port ];
   };
 }
