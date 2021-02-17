@@ -73,6 +73,10 @@ in
       username = "Ambroisie";
       password = my.secrets.transmission.password;
     };
+    # Simple, in-kernel VPN
+    wireguard = {
+      enable = true;
+    };
   };
 
   programs.gnupg.agent = {
