@@ -10,6 +10,8 @@ let
   peers = config.my.secrets.wireguard.peers;
   thisPeer = peers."${hostName}";
   otherPeers = lib.filterAttrs (name: _: name != hostName) peers;
+
+  extIface = config.my.networking.externalInterface;
 in
 {
   options.my.services.wireguard = with lib; {
@@ -96,25 +98,24 @@ in
         otherPeers;
     } // lib.optionalAttrs (thisPeer ? externalIp) {
       # Setup forwarding on server
-      # FIXME: 'eth0' should not hard-coded
       postUp = with cfg.net; ''
         ${pkgs.iptables}/bin/iptables -A FORWARD -i ${cfg.iface} -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${v4.subnet}.1/${toString v4.mask} -o eth0 -j MASQUERADE
+        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${v4.subnet}.1/${toString v4.mask} -o ${extIface} -j MASQUERADE
         ${pkgs.iptables}/bin/ip6tables -A FORWARD -i ${cfg.iface} -j ACCEPT
-        ${pkgs.iptables}/bin/ip6tables -t nat -A POSTROUTING -s ${v6.subnet}::1/${toString v6.mask} -o eth0 -j MASQUERADE
+        ${pkgs.iptables}/bin/ip6tables -t nat -A POSTROUTING -s ${v6.subnet}::1/${toString v6.mask} -o ${extIface} -j MASQUERADE
       '';
       preDown = with cfg.net; ''
         ${pkgs.iptables}/bin/iptables -D FORWARD -i ${cfg.iface} -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s ${v4.subnet}.1/${toString v4.mask} -o eth0 -j MASQUERADE
+        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s ${v4.subnet}.1/${toString v4.mask} -o ${extIface} -j MASQUERADE
         ${pkgs.iptables}/bin/ip6tables -D FORWARD -i ${cfg.iface} -j ACCEPT
-        ${pkgs.iptables}/bin/ip6tables -t nat -D POSTROUTING -s ${v6.subnet}::1/${toString v6.mask} -o eth0 -j MASQUERADE
+        ${pkgs.iptables}/bin/ip6tables -t nat -D POSTROUTING -s ${v6.subnet}::1/${toString v6.mask} -o ${extIface} -j MASQUERADE
       '';
 
     };
 
     nat = lib.optionalAttrs (thisPeer ? externalIp) {
       enable = true;
-      externalInterface = "eth0"; # FIXME: should not hard-coded
+      externalInterface = extIface;
       internalInterfaces = [ cfg.iface ];
     };
 
