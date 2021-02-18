@@ -4,6 +4,7 @@
   imports = [
     ./backup.nix
     ./blog.nix
+    ./calibre-web.nix
     ./drone.nix
     ./gitea.nix
     ./indexers.nix
