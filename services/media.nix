@@ -2,8 +2,13 @@
 
 { config, lib, ... }:
 let
-  needed = with config.my.services;
-    jellyfin.enable || pirate.enable || sabnzbd.enable || transmission.enable;
+  mediaServices = with config.my.services; [
+    jellyfin
+    pirate
+    sabnzbd
+    transmission
+  ];
+  needed = builtins.any (service: service.enable) mediaServices;
 in
 {
   config.users.groups.media = lib.mkIf needed { };
