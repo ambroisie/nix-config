@@ -10,7 +10,7 @@ in
     enable = mkEnableOption "Gitea";
     port = mkOption {
       type = types.port;
-      default = 3000;
+      default = 3042;
       example = 8080;
       description = "Internal port";
     };
