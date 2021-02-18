@@ -23,6 +23,10 @@ in
     };
     # My blog and related hosts
     blog.enable = true;
+    calibre-web = {
+      enable = true;
+      libraryPath = "/data/media/library";
+    };
     drone = {
       enable = true;
       runners = [ "docker" "exec" ];
