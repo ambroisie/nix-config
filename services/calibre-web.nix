@@ -48,5 +48,11 @@ in
 
       locations."/".proxyPass = "http://localhost:${toString cfg.port}/";
     };
+
+    my.services.backup = {
+      paths = [
+        cfg.libraryPath
+      ];
+    };
   };
 }
