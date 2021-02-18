@@ -7,12 +7,12 @@
   ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/d89efc61-6b03-4190-b488-301c919e2431";
+    device = "/dev/disk/by-label/nixos";
     fsType = "ext4";
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-uuid/1a261204-2e78-496f-8a8d-d29bfa770306"; }
+    { device = "/dev/disk/by-label/swap"; }
   ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
