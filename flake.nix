@@ -5,11 +5,11 @@
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, nur }: {
-    nixosConfigurations.porthos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules =
-        [
+  outputs = { self, nixpkgs, nur }:
+    let
+      buildHost = name: system: nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
           ({ pkgs, ... }: {
             # Let 'nixos-version --json' know about the Git revision
             # of this flake.
@@ -19,8 +19,13 @@
               else throw "Refusing to build from a dirty Git tree!";
           })
           { nixpkgs.overlays = [ nur.overlay ]; }
-          ./porthos.nix
+          (./. + "/${name}.nix")
         ];
+      };
+    in
+    {
+      nixosConfigurations = nixpkgs.lib.mapAttrs buildHost {
+        porthos = "x86_64-linux";
+      };
     };
-  };
 }
