@@ -29,4 +29,7 @@
       tunl0.useDHCP = true;
     };
   };
+
+  # Which interface is used to connect to the internet
+  my.networking.externalInterface = "eth0";
 }
