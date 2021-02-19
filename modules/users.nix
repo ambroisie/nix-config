@@ -1,5 +1,5 @@
 # User setup
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   my = config.my;
 in
@@ -12,6 +12,7 @@ in
     hashedPassword = my.secrets.users.ambroisie.hashedPassword;
     description = "Bruno BELANYI";
     isNormalUser = true;
+    shell = pkgs.zsh;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     openssh.authorizedKeys.keys = with builtins; let
       keyDir = ./ssh;
