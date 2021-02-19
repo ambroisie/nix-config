@@ -13,6 +13,7 @@
   ];
 
   programs.vim.defaultEditor = true; # Modal editing is life
+  programs.zsh.enable = true; # Use integrations
 
   nixpkgs.config.allowUnfree = true; # Because I don't care *that* much.
 }
