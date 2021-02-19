@@ -24,4 +24,10 @@
       }
     ];
   };
+
+  # Fuzzy-wuzzy
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 }
