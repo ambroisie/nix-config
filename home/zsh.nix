@@ -79,4 +79,8 @@
     enable = true;
     enableZshIntegration = true;
   };
+
+  programs.dircolors = {
+    enable = true;
+  };
 }
