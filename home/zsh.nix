@@ -24,6 +24,9 @@
         };
       }
     ];
+
+    # Modal editing is life, but CLI benefits from emacs gymnastics
+    defaultKeymap = "emacs";
   };
 
   # Fuzzy-wuzzy
