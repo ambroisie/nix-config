@@ -39,6 +39,7 @@
 
     initExtra = lib.concatMapStrings builtins.readFile [
       ./completion-styles.zsh
+      ./extra-mappings.zsh
       ./options.zsh
     ];
 
