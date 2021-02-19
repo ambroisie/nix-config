@@ -91,5 +91,10 @@
         autoStash = true;
       };
     };
+
+    # Multiple identities
+    includes = [
+      { path = ./epita.config; condition = "gitdir:~/git/EPITA/"; }
+    ];
   };
 }
