@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.git = {
     enable = true;
@@ -96,5 +96,13 @@
     includes = [
       { path = ./epita.config; condition = "gitdir:~/git/EPITA/"; }
     ];
+
+    ignores =
+      let
+        readLines = file: lib.splitString "\n" (builtins.readFile file);
+        removeComments = lib.filter (line: line != "" && !(lib.hasPrefix "#" line));
+        getPaths = file: removeComments (readLines file);
+      in
+      getPaths ./default.ignore;
   };
 }
