@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -10,6 +10,7 @@
       ignoreSpace = true;
       ignoreDups = true;
       share = true;
+      path = "${config.xdg.dataHome}/zsh/zsh_history";
     };
 
     plugins = with pkgs; [
