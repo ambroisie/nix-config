@@ -75,6 +75,16 @@
         defaultBranch = "main";
       };
 
+      pager =
+        let
+          diff-highlight = "${pkgs.gitAndTools.gitFull}/share/git/contrib/diff-highlight/diff-highlight";
+        in
+        {
+          diff = "${diff-highlight} | less";
+          log = "${diff-highlight} | less";
+          show = "${diff-highlight} | less";
+        };
+
       pull = {
         # Avoid useless merge commits
         rebase = true;
