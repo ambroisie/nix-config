@@ -8,6 +8,7 @@
     ./jq.nix
     ./packages.nix
     ./pager.nix
+    ./tmux.nix
     ./zsh
   ];
 }
