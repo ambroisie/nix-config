@@ -5,6 +5,7 @@
     ./direnv.nix
     ./documentation.nix
     ./git
+    ./gpg.nix
     ./htop.nix
     ./jq.nix
     ./packages.nix
