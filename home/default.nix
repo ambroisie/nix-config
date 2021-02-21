@@ -13,6 +13,7 @@
     ./secrets # Home-manager specific secrets
     ./ssh.nix
     ./tmux.nix
+    ./xdg.nix
     ./zsh
   ];
 }
