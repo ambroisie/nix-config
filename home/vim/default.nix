@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.neovim = {
     enable = true;
@@ -46,21 +46,18 @@
     extraConfig = builtins.readFile ./init.vim;
   };
 
-  xdg.configFile = {
-    "nvim/after" = {
-      source = ./after;
-    };
-
-    "nvim/autoload" = {
-      source = ./autoload;
-    };
-
-    "nvim/ftdetect" = {
-      source = ./ftdetect;
-    };
-
-    "nvim/plugin" = {
-      source = ./plugin;
-    };
-  };
+  xdg.configFile =
+    let
+      toSource = directory: { source = ./. + "/${directory}"; };
+      configureDirectory =
+        name: lib.nameValuePair "nvim/${name}" (toSource name);
+      linkDirectories =
+        dirs: builtins.listToAttrs (map configureDirectory dirs);
+    in
+    linkDirectories [
+      "after"
+      "autoload"
+      "ftdetect"
+      "plugin"
+    ];
 }
