@@ -47,6 +47,10 @@
   };
 
   xdg.configFile = {
+    "nvim/after" = {
+      source = ./after;
+    };
+
     "nvim/autoload" = {
       source = ./autoload;
     };
