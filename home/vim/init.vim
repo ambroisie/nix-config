@@ -72,9 +72,6 @@ set background=dark
 packadd! onedark-vim
 " Use onedark
 colorscheme onedark
-
-" 24-bit true color
-set termguicolors
 " }}}
 
 " Search parameters {{{
