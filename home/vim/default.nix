@@ -47,6 +47,10 @@
   };
 
   xdg.configFile = {
+    "nvim/autoload" = {
+      source = ./autoload;
+    };
+
     "nvim/ftdetect" = {
       source = ./ftdetect;
     };
