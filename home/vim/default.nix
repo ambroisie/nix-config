@@ -18,6 +18,7 @@
       # tpope essentials
       vim-commentary # Easy comments
       vim-eunuch # UNIX integrations
+      vim-fugitive # A 'git' wrapper
       vim-git # Sane git syntax files
       vim-repeat # Enanche '.' for plugins
       vim-rsi # Readline mappings
@@ -37,6 +38,11 @@
       # General enhancements
       fastfold # Better folding
       vim-qf # Better quick-fix list
+
+      # Other wrappers
+      fzfWrapper # The vim plugin inside the 'fzf' package
+      fzf-vim # Fuzzy commands
+      git-messenger-vim # A simple blame window
 
       # LSP and linting
       ale # Asynchronous Linting Engine
