@@ -10,7 +10,10 @@
     plugins = with pkgs.vimPlugins; [
       # Theming
       lightline-vim # Fancy status bar
-      onedark-vim # Nice dark theme
+      {
+        plugin = onedark-vim; # Nice dark theme
+        optional = true; # Needs to be `packadd`-ed manually...
+      }
 
       # tpope essentials
       vim-commentary # Easy comments

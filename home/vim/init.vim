@@ -68,6 +68,8 @@ set timeoutlen=500
 " Set dark mode by default
 set background=dark
 
+" Load it manually because of autoload functions...
+packadd! onedark-vim
 " Use onedark
 colorscheme onedark
 
