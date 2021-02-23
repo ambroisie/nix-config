@@ -39,5 +39,7 @@
       ale # Asynchronous Linting Engine
       lightline-ale # Status bar integration
     ];
+
+    extraConfig = builtins.readFile ./init.vim;
   };
 }
