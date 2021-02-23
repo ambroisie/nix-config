@@ -45,4 +45,10 @@
 
     extraConfig = builtins.readFile ./init.vim;
   };
+
+  xdg.configFile = {
+    "nvim/plugin" = {
+      source = ./plugin;
+    };
+  };
 }
