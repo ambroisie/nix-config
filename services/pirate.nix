@@ -26,7 +26,7 @@ let
     (mapAttrs'
       (service: port: nameValuePair "${service}.${domain}" {
         forceSSL = true;
-        useACMEHost = "${domain}";
+        useACMEHost = domain;
 
         locations."/".proxyPass = "http://localhost:${builtins.toString port}/";
       })

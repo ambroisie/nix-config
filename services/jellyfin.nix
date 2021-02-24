@@ -19,7 +19,7 @@ in
     # Proxy to Jellyfin
     services.nginx.virtualHosts."${jellyfinDomain}" = {
       forceSSL = true;
-      useACMEHost = "${domain}";
+      useACMEHost = domain;
 
       locations."/" = {
         proxyPass = "http://localhost:8096/";

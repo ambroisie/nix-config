@@ -19,7 +19,7 @@ in
 
     services.nginx.virtualHosts."${rss-bridgeDomain}" = {
       forceSSL = true;
-      useACMEHost = "${domain}";
+      useACMEHost = domain;
     };
   };
 }

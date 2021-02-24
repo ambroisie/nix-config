@@ -21,7 +21,7 @@ let
   makeVirtualHost = with lib.attrsets;
     name: root: nameValuePair "${name}" {
       forceSSL = true;
-      useACMEHost = "${domain}";
+      useACMEHost = domain;
       inherit root;
       # Make my blog the default landing site
       default = (name == domain);

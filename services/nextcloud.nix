@@ -61,7 +61,7 @@ in
 
     services.nginx.virtualHosts."${nextcloudDomain}" = {
       forceSSL = true;
-      useACMEHost = "${domain}";
+      useACMEHost = domain;
 
       locations."/".proxyPass = "http://localhost:3000/";
     };

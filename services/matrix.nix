@@ -71,7 +71,7 @@ in
     services.nginx.virtualHosts = {
       "matrix.${domain}" = {
         forceSSL = true;
-        useACMEHost = "${domain}";
+        useACMEHost = domain;
 
         locations =
           let
@@ -100,7 +100,7 @@ in
       "matrix.${domain}_federation" = rec {
         forceSSL = true;
         serverName = "matrix.${domain}";
-        useACMEHost = "${domain}";
+        useACMEHost = domain;
 
         locations."/".return = "404";
 
@@ -117,7 +117,7 @@ in
 
       "${domain}" = {
         forceSSL = true;
-        useACMEHost = "${domain}";
+        useACMEHost = domain;
 
         locations."= /.well-known/matrix/server".extraConfig =
           let
@@ -145,7 +145,7 @@ in
 
       # Element Web app deployment
       "chat.${domain}" = {
-        useACMEHost = "${domain}";
+        useACMEHost = domain;
         forceSSL = true;
 
         root = pkgs.element-web.override {
@@ -153,7 +153,7 @@ in
             default_server_config = {
               "m.homeserver" = {
                 "base_url" = "https://matrix.${domain}";
-                "server_name" = "${domain}";
+                "server_name" = domain;
               };
               "m.identity_server" = {
                 "base_url" = "https://vector.im";

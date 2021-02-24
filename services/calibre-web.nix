@@ -44,7 +44,7 @@ in
 
     services.nginx.virtualHosts."${calibreDomain}" = {
       forceSSL = true;
-      useACMEHost = "${domain}";
+      useACMEHost = domain;
 
       locations."/".proxyPass = "http://localhost:${toString cfg.port}/";
     };

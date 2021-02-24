@@ -60,7 +60,7 @@ in
     # seems to have stalled
     services.nginx.virtualHosts."${webuiDomain}" = {
       forceSSL = true;
-      useACMEHost = "${domain}";
+      useACMEHost = domain;
 
       locations."/".proxyPass = "http://localhost:${toString transmissionRpcPort}";
     };

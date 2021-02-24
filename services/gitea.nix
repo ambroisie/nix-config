@@ -62,7 +62,7 @@ in
     # Proxy to Gitea
     services.nginx.virtualHosts."${giteaDomain}" = {
       forceSSL = true;
-      useACMEHost = "${domain}";
+      useACMEHost = domain;
 
       locations."/".proxyPass = "http://localhost:${toString cfg.port}/";
     };

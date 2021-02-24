@@ -24,7 +24,7 @@ in
     services.nginx.virtualHosts."${jackettDomain}" =
       lib.mkIf cfg.jackett.enable {
         forceSSL = true;
-        useACMEHost = "${domain}";
+        useACMEHost = domain;
 
         locations."/".proxyPass = "http://localhost:${toString jackettPort}/";
       };
@@ -36,7 +36,7 @@ in
     services.nginx.virtualHosts."${nzbhydraDomain}" =
       lib.mkIf cfg.nzbhydra.enable {
         forceSSL = true;
-        useACMEHost = "${domain}";
+        useACMEHost = domain;
 
         locations."/".proxyPass = "http://localhost:${toString nzbhydraPort}/";
       };
