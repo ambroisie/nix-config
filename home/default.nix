@@ -17,4 +17,7 @@
     ./xdg.nix
     ./zsh
   ];
+
+  # First sane reproducible version
+  home.stateVersion = "20.09";
 }
