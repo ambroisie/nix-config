@@ -22,6 +22,12 @@
         user = "git";
       };
 
+      "gitea.belanyi.fr" = {
+        hostname = "gitea.belanyi.fr";
+        identityFile = "~/.ssh/shared_rsa";
+        user = "git";
+      };
+
       porthos = {
         hostname = "91.121.177.163";
         identityFile = "~/.ssh/shared_rsa";
