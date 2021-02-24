@@ -22,7 +22,7 @@ in
 
       appName = "Ambroisie's forge";
       httpPort = cfg.port;
-      domain = "${giteaDomain}";
+      domain = giteaDomain;
       rootUrl = "https://${giteaDomain}";
 
       user = "git";
