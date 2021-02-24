@@ -21,7 +21,10 @@ in
       forceSSL = true;
       useACMEHost = "${domain}";
 
-      locations."/".proxyPass = "http://localhost:8096/";
+      locations."/" = {
+        proxyPass = "http://localhost:8096/";
+        proxyWebsockets = true;
+      };
     };
   };
 }
