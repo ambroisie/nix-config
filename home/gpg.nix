@@ -7,7 +7,7 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true; # One agent to rule them all
-    pinentryFlavor = "curses";
+    pinentryFlavor = "tty";
     extraConfig = ''
       allow-loopback-pinentry
     '';
