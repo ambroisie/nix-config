@@ -14,13 +14,13 @@ in
       type = types.str;
       default = "Ambroisie";
       example = "username";
-      description = "Name of the transmission RPC user";
+      description = "Name of the admin user";
     };
 
     password = mkOption {
       type = types.str;
       example = "password";
-      description = "Password of the transmission RPC user";
+      description = "Password of the admin user";
     };
 
     privatePort = mkOption {
