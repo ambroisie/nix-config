@@ -9,25 +9,43 @@ let
 
   domain = config.networking.domain;
   webuiDomain = "transmission.${domain}";
-
-  transmissionRpcPort = 9091;
-  transmissionPeerPort = 30251;
-
-  downloadBase = "/data/downloads/"; # NOTE: to be excluded from backups
 in
 {
   options.my.services.transmission = with lib; {
     enable = mkEnableOption "Transmission torrent client";
+
     username = mkOption {
       type = types.str;
       default = "Ambroisie";
       example = "username";
       description = "Name of the transmission RPC user";
     };
+
     password = mkOption {
       type = types.str;
       example = "password";
       description = "Password of the transmission RPC user";
+    };
+
+    downloadBase = mkOption {
+      type = types.str;
+      default = "/data/downloads/";
+      example = "/var/lib/transmission/download";
+      description = "Download base directory";
+    };
+
+    privatePort = mkOption {
+      type = types.port;
+      default = 9091;
+      example = 8080;
+      description = "Internal port for webui";
+    };
+
+    peerPort = mkOption {
+      type = types.port;
+      default = 30251;
+      example = 32323;
+      description = "Peering port";
     };
   };
 
@@ -39,13 +57,13 @@ in
       downloadDirPermissions = "775";
 
       settings = {
-        download-dir = "${downloadBase}/complete";
-        incomplete-dir = "${downloadBase}/incomplete";
+        download-dir = "${cfg.downloadBase}/complete";
+        incomplete-dir = "${cfg.downloadBase}/incomplete";
 
-        peer-port = transmissionPeerPort;
+        peer-port = cfg.peerPort;
 
         rpc-enabled = true;
-        rpc-port = transmissionRpcPort;
+        rpc-port = cfg.privatePort;
         rpc-authentication-required = true;
 
         rpc-username = cfg.username;
@@ -63,12 +81,12 @@ in
       forceSSL = true;
       useACMEHost = domain;
 
-      locations."/".proxyPass = "http://localhost:${toString transmissionRpcPort}";
+      locations."/".proxyPass = "http://localhost:${toString cfg.privatePort}";
     };
 
     networking.firewall = {
-      allowedTCPPorts = [ transmissionPeerPort ];
-      allowedUDPPorts = [ transmissionPeerPort ];
+      allowedTCPPorts = [ cfg.peerPort ];
+      allowedUDPPorts = [ cfg.peerPort ];
     };
   };
 }
