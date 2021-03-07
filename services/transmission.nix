@@ -39,7 +39,6 @@ in
       settings = {
         download-dir = "${downloadBase}/complete";
         incomplete-dir = "${downloadBase}/incomplete";
-        umask = 0; # Make it world-writeable
 
         peer-port = transmissionPeerPort;
 
