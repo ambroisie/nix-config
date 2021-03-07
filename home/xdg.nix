@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   xdg = {
     enable = true;
@@ -21,5 +21,12 @@
       templates = "\$HOME/templates";
       videos = "\$HOME/videos";
     };
+  };
+
+  # I want a tidier home
+  home.sessionVariables = with config.xdg; {
+    HISTFILE = "${dataHome}/bash/history";
+    LESSHISTFILE = "${dataHome}/less/history";
+    LESSKEY = "${configHome}/less/lesskey";
   };
 }
