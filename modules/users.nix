@@ -1,7 +1,12 @@
 # User setup
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   my = config.my;
+  groupIfExists = grp:
+    lib.lists.optional
+      (builtins.hasAttr grp config.users.groups)
+      grp;
+  groupsIfExist = grps: builtins.concatMap groupIfExists grps;
 in
 {
   users.mutableUsers = false; # I want it to be declarative.
@@ -13,7 +18,10 @@ in
     description = "Bruno BELANYI";
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = groupsIfExist [
+      "media" # access to media files
+      "wheel" # `sudo` for the user.
+    ];
     openssh.authorizedKeys.keys = with builtins; let
       keyDir = ./ssh;
       contents = readDir keyDir;
