@@ -1,5 +1,5 @@
 {
-  description = "Nixos configuration with flakes";
+  description = "NixOS configuration with flakes";
   inputs = {
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
