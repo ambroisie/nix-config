@@ -5,11 +5,13 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
+    futils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, nur, home-manager }:
+  outputs = { self, nixpkgs, nur, home-manager, futils }:
     let
       inherit (nixpkgs) lib;
+      inherit (futils.lib) eachDefaultSystem;
 
       defaultModules = [
         ({ pkgs, ... }: {
@@ -36,7 +38,20 @@
         ];
       };
     in
-    {
+    eachDefaultSystem
+      (system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          devShell = pkgs.mkShell {
+            name = "NixOS-config";
+            buildInputs = with pkgs; [
+              gitAndTools.pre-commit
+              nixpkgs-fmt
+            ];
+          };
+        }) // {
       nixosConfigurations = nixpkgs.lib.mapAttrs buildHost {
         porthos = "x86_64-linux";
       };

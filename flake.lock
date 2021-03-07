@@ -1,5 +1,20 @@
 {
   "nodes": {
+    "futils": {
+      "locked": {
+        "lastModified": 1614513358,
+        "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5466c5bbece17adaab2d82fae80b46e807611bf3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -53,6 +68,7 @@
     },
     "root": {
       "inputs": {
+        "futils": "futils",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nur": "nur"
