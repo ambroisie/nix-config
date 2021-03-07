@@ -9,26 +9,30 @@
 
   outputs = { self, nixpkgs, nur, home-manager }:
     let
-      buildHost = name: system: nixpkgs.lib.nixosSystem {
+      inherit (nixpkgs) lib;
+
+      defaultModules = [
+        ({ pkgs, ... }: {
+          # Let 'nixos-version --json' know about the Git revision
+          system.configurationRevision =
+            if self ? rev
+            then self.rev
+            else throw "Refusing to build from a dirty Git tree!";
+        })
+        { nixpkgs.overlays = [ nur.overlay ]; }
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.users.ambroisie = import ./home;
+          # Nix Flakes compatibility
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
+      ];
+
+      buildHost = name: system: lib.nixosSystem {
         inherit system;
-        modules = [
-          ({ pkgs, ... }: {
-            # Let 'nixos-version --json' know about the Git revision
-            # of this flake.
-            system.configurationRevision =
-              if self ? rev
-              then self.rev
-              else throw "Refusing to build from a dirty Git tree!";
-          })
-          { nixpkgs.overlays = [ nur.overlay ]; }
+        modules = defaultModules ++ [
           (./. + "/${name}.nix")
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.users.ambroisie = import ./home;
-            # Nix Flakes compatibility
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-          }
         ];
       };
     in
