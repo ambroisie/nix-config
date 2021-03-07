@@ -3,6 +3,7 @@
 
 {
   imports = [
+    ./ergodox.nix
     ./language.nix
     ./networking.nix
     ./nix.nix

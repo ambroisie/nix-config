@@ -19,6 +19,7 @@ in
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = groupsIfExist [
+      "plugdev" # usage of ZSA keyboard tools
       "media" # access to media files
       "wheel" # `sudo` for the user.
     ];
