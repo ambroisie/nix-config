@@ -36,6 +36,8 @@ in
       enable = true;
       group = "media";
 
+      downloadDirPermissions = "775";
+
       settings = {
         download-dir = "${downloadBase}/complete";
         incomplete-dir = "${downloadBase}/incomplete";
