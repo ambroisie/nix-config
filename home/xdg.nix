@@ -21,6 +21,11 @@
       templates = "\$HOME/templates";
       videos = "\$HOME/videos";
     };
+    # A tidy home is a tidy mind
+    dataFile = {
+      "bash/.keep".text = "";
+      "tig/.keep".text = "";
+    };
   };
 
   # I want a tidier home
