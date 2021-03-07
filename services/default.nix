@@ -10,7 +10,6 @@
     ./indexers.nix
     ./jellyfin.nix
     ./matrix.nix
-    ./media.nix
     ./miniflux.nix
     ./nextcloud.nix
     ./nginx.nix
