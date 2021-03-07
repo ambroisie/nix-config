@@ -30,8 +30,12 @@
 
   # I want a tidier home
   home.sessionVariables = with config.xdg; {
+    CARGO_HOME = "${dataHome}/cargo";
+    DOCKER_CONFIG = "${configHome}/docker";
     HISTFILE = "${dataHome}/bash/history";
+    INPUTRC = "${configHome}/readline/inputrc";
     LESSHISTFILE = "${dataHome}/less/history";
     LESSKEY = "${configHome}/less/lesskey";
+    WGETRC = "${configHome}/wgetrc";
   };
 }
