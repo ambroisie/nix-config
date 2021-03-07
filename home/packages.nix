@@ -7,5 +7,7 @@
     gitAndTools.tig
     # Dev work
     rr
+    # Terminal prettiness
+    termite.terminfo
   ];
 }
