@@ -1,5 +1,5 @@
 # User setup
-{ config, lib, ... }:
+{ config, ... }:
 let
   my = config.my;
 in
