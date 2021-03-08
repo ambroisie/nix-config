@@ -14,7 +14,7 @@
       inherit (futils.lib) eachDefaultSystem;
 
       defaultModules = [
-        ({ pkgs, ... }: {
+        ({ ... }: {
           # Let 'nixos-version --json' know about the Git revision
           system.configurationRevision =
             if self ? rev
