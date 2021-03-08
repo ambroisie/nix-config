@@ -6,7 +6,7 @@ let
     lib.lists.optional
       (builtins.hasAttr grp config.users.groups)
       grp;
-  groupsIfExist = grps: builtins.concatMap groupIfExists grps;
+  groupsIfExist = builtins.concatMap groupIfExists;
 in
 {
   users.mutableUsers = false; # I want it to be declarative.
