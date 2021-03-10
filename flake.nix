@@ -8,10 +8,13 @@
     futils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, futils }:
+  outputs = { self, nixpkgs, nur, home-manager, futils } @ inputs:
     let
-      inherit (nixpkgs) lib;
       inherit (futils.lib) eachDefaultSystem;
+
+      lib = nixpkgs.lib.extend (self: super: {
+        my = import ./lib { inherit inputs; pkgs = nixpkgs; lib = self; };
+      });
 
       defaultModules = [
         ({ ... }: {
@@ -21,7 +24,7 @@
             then self.rev
             else throw "Refusing to build from a dirty Git tree!";
         })
-        { nixpkgs.overlays = [ nur.overlay ]; }
+        { nixpkgs.overlays = [ nur.overlay self.overlay ]; }
         home-manager.nixosModules.home-manager
         {
           home-manager.users.ambroisie = import ./home;
@@ -52,6 +55,12 @@
             ];
           };
         }) // {
+      overlay = self.overlays.lib;
+
+      overlays = {
+        lib = final: prev: { inherit lib; };
+      };
+
       nixosConfigurations = lib.mapAttrs buildHost {
         porthos = "x86_64-linux";
       };
