@@ -1,6 +1,13 @@
-{ config, ... }:
+{ config, lib, ... }:
+let
+  cfg = config.my.home.xdg;
+in
 {
-  xdg = {
+  options.my.home.xdg = with lib.my; {
+    enable = mkDisableOption "XDG configuration";
+  };
+
+  config.xdg = lib.mkIf cfg.enable {
     enable = true;
     # File types
     mime.enable = true;
@@ -29,7 +36,7 @@
   };
 
   # I want a tidier home
-  home.sessionVariables = with config.xdg; {
+  config.home.sessionVariables = with config.xdg; lib.mkIf cfg.enable {
     CARGO_HOME = "${dataHome}/cargo";
     DOCKER_CONFIG = "${configHome}/docker";
     HISTFILE = "${dataHome}/bash/history";
