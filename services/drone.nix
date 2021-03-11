@@ -70,7 +70,7 @@ in
   config = lib.mkIf cfg.enable {
     systemd.services.drone-server = {
       wantedBy = [ "multi-user.target" ];
-      after = [ "postgresql" ];
+      after = [ "postgresql.service" ];
       serviceConfig = {
         EnvironmentFile = [
           cfg.secretFile
