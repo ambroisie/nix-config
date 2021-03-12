@@ -52,7 +52,7 @@
             ];
           };
         }) // {
-      nixosConfigurations = nixpkgs.lib.mapAttrs buildHost {
+      nixosConfigurations = lib.mapAttrs buildHost {
         porthos = "x86_64-linux";
       };
     };
