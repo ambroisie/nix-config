@@ -1,6 +1,27 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
+let
+  cfg = config.my.home.vim;
+  configFiles =
+    let
+      toSource = directory: { source = ./. + "/${directory}"; };
+      configureDirectory =
+        name: lib.nameValuePair "nvim/${name}" (toSource name);
+      linkDirectories =
+        dirs: builtins.listToAttrs (map configureDirectory dirs);
+    in
+    linkDirectories [
+      "after"
+      "autoload"
+      "ftdetect"
+      "plugin"
+    ];
+in
 {
-  programs.neovim = {
+  options.my.home.vim = with lib.my; {
+    enable = mkDisableOption "vim configuration";
+  };
+
+  config.programs.neovim = lib.mkIf cfg.enable {
     enable = true;
     # All the aliases
     viAlias = true;
@@ -52,18 +73,5 @@
     extraConfig = builtins.readFile ./init.vim;
   };
 
-  xdg.configFile =
-    let
-      toSource = directory: { source = ./. + "/${directory}"; };
-      configureDirectory =
-        name: lib.nameValuePair "nvim/${name}" (toSource name);
-      linkDirectories =
-        dirs: builtins.listToAttrs (map configureDirectory dirs);
-    in
-    linkDirectories [
-      "after"
-      "autoload"
-      "ftdetect"
-      "plugin"
-    ];
+  config.xdg.configFile = lib.mkIf cfg.enable configFiles;
 }
