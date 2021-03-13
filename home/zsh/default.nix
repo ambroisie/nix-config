@@ -1,6 +1,13 @@
 { config, pkgs, lib, ... }:
+let
+  cfg = config.my.home.zsh;
+in
 {
-  programs.zsh = {
+  options.my.home.zsh = with lib.my; {
+    enable = mkDisableOption "zsh configuration";
+  };
+
+  config.programs.zsh = lib.mkIf cfg.enable {
     enable = true;
     dotDir = ".config/zsh"; # Don't clutter $HOME
     enableCompletion = true;
@@ -56,12 +63,12 @@
   };
 
   # Fuzzy-wuzzy
-  programs.fzf = {
+  config.programs.fzf = lib.mkIf cfg.enable {
     enable = true;
     enableZshIntegration = true;
   };
 
-  programs.dircolors = {
+  config.programs.dircolors = lib.mkIf cfg.enable {
     enable = true;
   };
 }
