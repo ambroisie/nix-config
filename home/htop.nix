@@ -1,6 +1,13 @@
-{ ... }:
+{ config, lib, ... }:
+let
+  cfg = config.my.home.htop;
+in
 {
-  programs.htop = {
+  options.my.home.htop = with lib.my; {
+    enable = mkDisableOption "htop configuration";
+  };
+
+  config.programs.htop = lib.mkIf cfg.enable {
     enable = true;
   };
 }
