@@ -1,6 +1,13 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
+let
+  cfg = config.my.home.git;
+in
 {
-  programs.git = {
+  options.my.home.git = with lib.my; {
+    enable = mkDisableOption "git configuration";
+  };
+
+  config.programs.git = lib.mkIf cfg.enable {
     enable = true;
 
     # Who am I?
