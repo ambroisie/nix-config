@@ -1,6 +1,13 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.my.home.tmux;
+in
 {
-  programs.tmux = {
+  options.my.home.tmux = with lib.my; {
+    enable = mkDisableOption "tmux terminal multiplexer";
+  };
+
+  config.programs.tmux = lib.mkIf cfg.enable {
     enable = true;
 
     clock24 = true; # I'm one of those heathens
