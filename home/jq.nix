@@ -1,6 +1,13 @@
-{ ... }:
+{ config, lib, ... }:
+let
+  cfg = config.my.home.jq;
+in
 {
-  programs.jq = {
+  options.my.home.jq = with lib.my; {
+    enable = mkDisableOption "jq configuration";
+  };
+
+  config.programs.jq = lib.mkIf cfg.enable {
     enable = true;
     colors = {
       null = "1;30";
