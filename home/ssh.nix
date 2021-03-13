@@ -1,6 +1,13 @@
-{ ... }:
+{ config, lib, ... }:
+let
+  cfg = config.my.home.ssh;
+in
 {
-  programs.ssh = {
+  options.my.home.ssh = with lib.my; {
+    enable = mkDisableOption "ssh configuration";
+  };
+
+  config.programs.ssh = {
     enable = true;
 
     matchBlocks = {
