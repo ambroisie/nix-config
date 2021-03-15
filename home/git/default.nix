@@ -34,8 +34,8 @@ in
       # Makes it a bit more readable
       blame = {
         coloring = "repeatedLines";
-        markUnblamables = true;
         markIgnoredLines = true;
+        markUnblamables = true;
       };
 
       # I want `pull --rebase` as a default
@@ -45,20 +45,20 @@ in
 
       # Shiny colors
       color = {
-        ui = "auto";
         branch = "auto";
         diff = "auto";
         interactive = "auto";
         status = "auto";
+        ui = "auto";
       };
 
       # Pretty much the usual diff colors
       "color.diff" = {
         commit = "yellow";
-        meta = "yellow";
         frag = "cyan";
-        old = "red";
+        meta = "yellow";
         new = "green";
+        old = "red";
         whitespace = "red reverse";
       };
 
