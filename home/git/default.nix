@@ -123,8 +123,10 @@ in
 
     ignores =
       let
-        readLines = file: lib.splitString "\n" (builtins.readFile file);
-        removeComments = lib.filter (line: line != "" && !(lib.hasPrefix "#" line));
+        inherit (builtins) readFile;
+        inherit (lib) filter hasPrefix splitString;
+        readLines = file: splitString "\n" (readFile file);
+        removeComments = filter (line: line != "" && !(hasPrefix "#" line));
         getPaths = file: removeComments (readLines file);
       in
       getPaths ./default.ignore;
