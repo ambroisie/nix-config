@@ -3,7 +3,6 @@ let
   cfg = config.my.home.git;
 
   inherit (lib.my) mkMailAddress;
-  diff-highlight = "${pkgs.gitAndTools.gitFull}/share/git/contrib/diff-highlight/diff-highlight";
 in
 {
   options.my.home.git = with lib.my; {
@@ -40,6 +39,33 @@ in
 
     lfs.enable = true;
 
+    delta = {
+      enable = true;
+
+      options = {
+        features = "diff-highlight decorations";
+
+        # Less jarring style for `diff-highlight` emulation
+        diff-highlight = {
+          minus-style = "red";
+          minus-non-emph-style = "red";
+          minus-emph-style = "bold red 52";
+
+          plus-style = "green";
+          plus-non-emph-style = "green";
+          plus-emph-style = "bold green 22";
+
+          whitespace-error-style = "reverse red";
+        };
+
+        # Personal preference for easier reading
+        decorations = {
+          keep-plus-minus-markers = true;
+          paging = "always";
+        };
+      };
+    };
+
     # There's more
     extraConfig = {
       # Makes it a bit more readable
@@ -73,13 +99,6 @@ in
         whitespace = "red reverse";
       };
 
-      "color.diff-highlight" = {
-        oldNormal = "red bold";
-        oldHighlight = "red bold 52";
-        newNormal = "green bold";
-        newHighlight = "green bold 22";
-      };
-
       commit = {
         # Show my changes when writing the message
         verbose = true;
@@ -98,16 +117,6 @@ in
 
       init = {
         defaultBranch = "main";
-      };
-
-      interactive = {
-        diffFilter = "${diff-highlight}";
-      };
-
-      pager = {
-        diff = "${diff-highlight} | less";
-        log = "${diff-highlight} | less";
-        show = "${diff-highlight} | less";
       };
 
       pull = {
