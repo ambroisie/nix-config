@@ -30,7 +30,7 @@ in
   config = lib.mkIf cfg.enable {
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud20; # Nextcloud 19.0.6 is marked as insecure
+      package = pkgs.nextcloud21;
       hostName = nextcloudDomain;
       home = "/var/lib/nextcloud";
       maxUploadSize = cfg.maxSize;
