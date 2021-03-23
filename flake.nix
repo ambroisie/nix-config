@@ -50,7 +50,9 @@
           devShell = pkgs.mkShell {
             name = "NixOS-config";
             buildInputs = with pkgs; [
+              git-crypt
               gitAndTools.pre-commit
+              gnupg
               nixpkgs-fmt
             ];
           };
