@@ -29,7 +29,7 @@ in
 
     downloadBase = mkOption {
       type = types.str;
-      default = "/data/downloads/";
+      default = "/data/downloads";
       example = "/var/lib/transmission/download";
       description = "Download base directory";
     };
