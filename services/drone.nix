@@ -11,28 +11,9 @@ let
 
   hasRunner = (name: builtins.elem name cfg.runners);
 
-  execPkg = pkgs.nur.repos.mic92.drone-runner-exec;
+  execPkg = pkgs.drone-runner-exec;
 
-  dockerPkg = with pkgs; with stdenv; buildGoModule rec {
-    pname = "drone-runner-docker";
-    version = "2020-04-19";
-
-    src = fetchFromGitHub {
-      owner = "drone-runners";
-      repo = "drone-runner-docker";
-      rev = "v1.6.3";
-      sha256 = "sha256-WI3pr0t6EevIBOQwCAI+CY2O8Q7+W/CLDT/5Y0+tduQ=";
-    };
-
-    vendorSha256 = "sha256-tQPM91jMH2/nJ2pq8ExS/dneeLNb/vcL9kmEjyNtl5Y=";
-
-    meta = with lib; {
-      description = "Drone pipeline runner that executes builds using docker";
-      homepage = "https://github.com/drone-runners/drone-runner-docker";
-      # https://polyformproject.org/licenses/small-business/1.0.0/
-      license = licenses.unfree;
-    };
-  };
+  dockerPkg = pkgs.drone-runner-docker;
 in
 {
   options.my.services.drone = with lib; {
