@@ -26,7 +26,7 @@ in
         forceSSL = true;
         useACMEHost = domain;
 
-        locations."/".proxyPass = "http://localhost:${toString jackettPort}/";
+        locations."/".proxyPass = "http://127.0.0.1:${toString jackettPort}/";
       };
 
     services.nzbhydra2 = lib.mkIf cfg.nzbhydra.enable {
@@ -38,7 +38,7 @@ in
         forceSSL = true;
         useACMEHost = domain;
 
-        locations."/".proxyPass = "http://localhost:${toString nzbhydraPort}/";
+        locations."/".proxyPass = "http://127.0.0.1:${toString nzbhydraPort}/";
       };
   };
 }

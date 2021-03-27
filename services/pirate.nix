@@ -28,7 +28,7 @@ let
         forceSSL = true;
         useACMEHost = domain;
 
-        locations."/".proxyPass = "http://localhost:${builtins.toString port}/";
+        locations."/".proxyPass = "http://127.0.0.1:${builtins.toString port}/";
       })
       ports);
 in

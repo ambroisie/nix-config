@@ -22,7 +22,7 @@ in
       useACMEHost = domain;
 
       locations."/" = {
-        proxyPass = "http://localhost:8096/";
+        proxyPass = "http://127.0.0.1:8096/";
         proxyWebsockets = true;
       };
     };

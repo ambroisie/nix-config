@@ -81,7 +81,7 @@ in
       forceSSL = true;
       useACMEHost = domain;
 
-      locations."/".proxyPass = "http://localhost:${toString cfg.privatePort}";
+      locations."/".proxyPass = "http://127.0.0.1:${toString cfg.privatePort}";
     };
 
     networking.firewall = {

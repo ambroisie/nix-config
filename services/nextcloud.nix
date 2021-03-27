@@ -63,7 +63,7 @@ in
       forceSSL = true;
       useACMEHost = domain;
 
-      locations."/".proxyPass = "http://localhost:3000/";
+      locations."/".proxyPass = "http://127.0.0.1:3000/";
     };
 
     my.services.backup = {
