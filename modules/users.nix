@@ -19,8 +19,8 @@ in
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = groupsIfExist [
-      "plugdev" # usage of ZSA keyboard tools
       "media" # access to media files
+      "plugdev" # usage of ZSA keyboard tools
       "wheel" # `sudo` for the user.
     ];
     openssh.authorizedKeys.keys = with builtins; let
