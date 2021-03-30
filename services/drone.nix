@@ -100,6 +100,7 @@ in
     # Docker runner
     systemd.services.drone-runner-docker = lib.mkIf (hasRunner "docker") {
       wantedBy = [ "multi-user.target" ];
+      after = [ "docker.socket" ]; # Needs the socket to be available
       # might break deployment
       restartIfChanged = false;
       confinement.enable = true;
