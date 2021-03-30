@@ -60,6 +60,11 @@ in
       # I don't like moving my eyes
       AGKOZAK_LEFT_PROMPT_ONLY = 1;
     };
+
+    shellAliases = {
+      # Sometime `gpg-agent` errors out...
+      reset-agent = "gpg-connect-agent updatestartuptty /bye";
+    };
   };
 
   # Fuzzy-wuzzy
