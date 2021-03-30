@@ -45,6 +45,15 @@ in
     };
     # Jellyfin media server
     jellyfin.enable = true;
+    # Gitea mirrorig service
+    lohr = {
+      enable = true;
+      sharedSecretFile =
+        let
+          content = "LOHR_SECRET=${my.secrets.lohr.secret}";
+        in
+        builtins.toFile "lohr-secret.env" content;
+    };
     # Matrix backend and Element chat front-end
     matrix = {
       enable = true;

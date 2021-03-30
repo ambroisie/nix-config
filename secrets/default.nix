@@ -30,6 +30,8 @@ else {
       };
     };
 
+    lohr.secret = fileContents ./lohr/secret.txt;
+
     matrix.secret = fileContents ./matrix/secret.txt;
 
     miniflux.password = fileContents ./miniflux/password.txt;
