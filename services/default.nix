@@ -9,6 +9,7 @@
     ./gitea.nix
     ./indexers.nix
     ./jellyfin.nix
+    ./lohr.nix
     ./matrix.nix
     ./miniflux.nix
     ./nextcloud.nix
