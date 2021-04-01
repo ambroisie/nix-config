@@ -23,22 +23,19 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    virtualisation.oci-containers.containers = {
-      calibre-web = {
-        image = "technosoft2000/calibre-web";
-        volumes = [
-          "${cfg.libraryPath}:/books"
-        ];
-        ports = [
-          "127.0.0.1:${toString cfg.port}:8083"
-        ];
-        environment = {
-          # NOTE: should be configurable
-          SET_CONTAINER_TIMEZONE = "true";
-          CONTAINER_TIMEZONE = "Europe/Paris";
-          # Use 'media' group id
-          PDGID = toString config.users.groups.media.gid;
-        };
+    services.calibre-web = {
+      enable = true;
+
+      listen = {
+        ip = "127.0.0.1";
+        port = cfg.port;
+      };
+
+      group = "media";
+
+      options = {
+        calibreLibrary = cfg.libraryPath;
+        enableBookConversion = true;
       };
     };
 
@@ -51,6 +48,7 @@ in
 
     my.services.backup = {
       paths = [
+        "/var/lib/calibre-web" # For `app.db` and `gdrive.db`
         cfg.libraryPath
       ];
     };
