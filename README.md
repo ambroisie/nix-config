@@ -15,6 +15,7 @@ sudo nixos-rebuild switch --flake .
 Secondly, take care of a few manual steps:
 
 * Configure Gitea and Drone
+* Configure Lohr webhook and SSH key
 * Configure Jellyfin
 * Configure Jackett and NZBHydra2
 * Configure Sonarr, Radarr, Bazarr
