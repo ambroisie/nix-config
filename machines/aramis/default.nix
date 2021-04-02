@@ -8,19 +8,13 @@
   imports = [
     ./boot.nix
     ./hardware.nix
+    ./home.nix
     ./networking.nix
     ./sound.nix
   ];
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
