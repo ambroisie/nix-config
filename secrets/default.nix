@@ -38,6 +38,8 @@ else {
 
     nextcloud.password = fileContents ./nextcloud/password.txt;
 
+    podgrab.password = fileContents ./podgrab/password.txt;
+
     transmission.password = fileContents ./transmission/password.txt;
 
     users = {

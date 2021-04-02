@@ -70,6 +70,16 @@ in
     };
     # The whole *arr software suite
     pirate.enable = true;
+    # Podcast automatic downloader
+    podgrab = {
+      enable = true;
+      passwordFile =
+        let
+          contents = "PASSWORD=${my.secrets.podgrab.password}";
+        in
+        builtins.toFile "podgrab.env" contents;
+      port = 9598;
+    };
     # Regular backups
     postgresql-backup.enable = true;
     # An IRC client daemon
