@@ -15,6 +15,7 @@
     ./nextcloud.nix
     ./nginx.nix
     ./pirate.nix
+    ./podgrab.nix
     ./postgresql-backup.nix
     ./quassel.nix
     ./rss-bridge.nix
