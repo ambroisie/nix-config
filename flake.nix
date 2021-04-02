@@ -58,12 +58,18 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
         }
+        # Include generic settings
+        ./modules
+        # Include my secrets
+        ./secrets
+        # Include my services
+        ./services
       ];
 
       buildHost = name: system: lib.nixosSystem {
         inherit system;
         modules = defaultModules ++ [
-          (./. + "/${name}.nix")
+          (./. + "/machines/${name}")
         ];
         specialArgs = {
           # Use my extended lib in NixOS configuration
