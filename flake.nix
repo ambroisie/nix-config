@@ -109,6 +109,7 @@
       };
 
       nixosConfigurations = lib.mapAttrs buildHost {
+        aramis = "x86_64-linux";
         porthos = "x86_64-linux";
       };
     };
