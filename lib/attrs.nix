@@ -4,4 +4,6 @@ let
 in
 {
   mapFilterAttrs = pred: f: attrs: filterAttrs pred (mapAttrs' f attrs);
+
+  genAttrs' = values: f: listToAttrs (map f values);
 }
