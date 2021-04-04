@@ -3,6 +3,7 @@
   imports = [
     ./i3.nix
     ./i3bar.nix
+    ./rofi.nix
   ];
 
   options.my.home.wm = with lib; {
