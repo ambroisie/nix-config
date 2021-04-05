@@ -7,6 +7,8 @@
     wm.windowManager = "i3";
     # Keyboard settings
     x.enable = true;
+    # Zathura document viewer
+    zathura.enable = true;
   };
 
   # Enable the X11 windowing system.
