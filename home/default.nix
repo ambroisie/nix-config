@@ -15,6 +15,7 @@
     ./ssh.nix
     ./terminal
     ./tmux.nix
+    ./udiskie.nix
     ./vim
     ./wm
     ./x
