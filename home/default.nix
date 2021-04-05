@@ -12,6 +12,7 @@
     ./pager.nix
     ./secrets # Home-manager specific secrets
     ./ssh.nix
+    ./terminal
     ./tmux.nix
     ./vim
     ./wm
