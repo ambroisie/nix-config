@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 let
-  isEnabled = config.my.home.wm.windowManager == "i3";
+  cfg = config.my.home.wm.i3bar;
 in
 {
-  config = lib.mkIf isEnabled {
+  config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       alsaUtils # Used by `sound` block
       lm_sensors # Used by `temperature` block

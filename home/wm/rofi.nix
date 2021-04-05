@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 let
-  isEnabled = config.my.home.wm.windowManager == "i3";
+  cfg = config.my.home.wm.rofi;
 in
 {
-  config = lib.mkIf isEnabled {
+  config = lib.mkIf cfg.enable {
     programs.rofi = {
       enable = true;
 
