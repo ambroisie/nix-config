@@ -18,6 +18,7 @@
     ./wm
     ./x
     ./xdg.nix
+    ./zathura.nix
     ./zsh
   ];
 
