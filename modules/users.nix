@@ -19,8 +19,10 @@ in
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = groupsIfExist [
+      "audio" # sound control
       "media" # access to media files
       "plugdev" # usage of ZSA keyboard tools
+      "video" # screen control
       "wheel" # `sudo` for the user.
     ];
     openssh.authorizedKeys.keys = with builtins; let
