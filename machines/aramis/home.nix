@@ -3,6 +3,8 @@
   my.home = {
     # Firefo profile and extensions
     firefox.enable = true;
+    # Blue light filter
+    gammastep.enable = true;
     # Termite terminal
     terminal.program = "termite";
     # i3 settings
