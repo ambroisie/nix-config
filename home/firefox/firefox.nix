@@ -37,6 +37,7 @@ in
 
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
       bitwarden
+      form-history-control
       https-everywhere
       i-dont-care-about-cookies
       reddit-enhancement-suite
