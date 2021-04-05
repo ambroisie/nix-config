@@ -28,9 +28,12 @@ let
 in
 {
   config = lib.mkIf isEnabled {
+    my.home = {
+      flameshot.enable = true;
+    };
+
     home.packages = with pkgs; [
       arandr # Used by a mapping
-      flameshot # Used by a mapping, started at startup
       playerctl # Used by a mapping
     ];
 
@@ -292,9 +295,6 @@ in
         startup = [
           # FIXME
           # { commdand; always; notification; }
-          {
-            command = "flameshot";
-          }
         ];
       };
     };
