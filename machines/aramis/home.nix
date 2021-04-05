@@ -1,6 +1,8 @@
 { ... }:
 {
   my.home = {
+    # Termite terminal
+    terminal.program = "termite";
     # i3 settings
     wm.windowManager = "i3";
     # Keyboard settings
