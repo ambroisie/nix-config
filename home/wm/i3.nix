@@ -30,6 +30,7 @@ in
   config = lib.mkIf isEnabled {
     my.home = {
       flameshot.enable = true;
+      udiskie.enable = true;
     };
 
     home.packages = with pkgs; [
