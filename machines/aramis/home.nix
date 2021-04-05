@@ -1,6 +1,8 @@
 { ... }:
 {
   my.home = {
+    # Firefo profile and extensions
+    firefox.enable = true;
     # Termite terminal
     terminal.program = "termite";
     # i3 settings
