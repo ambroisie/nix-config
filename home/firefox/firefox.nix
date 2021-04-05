@@ -6,6 +6,12 @@ in
   config.programs.firefox = lib.mkIf cfg.enable {
     enable = true;
 
+    package = pkgs.firefox.override {
+      cfg = {
+        enableTridactylNative = cfg.tridactyl.enable;
+      };
+    };
+
     profiles = {
       default = {
         id = 0;
