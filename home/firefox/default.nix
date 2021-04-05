@@ -15,5 +15,6 @@
 
   imports = [
     ./firefox.nix
+    ./tridactyl.nix
   ];
 }
