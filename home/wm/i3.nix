@@ -2,7 +2,10 @@
 let
   isEnabled = config.my.home.wm.windowManager == "i3";
 
-  terminal = "i3-sensible-terminal";
+  terminal =
+    if config.my.home.terminal.program != null
+    then config.my.home.terminal.program
+    else "i3-sensible-terminal";
 
   alt = "Mod1"; # `Alt` key
   modifier = "Mod4"; # `Super` key
