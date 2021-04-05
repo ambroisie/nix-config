@@ -8,10 +8,18 @@ let
 in
 {
   imports = [
+    ./termite.nix
   ];
 
   options.my.home = with lib; {
     terminal = {
+      program = mkOption {
+        type = with types; nullOr (enum [ "termite" ]);
+        default = null;
+        example = "termite";
+        description = "Which terminal to use for home session";
+      };
+
       colors = {
         background = mkColorOption "Background color" "#161616";
         foreground = mkColorOption "Foreground color" "#ffffff";
