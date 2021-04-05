@@ -4,6 +4,7 @@
     ./bat.nix
     ./direnv.nix
     ./documentation.nix
+    ./flameshot.nix
     ./git
     ./gpg.nix
     ./htop.nix
