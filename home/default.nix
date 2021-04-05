@@ -6,6 +6,7 @@
     ./documentation.nix
     ./firefox
     ./flameshot.nix
+    ./gammastep.nix
     ./git
     ./gpg.nix
     ./htop.nix
