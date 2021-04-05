@@ -18,6 +18,7 @@ in
             {
               block = "music";
               buttons = [ "prev" "play" "next" ];
+              hide_when_empty = true;
             }
             {
               block = "cpu";
