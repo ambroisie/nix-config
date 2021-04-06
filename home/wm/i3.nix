@@ -212,6 +212,33 @@ in
             "XF86AudioNext" = "exec playerctl next";
             "XF86AudioPrev" = "exec playerctl previous";
           }
+          (
+            let
+              xbacklight = "${pkgs.xorg.xbacklight}/bin/xbacklight";
+              changeBacklight = pkgs.writeScript "change-backlight" ''
+                #!/bin/sh
+                if [ "$1" = "up" ]; then
+                    upDown=-inc
+                else
+                    upDown=-dec
+                fi
+
+                ${xbacklight} "$upDown" "$2"
+                newBrightness="$(printf '$.0f' "$(${xbacklight} -get)")"
+                ${pkgs.libnotify}/bin/notify-send -u low \
+                    -h string:x-canonical-private-synchronous:change-backlight \
+                    -h "int:value:$newBrightness" \
+                    -- "Set brightness to $newBrightness"
+              '';
+            in
+            {
+              "XF86Display" = "arandr";
+              "XF86MonBrightnessUp" = "${changeBacklight} up 10";
+              "XF86MonBrightnessDown" = "${changeBacklight} down 10";
+              "Control+XF86MonBrightnessUp" = "${changeBacklight} up 1";
+              "Control+XF86MonBrightnessDown" = "${changeBacklight} down 1";
+            }
+          )
           {
             # Sub-modes
             "${modifier}+r" = "mode resize";
