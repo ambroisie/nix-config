@@ -47,6 +47,13 @@ in
         description = "Locker command to run";
       };
 
+      cornerLock = my.mkDisableOption ''
+        Move mouse to upper-left corner to lock instantly, lower-right corner to
+        disable auto-lock.
+      '';
+
+      notify = my.mkDisableOption "Notify when about to lock the screen";
+
       timeout = mkOption {
         type = types.ints.between 1 60;
         default = 5;
