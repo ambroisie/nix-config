@@ -157,6 +157,17 @@ in
             "${modifier}+d" = "exec rofi -show drun -disable-history";
             "${modifier}+Shift+d" = "exec rofi -show run -disable-history";
             "${modifier}+p" = "exec --no-startup-id flameshot gui";
+            "${modifier}+Control+p" =
+              let
+                bitwarden-rofi =
+                  pkgs.nur.repos.c0deaddict.bitwarden-rofi.overrideAttrs (old: {
+                    src = old.src // {
+                      rev = "62c95afd5634234bac75855dc705d4da5f4fab69";
+                      sha256 = lib.fakeSha256;
+                    };
+                  });
+              in
+              "exec ${bitwarden-rofi}/bin/bwmenu";
             "${modifier}+Shift+p" = "exec rofi -show emoji";
           }
           (
