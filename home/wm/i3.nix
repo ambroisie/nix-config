@@ -218,6 +218,25 @@ in
             "${modifier}+Shift+space" = "mode floating";
             "${modifier}+0" = ''mode "${shutdownMode}"'';
           }
+          (lib.optionalAttrs config.my.home.wm.screen-lock.enable {
+            "${modifier}+x" =
+              let
+                systemctlUser = "${pkgs.systemd}/bin/systemctl --user";
+                notify = "${pkgs.libnotify}/bin/notify-send -u low " +
+                  "-h string:x-canonical-private-synchronous:xautolock-toggle";
+                toggleXautolock = pkgs.writeScript "toggle-xautolock" ''
+                  #!/bin/sh
+                  if ${systemctlUser} is-active xautolock-session.service; then
+                    ${systemctlUser} stop --user xautolock-session.service
+                    ${notify} "Disabled Xautolock"
+                  else
+                    ${systemctlUser} start xautolock-session.service
+                    ${notify} "Enabled Xautolock"
+                  fi
+                '';
+              in
+              "exec ${toggleXautolock}";
+          })
         ];
 
         keycodebindings =
