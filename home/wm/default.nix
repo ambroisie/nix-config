@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    ./dunst.nix
     ./i3.nix
     ./i3bar.nix
     ./rofi.nix
@@ -21,6 +22,10 @@ in
       default = null;
       example = "i3";
       description = "Which window manager to use for home session";
+    };
+
+    dunst = {
+      enable = mkRelatedOption "dunst configuration" [ "i3" ];
     };
 
     i3bar = {
