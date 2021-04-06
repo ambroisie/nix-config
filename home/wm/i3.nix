@@ -237,6 +237,16 @@ in
               in
               "exec ${toggleXautolock}";
           })
+          (
+            let
+              execDunstctl = "exec ${pkgs.dunst}/bin/dunstctl";
+            in
+            lib.optionalAttrs config.my.home.wm.dunst.enable {
+              "${modifier}+minus" = "${execDunstctl} close";
+              "${modifier}+Shift+minus" = "${execDunstctl} close-all";
+              "${modifier}+equal" = "${execDunstctl} history-pop";
+            }
+          )
         ];
 
         keycodebindings =
