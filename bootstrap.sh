@@ -78,7 +78,7 @@ get_pgp() {
 }
 
 get_creds() {
-    BW_SESSION="$(bw login --raw)"
+    BW_SESSION="$(bw login --raw || bw unlock --raw)"
     export BW_SESSION
 
     get_ssh
