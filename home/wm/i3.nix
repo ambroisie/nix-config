@@ -243,7 +243,6 @@ in
             # Sub-modes
             "${modifier}+r" = "mode resize";
             "${modifier}+Shift+space" = "mode floating";
-            "${modifier}+0" = ''mode "${shutdownMode}"'';
           }
           (lib.optionalAttrs config.my.home.wm.screen-lock.enable {
             "${modifier}+x" =
@@ -292,6 +291,9 @@ in
           builtins.foldl' (lhs: rhs: lhs // rhs) { } [
             (createWorkspaceBindings modifier "workspace number")
             (createWorkspaceBindings "${modifier}+Shift" "move container to workspace number")
+            {
+              "${modifier}+${toString (toKeycode 0)}" = ''mode "${shutdownMode}"'';
+            }
           ];
 
         modes =
