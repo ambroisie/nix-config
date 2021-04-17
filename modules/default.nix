@@ -3,6 +3,7 @@
 
 {
   imports = [
+    ./documentation.nix
     ./ergodox.nix
     ./language.nix
     ./media.nix
