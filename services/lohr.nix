@@ -9,7 +9,7 @@ let
 
   lohrPkg =
     let
-      flake = builtins.getFlake "github:alarsyo/lohr?rev=e68fcf3e522fc055c1a42ad10ac24c97ee068742";
+      flake = builtins.getFlake "github:alarsyo/lohr?rev=6c4a496ede8d7209be13d2bd597eef0789992fc3";
     in
     flake.defaultPackage."x86_64-linux"; # FIXME: use correct system
 in
