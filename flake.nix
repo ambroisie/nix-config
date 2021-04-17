@@ -39,6 +39,10 @@
         modules = defaultModules ++ [
           (./. + "/${name}.nix")
         ];
+        specialArgs = {
+          # Use my extended lib in NixOS configuration
+          inherit lib;
+        };
       };
     in
     eachDefaultSystem
