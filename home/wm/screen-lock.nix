@@ -1,6 +1,14 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.my.home.wm.screen-lock;
+
+  notficationCmd =
+    let
+      duration = toString (cfg.notify.delay * 1000);
+      notifyCmd = "${pkgs.libnotify}/bin/notify-send -u critical -t ${duration}";
+    in
+    # Needs to be surrounded by quotes for systemd to launch it correctly
+    ''"${notifyCmd} -- 'Locking in ${toString cfg.notify.delay} seconds'"'';
 in
 {
   config = lib.mkIf cfg.enable {
@@ -19,11 +27,11 @@ in
         "${toString cfg.cornerLock.delay}"
         "-corners"
         "+00-"
-      ] ++ lib.optionals cfg.notify [
+      ] ++ lib.optionals cfg.notify.enable [
         "-notify"
-        "5"
+        "${toString cfg.notify.delay}"
         "-notifier"
-        ''"${pkgs.libnotify}/bin/notify-send -u critical -t 5000 -- 'Locking in 5 seconds'"''
+        notficationCmd
       ];
     };
   };

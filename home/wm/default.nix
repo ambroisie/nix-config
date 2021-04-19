@@ -61,7 +61,26 @@ in
         };
       };
 
-      notify = my.mkDisableOption "Notify when about to lock the screen";
+      notify = {
+        enable = my.mkDisableOption "Notify when about to lock the screen";
+
+        delay = mkOption {
+          type = with types;
+            addCheck int (x:
+              let
+                cfg = config.my.home.wm.screen-lock.notify;
+                cornerCfg = config.my.home.wm.screen-lock.cornerLock;
+              in
+              (cfg.enable && cornerCfg.enable) -> cornerCfg.delay >= x);
+          default = 5;
+          example = 15;
+          description = ''
+            How many seconds in advance should there be a notification.
+            This value must be at lesser than or equal to `cornerLock.delay`
+            when both options are enabled.
+          '';
+        };
+      };
 
       timeout = mkOption {
         type = types.ints.between 1 60;
