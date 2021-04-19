@@ -24,7 +24,11 @@
             then self.rev
             else throw "Refusing to build from a dirty Git tree!";
         })
-        { nixpkgs.overlays = [ nur.overlay self.overlay ]; }
+        {
+          nixpkgs.overlays = (lib.attrValues self.overlays) ++ [
+            nur.overlay
+          ];
+        }
         home-manager.nixosModules.home-manager
         {
           home-manager.users.ambroisie = import ./home;
@@ -61,10 +65,11 @@
             ];
           };
         }) // {
-      overlay = self.overlays.lib;
+      overlay = self.overlays.pkgs;
 
       overlays = {
         lib = final: prev: { inherit lib; };
+        pkgs = final: prev: { ambroisie = import ./pkgs { pkgs = prev; }; };
       };
 
       nixosConfigurations = lib.mapAttrs buildHost {
