@@ -7,11 +7,7 @@ let
   domain = config.networking.domain;
   lohrDomain = "lohr.${config.networking.domain}";
 
-  lohrPkg =
-    let
-      flake = builtins.getFlake "github:alarsyo/lohr?rev=6c4a496ede8d7209be13d2bd597eef0789992fc3";
-    in
-    flake.defaultPackage."x86_64-linux"; # FIXME: use correct system
+  lohrPkg = pkgs.ambroisie.lohr;
 in
 {
   options.my.services.lohr = with lib; {
