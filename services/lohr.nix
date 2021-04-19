@@ -48,7 +48,7 @@ in
         ];
         Environment = [
           "ROCKET_PORT=${toString cfg.port}"
-          "ROCKET_LOG=normal"
+          "ROCKET_LOG_LEVEL=normal"
           "LOHR_HOME=/var/lib/lohr/"
           "LOHR_CONFIG="
         ];
