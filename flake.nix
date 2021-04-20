@@ -64,6 +64,8 @@
               nixpkgs-fmt
             ];
           };
+
+          packages = import ./pkgs { inherit pkgs; };
         }) // {
       overlay = self.overlays.pkgs;
 
