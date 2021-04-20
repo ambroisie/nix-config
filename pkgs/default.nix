@@ -1,5 +1,7 @@
 { pkgs }:
 {
+  havm = pkgs.callPackage ./havm { };
+
   lohr = pkgs.callPackage ./lohr { };
 
   nolimips = pkgs.callPackage ./nolimips { };
