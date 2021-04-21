@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./adblock.nix
     ./backup.nix
     ./blog.nix
     ./calibre-web.nix
