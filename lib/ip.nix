@@ -85,4 +85,28 @@ rec {
 
   # Pretty print a parsed subnet into a human readable form
   prettySubnet4 = { baseIp, cidr, ... }: "${prettyIp4 baseIp}/${toString cidr}";
+
+  # Convert an IPv4 range into a list of all its constituent addresses
+  rangeIp4 =
+    { from, to }:
+    let
+      numAddresses =
+        builtins.foldl' (acc: rhs: acc * 256 + rhs)
+          0
+          (zipListsWith (lhs: rhs: lhs - rhs) to from);
+      addToBase = n:
+        let
+          carry = lhs: { carry, acc }:
+            let
+              totVal = lhs + carry;
+            in
+            {
+              carry = totVal / 256;
+              acc = [ (mod totVal 256) ] ++ acc;
+            };
+          carried = foldr carry { carry = n; acc = [ ]; } from;
+        in
+        carried.acc;
+    in
+    map addToBase (range 0 numAddresses);
 }
