@@ -36,9 +36,11 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # Needed when connecting from Wireguard clients
-    networking.firewall.allowedUDPPorts = [ 53 ];
-    networking.firewall.allowedTCPPorts = [ 53 ];
+    # Allow wireguard clients to connect to it
+    networking.firewall.interfaces."${wgCfg.iface}" = {
+      allowedUDPPorts = [ 53 ];
+      allowedTCPPorts = [ 53 ];
+    };
 
     services.unbound = {
       enable = true;
