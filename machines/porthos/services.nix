@@ -6,6 +6,10 @@ in
 {
   # List services that you want to enable:
   my.services = {
+    # Hosts-based adblock using unbound
+    adblock = {
+      enable = true;
+    };
     # Backblaze B2 backup
     backup = {
       enable = true;
