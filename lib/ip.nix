@@ -75,9 +75,22 @@ rec {
             "which will get masked to ${prettyIp4 baseIp},"
             "which should be used instead"
           ]);
+      nth = n:
+        let
+          result = nthInRange4 range n;
+          try =
+            if check result
+            then id
+            else
+              warn (concatStringsSep " " [
+                "nth call with n = ${toString n}"
+                "is out of range for subnet ${str}"
+              ]);
+        in
+        try result;
     in
     try {
-      inherit baseIp check cidr mask range;
+      inherit baseIp check cidr mask nth range;
     };
 
   # Pretty print a parsed IPv4 address into a human readable form
