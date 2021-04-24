@@ -65,7 +65,8 @@ rec {
         from = baseIp;
         to = zipListsWith (b: m: 255 - m + b) baseIp mask;
       };
-      check = ip: baseIp == zipListsWith (b: m: bitAnd b m) ip mask;
+      check =
+        ip: isValidIp4 ip && baseIp == zipListsWith (b: m: bitAnd b m) ip mask;
       try =
         if baseIp == givenIp
         then id
