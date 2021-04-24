@@ -124,4 +124,7 @@ rec {
           (zipListsWith (lhs: rhs: lhs - rhs) to from);
     in
     map (nthInRange4 arg) (range 0 numAddresses);
+
+  isValidIp4 = ip:
+    (builtins.all (n: n >= 0 && n < 256) ip) && (builtins.length ip == 4);
 }
