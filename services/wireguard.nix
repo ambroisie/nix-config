@@ -174,15 +174,23 @@ in
       networking.wg-quick.interfaces."${cfg.iface}" = {
         postUp = with cfg.net; ''
           ${pkgs.iptables}/bin/iptables -A FORWARD -i ${cfg.iface} -j ACCEPT
-          ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${v4.subnet}.1/${toString v4.mask} -o ${extIface} -j MASQUERADE
+          ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING \
+              -s ${v4.subnet}.${toString thisPeer.clientNum}/${toString v4.mask} \
+              -o ${extIface} -j MASQUERADE
           ${pkgs.iptables}/bin/ip6tables -A FORWARD -i ${cfg.iface} -j ACCEPT
-          ${pkgs.iptables}/bin/ip6tables -t nat -A POSTROUTING -s ${v6.subnet}::1/${toString v6.mask} -o ${extIface} -j MASQUERADE
+          ${pkgs.iptables}/bin/ip6tables -t nat -A POSTROUTING \
+              -s ${v6.subnet}::${toString thisPeer.clientNum}/${toString v6.mask} \
+              -o ${extIface} -j MASQUERADE
         '';
         preDown = with cfg.net; ''
           ${pkgs.iptables}/bin/iptables -D FORWARD -i ${cfg.iface} -j ACCEPT
-          ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s ${v4.subnet}.1/${toString v4.mask} -o ${extIface} -j MASQUERADE
+          ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING \
+              -s ${v4.subnet}.${toString thisPeer.clientNum}/${toString v4.mask} \
+              -o ${extIface} -j MASQUERADE
           ${pkgs.iptables}/bin/ip6tables -D FORWARD -i ${cfg.iface} -j ACCEPT
-          ${pkgs.iptables}/bin/ip6tables -t nat -D POSTROUTING -s ${v6.subnet}::1/${toString v6.mask} -o ${extIface} -j MASQUERADE
+          ${pkgs.iptables}/bin/ip6tables -t nat -D POSTROUTING \
+              -s ${v6.subnet}::${toString thisPeer.clientNum}/${toString v6.mask} \
+              -o ${extIface} -j MASQUERADE
         '';
       };
     })
