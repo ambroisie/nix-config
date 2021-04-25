@@ -23,6 +23,7 @@ stdenvNoCC.mkDerivation {
   '';
 
   cat = "${coreutils}/bin/cat";
+  mktemp = "${coreutils}/bin/mktemp";
   git = "${git}/bin/git";
   sed = "${gnused}/bin/sed";
 

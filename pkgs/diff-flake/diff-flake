@@ -98,8 +98,8 @@ fill_default_outputs() {
 
 diff_output() {
     local PREV NEW;
-    PREV="$(mktemp --dry-run)"
-    NEW="$(mktemp --dry-run)"
+    PREV="$(@mktemp@ --dry-run)"
+    NEW="$(@mktemp@ --dry-run)"
 
     nix build "${NIX_BUILD_ARGS[@]}" -v ".?rev=${PREVIOUS_REV}#$1" -o "$PREV"
     nix build "${NIX_BUILD_ARGS[@]}" -v ".${NEW_REV:+?rev=$NEW_REV}#$1" -o "$NEW"
