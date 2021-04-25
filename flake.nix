@@ -51,7 +51,13 @@
         let
           pkgs = nixpkgs.legacyPackages.${system};
         in
-        {
+        rec {
+          apps = {
+            diff-flake = futils.lib.mkApp { drv = packages.diff-flake; };
+          };
+
+          defaultApp = apps.diff-flake;
+
           devShell = pkgs.mkShell {
             name = "NixOS-config";
             buildInputs = with pkgs; [
