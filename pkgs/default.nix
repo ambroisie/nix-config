@@ -1,5 +1,7 @@
 { pkgs }:
 rec {
+  diff-flake = pkgs.callPackage ./diff-flake { };
+
   havm = pkgs.callPackage ./havm { };
 
   lohr = pkgs.callPackage ./lohr { };
