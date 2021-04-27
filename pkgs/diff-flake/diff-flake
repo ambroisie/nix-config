@@ -53,7 +53,7 @@ parse_args() {
                 exit
                 ;;
             -f|--flake-output)
-                INPUTS+="$1"
+                FLAKE_OUTPUTS+=("$1")
                 shift
                 ;;
             -o|--output)
