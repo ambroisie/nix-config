@@ -43,6 +43,7 @@ in
             }
             {
               block = "temperature";
+              collapsed = false;
             }
             {
               block = "sound";
