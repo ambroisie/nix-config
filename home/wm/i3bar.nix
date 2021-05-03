@@ -18,6 +18,7 @@ in
             {
               block = "music";
               buttons = [ "prev" "play" "next" ];
+              max_width = 50;
               hide_when_empty = true;
             }
             {
