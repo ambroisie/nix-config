@@ -32,6 +32,8 @@ in
   config.services.gammastep = lib.mkIf cfg.enable {
     enable = true;
 
+    tray = true;
+
     dawnTime = cfg.times.dawn;
     duskTime = cfg.times.dusk;
 
