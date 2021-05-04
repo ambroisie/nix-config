@@ -84,6 +84,11 @@ in
                   text = "#fdf6e3";
                 };
               };
+
+              fonts = {
+                names = [ "DejaVu Sans Mono" "FontAwesome5Free" ];
+                size = 8.0;
+              };
             }
           ];
 
