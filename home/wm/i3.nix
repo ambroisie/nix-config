@@ -202,11 +202,11 @@ in
           )
           {
             # Media keys
-            "XF86AudioRaiseVolume" = "exec amixer -q -D pulse sset Master 5%+";
-            "XF86AudioLowerVolume" = "exec amixer -q -D pulse sset Master 5%-";
-            "Control+XF86AudioRaiseVolume" = "exec amixer -q -D pulse sset Master 1%+";
-            "Control+XF86AudioLowerVolume" = "exec amixer -q -D pulse sset Master 1%-";
-            "XF86AudioMute" = "exec amixer -q -D pulse sset Master toggle";
+            "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
+            "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
+            "Control+XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +1%";
+            "Control+XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -1%";
+            "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
 
             "XF86AudioPlay" = "exec playerctl play-pause";
             "XF86AudioNext" = "exec playerctl next";
