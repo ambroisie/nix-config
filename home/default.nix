@@ -2,6 +2,7 @@
 {
   imports = [
     ./bat.nix
+    ./bluetooth.nix
     ./direnv.nix
     ./documentation.nix
     ./firefox
