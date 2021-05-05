@@ -11,6 +11,7 @@
     ./gpg.nix
     ./htop.nix
     ./jq.nix
+    ./nm-applet.nix
     ./packages.nix
     ./pager.nix
     ./secrets # Home-manager specific secrets
