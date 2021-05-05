@@ -7,6 +7,8 @@
     gammastep.enable = true;
     # Use a small popup to enter passwords
     gpg.pinentry = "gtk2";
+    # Network-Manager applet
+    nm-applet.enable = true;
     # Termite terminal
     terminal.program = "termite";
     # i3 settings
