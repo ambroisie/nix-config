@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.my.module.documentation;
 in
@@ -10,23 +10,31 @@ in
 
     info.enable = mkDisableOption "Documentation aimed at developers";
 
-    man.enable = mkDisableOption "Documentation aimed at developers";
+    man = {
+      enable = mkDisableOption "Documentation aimed at developers";
+
+      linux = mkDisableOption "Linux man pages (section 2 & 3)";
+    };
 
     nixos.enable = mkDisableOption "NixOS documentation";
   };
 
-  config.documentation = {
-    enable = cfg.enable;
+  config = lib.mkIf cfg.enable {
+    documentation = {
+      enable = true;
 
-    dev.enable = cfg.dev.enable;
+      dev.enable = cfg.dev.enable;
 
-    info.enable = cfg.info.enable;
+      info.enable = cfg.info.enable;
 
-    man = {
-      enable = cfg.man.enable;
-      generateCaches = true;
+      man = {
+        enable = cfg.man.enable;
+        generateCaches = true;
+      };
+
+      nixos.enable = cfg.nixos.enable;
     };
 
-    nixos.enable = cfg.nixos.enable;
+    environment.systemPackages = lib.optional cfg.man.linux pkgs.manpages;
   };
 }
