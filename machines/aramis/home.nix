@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   my.home = {
     # Bluetooth GUI & media keys
@@ -9,6 +9,11 @@
     gammastep.enable = true;
     # Use a small popup to enter passwords
     gpg.pinentry = "gtk2";
+    # Machine specific packages
+    packages.additionalPackages = with pkgs; [
+      pavucontrol # Audio mixer GUI
+      quasselClient # IRC client
+    ];
     # Network-Manager applet
     nm-applet.enable = true;
     # Termite terminal
