@@ -3,6 +3,8 @@
   my.home = {
     # Bluetooth GUI & media keys
     bluetooth.enable = true;
+    # Image viewver
+    feh.enable = true;
     # Firefo profile and extensions
     firefox.enable = true;
     # Blue light filter
