@@ -30,4 +30,10 @@
   services.xserver.enable = true;
   # Enable i3
   services.xserver.windowManager.i3.enable = true;
+  # Nice wallpaper
+  services.xserver.displayManager.lightdm.background =
+    let
+      wallpapers = "${pkgs.plasma-workspace-wallpapers}/share/wallpapers";
+    in
+    "${wallpapers}/summer_1am/contents/images/2560x1600.jpg";
 }
