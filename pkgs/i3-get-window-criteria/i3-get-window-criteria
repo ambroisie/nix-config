@@ -27,4 +27,4 @@ match_qstring='"[^"\\]*(\\.[^"\\]*)*"' # NOTE: Adds 1 backreference
             -e "/^WM_NAME\(STRING\) = ($match_string)$/ {s//title=\1/; h}" \
             -e "/^_NET_WM_NAME\(UTF8_STRING\) = ($match_qstring)$/ {s//title=\1/; h}" \
             -e '$ {g; p}'
-} | sort | tr "\n" " " | sed -r 's/^(.*) $/[\1]\n/'
+} | sort | tr "\n" " " | sed -r 's/^ *(.*) $/[\1]\n/'
