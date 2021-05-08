@@ -4,6 +4,8 @@ rec {
 
   havm = pkgs.callPackage ./havm { };
 
+  i3-get-window-criteria = pkgs.callPackage ./i3-get-window-criteria { };
+
   lohr = pkgs.callPackage ./lohr { };
 
   nolimips = pkgs.callPackage ./nolimips { };
