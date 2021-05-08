@@ -16,6 +16,7 @@
       jellyfin-media-player # Wraps the webui and mpv together
       pavucontrol # Audio mixer GUI
       quasselClient # IRC client
+      transgui # Transmission remote
     ];
     # Network-Manager applet
     nm-applet.enable = true;
