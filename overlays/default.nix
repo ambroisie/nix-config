@@ -1,3 +1,3 @@
 {
-  # FIXME: add overlays
+  transgui-fix-duplicate-status = import ./transgui-fix-duplicate-status;
 }
