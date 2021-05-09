@@ -222,20 +222,19 @@ in
           }
           (
             let
-              xbacklight = "${pkgs.xorg.xbacklight}/bin/xbacklight";
+              brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
               changeBacklight = pkgs.writeScript "change-backlight" ''
                 #!/bin/sh
                 if [ "$1" = "up" ]; then
-                    upDown=-inc
+                    upDown="+$2%"
                 else
-                    upDown=-dec
+                    upDown="$2%-"
                 fi
 
-                ${xbacklight} "$upDown" "$2"
-                newBrightness="$(printf '$.0f' "$(${xbacklight} -get)")"
+                newBrightness="$(${brightnessctl} -m set "$upDown" | cut -d, -f4)"
                 ${pkgs.libnotify}/bin/notify-send -u low \
                     -h string:x-canonical-private-synchronous:change-backlight \
-                    -h "int:value:$newBrightness" \
+                    -h "int:value:''${newBrightness/\%/}" \
                     -- "Set brightness to $newBrightness"
               '';
             in
