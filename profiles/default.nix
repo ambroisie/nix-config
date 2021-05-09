@@ -5,5 +5,6 @@
     ./bluetooth.nix
     ./gtk.nix
     ./wm.nix
+    ./x.nix
   ];
 }
