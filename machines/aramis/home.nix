@@ -9,8 +9,6 @@
     gammastep.enable = true;
     # Use a small popup to enter passwords
     gpg.pinentry = "gtk2";
-    # GTK theme configuration
-    gtk.enable = true;
     # Machine specific packages
     packages.additionalPackages = with pkgs; [
       jellyfin-media-player # Wraps the webui and mpv together
@@ -36,9 +34,4 @@
       wallpapers = "${pkgs.plasma-workspace-wallpapers}/share/wallpapers";
     in
     "${wallpapers}/summer_1am/contents/images/2560x1600.jpg";
-
-  services.dbus.packages = with pkgs; [
-    # Allow setting GTK configuration using home-manager
-    gnome3.dconf
-  ];
 }
