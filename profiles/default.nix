@@ -4,6 +4,7 @@
   imports = [
     ./bluetooth.nix
     ./gtk.nix
+    ./laptop.nix
     ./wm.nix
     ./x.nix
   ];
