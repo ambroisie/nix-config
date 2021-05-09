@@ -4,7 +4,7 @@ let
 in
 {
   options.my.modules.bluetooth = with lib; {
-    enable = mkEnableOption "wireless configuration";
+    enable = mkEnableOption "bluetooth configuration";
 
     enableHeadsetIntegration = my.mkDisableOption "A2DP sink configuration";
 
