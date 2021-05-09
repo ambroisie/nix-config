@@ -35,6 +35,9 @@ in
               format = "{ssid} {ip} {signal_strength}";
             }
             {
+              block = "backlight";
+            }
+            {
               block = "battery";
               format = "{percentage}% ({time})";
               full_format = "{percentage}%";
