@@ -240,11 +240,11 @@ in
               '';
             in
             {
-              "XF86Display" = "arandr";
-              "XF86MonBrightnessUp" = "${changeBacklight} up 10";
-              "XF86MonBrightnessDown" = "${changeBacklight} down 10";
-              "Control+XF86MonBrightnessUp" = "${changeBacklight} up 1";
-              "Control+XF86MonBrightnessDown" = "${changeBacklight} down 1";
+              "XF86Display" = "exec arandr";
+              "XF86MonBrightnessUp" = "exec ${changeBacklight} up 10";
+              "XF86MonBrightnessDown" = "exec ${changeBacklight} down 10";
+              "Control+XF86MonBrightnessUp" = "exec ${changeBacklight} up 1";
+              "Control+XF86MonBrightnessDown" = "exec ${changeBacklight} down 1";
             }
           )
           {
