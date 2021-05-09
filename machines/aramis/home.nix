@@ -20,18 +20,7 @@
     nm-applet.enable = true;
     # Termite terminal
     terminal.program = "termite";
-    # Keyboard settings
-    x.enable = true;
     # Zathura document viewer
     zathura.enable = true;
   };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  # Nice wallpaper
-  services.xserver.displayManager.lightdm.background =
-    let
-      wallpapers = "${pkgs.plasma-workspace-wallpapers}/share/wallpapers";
-    in
-    "${wallpapers}/summer_1am/contents/images/2560x1600.jpg";
 }
