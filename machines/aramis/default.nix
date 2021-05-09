@@ -6,11 +6,11 @@
 
 {
   imports = [
-    ./bluetooth.nix
     ./boot.nix
     ./hardware.nix
     ./home.nix
     ./networking.nix
+    ./profiles.nix
     ./services.nix
     ./sound.nix
   ];
