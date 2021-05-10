@@ -10,5 +10,8 @@ in
   config = lib.mkIf cfg.enable {
     # Enable touchpad support
     services.xserver.libinput.enable = true;
+
+    # Enable upower power management
+    my.modules.upower.enable = true;
   };
 }
