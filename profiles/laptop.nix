@@ -13,5 +13,8 @@ in
 
     # Enable upower power management
     my.modules.upower.enable = true;
+
+    # Enable battery notifications
+    my.home.power-alert.enable = true;
   };
 }
