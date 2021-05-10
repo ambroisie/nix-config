@@ -14,6 +14,7 @@
     ./gtk.nix
     ./htop.nix
     ./jq.nix
+    ./nix-index.nix
     ./nm-applet.nix
     ./packages.nix
     ./pager.nix
