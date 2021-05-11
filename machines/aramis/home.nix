@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   my.home = {
+    bitwarden.pinentry = "gtk2";
     # Image viewver
     feh.enable = true;
     # Firefo profile and extensions
