@@ -25,5 +25,6 @@ buildGoModule rec {
     '';
     homepage = "https://github.com/akhilrex/podgrab";
     license = licenses.gpl3;
+    maintainers = with maintainers; [ ambroisie ];
   };
 }
