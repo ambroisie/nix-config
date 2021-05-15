@@ -8,7 +8,7 @@ let
   domain = config.networking.domain;
   podgrabDomain = "podgrab.${domain}";
 
-  podgrabPkg = pkgs.ambroisie.podgrab;
+  podgrabPkg = pkgs.podgrab;
 in
 {
   options.my.services.podgrab = with lib; {
