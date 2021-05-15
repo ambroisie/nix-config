@@ -21,7 +21,7 @@
     # Network-Manager applet
     nm-applet.enable = true;
     # Termite terminal
-    terminal.program = "termite";
+    terminal.program = "alacritty";
     # Zathura document viewer
     zathura.enable = true;
   };
