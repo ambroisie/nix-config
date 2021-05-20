@@ -7,8 +7,8 @@
     registry = {
       # Allow me to use my custom package using `nix run self#pkg`
       self.flake = inputs.self;
-      # Do not follow master, use pinned revision instead
-      nixpkgs.flake = inputs.nixpkgs;
+      # Use pinned nixpkgs when using `nix run pkgs#<whatever>`
+      pkgs.flake = inputs.nixpkgs;
       # Add NUR to run some packages that are only present there
       nur.flake = inputs.nur;
     };
