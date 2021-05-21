@@ -1,5 +1,7 @@
 { pkgs }:
 rec {
+  bw-pass = pkgs.callPackage ./bw-pass { };
+
   comma = pkgs.callPackage ./comma { };
 
   diff-flake = pkgs.callPackage ./diff-flake { };
