@@ -7,8 +7,6 @@ let
 
   domain = config.networking.domain;
   podgrabDomain = "podgrab.${domain}";
-
-  podgrabPkg = pkgs.podgrab;
 in
 {
   options.my.services.podgrab = with lib; {
@@ -33,24 +31,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.services.podgrab = {
-      description = "Podgrab podcast manager";
-      wantedBy = [ "multi-user.target" ];
-      environment = {
-        CONFIG = "/var/lib/podgrab/config";
-        DATA = "/var/lib/podgrab/data";
-        GIN_MODE = "release";
-        PORT = toString cfg.port;
-      };
-      serviceConfig = {
-        DynamicUser = true;
-        EnvironmentFile = lib.optional (cfg.passwordFile != null) [
-          cfg.passwordFile
-        ];
-        ExecStart = "${podgrabPkg}/bin/podgrab";
-        WorkingDirectory = "${podgrabPkg}/share";
-        StateDirectory = [ "podgrab/config" "podgrab/data" ];
-      };
+    services.podgrab = {
+      enable = true;
+      inherit (cfg) passwordFile port;
     };
 
     services.nginx.virtualHosts."${podgrabDomain}" = {
