@@ -1,6 +1,4 @@
-# A simple podcast fetcher. See [1]
-#
-# [1]: https://github.com/NixOS/nixpkgs/pull/106008
+# A simple podcast fetcher
 { config, lib, pkgs, ... }:
 let
   cfg = config.my.services.podgrab;
