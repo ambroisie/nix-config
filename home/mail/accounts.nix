@@ -1,5 +1,7 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
+  cfg = config.my.home.mail;
+
   mkAddress = address: domain: "${address}@${domain}";
 
   mkConfig = { domain, address, passName, aliases ? [ ], primary ? false }: {
@@ -12,6 +14,10 @@ let
     aliases = builtins.map (lib.flip mkAddress domain) aliases;
 
     inherit primary;
+
+    msmtp = {
+      enable = cfg.msmtp.enable;
+    };
   };
 
   migaduConfig = {
