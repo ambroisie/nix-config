@@ -3,7 +3,7 @@
   my.modules.sound = {
     enable = true;
 
-    pulse = {
+    pipewire = {
       enable = true;
     };
   };
