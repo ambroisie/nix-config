@@ -3,6 +3,6 @@
 
 {
   imports = [
-    # FIXME: add modules
+    ./bluetooth.nix
   ];
 }
