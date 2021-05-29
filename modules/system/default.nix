@@ -6,6 +6,7 @@
     ./documentation.nix
     ./language.nix
     ./media.nix
+    ./nix.nix
     ./users.nix
   ];
 }
