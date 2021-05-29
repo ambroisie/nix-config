@@ -64,8 +64,6 @@
         ./profiles
         # Include my secrets
         ./secrets
-        # Include my services
-        ./services
       ];
 
       buildHost = name: system: lib.nixosSystem {
