@@ -10,7 +10,5 @@ in
 
   config = lib.mkIf cfg.enable {
     hardware.keyboard.zsa.enable = true;
-
-    users.extraGroups = [ "plugdev" ];
   };
 }
