@@ -11,6 +11,5 @@
     ./packages.nix
     ./services
     ./system
-    ./users.nix
   ];
 }

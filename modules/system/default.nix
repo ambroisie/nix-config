@@ -4,5 +4,6 @@
 {
   imports = [
     ./media.nix
+    ./users.nix
   ];
 }
