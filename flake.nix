@@ -52,12 +52,12 @@
           ];
         }
         home-manager.nixosModules.home-manager
-        {
-          home-manager.users.ambroisie = import ./home;
+        ({ config, ... }: {
+          home-manager.users.${config.my.username} = import ./home;
           # Nix Flakes compatibility
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-        }
+        })
         # Include generic settings
         ./modules
         # Include bundles of settings
