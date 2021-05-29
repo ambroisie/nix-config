@@ -3,6 +3,6 @@
 
 {
   imports = [
-    # FIXME
+    ./media.nix
   ];
 }
