@@ -3,7 +3,6 @@
 
 {
   imports = [
-    ./documentation.nix
     ./hardware
     ./home.nix
     ./nix.nix
