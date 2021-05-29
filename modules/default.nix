@@ -10,7 +10,6 @@
     ./media.nix
     ./nix.nix
     ./packages.nix
-    ./sound.nix
     ./upower.nix
     ./users.nix
   ];
