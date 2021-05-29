@@ -3,6 +3,7 @@
 
 {
   imports = [
+    ./language.nix
     ./media.nix
     ./users.nix
   ];
