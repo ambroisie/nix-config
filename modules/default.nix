@@ -6,6 +6,7 @@
     ./bluetooth.nix
     ./documentation.nix
     ./ergodox.nix
+    ./hardware
     ./home.nix
     ./language.nix
     ./media.nix
