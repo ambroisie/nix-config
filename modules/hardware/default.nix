@@ -7,5 +7,6 @@
     ./ergodox.nix
     ./networking.nix
     ./sound.nix
+    ./upower.nix
   ];
 }
