@@ -4,5 +4,6 @@
 {
   imports = [
     ./bluetooth.nix
+    ./ergodox.nix
   ];
 }

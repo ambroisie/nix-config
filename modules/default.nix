@@ -4,7 +4,6 @@
 {
   imports = [
     ./documentation.nix
-    ./ergodox.nix
     ./hardware
     ./home.nix
     ./language.nix

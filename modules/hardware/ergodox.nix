@@ -1,10 +1,10 @@
 # ZSA keyboard udev rules
 { config, lib, ... }:
 let
-  cfg = config.my.modules.ergodox;
+  cfg = config.my.hardware.ergodox;
 in
 {
-  options.my.modules.ergodox = with lib; {
+  options.my.hardware.ergodox = with lib; {
     enable = mkEnableOption "ZSA udev rules and user group configuration";
   };
 
