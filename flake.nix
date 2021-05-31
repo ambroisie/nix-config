@@ -33,7 +33,14 @@
     };
   };
 
-  outputs = { self, futils, home-manager, nixpkgs, nur } @ inputs:
+  outputs =
+    inputs @
+    { self
+    , futils
+    , home-manager
+    , nixpkgs
+    , nur
+    }:
     let
       inherit (futils.lib) eachDefaultSystem;
 
@@ -81,28 +88,29 @@
     in
     eachDefaultSystem
       (system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        rec {
-          apps = {
-            diff-flake = futils.lib.mkApp { drv = packages.diff-flake; };
-          };
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      rec {
+        apps = {
+          diff-flake = futils.lib.mkApp { drv = packages.diff-flake; };
+        };
 
-          defaultApp = apps.diff-flake;
+        defaultApp = apps.diff-flake;
 
-          devShell = pkgs.mkShell {
-            name = "NixOS-config";
-            buildInputs = with pkgs; [
-              git-crypt
-              gitAndTools.pre-commit
-              gnupg
-              nixpkgs-fmt
-            ];
-          };
+        devShell = pkgs.mkShell {
+          name = "NixOS-config";
 
-          packages = import ./pkgs { inherit pkgs; };
-        }) // {
+          buildInputs = with pkgs; [
+            git-crypt
+            gitAndTools.pre-commit
+            gnupg
+            nixpkgs-fmt
+          ];
+        };
+
+        packages = import ./pkgs { inherit pkgs; };
+      }) // {
       overlay = self.overlays.pkgs;
 
       overlays = import ./overlays // {
