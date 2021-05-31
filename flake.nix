@@ -31,6 +31,17 @@
       repo = "NUR";
       ref = "master";
     };
+
+    pre-commit-hooks = {
+      type = "github";
+      owner = "cachix";
+      repo = "pre-commit-hooks.nix";
+      ref = "master";
+      inputs = {
+        flake-utils.follows = "futils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
   outputs =
@@ -40,6 +51,7 @@
     , home-manager
     , nixpkgs
     , nur
+    , pre-commit-hooks
     }:
     let
       inherit (futils.lib) eachDefaultSystem;
@@ -96,6 +108,18 @@
           diff-flake = futils.lib.mkApp { drv = packages.diff-flake; };
         };
 
+        checks = {
+          pre-commit = pre-commit-hooks.lib.${system}.run {
+            src = ./.;
+
+            hooks = {
+              nixpkgs-fmt = {
+                enable = true;
+              };
+            };
+          };
+        };
+
         defaultApp = apps.diff-flake;
 
         devShell = pkgs.mkShell {
@@ -107,6 +131,8 @@
             gnupg
             nixpkgs-fmt
           ];
+
+          inherit (self.checks.${system}.pre-commit) shellHook;
         };
 
         packages = import ./pkgs { inherit pkgs; };
