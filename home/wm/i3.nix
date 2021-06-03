@@ -67,11 +67,6 @@ let
 in
 {
   config = lib.mkIf isEnabled {
-    my.home = {
-      flameshot.enable = true;
-      udiskie.enable = true;
-    };
-
     home.packages = with pkgs; [
       ambroisie.i3-get-window-criteria # little helper for i3 configuration
       arandr # Used by a mapping
