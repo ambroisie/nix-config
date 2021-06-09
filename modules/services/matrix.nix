@@ -18,10 +18,45 @@ in
 {
   options.my.services.matrix = with lib; {
     enable = mkEnableOption "Matrix Synapse";
+
     secret = mkOption {
       type = types.str;
       example = "deadbeef";
       description = "Shared secret to register users";
+    };
+
+    mail = {
+      host = mkOption {
+        type = types.str;
+        default = "smtp.migadu.com";
+        example = "smtp.example.com";
+        description = "Which host should be used for SMTP";
+      };
+
+      port = mkOption {
+        type = types.port;
+        default = 587;
+        example = 25;
+        description = "Which port should be used for SMTP";
+      };
+
+      username = mkOption {
+        type = types.str;
+        example = "matrix@example.com";
+        description = "Which username should be used to connect";
+      };
+
+      password = mkOption {
+        type = types.str;
+        example = "password";
+        description = "Which password should be used to connect";
+      };
+
+      notifFrom = mkOption {
+        type = types.str;
+        example = "<matrix@example.com>";
+        description = "Which address should be used for `From` field";
+      };
     };
   };
 
@@ -72,6 +107,15 @@ in
       extraConfig = ''
         experimental_features:
           spaces_enabled: true
+
+        email:
+          smtp_host: "${cfg.mail.host}"
+          smtp_port: ${toString cfg.mail.port}
+          smtp_user: "${cfg.mail.username}"
+          smtp_pass: "${cfg.mail.password}"
+          notif_from: "${cfg.mail.notifFrom}"
+          # Refuse to connect unless the server supports STARTTLS.
+          require_transport_security: true
       '';
     };
 
