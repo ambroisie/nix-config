@@ -66,6 +66,8 @@ in
           resources = [{ names = [ "client" ]; compress = false; }];
         }
       ];
+
+      account_threepid_delegates.msisdn = "https://vector.im";
     };
 
     services.nginx.virtualHosts = {
