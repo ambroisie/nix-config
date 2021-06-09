@@ -68,6 +68,11 @@ in
       ];
 
       account_threepid_delegates.msisdn = "https://vector.im";
+
+      extraConfig = ''
+        experimental_features:
+          spaces_enabled: true
+      '';
     };
 
     services.nginx.virtualHosts = {
