@@ -21,6 +21,7 @@ in
           progress_bar = true; # show a progress bar in notification bubbles
           separator_color = "frame"; # use frame color to separate bubbles
           sort = true; # sort messages by urgency
+          word_wrap = true; # Break long lines to make them readable
         };
 
         urgency_low = {
