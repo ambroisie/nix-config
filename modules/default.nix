@@ -17,6 +17,10 @@
         example = "alice";
         description = "my username";
       };
+
+      home = {
+        enable = my.mkDisableOption "home-manager configuration";
+      };
     };
   };
 }
