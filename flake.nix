@@ -72,7 +72,7 @@
         }
         home-manager.nixosModules.home-manager
         ({ config, ... }: {
-          home-manager.users.${config.my.username} = import ./home;
+          home-manager.users.${config.my.user.name} = import ./home;
           # Nix Flakes compatibility
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
