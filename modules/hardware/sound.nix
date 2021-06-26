@@ -4,8 +4,6 @@ let
 in
 {
   options.my.hardware.sound = with lib; {
-    enable = mkEnableOption "sound configuration";
-
     pipewire = {
       enable = mkEnableOption "pipewire configuration";
     };
@@ -15,10 +13,21 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable (lib.mkMerge [
-    # Basic configuration
+  config = (lib.mkMerge [
+    # Sanity check
     {
-      sound.enable = true;
+      assertions = [
+        {
+          assertion = builtins.all (lib.id) [
+            (cfg.pipewire.enable -> !cfg.pulse.enable)
+            (cfg.pulse.enable -> !cfg.pipewire.enable)
+          ];
+          message = ''
+            `config.my.hardware.sound.pipewire.enable` and
+            `config.my.hardware.sound.pulse.enable` are incompatible.
+          '';
+        }
+      ];
     }
 
     (lib.mkIf cfg.pipewire.enable {
@@ -49,6 +58,9 @@ in
 
     # Pulseaudio setup
     (lib.mkIf cfg.pulse.enable {
+      # ALSA
+      sound.enable = true;
+
       hardware.pulseaudio.enable = true;
     })
   ]);
