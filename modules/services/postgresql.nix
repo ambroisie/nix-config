@@ -14,7 +14,7 @@ in
     # Let other services enable postgres when they need it
     (lib.mkIf cfg.enable {
       services.postgresql = {
-        package = pkgs.postgresql_12;
+        package = pkgs.postgresql_13;
       };
     })
 
