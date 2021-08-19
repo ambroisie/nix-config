@@ -56,6 +56,8 @@ throwOnCanary {
 
     nextcloud.password = fileContents ./nextcloud/password.txt;
 
+    paperless.secretKey = fileContents ./paperless/secretKey.txt;
+
     podgrab.password = fileContents ./podgrab/password.txt;
 
     sso = import ./sso { inherit lib; };
