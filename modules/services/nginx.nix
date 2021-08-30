@@ -248,6 +248,23 @@ in
             inherit (cfg.sso) port;
           };
 
+          audit_log = {
+            target = [
+              "fd://stdout"
+            ];
+            events = [
+              "access_denied"
+              "login_success"
+              "login_failure"
+              "logout"
+              "validate"
+            ];
+            headers = [
+              "x-origin-uri"
+              "x-application"
+            ];
+          };
+
           cookie = {
             domain = ".${config.networking.domain}";
             secure = true;
