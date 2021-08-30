@@ -34,6 +34,12 @@ in
       example = "username";
       description = "Name of the administrator";
     };
+
+    passwordFile = mkOption {
+      type = types.str;
+      example = "/var/lib/paperless/password.txt";
+      description = "Read the administrator's password from this path";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -70,6 +76,9 @@ in
           PAPERLESS_TIME_ZONE = config.time.timeZone;
           PAPERLESS_ADMIN_USER = cfg.username;
         };
+
+      # Admin password
+      passwordFile = cfg.passwordFile;
     };
 
     # Set-up database
