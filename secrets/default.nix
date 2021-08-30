@@ -58,6 +58,8 @@ throwOnCanary {
 
     podgrab.password = fileContents ./podgrab/password.txt;
 
+    sso = import ./sso { inherit lib; };
+
     transmission.password = fileContents ./transmission/password.txt;
 
     users = {
