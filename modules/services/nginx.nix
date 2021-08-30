@@ -54,10 +54,7 @@ let
 in
 {
   options.my.services.nginx = with lib; {
-    enable =
-      mkEnableOption "Nginx, activates when `virtualHosts` is not empty" // {
-        default = builtins.length cfg.virtualHosts != 0;
-      };
+    enable = mkEnableOption "Nginx";
 
     monitoring = {
       enable = my.mkDisableOption "monitoring through grafana and prometheus";
