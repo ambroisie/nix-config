@@ -20,6 +20,7 @@ throwOnCanary {
           int
           str
           (attrsOf valueType)
+          (listOf valueType)
         ];
       in
       valueType;
