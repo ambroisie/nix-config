@@ -56,7 +56,10 @@ throwOnCanary {
 
     nextcloud.password = fileContents ./nextcloud/password.txt;
 
-    paperless.secretKey = fileContents ./paperless/secretKey.txt;
+    paperless = {
+      password = fileContents ./paperless/password.txt;
+      secretKey = fileContents ./paperless/secretKey.txt;
+    };
 
     podgrab.password = fileContents ./podgrab/password.txt;
 
