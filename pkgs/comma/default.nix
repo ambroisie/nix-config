@@ -3,7 +3,7 @@ stdenvNoCC.mkDerivation rec {
   pname = "comma";
   version = "0.1.0";
 
-  src = ./. + "/comma";
+  src = ./comma;
 
   phases = [ "buildPhase" "installPhase" "fixupPhase" ];
 
