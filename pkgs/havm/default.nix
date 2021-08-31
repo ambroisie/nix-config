@@ -10,7 +10,10 @@ stdenv.mkDerivation rec {
 
   buildInputs = [
     ghc
-    which # Used by tests
+  ];
+
+  checkInputs = [
+    which
   ];
 
   doCheck = true;
