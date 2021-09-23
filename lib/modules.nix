@@ -5,6 +5,14 @@ let
   inherit (self.attrs) mapFilterAttrs;
 in
 {
+  # Find all nix modules in a directory, discard any prefixed with "_",
+  # map a function to each resulting path, and generate an attribute set
+  # to associate module name to resulting value.
+  #
+  # mapModules ::
+  #   path
+  #   (path -> any)
+  #   attrs
   mapModules = dir: fn:
     mapFilterAttrs
       (n: v:
