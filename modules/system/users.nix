@@ -21,7 +21,7 @@ in
         };
 
         ${config.my.user.name} = {
-          inherit (secrets.users.${config.my.user.name}) hashedPassword;
+          inherit (secrets.users.ambroisie) hashedPassword;
           description = "Bruno BELANYI";
           isNormalUser = true;
           shell = pkgs.zsh;
