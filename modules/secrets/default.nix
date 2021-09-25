@@ -1,6 +1,5 @@
 { inputs, lib, options, ... }:
 
-with lib;
 {
   imports = [
     inputs.agenix.nixosModules.age
@@ -9,12 +8,12 @@ with lib;
   config.age = {
     secrets =
       let
-        toName = removeSuffix ".age";
+        toName = lib.removeSuffix ".age";
         toSecret = name: _: {
           file = ./. + "/${name}";
-          owner = mkDefault "root";
+          owner = lib.mkDefault "root";
         };
-        convertSecrets = n: v: nameValuePair (toName n) (toSecret n v);
+        convertSecrets = n: v: lib.nameValuePair (toName n) (toSecret n v);
         secrets = import ./secrets.nix;
       in
       lib.mapAttrs' convertSecrets secrets;
