@@ -1,7 +1,7 @@
 # User setup
 { config, lib, pkgs, ... }:
 let
-  secrets = config.my.secrets;
+  secrets = config.age.secrets;
   cfg = config.my.system.users;
   groupExists = grp: builtins.hasAttr grp config.users.groups;
   groupsIfExist = builtins.filter groupExists;
@@ -17,11 +17,11 @@ in
 
       users = {
         root = {
-          initialHashedPassword = secrets.users.root.hashedPassword;
+          passwordFile = secrets."users/root/hashed-password".path;
         };
 
         ${config.my.user.name} = {
-          initialHashedPassword = secrets.users.ambroisie.hashedPassword;
+          passwordFile = secrets."users/ambroisie/hashed-password".path;
           description = "Bruno BELANYI";
           isNormalUser = true;
           shell = pkgs.zsh;
