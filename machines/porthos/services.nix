@@ -91,7 +91,8 @@ in
     # Nextcloud self-hosted cloud
     nextcloud = {
       enable = true;
-      password = my.secrets.nextcloud.password;
+      passwordFile =
+        builtins.toFile "nextcloud-pass.txt" my.secrets.nextcloud.password;
     };
     nginx = {
       enable = true;

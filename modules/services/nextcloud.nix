@@ -18,10 +18,13 @@ in
       example = "admin";
       description = "Name of the admin user";
     };
-    password = mkOption {
+    passwordFile = mkOption {
       type = types.str;
-      example = "password";
-      description = "The admin user's password";
+      example = "/var/lib/nextcloud/password.txt";
+      description = ''
+        Path to a file containing the admin's password, must be readable by
+        'nextcloud' user.
+      '';
     };
   };
 
@@ -34,7 +37,7 @@ in
       maxUploadSize = cfg.maxSize;
       config = {
         adminuser = cfg.admin;
-        adminpass = cfg.password; # Insecure, but I don't care
+        adminpassFile = cfg.passwordFile;
         dbtype = "pgsql";
         dbhost = "/run/postgresql";
         overwriteProtocol = "https"; # Nginx only allows SSL
