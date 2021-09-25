@@ -106,6 +106,9 @@ in
     };
     nginx = {
       enable = true;
+      acme = {
+        credentialsFile = builtins.toFile "gandi-key.env" my.secrets.acme.key;
+      };
     };
     paperless = {
       enable = true;

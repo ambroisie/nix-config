@@ -60,6 +60,16 @@ in
   options.my.services.nginx = with lib; {
     enable = mkEnableOption "Nginx";
 
+    acme = {
+      credentialsFile = mkOption {
+        type = types.str;
+        example = "/var/lib/acme/creds.env";
+        description = ''
+          Gandi API key file as an 'EnvironmentFile' (see `systemd.exec(5)`)
+        '';
+      };
+    };
+
     monitoring = {
       enable = my.mkDisableOption "monitoring through grafana and prometheus";
     };
@@ -330,14 +340,13 @@ in
       certs =
         let
           domain = config.networking.domain;
-          key = config.my.secrets.acme.key;
         in
         with pkgs;
         {
           "${domain}" = {
             extraDomainNames = [ "*.${domain}" ];
             dnsProvider = "gandiv5";
-            credentialsFile = writeText "key.env" key; # Unsecure, I don't care.
+            inherit (cfg.acme) credentialsFile;
           };
         };
     };
