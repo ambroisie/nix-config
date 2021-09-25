@@ -109,6 +109,22 @@ in
       acme = {
         credentialsFile = builtins.toFile "gandi-key.env" my.secrets.acme.key;
       };
+      sso = {
+        authKeyFile = secrets."sso/auth-key".path;
+        users = {
+          ambroisie = {
+            passwordHashFile = builtins.toFile
+              "ambroisie-sso-pass.txt"
+              my.secrets.sso.ambroisie.passwordHash;
+            totpSecretFile = builtins.toFile
+              "ambroisie-sso-totp.txt"
+              my.secrets.sso.ambroisie.totpSecret;
+          };
+        };
+        groups = {
+          root = [ "ambroisie" ];
+        };
+      };
     };
     paperless = {
       enable = true;

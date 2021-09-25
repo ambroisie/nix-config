@@ -1,5 +1,5 @@
 # A simple abstraction layer for almost all of my services' needs
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, utils, ... }:
 let
   cfg = config.my.services.nginx;
 
@@ -105,6 +105,14 @@ in
     };
 
     sso = {
+      authKeyFile = mkOption {
+        type = types.str;
+        example = "/var/lib/nginx-sso/auth-key.txt";
+        description = ''
+          Path to the auth key.
+        '';
+      };
+
       subdomain = mkOption {
         type = types.str;
         default = "login";
@@ -117,6 +125,43 @@ in
         default = 8082;
         example = 8080;
         description = "Port to use for internal webui.";
+      };
+
+      users = mkOption {
+        type = types.attrsOf (types.submodule {
+          options = {
+            passwordHashFile = mkOption {
+              type = types.str;
+              example = "/var/lib/nginx-sso/alice/password-hash.txt";
+              description = "Path to file containing the user's password hash.";
+            };
+            totpSecretFile = mkOption {
+              type = types.str;
+              example = "/var/lib/nginx-sso/alice/totp-secret.txt";
+              description = "Path to file containing the user's TOTP secret.";
+            };
+          };
+        });
+        example = litteralExample ''
+          {
+            alice = {
+              passwordHashFile = "/var/lib/nginx-sso/alice/password-hash.txt";
+              totpSecretFile = "/var/lib/nginx-sso/alice/totp-secret.txt";
+            };
+          }
+        '';
+        description = "Definition of users";
+      };
+
+      groups = mkOption {
+        type = with types; attrsOf (listOf str);
+        example = litteralExample ''
+          {
+            root = [ "alice" ];
+            users = [ "alice" "bob" ];
+          }
+        '';
+        description = "Groups of users";
       };
     };
   };
@@ -278,7 +323,9 @@ in
           cookie = {
             domain = ".${config.networking.domain}";
             secure = true;
-            authentication_key = config.my.secrets.sso.auth_key;
+            authentication_key = {
+              _secret = cfg.sso.authKeyFile;
+            };
           };
 
           login = {
@@ -293,19 +340,21 @@ in
           providers = {
             simple =
               let
-                applyUsers = lib.flip lib.mapAttrs config.my.secrets.sso.users;
+                applyUsers = lib.flip lib.mapAttrs cfg.sso.users;
               in
               {
-                users = applyUsers (_: v: v.passwordHash);
+                users = applyUsers (_: v: { _secret = v.passwordHashFile; });
 
                 mfa = applyUsers (_: v: [{
                   provider = "totp";
                   attributes = {
-                    secret = v.totpSecret;
+                    secret = {
+                      _secret = v.totpSecretFile;
+                    };
                   };
                 }]);
 
-                inherit (config.my.secrets.sso) groups;
+                inherit (cfg.sso) groups;
               };
           };
 
