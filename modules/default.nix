@@ -4,7 +4,7 @@
 {
   imports = [
     ./hardware
-    ./home.nix
+    ./home
     ./programs
     ./services
     ./system
