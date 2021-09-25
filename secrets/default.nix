@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ inputs, lib, ... }:
 
 with lib;
 let
@@ -13,6 +13,10 @@ let
     else id;
 in
 throwOnCanary {
+  imports = [
+    inputs.agenix.nixosModules.age
+  ];
+
   options.my.secrets = mkOption {
     type =
       let
