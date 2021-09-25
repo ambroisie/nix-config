@@ -103,7 +103,9 @@ in
       # Insecure, I don't care
       passwordFile =
         builtins.toFile "paperless.env" my.secrets.paperless.password;
-      secretKey = my.secrets.paperless.secretKey;
+      secretKeyFile = builtins.toFile "paperless-key.env" ''
+        PAPERLESS_SECRET_KEY=${my.secrets.paperless.secretKey}
+      '';
     };
     # The whole *arr software suite
     pirate.enable = true;

@@ -13,10 +13,12 @@ in
       description = "Internal port for webui";
     };
 
-    secretKey = mkOption {
+    secretKeyFile = mkOption {
       type = types.str;
-      example = "e11fl1oa-*ytql8p)(06fbj4ukrlo+n7k&q5+$1md7i+mge=ee";
-      description = "Secret key used for sessions tokens";
+      example = "/var/lib/paperless/secret-key.env";
+      description = ''
+        Secret key as an 'EnvironmentFile' (see `systemd.exec(5)`)
+      '';
     };
 
     documentPath = mkOption {
@@ -65,7 +67,6 @@ in
           PAPERLESS_DBNAME = "paperless";
 
           # Security settings
-          PAPERLESS_SECRET_KEY = cfg.secretKey; # Insecure, I don't care
           PAPERLESS_ALLOWED_HOSTS = paperlessDomain;
           PAPERLESS_CORS_ALLOWED_HOSTS = "https://${paperlessDomain}";
 
@@ -79,6 +80,20 @@ in
 
       # Admin password
       passwordFile = cfg.passwordFile;
+    };
+
+    systemd.services = {
+      paperless-ng-server.serviceConfig = {
+        EnvironmentFile = cfg.secretKeyFile;
+      };
+
+      paperless-ng-consumer.serviceConfig = {
+        EnvironmentFile = cfg.secretKeyFile;
+      };
+
+      paperless-ng-web.serviceConfig = {
+        EnvironmentFile = cfg.secretKeyFile;
+      };
     };
 
     # Set-up database
