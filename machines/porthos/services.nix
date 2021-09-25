@@ -70,7 +70,10 @@ in
     };
     miniflux = {
       enable = true;
-      password = my.secrets.miniflux.password;
+      credentialsFiles = builtins.toFile "miniflux-creds.txt" ''
+        ADMIN_USERNAME=Ambroisie
+        ADMIN_PASSWORD=${my.secrets.miniflux.password}
+      '';
     };
     # Various monitoring dashboards
     monitoring = {

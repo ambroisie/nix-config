@@ -7,17 +7,12 @@ in
   options.my.services.miniflux = with lib; {
     enable = mkEnableOption "Miniflux feed reader";
 
-    username = mkOption {
+    credentialsFiles = mkOption {
       type = types.str;
-      default = "Ambroisie";
-      example = "username";
-      description = "Name of the admin user";
-    };
-
-    password = mkOption {
-      type = types.str;
-      example = "password";
-      description = "Password of the admin user";
+      example = "/var/lib/miniflux/creds.env";
+      description = ''
+        Credential file as an 'EnvironmentFile' (see `systemd.exec(5)`)
+      '';
     };
 
     port = mkOption {
@@ -33,12 +28,7 @@ in
     services.miniflux = {
       enable = true;
 
-      adminCredentialsFile =
-        # Insecure, I don't care.
-        builtins.toFile "credentials.env" ''
-          ADMIN_USERNAME=${cfg.username}
-          ADMIN_PASSWORD=${cfg.password}
-        '';
+      adminCredentialsFile = cfg.credentialsFiles;
 
       config = {
         # Virtual hosts settings
