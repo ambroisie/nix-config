@@ -130,7 +130,6 @@
           name = "NixOS-config";
 
           nativeBuildInputs = with pkgs; [
-            git-crypt
             gitAndTools.pre-commit
             gnupg
             nixpkgs-fmt
