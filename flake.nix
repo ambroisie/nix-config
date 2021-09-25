@@ -85,8 +85,6 @@
         ./modules
         # Include bundles of settings
         ./profiles
-        # Include my secrets
-        ./secrets
       ];
 
       buildHost = name: system: lib.nixosSystem {

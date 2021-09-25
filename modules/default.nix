@@ -6,6 +6,7 @@
     ./hardware
     ./home
     ./programs
+    ./secrets
     ./services
     ./system
   ];
