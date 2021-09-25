@@ -1,7 +1,7 @@
 # Deployed services
 { config, ... }:
 let
-  my = config.my;
+  secrets = config.age.secrets;
 in
 {
   # List services that you want to enable:
@@ -19,11 +19,8 @@ in
         OnActiveSec = "6h";
         OnUnitActiveSec = "6h";
       };
-      # Insecure, I don't care.
-      passwordFile =
-        builtins.toFile "password.txt" my.secrets.backup.password;
-      credentialsFile =
-        builtins.toFile "creds.env" my.secrets.backup.credentials;
+      passwordFile = secrets."backup/password".path;
+      credentialsFile = secrets."backup/credentials".path;
     };
     # My blog and related hosts
     blog.enable = true;
@@ -34,11 +31,8 @@ in
     drone = {
       enable = true;
       runners = [ "docker" "exec" ];
-      # Insecure, I don't care.
-      secretFile =
-        builtins.toFile "gitea.env" my.secrets.drone.gitea;
-      sharedSecretFile =
-        builtins.toFile "rpc.env" my.secrets.drone.secret;
+      secretFile = secrets."drone/gitea".path;
+      sharedSecretFile = secrets."drone/secret".path;
     };
     # Flood UI for transmission
     flood = {
@@ -56,41 +50,24 @@ in
     # Gitea mirrorig service
     lohr = {
       enable = true;
-      sharedSecretFile =
-        let
-          content = "LOHR_SECRET=${my.secrets.lohr.secret}";
-        in
-        builtins.toFile "lohr-secret.env" content;
+      sharedSecretFile = secrets."lohr/secret".path;
     };
     # Matrix backend and Element chat front-end
     matrix = {
       enable = true;
-      mailConfigFile = builtins.toFile "matrix-mail.yaml" ''
-        email:
-          smtp_host: "smtp.migadu.com"
-          smtp_port: 587
-          smtp_user: "${my.secrets.matrix.mail.username}"
-          smtp_pass: "${my.secrets.matrix.mail.password}"
-          notif_from: "${my.secrets.matrix.mail.notifFrom}"
-          # Refuse to connect unless the server supports STARTTLS.
-          require_transport_security: true
-      '';
+      mailConfigFile = secrets."matrix/mail".path;
       # Only necessary when doing the initial registration
       # secret = "change-me";
     };
     miniflux = {
       enable = true;
-      credentialsFiles = builtins.toFile "miniflux-creds.txt" ''
-        ADMIN_USERNAME=Ambroisie
-        ADMIN_PASSWORD=${my.secrets.miniflux.password}
-      '';
+      credentialsFiles = secrets."miniflux/credentials".path;
     };
     # Various monitoring dashboards
     monitoring = {
       enable = true;
       grafana = {
-        passwordFile =
-          builtins.toFile "grafana.txt" my.secrets.monitoring.password; # Insecure, I don't care
+        passwordFile = secrets."monitoring/password".path;
       };
     };
     # FLOSS music streaming server
@@ -101,24 +78,19 @@ in
     # Nextcloud self-hosted cloud
     nextcloud = {
       enable = true;
-      passwordFile =
-        builtins.toFile "nextcloud-pass.txt" my.secrets.nextcloud.password;
+      passwordFile = secrets."nextcloud/password".path;
     };
     nginx = {
       enable = true;
       acme = {
-        credentialsFile = builtins.toFile "gandi-key.env" my.secrets.acme.key;
+        credentialsFile = secrets."acme/dns-key".path;
       };
       sso = {
         authKeyFile = secrets."sso/auth-key".path;
         users = {
           ambroisie = {
-            passwordHashFile = builtins.toFile
-              "ambroisie-sso-pass.txt"
-              my.secrets.sso.ambroisie.passwordHash;
-            totpSecretFile = builtins.toFile
-              "ambroisie-sso-totp.txt"
-              my.secrets.sso.ambroisie.totpSecret;
+            passwordHashFile = secrets."sso/ambroisie/password-hash".path;
+            totpSecretFile = secrets."sso/ambroisie/totp-secret".path;
           };
         };
         groups = {
@@ -129,23 +101,15 @@ in
     paperless = {
       enable = true;
       documentPath = "/data/media/paperless";
-      # Insecure, I don't care
-      passwordFile =
-        builtins.toFile "paperless.env" my.secrets.paperless.password;
-      secretKeyFile = builtins.toFile "paperless-key.env" ''
-        PAPERLESS_SECRET_KEY=${my.secrets.paperless.secretKey}
-      '';
+      passwordFile = secrets."paperless/password".path;
+      secretKeyFile = secrets."paperless/secret-key".path;
     };
     # The whole *arr software suite
     pirate.enable = true;
     # Podcast automatic downloader
     podgrab = {
       enable = true;
-      passwordFile =
-        let
-          contents = "PASSWORD=${my.secrets.podgrab.password}";
-        in
-        builtins.toFile "podgrab.env" contents;
+      passwordFile = secrets."podgrab/password".path;
       port = 9598;
     };
     # Regular backups
@@ -161,12 +125,7 @@ in
     # Torrent client and webui
     transmission = {
       enable = true;
-      credentialsFile = builtins.toFile "transmission-creds.txt" ''
-        {
-            "rpc-username": "Ambroisie",
-            "rpc-password": "${my.secrets.transmission.password}"
-        }
-      '';
+      credentialsFile = secrets."transmission/credentials".path;
     };
     # Simple, in-kernel VPN
     wireguard = {
