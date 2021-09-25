@@ -126,8 +126,12 @@ in
     # Torrent client and webui
     transmission = {
       enable = true;
-      username = "Ambroisie";
-      password = my.secrets.transmission.password;
+      credentialsFile = builtins.toFile "transmission-creds.txt" ''
+        {
+            "rpc-username": "Ambroisie",
+            "rpc-password": "${my.secrets.transmission.password}"
+        }
+      '';
     };
     # Simple, in-kernel VPN
     wireguard = {

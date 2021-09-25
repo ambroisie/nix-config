@@ -11,17 +11,13 @@ in
   options.my.services.transmission = with lib; {
     enable = mkEnableOption "Transmission torrent client";
 
-    username = mkOption {
+    credentialsFile = mkOption {
       type = types.str;
-      default = "Ambroisie";
-      example = "username";
-      description = "Name of the transmission RPC user";
-    };
-
-    password = mkOption {
-      type = types.str;
-      example = "password";
-      description = "Password of the transmission RPC user";
+      example = "/var/lib/transmission/creds.json";
+      description = ''
+        Credential file as an json configuration file to be merged with
+        the main one.
+      '';
     };
 
     downloadBase = mkOption {
@@ -53,6 +49,8 @@ in
 
       downloadDirPermissions = "775";
 
+      inherit (cfg) credentialsFile;
+
       settings = {
         download-dir = "${cfg.downloadBase}/complete";
         incomplete-dir = "${cfg.downloadBase}/incomplete";
@@ -62,9 +60,6 @@ in
         rpc-enabled = true;
         rpc-port = cfg.port;
         rpc-authentication-required = true;
-
-        rpc-username = cfg.username;
-        rpc-password = cfg.password; # Insecure, but I don't care.
 
         # Proxied behind Nginx.
         rpc-whitelist-enabled = true;
