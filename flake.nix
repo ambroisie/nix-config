@@ -1,6 +1,16 @@
 {
   description = "NixOS configuration with flakes";
   inputs = {
+    agenix = {
+      type = "github";
+      owner = "ryantm";
+      repo = "agenix";
+      ref = "master";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     futils = {
       type = "github";
       owner = "numtide";
@@ -47,6 +57,7 @@
   outputs =
     inputs @
     { self
+    , agenix
     , futils
     , home-manager
     , nixpkgs
