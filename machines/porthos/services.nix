@@ -65,8 +65,18 @@ in
     # Matrix backend and Element chat front-end
     matrix = {
       enable = true;
-      mail = my.secrets.matrix.mail;
-      secret = my.secrets.matrix.secret;
+      mailConfigFile = builtins.toFile "matrix-mail.yaml" ''
+        email:
+          smtp_host: "smtp.migadu.com"
+          smtp_port: 587
+          smtp_user: "${my.secrets.matrix.mail.username}"
+          smtp_pass: "${my.secrets.matrix.mail.password}"
+          notif_from: "${my.secrets.matrix.mail.notifFrom}"
+          # Refuse to connect unless the server supports STARTTLS.
+          require_transport_security: true
+      '';
+      # Only necessary when doing the initial registration
+      # secret = "change-me";
     };
     miniflux = {
       enable = true;
