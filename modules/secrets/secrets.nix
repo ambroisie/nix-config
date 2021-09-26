@@ -27,7 +27,11 @@ in
 
   "monitoring/password.age".publicKeys = all;
 
-  "nextcloud/password.age".publicKeys = all;
+  "nextcloud/password.age" = {
+    # Must be readable by the service
+    owner = "nextcloud";
+    publicKeys = all;
+  };
 
   "paperless/password.age".publicKeys = all;
   "paperless/secret-key.age".publicKeys = all;

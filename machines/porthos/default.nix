@@ -6,7 +6,6 @@
     ./boot.nix
     ./hardware.nix
     ./networking.nix
-    ./secrets.nix
     ./services.nix
     ./users.nix
   ];
