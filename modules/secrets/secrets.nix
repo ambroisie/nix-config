@@ -20,7 +20,10 @@ in
 
   "lohr/secret.age".publicKeys = all;
 
-  "matrix/mail.age".publicKeys = all;
+  "matrix/mail.age" = {
+    owner = "matrix-synapse";
+    publicKeys = all;
+  };
   "matrix/secret.age".publicKeys = all;
 
   "miniflux/credentials.age".publicKeys = all;
