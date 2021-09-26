@@ -28,7 +28,10 @@ in
 
   "miniflux/credentials.age".publicKeys = all;
 
-  "monitoring/password.age".publicKeys = all;
+  "monitoring/password.age" = {
+    owner = "grafana";
+    publicKeys = all;
+  };
 
   "nextcloud/password.age" = {
     # Must be readable by the service
