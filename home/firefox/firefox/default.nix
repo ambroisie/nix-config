@@ -46,6 +46,7 @@ in
       https-everywhere
       i-dont-care-about-cookies
       reddit-enhancement-suite
+      refined-github
       sponsorblock
       ublock-origin
     ]
