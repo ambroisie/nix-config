@@ -71,6 +71,7 @@ in
       form-history-control
       https-everywhere
       i-dont-care-about-cookies
+      reddit-comment-collapser
       reddit-enhancement-suite
       refined-github
       sponsorblock
