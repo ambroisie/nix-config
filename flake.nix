@@ -149,7 +149,9 @@
 
       overlays = import ./overlays // {
         lib = final: prev: { inherit lib; };
-        pkgs = final: prev: { ambroisie = import ./pkgs { pkgs = prev; }; };
+        pkgs = final: prev: {
+          ambroisie = prev.recurseIntoAttrs (import ./pkgs { pkgs = prev; });
+        };
       };
 
       nixosConfigurations = lib.mapAttrs buildHost {
