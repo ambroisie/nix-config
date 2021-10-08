@@ -6,6 +6,8 @@ pkgs.lib.makeScope pkgs.newScope (pkgs: {
 
   diff-flake = pkgs.callPackage ./diff-flake { };
 
+  dragger = pkgs.callPackage ./dragger { };
+
   drone-scp = pkgs.callPackage ./drone-scp { };
 
   ff2mpv-go = pkgs.callPackage ./ff2mpv-go { };
