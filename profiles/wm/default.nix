@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.my.profiles.wm;
 in
@@ -22,6 +22,12 @@ in
       my.home.flameshot.enable = true;
       # Auto disk mounter
       my.home.udiskie.enable = true;
+    })
+
+    (lib.mkIf (cfg.windowManager != null) {
+      environment.systemPackages = with pkgs; [
+        ambroisie.dragger
+      ];
     })
   ];
 }
