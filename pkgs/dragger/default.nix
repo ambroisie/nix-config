@@ -1,4 +1,4 @@
-{ lib, fetchFromGitHub, qt5 }:
+{ lib, fetchFromGitHub, qt5, stdenv }:
 qt5.mkDerivation rec {
   pname = "dragger";
   version = "0.1.0";
@@ -24,6 +24,6 @@ qt5.mkDerivation rec {
     homepage = "https://gitea.belanyi.fr/ambroisie/dragger";
     license = licenses.mit;
     maintainers = [ ambroisie ];
-    platforms = platforms.all;
+    platforms = platforms.linux;
   };
 }
