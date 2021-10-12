@@ -18,6 +18,7 @@ in
     package = pkgs.gitAndTools.gitFull;
 
     aliases = {
+      git = "!git";
       lol = "log --graph --decorate --pretty=oneline --abbrev-commit --topo-order";
       lola = "lol --all";
       assume = "update-index --assume-unchanged";
