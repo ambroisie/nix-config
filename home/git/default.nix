@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 let
   cfg = config.my.home.git;
+
+  inherit (lib.my) mkMailAddress;
 in
 {
   options.my.home.git = with lib.my; {
@@ -11,7 +13,7 @@ in
     enable = true;
 
     # Who am I?
-    userEmail = "bruno@belanyi.fr";
+    userEmail = mkMailAddress "bruno" "belanyi.fr";
     userName = "Bruno BELANYI";
 
     # I want the full experience
