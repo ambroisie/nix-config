@@ -122,7 +122,15 @@ in
 
     # Multiple identities
     includes = [
-      { path = ./epita.config; condition = "gitdir:~/git/EPITA/"; }
+      {
+        condition = "gitdir:~/git/EPITA/";
+        contents = {
+          user = {
+            name = "Bruno BELANYI";
+            email = mkMailAddress "bruno.belanyi" "epita.fr";
+          };
+        };
+      }
     ];
 
     ignores =
