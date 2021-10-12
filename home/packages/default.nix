@@ -19,9 +19,6 @@ in
 
   config.home.packages = with pkgs; lib.mkIf cfg.enable ([
     file
-    gitAndTools.git-absorb
-    gitAndTools.git-revise
-    gitAndTools.tig
     rr
     termite.terminfo
   ] ++ cfg.additionalPackages);

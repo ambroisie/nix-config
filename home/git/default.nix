@@ -9,6 +9,12 @@ in
     enable = mkDisableOption "git configuration";
   };
 
+  config.home.packages = with pkgs.gitAndTools; lib.mkIf cfg.enable [
+    gitAndTools.git-absorb
+    gitAndTools.git-revise
+    gitAndTools.tig
+  ];
+
   config.programs.git = lib.mkIf cfg.enable {
     enable = true;
 
