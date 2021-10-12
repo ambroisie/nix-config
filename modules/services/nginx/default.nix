@@ -387,7 +387,7 @@ in
     users.users.nginx.extraGroups = [ "acme" ];
 
     security.acme = {
-      email = "bruno.acme@belanyi.fr";
+      email = lib.my.mkMailAddress "bruno.acme" "belanyi.fr";
       acceptTerms = true;
       # Use DNS wildcard certificate
       certs =
