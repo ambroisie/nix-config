@@ -44,6 +44,7 @@ in
     indexers = {
       jackett.enable = true;
       nzbhydra.enable = true;
+      prowlarr.enable = true;
     };
     # Jellyfin media server
     jellyfin.enable = true;
