@@ -22,11 +22,11 @@ pkgs.lib.makeScope pkgs.newScope (pkgs: {
 
   nolimips = pkgs.callPackage ./nolimips { };
 
-  vimix-cursors = pkgs.callPackage ./vimix-cursors { };
-
-  volantes-cursors = pkgs.callPackage ./volantes-cursors { };
-
   unbound-zones-adblock = pkgs.callPackage ./unbound-zones-adblock { };
 
   unified-hosts-lists = pkgs.callPackage ./unified-hosts-lists { };
+
+  vimix-cursors = pkgs.callPackage ./vimix-cursors { };
+
+  volantes-cursors = pkgs.callPackage ./volantes-cursors { };
 })
