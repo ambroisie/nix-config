@@ -46,6 +46,8 @@ in
       # Better vim mode
       bind-key -T copy-mode-vi 'v' send -X begin-selection
       bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
+      # Block selection in vim mode
+      bind-key -Tcopy-mode-vi 'C-v' send -X begin-selection \; send -X rectangle-toggle
     '';
   };
 
