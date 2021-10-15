@@ -198,6 +198,12 @@ in
             "${modifier}+Shift+d" = "exec rofi -show run -disable-history";
             "${modifier}+p" = "exec --no-startup-id flameshot gui";
             "${modifier}+Shift+p" = "exec rofi -show emoji";
+            "${modifier}+b" =
+              let
+                inherit (config.my.home.bluetooth) enable;
+                prog = "${pkgs.ambroisie.rofi-bluetooth}/bin/rofi-bluetooth";
+              in
+              lib.mkIf enable "exec ${prog}";
           })
           (
             # Changing container focus
