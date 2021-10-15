@@ -9,7 +9,7 @@ in
 {
   options.my.services.indexers = with lib; {
     jackett.enable = mkEnableOption "Jackett torrent meta-indexer";
-    nzbhydra.enable = mkEnableOption "NZBHydra2 torrent meta-indexer";
+    nzbhydra.enable = mkEnableOption "NZBHydra2 usenet meta-indexer";
   };
 
   config = {
