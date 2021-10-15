@@ -5,11 +5,13 @@ let
 
   jackettPort = 9117;
   nzbhydraPort = 5076;
+  prowlarrPort = 9696;
 in
 {
   options.my.services.indexers = with lib; {
     jackett.enable = mkEnableOption "Jackett torrent meta-indexer";
     nzbhydra.enable = mkEnableOption "NZBHydra2 usenet meta-indexer";
+    prowlarr.enable = mkEnableOption "Prowlarr torrent & usenet meta-indexer";
   };
 
   config = lib.mkMerge [
@@ -43,6 +45,19 @@ in
         {
           subdomain = "nzbhydra";
           port = nzbhydraPort;
+        }
+      ];
+    })
+
+    (lib.mkIf cfg.prowlarr.enable {
+      services.prowlarr = {
+        enable = true;
+      };
+
+      my.services.nginx.virtualHosts = [
+        {
+          subdomain = "prowlarr";
+          port = prowlarrPort;
         }
       ];
     })
