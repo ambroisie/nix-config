@@ -23,11 +23,5 @@ in
       # Auto disk mounter
       my.home.udiskie.enable = true;
     })
-
-    (lib.mkIf (cfg.windowManager != null) {
-      environment.systemPackages = with pkgs; [
-        ambroisie.dragger
-      ];
-    })
   ];
 }
