@@ -14,6 +14,7 @@ in
     # File associatons
     mimeApps = {
       enable = true;
+      defaultApplications = import ./applications.nix { inherit config lib; };
     };
     # User directories
     userDirs = {
