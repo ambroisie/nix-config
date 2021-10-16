@@ -2,7 +2,6 @@
 {
   networking = {
     hostName = "aramis";
-    domain = "nodomain.local"; # FIXME: gotta fix domain handling
 
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
     # Per-interface useDHCP will be mandatory in the future, so this generated config
