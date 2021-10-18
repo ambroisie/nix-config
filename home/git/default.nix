@@ -124,6 +124,12 @@ in
         autoSquash = true;
         autoStash = true;
       };
+
+      url = {
+        "git@gitea.belanyi.fr:" = {
+          insteadOf = "https://gitea.belanyi.fr/";
+        };
+      };
     };
 
     # Multiple identities
