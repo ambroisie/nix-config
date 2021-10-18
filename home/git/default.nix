@@ -129,6 +129,10 @@ in
         "git@gitea.belanyi.fr:" = {
           insteadOf = "https://gitea.belanyi.fr/";
         };
+
+        "git@github.com:" = {
+          insteadOf = "https://github.com/";
+        };
       };
     };
 
