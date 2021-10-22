@@ -20,6 +20,13 @@ in
       };
     };
 
+    # Persist SSH keys
+    my.system.persist.files =
+      let
+        pubAndPrivKey = key: [ key.path "${key.path}.pub" ];
+      in
+      lib.concatMap pubAndPrivKey config.services.openssh.hostKeys;
+
     # Opens the relevant UDP ports.
     programs.mosh.enable = true;
   };
