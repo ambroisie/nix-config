@@ -9,6 +9,7 @@
     ./language
     ./nix
     ./packages
+    ./persist
     ./podman
     ./printing
     ./users
