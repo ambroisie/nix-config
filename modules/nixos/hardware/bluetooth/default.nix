@@ -18,6 +18,13 @@ in
       services.blueman.enable = true;
     }
 
+    # Persist bluetooth files
+    {
+      my.system.persist.directories = [
+        "/var/lib/bluetooth"
+      ];
+    }
+
     # Support for additional bluetooth codecs
     (lib.mkIf cfg.loadExtraCodecs {
       hardware.pulseaudio = {
