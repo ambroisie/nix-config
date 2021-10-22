@@ -28,6 +28,13 @@
       };
     };
 
+    impermanence = {
+      type = "github";
+      owner = "nix-community";
+      repo = "impermanence";
+      ref = "master";
+    };
+
     nixpkgs = {
       type = "github";
       owner = "NixOS";
@@ -60,6 +67,7 @@
     , agenix
     , futils
     , home-manager
+    , impermanence
     , nixpkgs
     , nur
     , pre-commit-hooks
