@@ -22,6 +22,11 @@ in
   config = lib.mkMerge [
     (lib.mkIf cfg.wireless.enable {
       networking.networkmanager.enable = true;
+
+      # Persist NetworkManager files
+      my.system.persist.directories = [
+        "/etc/NetworkManager/system-connections"
+      ];
     })
   ];
 }
