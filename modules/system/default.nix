@@ -8,6 +8,7 @@
     ./language
     ./nix
     ./packages
+    ./persist
     ./users
   ];
 }
