@@ -9,6 +9,7 @@
     ./language
     ./nix
     ./packages
+    ./persist
     ./podman
     ./polkit
     ./printing
