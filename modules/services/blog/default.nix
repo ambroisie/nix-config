@@ -29,5 +29,12 @@ in
 
     # Those are all subdomains, no problem
     my.services.nginx.virtualHosts = hostsInfo;
+
+    my.system.persist.directories = [
+      "/var/www/blog"
+      "/var/www/cv"
+      "/var/www/dev"
+      "/var/www/key"
+    ];
   };
 }
