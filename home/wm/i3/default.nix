@@ -87,10 +87,12 @@ in
           let
             barConfigPath =
               config.xdg.configFile."i3status-rust/config-top.toml".target;
+            i3status-rs =
+              "${config.programs.i3status-rust.package}/bin/i3status-rs";
           in
           [
             {
-              statusCommand = "i3status-rs ${barConfigPath}";
+              statusCommand = "${i3status-rs} ${barConfigPath}";
               trayOutput = "primary";
               position = "top";
 
