@@ -129,7 +129,6 @@
 
           nativeBuildInputs = with pkgs; [
             gitAndTools.pre-commit
-            gnupg
             nixpkgs-fmt
           ];
 
