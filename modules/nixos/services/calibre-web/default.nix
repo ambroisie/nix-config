@@ -53,6 +53,11 @@ in
       ];
     };
 
+    my.system.persist.directories = [
+      "/var/lib/${config.services.calibre-web.dataDir}"
+      cfg.libraryPath
+    ];
+
     services.fail2ban.jails = {
       calibre-web = ''
         enabled = true
