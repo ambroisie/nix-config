@@ -61,5 +61,7 @@ in
         port = cfg.rpcPort;
       };
     };
+
+    # FIXME: persistence
   };
 }

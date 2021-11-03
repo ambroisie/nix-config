@@ -99,5 +99,7 @@ in
         config.services.vikunja.settings.files.basepath
       ];
     };
+
+    # FIXME: persistence
   };
 }

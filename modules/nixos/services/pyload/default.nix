@@ -54,5 +54,7 @@ in
     };
 
     # FIXME: fail2ban
+    # FIXME: backup
+    # FIXME: persistence
   };
 }

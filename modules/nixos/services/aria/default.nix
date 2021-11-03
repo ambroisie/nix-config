@@ -72,5 +72,6 @@ in
     };
 
     # NOTE: unfortunately aria2 does not log connection failures for fail2ban
+    # FIXME: persistence?
   };
 }
