@@ -65,5 +65,7 @@ in
       # Allow resolution of '.local' addresses
       nssmdns4 = true;
     };
+
+    # FIXME: persistence?
   };
 }

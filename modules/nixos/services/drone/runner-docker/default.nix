@@ -39,5 +39,7 @@ in
       extraGroups = [ "docker" ]; # Give access to the daemon
     };
     users.groups.drone-runner-docker = { };
+
+    # FIXME: persistence?
   };
 }

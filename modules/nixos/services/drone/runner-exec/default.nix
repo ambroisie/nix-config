@@ -63,5 +63,7 @@ in
       group = "drone-runner-exec";
     };
     users.groups.drone-runner-exec = { };
+
+    # FIXME: persistence?
   };
 }
