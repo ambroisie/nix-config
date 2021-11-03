@@ -24,5 +24,9 @@ in
         (config.services.postgresqlBackup.location + "/*.prev.sql.gz")
       ];
     };
+
+    my.system.persist.directories = [
+      config.services.postgresqlBackup.location
+    ];
   };
 }
