@@ -46,5 +46,9 @@ in
         inherit (cfg) port;
       }
     ];
+
+    my.system.persist.directories = [
+      "/var/lib/${cfg.stateDir}"
+    ];
   };
 }
