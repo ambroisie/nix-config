@@ -281,10 +281,10 @@ in
           )
           {
             # Media keys
-            "XF86AudioRaiseVolume" = "exec ${changeAudio} up 5";
-            "XF86AudioLowerVolume" = "exec ${changeAudio} down 5";
-            "Control+XF86AudioRaiseVolume" = "exec ${changeAudio} up 1";
-            "Control+XF86AudioLowerVolume" = "exec ${changeAudio} down 1";
+            "XF86AudioRaiseVolume" = "exec --no-startup-id ${changeAudio} up 5";
+            "XF86AudioLowerVolume" = "exec --no-startup-id ${changeAudio} down 5";
+            "Control+XF86AudioRaiseVolume" = "exec --no-startup-id ${changeAudio} up 1";
+            "Control+XF86AudioLowerVolume" = "exec --no-startup-id ${changeAudio} down 1";
             "XF86AudioMute" = "exec pamixer --toggle-mute";
             "XF86AudioMicMute" = "exec pamixer --default-source --toggle-mute";
 
@@ -295,10 +295,10 @@ in
           {
             # Screen management
             "XF86Display" = "exec arandr";
-            "XF86MonBrightnessUp" = "exec ${changeBacklight} up 10";
-            "XF86MonBrightnessDown" = "exec ${changeBacklight} down 10";
-            "Control+XF86MonBrightnessUp" = "exec ${changeBacklight} up 1";
-            "Control+XF86MonBrightnessDown" = "exec ${changeBacklight} down 1";
+            "XF86MonBrightnessUp" = "exec --no-startup-id ${changeBacklight} up 10";
+            "XF86MonBrightnessDown" = "exec --no-startup-id ${changeBacklight} down 10";
+            "Control+XF86MonBrightnessUp" = "exec --no-startup-id ${changeBacklight} up 1";
+            "Control+XF86MonBrightnessDown" = "exec --no-startup-id ${changeBacklight} down 1";
           }
           {
             # Sub-modes
