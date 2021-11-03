@@ -49,6 +49,28 @@ let
           -- "Set brightness to $newBrightness"
     '';
 
+  # Audio and volume management
+  changeAudio =
+    let
+      pamixer = "${pkgs.pamixer}/bin/pamixer";
+    in
+    pkgs.writeScript "change-audio" ''
+      #!/bin/sh
+      if [ "$1" = "up" ]; then
+          upDown="-i"
+      else
+          upDown="-d"
+      fi
+
+      ${pamixer} --allow-boost "$upDown" "$2"
+      newVolume="$(${pamixer} --get-volume)"
+
+      ${notify-send} -u low \
+          -h string:x-canonical-private-synchronous:change-audio \
+          -h "int:value:$newVolume" \
+          -- "Set volume to $newVolume "
+    '';
+
   # Lock management
   toggleXautolock =
     let
@@ -259,10 +281,10 @@ in
           )
           {
             # Media keys
-            "XF86AudioRaiseVolume" = "exec pamixer --allow-boost -i 5";
-            "XF86AudioLowerVolume" = "exec pamixer --allow-boost -d 5";
-            "Control+XF86AudioRaiseVolume" = "exec pamixer --allow-boost -i 1";
-            "Control+XF86AudioLowerVolume" = "exec pamixer --allow-boost -d 1";
+            "XF86AudioRaiseVolume" = "exec ${changeAudio} up 5";
+            "XF86AudioLowerVolume" = "exec ${changeAudio} down 5";
+            "Control+XF86AudioRaiseVolume" = "exec ${changeAudio} up 1";
+            "Control+XF86AudioLowerVolume" = "exec ${changeAudio} down 1";
             "XF86AudioMute" = "exec pamixer --toggle-mute";
             "XF86AudioMicMute" = "exec pamixer --default-source --toggle-mute";
 
