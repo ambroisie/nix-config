@@ -214,5 +214,9 @@ in
         config.services.matrix-synapse.dataDir
       ];
     };
+
+    my.system.persist.directories = [
+      config.services.matrix-synapse.dataDir
+    ];
   };
 }
