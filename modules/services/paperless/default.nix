@@ -142,5 +142,10 @@ in
         config.services.paperless-ng.mediaDir
       ];
     };
+
+    my.system.persist.directories = [
+      config.services.paperless-ng.dataDir
+      config.services.paperless-ng.mediaDir
+    ];
   };
 }
