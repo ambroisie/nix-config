@@ -26,6 +26,9 @@ let
   # Generate an attrset of movement bindings, using the mapper function
   genMovementBindings = f: addVimKeyBindings (lib.my.genAttrs' movementKeys f);
 
+  # Used in multiple scripts to show messages through keybindings
+  notify-send = "${pkgs.libnotify}/bin/notify-send";
+
   # Screen backlight management
   changeBacklight =
     let
@@ -40,7 +43,7 @@ let
       fi
 
       newBrightness="$(${brightnessctl} -m set "$upDown" | cut -d, -f4)"
-      ${pkgs.libnotify}/bin/notify-send -u low \
+      ${notify-send} -u low \
           -h string:x-canonical-private-synchronous:change-backlight \
           -h "int:value:''${newBrightness/\%/}" \
           -- "Set brightness to $newBrightness"
@@ -50,7 +53,6 @@ let
   toggleXautolock =
     let
       systemctlUser = "${pkgs.systemd}/bin/systemctl --user";
-      notify-send = "${pkgs.libnotify}/bin/notify-send";
       notify = "${notify-send} -u low"
         + " -h string:x-canonical-private-synchronous:xautolock-toggle";
     in
