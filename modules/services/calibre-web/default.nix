@@ -53,5 +53,10 @@ in
         cfg.libraryPath
       ];
     };
+
+    my.system.persist.directories = [
+      "/var/lib/${config.services.calibre-web.dataDir}"
+      cfg.libraryPath
+    ];
   };
 }
