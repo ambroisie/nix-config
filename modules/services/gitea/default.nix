@@ -75,5 +75,10 @@ in
         config.services.gitea.repositoryRoot
       ];
     };
+
+    my.system.persist.directories = [
+      config.services.gitea.lfs.contentDir
+      config.services.gitea.repositoryRoot
+    ];
   };
 }
