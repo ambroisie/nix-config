@@ -18,6 +18,13 @@ in
       };
     })
 
+    # Only persist directory if the actual service is enabled
+    (lib.mkIf config.services.postgresql.enable {
+      my.system.persist.directories = [
+        config.services.postgresql.dataDir
+      ];
+    })
+
     # Taken from the manual
     (lib.mkIf cfg.upgradeScript {
       environment.systemPackages =
