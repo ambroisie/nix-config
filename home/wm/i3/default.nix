@@ -30,46 +30,10 @@ let
   notify-send = "${pkgs.libnotify}/bin/notify-send";
 
   # Screen backlight management
-  changeBacklight =
-    let
-      brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
-    in
-    pkgs.writeScript "change-backlight" ''
-      #!/bin/sh
-      if [ "$1" = "up" ]; then
-          upDown="+$2%"
-      else
-          upDown="$2%-"
-      fi
-
-      newBrightness="$(${brightnessctl} -m set "$upDown" | cut -d, -f4)"
-      ${notify-send} -u low \
-          -h string:x-canonical-private-synchronous:change-backlight \
-          -h "int:value:''${newBrightness/\%/}" \
-          -- "Set brightness to $newBrightness"
-    '';
+  changeBacklight = "${pkgs.ambroisie.change-backlight}/bin/change-backlight";
 
   # Audio and volume management
-  changeAudio =
-    let
-      pamixer = "${pkgs.pamixer}/bin/pamixer";
-    in
-    pkgs.writeScript "change-audio" ''
-      #!/bin/sh
-      if [ "$1" = "up" ]; then
-          upDown="-i"
-      else
-          upDown="-d"
-      fi
-
-      ${pamixer} --allow-boost "$upDown" "$2"
-      newVolume="$(${pamixer} --get-volume)"
-
-      ${notify-send} -u low \
-          -h string:x-canonical-private-synchronous:change-audio \
-          -h "int:value:$newVolume" \
-          -- "Set volume to $newVolume "
-    '';
+  changeAudio = "${pkgs.ambroisie.change-audio}/bin/change-audio";
 
   # Lock management
   toggleXautolock =
