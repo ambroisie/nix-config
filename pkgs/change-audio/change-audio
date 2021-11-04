@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ "$1" = "up" ]; then
+    upDown="-i"
+else
+    upDown="-d"
+fi
+
+pamixer --allow-boost "$upDown" "$2"
+newVolume="$(pamixer --get-volume)"
+
+notify-send -u low \
+    -h string:x-canonical-private-synchronous:change-audio \
+    -h "int:value:$newVolume" \
+    -- "Set volume to $newVolume%"
