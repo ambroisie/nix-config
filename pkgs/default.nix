@@ -2,6 +2,8 @@
 pkgs.lib.makeScope pkgs.newScope (pkgs: {
   bw-pass = pkgs.callPackage ./bw-pass { };
 
+  change-backlight = pkgs.callPackage ./change-backlight { };
+
   comma = pkgs.callPackage ./comma { };
 
   diff-flake = pkgs.callPackage ./diff-flake { };
