@@ -19,6 +19,16 @@ let
       enable = true;
       group = "media";
     };
+
+    my.system.persist.directories =
+      let
+        # Bazarr breaks the mold unfortunately
+        dataDir =
+          if service != "bazarr"
+          then config.services.${service}.dataDir
+          else "/var/lib/bazarr";
+      in
+      [ dataDir ];
   };
 
   mkRedirection = service: {
