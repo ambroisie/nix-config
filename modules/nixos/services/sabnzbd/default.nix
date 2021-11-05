@@ -25,6 +25,10 @@ in
       }
     ];
 
+    my.system.persist.files = [
+      config.services.sabnzbd.configFile
+    ];
+
     services.fail2ban.jails = {
       sabnzbd = ''
         enabled = true
