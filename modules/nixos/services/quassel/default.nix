@@ -46,5 +46,9 @@ in
       # Because Quassel does not use the socket, I simply trust its connection
       authentication = "host quassel quassel localhost trust";
     };
+
+    my.system.persist.directories = [
+      config.services.quassel.dataDir
+    ];
   };
 }
