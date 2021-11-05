@@ -53,6 +53,10 @@ in
       };
     };
 
+    my.system.persist.directories = [
+      "/var/lib/navidrome"
+    ];
+
     services.fail2ban.jails = {
       navidrome = ''
         enabled = true
