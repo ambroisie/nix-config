@@ -92,6 +92,10 @@ in
       ];
     };
 
+    my.system.persist.directories = [
+      config.services.nextcloud.home
+    ];
+
     services.fail2ban.jails = {
       nextcloud = ''
         enabled = true
