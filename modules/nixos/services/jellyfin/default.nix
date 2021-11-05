@@ -41,5 +41,9 @@ in
         };
       };
     };
+
+    my.system.persist.directories = [
+      "/var/lib/${config.systemd.services.jellyfin.serviceConfig.StateDirectory}"
+    ];
   };
 }
