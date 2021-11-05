@@ -20,5 +20,9 @@ in
       forceSSL = true;
       useACMEHost = config.networking.domain;
     };
+
+    my.system.persist.directories = [
+      config.services.rss-bridge.dataDir
+    ];
   };
 }
