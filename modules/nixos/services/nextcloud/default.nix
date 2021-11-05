@@ -87,5 +87,10 @@ in
         "${config.services.nextcloud.home}/data/appdata_*/preview"
       ];
     };
+
+    my.system.persist.directories = [
+      config.services.nextcloud.home
+      config.services.nextcloud.datadir
+    ];
   };
 }
