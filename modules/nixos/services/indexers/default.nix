@@ -33,6 +33,10 @@ in
           port = jackettPort;
         };
       };
+
+      my.system.persist.directories = [
+        config.services.jackett.dataDir
+      ];
     })
 
     (lib.mkIf cfg.nzbhydra.enable {
@@ -45,6 +49,10 @@ in
           port = nzbhydraPort;
         };
       };
+
+      my.system.persist.directories = [
+        config.services.nzbhydra2.dataDir
+      ];
     })
 
     (lib.mkIf cfg.prowlarr.enable {
@@ -57,6 +65,10 @@ in
           port = prowlarrPort;
         };
       };
+
+      my.system.persist.directories = [
+        "/var/lib/prowlarr"
+      ];
 
       services.fail2ban.jails = {
         prowlarr = ''
