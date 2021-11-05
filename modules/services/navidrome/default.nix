@@ -53,5 +53,9 @@ in
         inherit (cfg) port;
       }
     ];
+
+    my.system.persist.directories = [
+      "/var/lib/${config.systemd.services.navidrome.serviceConfig.StateDirectory}"
+    ];
   };
 }
