@@ -1,4 +1,4 @@
-{ lib, fetchFromGitHub, qt5, stdenv }:
+{ lib, fetchFromGitHub, qt5, }:
 qt5.mkDerivation rec {
   pname = "dragger";
   version = "0.1.0";
