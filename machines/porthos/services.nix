@@ -52,6 +52,7 @@ in
     lohr = {
       enable = true;
       sharedSecretFile = secrets."lohr/secret".path;
+      sshKeyFile = secrets."lohr/ssh-key".path;
     };
     # Matrix backend and Element chat front-end
     matrix = {
