@@ -465,5 +465,9 @@ in
         }
       ];
     };
+
+    my.system.persist.directories = [
+      config.users.user.acme.home
+    ];
   };
 }
