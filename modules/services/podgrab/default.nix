@@ -37,5 +37,10 @@ in
         inherit (cfg) port;
       }
     ];
+
+    my.system.persist.directories =
+      builtins.map
+        (d: "/var/lib/${d}")
+        config.systemd.services.podgrab.serviceConfig.StateDirectory;
   };
 }
