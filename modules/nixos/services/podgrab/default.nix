@@ -51,5 +51,10 @@ in
         inherit (cfg) port;
       };
     };
+
+    my.system.persist.directories = [
+      config.systemd.services.podgrab.environment.CONFIG
+      config.systemd.services.podgrab.environment.DATA
+    ];
   };
 }
