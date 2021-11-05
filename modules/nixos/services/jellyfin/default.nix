@@ -38,6 +38,10 @@ in
       };
     };
 
+    my.system.persist.directories = [
+      "/var/lib/jellyfin"
+    ];
+
     services.fail2ban.jails = {
       jellyfin = ''
         enabled = true
