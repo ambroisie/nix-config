@@ -18,6 +18,11 @@ let
       enable = true;
       group = "media";
     };
+
+    # Thankfully those old style services all define users with homes
+    my.system.persist.directories = [
+      config.users.user.${service}.home
+    ];
   };
 
   mkRedirection = service: {
