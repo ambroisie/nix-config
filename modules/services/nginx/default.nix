@@ -1,5 +1,5 @@
 # A simple abstraction layer for almost all of my services' needs
-{ config, lib, pkgs, utils, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.my.services.nginx;
 
