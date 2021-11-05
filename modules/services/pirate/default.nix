@@ -34,5 +34,13 @@ in
     my.services.nginx.virtualHosts = redirections;
     # Set-up media group
     users.groups.media = { };
+
+    # Thankfully those old style services all define users with homes
+    my.system.persist.directories = [
+      config.users.user.bazarr.home
+      config.users.user.lidarr.home
+      config.users.user.radarr.home
+      config.users.user.sonarr.home
+    ];
   };
 }
