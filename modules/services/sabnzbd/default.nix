@@ -24,5 +24,9 @@ in
         inherit port;
       }
     ];
+
+    my.system.persist.files = [
+      config.services.sabnzbd.configFile
+    ];
   };
 }
