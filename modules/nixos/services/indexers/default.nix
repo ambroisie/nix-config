@@ -34,6 +34,10 @@ in
           port = jackettPort;
         }
       ];
+
+      my.system.persist.directories = [
+        config.services.jackett.dataDir
+      ];
     })
 
     (lib.mkIf cfg.nzbhydra.enable {
@@ -47,6 +51,10 @@ in
           port = nzbhydraPort;
         }
       ];
+
+      my.system.persist.directories = [
+        config.services.nzbhydra2.dataDir
+      ];
     })
 
     (lib.mkIf cfg.prowlarr.enable {
@@ -59,6 +67,10 @@ in
           subdomain = "prowlarr";
           port = prowlarrPort;
         }
+      ];
+
+      my.system.persist.directories = [
+        "/var/lib/${config.systemd.services.prowlarr.serviceConfig.StateDirectory}"
       ];
 
       services.fail2ban.jails = {
