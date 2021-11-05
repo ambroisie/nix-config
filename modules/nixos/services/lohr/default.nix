@@ -107,5 +107,9 @@ in
         };
       };
     };
+
+    my.system.persist.directories = [
+      "/var/lib/${config.systemd.services.lohr.serviceConfig.StateDirectory}"
+    ];
   };
 }
