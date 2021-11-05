@@ -91,6 +91,11 @@ in
       allowedUDPPorts = [ cfg.peerPort ];
     };
 
+    my.system.persist.directories = [
+      cfg.downloadBase
+      config.services.transmission.home
+    ];
+
     # NOTE: unfortunately transmission does not log connection failures for fail2ban
   };
 }
