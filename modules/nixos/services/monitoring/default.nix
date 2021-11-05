@@ -130,5 +130,10 @@ in
         inherit (cfg.grafana) port;
       };
     };
+
+    my.system.persist.directories = [
+      config.services.grafana.dataDir
+      "/var/lib/${config.services.prometheus.stateDir}"
+    ];
   };
 }
