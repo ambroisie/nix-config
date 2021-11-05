@@ -91,5 +91,9 @@ in
       allowedTCPPorts = [ cfg.peerPort ];
       allowedUDPPorts = [ cfg.peerPort ];
     };
+
+    my.system.persist.directories = [
+      config.services.transmission.home
+    ];
   };
 }
