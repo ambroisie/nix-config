@@ -138,6 +138,7 @@ in
 
     my.services.backup = {
       paths = [
+        config.services.paperless-ng.dataDir
         config.services.paperless-ng.mediaDir
       ];
     };
