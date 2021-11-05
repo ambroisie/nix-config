@@ -19,6 +19,7 @@ in
   "drone/ssh/private-key.age".publicKeys = all;
 
   "lohr/secret.age".publicKeys = all;
+  "lohr/ssh-key.age".publicKeys = all;
 
   "matrix/mail.age" = {
     owner = "matrix-synapse";
