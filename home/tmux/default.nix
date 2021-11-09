@@ -5,10 +5,6 @@ in
 {
   options.my.home.tmux = with lib.my; {
     enable = mkDisableOption "tmux terminal multiplexer";
-
-    service = {
-      enable = mkDisableOption "tmux server service";
-    };
   };
 
   config.programs.tmux = lib.mkIf cfg.enable {
@@ -49,31 +45,5 @@ in
       # Block selection in vim mode
       bind-key -Tcopy-mode-vi 'C-v' send -X begin-selection \; send -X rectangle-toggle
     '';
-  };
-
-  config.systemd.user.services.tmux = lib.mkIf cfg.service.enable {
-    Unit = {
-      Description = "tmux server";
-    };
-
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
-
-    Service =
-      let
-        # Wrap `tmux` in a login shell and set the socket path
-        tmuxCmd = "${config.programs.tmux.package}/bin/tmux";
-        socketExport = lib.optionalString
-          config.programs.tmux.secureSocket
-          ''export TMUX_TMPDIR=''${XDG_RUNTIME_DIR:-"/run/user/\$(id -u)"};'';
-        mkTmuxCommand =
-          c: "${pkgs.runtimeShell} -l -c '${socketExport} ${tmuxCmd} ${c}'";
-      in
-      {
-        Type = "forking";
-        ExecStart = mkTmuxCommand "new -d -s ambroisie";
-        ExecStop = mkTmuxCommand "kill-server";
-      };
   };
 }
