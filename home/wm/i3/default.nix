@@ -249,8 +249,8 @@ in
             "XF86AudioLowerVolume" = "exec --no-startup-id ${changeAudio} down 5";
             "Control+XF86AudioRaiseVolume" = "exec --no-startup-id ${changeAudio} up 1";
             "Control+XF86AudioLowerVolume" = "exec --no-startup-id ${changeAudio} down 1";
-            "XF86AudioMute" = "exec pamixer --toggle-mute";
-            "XF86AudioMicMute" = "exec pamixer --default-source --toggle-mute";
+            "XF86AudioMute" = "exec --no-startup-id ${changeAudio} toggle";
+            "XF86AudioMicMute" = "exec --no-startup-id ${changeAudio} toggle mic";
 
             "XF86AudioPlay" = "exec playerctl play-pause";
             "XF86AudioNext" = "exec playerctl next";
