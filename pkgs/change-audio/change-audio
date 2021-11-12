@@ -10,8 +10,14 @@ fi
 
 pamixer --allow-boost "$upDown" "$2"
 newVolume="$(pamixer --get-volume || true)"
+[ "$(pamixer --get-volume-human)" = "muted" ] && isMuted=true
+
+MSG="Set volume to $newVolume%"
+if [ "${isMuted:-false}" = true ]; then
+    MSG="$MSG (muted)"
+fi
 
 notify-send -u low \
     -h string:x-canonical-private-synchronous:change-audio \
     -h "int:value:$newVolume" \
-    -- "Set volume to $newVolume%"
+    -- "$MSG"
