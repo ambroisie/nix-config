@@ -1,7 +1,7 @@
 { lib, libnotify, makeWrapper, pamixer, shellcheck, stdenvNoCC }:
 stdenvNoCC.mkDerivation rec {
   pname = "change-audio";
-  version = "0.1.0";
+  version = "0.1.1";
 
   src = ./change-audio;
 

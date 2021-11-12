@@ -9,7 +9,7 @@ else
 fi
 
 pamixer --allow-boost "$upDown" "$2"
-newVolume="$(pamixer --get-volume)"
+newVolume="$(pamixer --get-volume || true)"
 
 notify-send -u low \
     -h string:x-canonical-private-synchronous:change-audio \
