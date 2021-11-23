@@ -5,7 +5,7 @@
       type = "github";
       owner = "ryantm";
       repo = "agenix";
-      ref = "master";
+      ref = "main";
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
