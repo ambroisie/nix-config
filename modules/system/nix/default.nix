@@ -18,9 +18,6 @@ in
         extraOptions = ''
           experimental-features = nix-command flakes
         '';
-
-        # Keep my system responsive during builds
-        daemonNiceLevel = 19;
       };
     }
 
