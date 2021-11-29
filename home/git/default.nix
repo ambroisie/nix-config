@@ -3,6 +3,7 @@ let
   cfg = config.my.home.git;
 
   inherit (lib.my) mkMailAddress;
+  diff-highlight = "${pkgs.gitAndTools.gitFull}/share/git/contrib/diff-highlight/diff-highlight";
 in
 {
   options.my.home.git = with lib.my; {
@@ -99,15 +100,15 @@ in
         defaultBranch = "main";
       };
 
-      pager =
-        let
-          diff-highlight = "${pkgs.gitAndTools.gitFull}/share/git/contrib/diff-highlight/diff-highlight";
-        in
-        {
-          diff = "${diff-highlight} | less";
-          log = "${diff-highlight} | less";
-          show = "${diff-highlight} | less";
-        };
+      interactive = {
+        diffFilter = "${diff-highlight}";
+      };
+
+      pager = {
+        diff = "${diff-highlight} | less";
+        log = "${diff-highlight} | less";
+        show = "${diff-highlight} | less";
+      };
 
       pull = {
         # Avoid useless merge commits
