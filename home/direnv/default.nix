@@ -12,8 +12,6 @@ in
     nix-direnv = {
       # A better `use_nix`
       enable = true;
-      # And `use_flake`
-      enableFlakes = true;
     };
   };
 }
