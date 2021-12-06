@@ -60,6 +60,7 @@ in
 
         # Personal preference for easier reading
         decorations = {
+          commit-style = "raw"; # Do not recolor meta information
           keep-plus-minus-markers = true;
           paging = "always";
         };
