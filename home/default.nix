@@ -5,6 +5,7 @@
     ./bluetooth
     ./comma
     ./direnv
+    ./discord
     ./documentation
     ./feh
     ./firefox
