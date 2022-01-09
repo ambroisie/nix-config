@@ -1,6 +1,8 @@
 { pkgs, ... }:
 {
   my.home = {
+    # Some amount of social life
+    discord.enable = true;
     # Image viewver
     feh.enable = true;
     # Firefo profile and extensions
