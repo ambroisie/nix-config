@@ -42,7 +42,6 @@ in
     gitea.enable = true;
     # Meta-indexers
     indexers = {
-      jackett.enable = true;
       nzbhydra.enable = true;
       prowlarr.enable = true;
     };
