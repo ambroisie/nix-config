@@ -42,7 +42,6 @@ in
     gitea.enable = true;
     # Meta-indexers
     indexers = {
-      nzbhydra.enable = true;
       prowlarr.enable = true;
     };
     # Jellyfin media server
