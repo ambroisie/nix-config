@@ -68,6 +68,7 @@ in
 
     extensions = with pkgs.nur.repos.rycee.firefox-addons; ([
       bitwarden
+      consent-o-matic
       form-history-control
       https-everywhere
       i-dont-care-about-cookies
