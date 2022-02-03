@@ -68,6 +68,7 @@ in
             }
             {
               block = "sound";
+              show_volume_when_muted = true;
             }
             {
               block = "time";
