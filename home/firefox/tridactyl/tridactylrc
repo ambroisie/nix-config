@@ -12,7 +12,7 @@ set editorcmd termite --class tridactyl_editor -e 'vim %f'
 " Binds {{{
 " Reddit et al. {{{
 " Toggle comments on Reddit, Hacker News, Lobste.rs
-bind ;c hint -c [class*="expand"],[class="togg"],[class="comment_folder"]
+bind ;c hint -c [class*="expand"],[class*="togg"],[class="comment_folder"]
 
 " Make `gu` take me back to subreddit from comments
 bindurl reddit.com gu urlparent 3
