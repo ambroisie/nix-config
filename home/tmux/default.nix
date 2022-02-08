@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.my.home.tmux;
+  hasGUI = config.my.home.x.enable || (config.my.home.wm != null);
 in
 {
   options.my.home.tmux = with lib.my; {
@@ -23,8 +24,16 @@ in
       pain-control
       # Better session management
       sessionist
-      # X clipboard integration
-      yank
+      (lib.optionalAttrs hasGUI {
+        # X clipboard integration
+        plugin = yank;
+        extraConfig = ''
+          # Use 'clipboard' because of misbehaving apps (e.g: firefox)
+          set -g @yank_selection_mouse 'clipboard'
+          # Stay in copy mode after yanking
+          set -g @yank_action 'copy-pipe'
+        '';
+      })
       {
         # Show when prefix has been pressed
         plugin = prefix-highlight;
@@ -41,7 +50,11 @@ in
     extraConfig = ''
       # Better vim mode
       bind-key -T copy-mode-vi 'v' send -X begin-selection
-      bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
+      ${
+        lib.optionalString
+          (!hasGUI)
+          "bind-key -T copy-mode-vi 'y' send -X copy-selection"
+      }
       # Block selection in vim mode
       bind-key -Tcopy-mode-vi 'C-v' send -X begin-selection \; send -X rectangle-toggle
     '';
