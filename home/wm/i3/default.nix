@@ -249,6 +249,12 @@ in
             "XF86AudioLowerVolume" = "exec --no-startup-id ${changeAudio} down 5";
             "Control+XF86AudioRaiseVolume" = "exec --no-startup-id ${changeAudio} up 1";
             "Control+XF86AudioLowerVolume" = "exec --no-startup-id ${changeAudio} down 1";
+
+            "Shift+XF86AudioRaiseVolume" = "exec --no-startup-id ${changeAudio} up --force 5";
+            "Shift+XF86AudioLowerVolume" = "exec --no-startup-id ${changeAudio} down --force 5";
+            "Control+Shift+XF86AudioRaiseVolume" = "exec --no-startup-id ${changeAudio} up --force 1";
+            "Control+Shift+XF86AudioLowerVolume" = "exec --no-startup-id ${changeAudio} down --force 1";
+
             "XF86AudioMute" = "exec --no-startup-id ${changeAudio} toggle";
             "XF86AudioMicMute" = "exec --no-startup-id ${changeAudio} toggle mic";
 
