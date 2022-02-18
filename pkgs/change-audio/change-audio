@@ -9,13 +9,26 @@ NOTIFY=(
 )
 
 do_change_volume() {
+    local args=()
+
     if [ "$1" = "up" ]; then
-        upDown="-i"
+        args+=("-i")
     else
-        upDown="-d"
+        args+=("-d")
+    fi
+    shift
+
+    # Do not boost over 100% unless explitily asked for
+    if [ "$1" = "--force" ] || [ "$1" = "-f" ]; then
+        args=("--allow-boost" "${args[@]}")
+        shift
     fi
 
-    pamixer --allow-boost "$upDown" "$2"
+    # Volume
+    args+=("$1")
+
+    pamixer "${args[@]}"
+
     newVolume="$(pamixer --get-volume || true)"
     [ "$(pamixer --get-volume-human)" = "muted" ] && isMuted=true
 
@@ -29,7 +42,7 @@ do_change_volume() {
 }
 
 do_toggle() {
-    args=()
+    local args=()
     if [ "${2:-audio}" = mic ]; then
         args+=(--default-source)
         MSG="Toggled microphone"
