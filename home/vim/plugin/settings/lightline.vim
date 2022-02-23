@@ -63,7 +63,7 @@ let g:lightline#ale#indicator_ok='✓'
 
 " Show a lock icon when editing a read-only file when it makes sense
 function! LightlineReadonly()
-    return &ft!~?'help\|vimfiler\|netrw' && &readonly ? '' : ''
+    return &ft!~?'help\|vimfiler\|netrw' && &readonly ? '🔒' : ''
 endfunction
 
 " Show a '+' when the buffer is modified, '-' if not, when it makes sense
