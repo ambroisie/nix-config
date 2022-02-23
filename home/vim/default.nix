@@ -63,8 +63,6 @@ in
       git-messenger-vim # A simple blame window
 
       # LSP and linting
-      ale # Asynchronous Linting Engine
-      lightline-ale # Status bar integration
     ];
 
     extraConfig = builtins.readFile ./init.vim;

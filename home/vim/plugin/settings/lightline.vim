@@ -15,7 +15,6 @@ let g:lightline.active={
   \         [ 'lineinfo' ],
   \         [ 'percent' ],
   \         [ 'fileformat', 'fileencoding', 'filetype' ],
-  \         [ 'linter_check', 'linter_errors', 'linter_warn', 'linter_ok' ],
   \         [ 'ctags_status' ],
   \     ]
   \ }
@@ -38,28 +37,10 @@ let g:lightline.component_function={
   \     'gitbranch': 'LightlineFugitive',
   \ }
 
-" Which component can be expanded by using which function
-let g:lightline.component_expand={
-  \    'linter_check': 'lightline#ale#checking',
-  \    'linter_warn': 'lightline#ale#warnings',
-  \    'linter_errors': 'lightline#ale#errors',
-  \    'linter_ok': 'lightline#ale#ok',
-  \ }
-
 " How to color custom components
 let g:lightline.component_type={
   \   'readonly': 'error',
-  \   'linter_checking': 'left',
-  \   'linter_warn': 'warning',
-  \   'linter_errors': 'error',
-  \   'linter_ok': 'left',
   \ }
-
-" Show pretty icons instead of text for linting status
-let g:lightline#ale#indicator_checking='⏳'
-let g:lightline#ale#indicator_warnings='◆'
-let g:lightline#ale#indicator_errors='✗'
-let g:lightline#ale#indicator_ok='✓'
 
 " Show a lock icon when editing a read-only file when it makes sense
 function! LightlineReadonly()
