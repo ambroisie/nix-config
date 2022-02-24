@@ -63,6 +63,7 @@ in
       git-messenger-vim # A simple blame window
 
       # LSP and linting
+      lightline-lsp
     ];
 
     extraConfig = builtins.readFile ./init.vim;
