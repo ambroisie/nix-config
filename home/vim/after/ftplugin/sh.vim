@@ -12,8 +12,9 @@ null_ls.register({
         extra_args = { "-o", "avoid-nullary-conditions" },
     }),
     null_ls.builtins.formatting.shfmt.with({
-        -- Indent with 4 spaces, simplify the code, indent switch cases, use POSIX
-        extra_args = { "-i", "4", "-s", "-ci", "-ln", "posix" },
+        -- Indent with 4 spaces, simplify the code, indent switch cases,
+        -- add space after redirection, use POSIX
+        extra_args = { "-i", "4", "-s", "-ci", "-sr", "-ln", "posix" },
     }),
 })
 EOF

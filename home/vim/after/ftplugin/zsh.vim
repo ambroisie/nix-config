@@ -12,8 +12,9 @@ null_ls.register({
         extra_args = { "-s", "bash", "-o", "avoid-nullary-conditions" },
     }),
     null_ls.builtins.formatting.shfmt.with({
-        -- Indent with 4 spaces, simplify the code, indent switch cases, use bash dialect
-        extra_args = { "-i", "4", "-s", "-ci", "-ln", "bash" },
+        -- Indent with 4 spaces, simplify the code, indent switch cases,
+        -- add space after redirection, use bash dialect
+        extra_args = { "-i", "4", "-s", "-ci", "-sr", "-ln", "bash" },
     }),
 })
 EOF
