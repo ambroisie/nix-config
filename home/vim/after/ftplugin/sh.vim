@@ -6,6 +6,8 @@ lua << EOF
 local null_ls = require("null-ls")
 null_ls.register({
     null_ls.builtins.diagnostics.shellcheck.with({
+        -- Show error code in message
+        diagnostics_format = "[#{c}] #{m}",
         -- Require explicit empty string test
         extra_args = { "-o", "avoid-nullary-conditions" },
     }),
