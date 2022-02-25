@@ -64,6 +64,7 @@ in
 
       # LSP and linting
       lightline-lsp
+      lsp_lines-nvim # Show diagnostics *over* regions
       null-ls-nvim # LSP integration for linters and formatters
       plenary-nvim # 'null-ls' dependency
     ];
