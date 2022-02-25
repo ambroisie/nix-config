@@ -64,6 +64,8 @@ in
 
       # LSP and linting
       lightline-lsp
+      null-ls-nvim # LSP integration for linters and formatters
+      plenary-nvim # 'null-ls' dependency
     ];
 
     extraConfig = builtins.readFile ./init.vim;
