@@ -68,6 +68,9 @@ in
       null-ls-nvim # LSP integration for linters and formatters
       (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars)) # Better highlighting
       plenary-nvim # 'null-ls' dependency
+
+      # UX improvements
+      which-key-nvim # Show available mappings
     ];
 
     extraConfig = builtins.readFile ./init.vim;
