@@ -9,5 +9,23 @@ ts_config.setup({
     indent = {
         enable = true,
     },
+    textobjects = {
+        select = {
+            enable = true,
+            -- Jump to matching text objects
+            lookahead = true,
+            keymaps = {
+                ["aa"] = "@parameter.outer",
+                ["ia"] = "@parameter.inner",
+                ["ab"] = "@block.outer",
+                ["ib"] = "@block.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner",
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ak"] = "@comment.outer",
+            },
+        },
+    },
 })
 EOF
