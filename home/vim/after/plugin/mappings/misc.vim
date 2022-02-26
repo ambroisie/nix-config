@@ -1,5 +1,10 @@
-" Run make silently, then skip the 'Press ENTER to continue'
-noremap <Leader>m :silent! :make! \| :redraw!<CR>
+lua << EOF
+local wk = require("which-key")
 
-" Remove search-highlighting
-noremap <Leader><Leader> :nohls<CR>
+local keys = {
+    m = { "<cmd>silent! :make! | :redraw!<CR>", "Run make" },
+    ["<leader>"] = { "<cmd>nohls<CR>", "Clear search highlight" },
+}
+
+wk.register(keys, { prefix = "<leader>" })
+EOF

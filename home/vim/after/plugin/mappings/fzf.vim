@@ -1,5 +1,13 @@
-" Only git-tracked files, Vim needs to be in a Git repository
-nnoremap <Leader>ff :GFiles<CR>
+lua << EOF
+local wk = require("which-key")
 
-" Currently open buffers
-nnoremap <Leader>fb :Buffers<CR>
+local keys = {
+    f = {
+        name = "Fuzzy finder",
+        b = { "<cmd>Buffers<CR>", "Open buffers" },
+        f = { "<cmd>GFiles<CR>", "Git tracked files" },
+    },
+}
+
+wk.register(keys, { prefix = "<leader>" })
+EOF
