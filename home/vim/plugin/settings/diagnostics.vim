@@ -15,3 +15,9 @@ vim.diagnostic.config({
     severity_sort = true,
 })
 EOF
+
+augroup DiagnosticsHover
+    autocmd!
+    " Show diagnostics on "hover"
+    autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})
+augroup END
