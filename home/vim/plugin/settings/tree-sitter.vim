@@ -24,6 +24,7 @@ ts_config.setup({
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
                 ["ak"] = "@comment.outer",
+                ["aS"] = "@statement.outer",
             },
         },
         move = {
@@ -32,6 +33,7 @@ ts_config.setup({
             set_jumps = true,
             goto_next_start = {
                 ["]m"] = "@function.outer",
+                ["]S"] = "@statement.outer",
                 ["]]"] = "@class.outer",
             },
             goto_next_end = {
@@ -40,6 +42,7 @@ ts_config.setup({
             },
             goto_previous_start = {
                 ["[m"] = "@function.outer",
+                ["[S"] = "@statement.outer",
                 ["[["] = "@class.outer",
             },
             goto_previous_end = {
