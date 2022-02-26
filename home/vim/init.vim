@@ -13,6 +13,13 @@ set wildmenu
 " Enable syntax high-lighting and file-type specific plugins
 syntax on
 filetype plugin indent on
+
+" Map leader to space (needs the noremap trick to avoid moving the cursor)
+nnoremap <Space> <Nop>
+let mapleader=" "
+
+" Map localleader to '!' (if I want to filter text, I use visual mode)
+let maplocalleader="!"
 " }}}
 
 " Indentation configuration {{{
