@@ -65,6 +65,9 @@ set lazyredraw
 " Timeout quickly on shortcuts, I can't wait two seconds to delete in visual
 set timeoutlen=500
 
+" Timeout quickly for CursorHold events (and also swap file)
+set updatetime=250
+
 " Set dark mode by default
 set background=dark
 
