@@ -1,7 +1,4 @@
 lua << EOF
--- Show LSP diagnostics on virtual lines over affected regions
-require("lsp_lines").register_lsp_virtual_lines()
-
 vim.diagnostic.config({
     -- Disable virtual test next to affected regions
     virtual_text = false,
