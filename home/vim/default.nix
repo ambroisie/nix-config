@@ -66,6 +66,7 @@ in
       lightline-lsp
       lsp_lines-nvim # Show diagnostics *over* regions
       null-ls-nvim # LSP integration for linters and formatters
+      (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars)) # Better highlighting
       plenary-nvim # 'null-ls' dependency
     ];
 
