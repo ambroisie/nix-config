@@ -1,7 +1,18 @@
 lua << EOF
 local wk = require("which-key")
 
-local keys = {
+local motions = {
+    ["]m"] = "Next method start",
+    ["]M"] = "Next method end",
+    ["]]"] = "Next class start",
+    ["]["] = "Next class end",
+    ["[m"] = "Previous method start",
+    ["[M"] = "Previous method end",
+    ["[["] = "Previous class start",
+    ["[]"] = "Previous class end",
+}
+
+local objects = {
     ["aa"] = "a parameter",
     ["ia"] = "inner parameter",
     ["ab"] = "a block",
@@ -13,5 +24,6 @@ local keys = {
     ["ak"] = "a comment",
 }
 
-wk.register(keys, { mode = "o" })
+wk.register(motions, { mode = "n" })
+wk.register(objects, { mode = "o" })
 EOF
