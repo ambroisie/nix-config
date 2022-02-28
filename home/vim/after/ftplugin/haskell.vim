@@ -4,8 +4,13 @@ call ftplugined#check_undo_ft()
 " Set-up LSP, linters, formatters
 lua << EOF
 local null_ls = require("null-ls")
+local utils = require("ambroisie.utils")
+
 null_ls.register({
-    null_ls.builtins.formatting.brittany,
+    null_ls.builtins.formatting.brittany.with({
+        -- Only used if available
+        condition = utils.is_executable_condition("brittany"),
+    }),
 })
 EOF
 
