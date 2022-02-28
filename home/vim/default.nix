@@ -13,6 +13,7 @@ let
       "after"
       "autoload"
       "ftdetect"
+      "lua"
       "plugin"
     ];
 in
