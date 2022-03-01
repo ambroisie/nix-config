@@ -8,4 +8,11 @@ if utils.is_executable("pyright") then
         on_attach = utils.on_attach,
     })
 end
+
+-- Rust
+if utils.is_executable("rust-analyzer") then
+    lsp.rust_analyzer.setup({
+        on_attach = utils.on_attach,
+    })
+end
 EOF
