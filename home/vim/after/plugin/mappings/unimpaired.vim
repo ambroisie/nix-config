@@ -30,6 +30,8 @@ local keys = {
         u = "URL encode",
         x = "XML encode",
         y = "C string encode",
+        -- Custom
+        d = { vim.diagnostic.goto_prev, "Previous diagnostic" }
     },
     ["]"] = {
         name = "Next",
@@ -58,6 +60,8 @@ local keys = {
         u = "URL decode",
         x = "XML decode",
         y = "C string decode",
+        -- Custom
+        d = { vim.diagnostic.goto_next, "Next diagnostic" }
     },
 
     -- Option mappings
