@@ -36,6 +36,7 @@ lualine.setup({
         },
         lualine_c = {
             { list_spell_languages },
+            { "lsp_progress" },
         },
         lualine_x = {
             { list_lsp_clients },

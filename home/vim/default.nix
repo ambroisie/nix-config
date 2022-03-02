@@ -33,6 +33,7 @@ in
       # Theming
       vim-gruvbox8 # Nice dark theme
       lualine-nvim # A lua-based status line
+      lualine-lsp-progress # Show progress for LSP servers
 
       # tpope essentials
       vim-commentary # Easy comments
