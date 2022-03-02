@@ -14,6 +14,20 @@ M.is_executable_condition = function(cmd)
     return function() return M.is_executable(cmd) end
 end
 
+-- list all active LSP clients for current buffer
+-- @param bufnr int? buffer number
+-- @return table all active LSP client names
+M.list_lsp_clients = function(bufnr)
+    local clients = vim.lsp.buf_get_clients(bufnr)
+    local names = {}
+
+    for _, client in ipairs(clients) do
+        table.insert(names, client.name)
+    end
+
+    return names
+end
+
 -- shared LSP configuration callback
 -- @param client native client configuration
 -- @param bufnr int? buffer number of the attched client
