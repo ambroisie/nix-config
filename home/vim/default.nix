@@ -31,8 +31,8 @@ in
 
     plugins = with pkgs.vimPlugins; [
       # Theming
-      lightline-vim # Fancy status bar
       vim-gruvbox8 # Nice dark theme
+      lualine-nvim # A lua-based status line
 
       # tpope essentials
       vim-commentary # Easy comments
@@ -64,7 +64,6 @@ in
       git-messenger-vim # A simple blame window
 
       # LSP and linting
-      lightline-lsp
       lsp_lines-nvim # Show diagnostics *over* regions
       null-ls-nvim # LSP integration for linters and formatters
       (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars)) # Better highlighting
