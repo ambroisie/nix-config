@@ -9,8 +9,10 @@ null_ls.setup({
 -- C, C++
 null_ls.register({
     null_ls.builtins.formatting.clang_format.with({
-        -- Only used if available
-        condition = utils.is_executable_condition("clang-format"),
+        -- Only used if available, but prefer clangd formatting if available
+        condition = function()
+            return utils.is_executable("clang-format") and not utils.is_executable("clangd")
+        end,
     }),
 })
 
