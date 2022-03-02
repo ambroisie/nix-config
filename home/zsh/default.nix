@@ -8,6 +8,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      zsh-completions
+    ];
+
     programs.zsh = {
       enable = true;
       dotDir = ".config/zsh"; # Don't clutter $HOME
