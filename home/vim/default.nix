@@ -72,6 +72,7 @@ in
       plenary-nvim # 'null-ls' dependency
 
       # UX improvements
+      gitsigns-nvim # Fast git UI integration
       which-key-nvim # Show available mappings
     ];
 
