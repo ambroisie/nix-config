@@ -9,10 +9,8 @@ local keys = {
     },
     ["<leader>g"] = {
         name = "Git",
-        d = { "<cmd>Gdiffsplit<CR>", "Current buffer diff" },
         l = { "<cmd>:sp<CR><C-w>T:Gllog --follow -- %:p<CR>", "Current buffer log" },
         m = { "<Plug>(git-messenger)", "Current line blame" },
-        s = { "<cmd>Gstatus<CR>", "Status" },
     },
 }
 
