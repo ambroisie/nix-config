@@ -77,6 +77,14 @@ M.on_attach = function(client, bufnr)
         M.dump(vim.lsp.buf.list_workspace_folders())
     end
 
+    local function show_line_diagnostics()
+        vim.diagnostic.open_float(nil, { scope="line" })
+    end
+
+    local function show_buffer_diagnostics()
+        vim.diagnostic.open_float(nil, { scope="buffer" })
+    end
+
     local keys = {
         K = { vim.lsp.buf.hover, "Show symbol information" },
         ["gd"] = { vim.lsp.buf.definition, "Go to definition" },
@@ -87,6 +95,8 @@ M.on_attach = function(client, bufnr)
         ["<leader>c"] = {
             name = "Code",
             a = { vim.lsp.buf.code_action, "Code actions" },
+            d = { show_line_diagnostics, "Show line diagnostics" },
+            D = { show_buffer_diagnostics, "Show buffer diagnostics" },
             r = { vim.lsp.buf.rename, "Rename symbol" },
             s = { vim.lsp.buf.signature_help, "Show signature" },
             t = { vim.lsp.buf.type_definition, "Go to type definition" },
