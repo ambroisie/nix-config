@@ -9,6 +9,13 @@ if utils.is_executable("clangd") then
     })
 end
 
+-- Nix
+if utils.is_executable("rnix-lsp") then
+    lsp.rnix.setup({
+        on_attach = utils.on_attach,
+    })
+end
+
 -- Python
 if utils.is_executable("pyright") then
     lsp.pyright.setup({
