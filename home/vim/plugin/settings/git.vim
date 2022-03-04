@@ -50,8 +50,8 @@ gitsigns.setup({
         }
 
         wk.register(keys, { buffer = bufnr })
-        wk.register(objects, { mode = "o" })
-        wk.register(visual, { mode = "x" })
+        wk.register(objects, { buffer = bufnr, mode = "o" })
+        wk.register(visual, { buffer = bufnr, mode = "x" })
     end,
 })
 EOF
