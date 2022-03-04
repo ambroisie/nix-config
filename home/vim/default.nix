@@ -80,6 +80,9 @@ in
 
     # Linters, formatters, etc...
     extraPackages = with pkgs; [
+      # C/C++
+      clang-tools
+
       # Nix
       nixpkgs-fmt
 
