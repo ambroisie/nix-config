@@ -74,6 +74,7 @@ in
       nvim-cmp # Completion engine
       cmp-buffer # Words from open buffers
       cmp-path # Path name suggestions
+      cmp-nvim-lsp # LSP suggestions
       cmp-nvim-lua # NeoVim lua API
 
       # UX improvements
