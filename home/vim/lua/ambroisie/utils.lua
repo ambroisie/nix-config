@@ -73,6 +73,10 @@ M.on_attach = function(client, bufnr)
     -- Mappings
     local wk = require("which-key")
 
+    local function list_workspace_folders()
+        M.dump(vim.lsp.buf.list_workspace_folders())
+    end
+
     local keys = {
         K = { vim.lsp.buf.hover, "Show symbol information" },
         ["gd"] = { vim.lsp.buf.definition, "Go to definition" },
@@ -86,6 +90,12 @@ M.on_attach = function(client, bufnr)
             r = { vim.lsp.buf.rename, "Rename symbol" },
             s = { vim.lsp.buf.signature_help, "Show signature" },
             t = { vim.lsp.buf.type_definition, "Go to type definition" },
+            w = {
+                name = "Workspace",
+                a = { vim.lsp.buf.add_workspace_folder, "Add folder to workspace" },
+                l = { list_workspace_folders, "List folders in workspace" },
+                r = { vim.lsp.buf.remove_workspace_folder, "Remove folder from workspace" },
+            },
         },
     }
 
