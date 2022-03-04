@@ -70,6 +70,12 @@ in
       nvim-treesitter-textobjects # More textobjects
       plenary-nvim # 'null-ls' dependency
 
+      # Completion
+      nvim-cmp # Completion engine
+      cmp-buffer # Words from open buffers
+      cmp-path # Path name suggestions
+      cmp-nvim-lua # NeoVim lua API
+
       # UX improvements
       gitsigns-nvim # Fast git UI integration
       which-key-nvim # Show available mappings
