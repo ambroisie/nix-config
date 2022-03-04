@@ -47,6 +47,15 @@ gitsigns.setup({
 
         local visual = {
             ["ih"] = { gitsigns.select_hunk, "Git hunk" },
+
+            -- Only the actual command can make use of the visual selection...
+            ["<leader>g"] = {
+                name = "Git",
+                p = { ":Gitsigns preview_hunk<CR>", "Preview selection" },
+                r = { ":Gitsigns reset_hunk<CR>", "Restore selection" },
+                s = { ":Gitsigns stage_hunk<CR>", "Stage selection" },
+                u = { ":Gitsigns undo_stage_hunk<CR>", "Undo stage selection" },
+            },
         }
 
         wk.register(keys, { buffer = bufnr })
