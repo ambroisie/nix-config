@@ -77,6 +77,16 @@ in
     ];
 
     extraConfig = builtins.readFile ./init.vim;
+
+    # Linters, formatters, etc...
+    extraPackages = with pkgs; [
+      # Nix
+      nixpkgs-fmt
+
+      # Shell
+      shellcheck
+      shfmt
+    ];
   };
 
   config.xdg.configFile = lib.mkIf cfg.enable configFiles;
