@@ -60,6 +60,12 @@ null_ls.register({
 
 -- Shell (non-POSIX)
 null_ls.register({
+    null_ls.builtins.code_actions.shellcheck.with({
+        -- Restrict to bash and zsh
+        filetypes = { "bash", "zsh" },
+        -- Only used if available
+        condition = utils.is_executable_condition("shellcheck"),
+    }),
     null_ls.builtins.diagnostics.shellcheck.with({
         -- Show error code in message
         diagnostics_format = "[#{c}] #{m}",
@@ -83,6 +89,12 @@ null_ls.register({
 
 -- Shell (POSIX)
 null_ls.register({
+    null_ls.builtins.code_actions.shellcheck.with({
+    -- Restrict to POSIX sh
+        filetypes = { "sh" },
+        -- Only used if available
+        condition = utils.is_executable_condition("shellcheck"),
+    }),
     null_ls.builtins.diagnostics.shellcheck.with({
         -- Show error code in message
         diagnostics_format = "[#{c}] #{m}",
