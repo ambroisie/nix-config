@@ -63,6 +63,27 @@ M.on_attach = function(client, bufnr)
             augroup END
         ]])
     end
+
+    -- Mappings
+    local wk = require("which-key")
+
+    local keys = {
+        K = { vim.lsp.buf.hover, "Show symbol information" },
+        ["gd"] = { vim.lsp.buf.definition, "Go to definition" },
+        ["gD"] = { vim.lsp.buf.declaration, "Go to declaration" },
+        ["gi"] = { vim.lsp.buf.implementation, "Go to implementation" },
+        ["gr"] = { vim.lsp.buf.references, "List all references" },
+
+        ["<leader>c"] = {
+            name = "Code",
+            a = { vim.lsp.buf.code_action, "Code actions" },
+            r = { vim.lsp.buf.rename, "Rename symbol" },
+            s = { vim.lsp.buf.signature_help, "Show signature" },
+            t = { vim.lsp.buf.type_definition, "Go to type definition" },
+        },
+    }
+
+    wk.register(keys, { buffer = bufnr })
 end
 
 return M
