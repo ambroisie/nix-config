@@ -56,7 +56,6 @@ in
       vim-toml
 
       # General enhancements
-      fastfold # Better folding
       vim-qf # Better quick-fix list
 
       # Other wrappers
