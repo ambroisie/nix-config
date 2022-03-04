@@ -1,5 +1,11 @@
 local M = {}
 
+-- pretty print lua object
+-- @param obj any object to pretty print
+M.dump = function(obj)
+    print(vim.inspect(obj))
+end
+
 --- checks if a given command is executable
 ---@param cmd string? command to check
 ---@return boolean executable
