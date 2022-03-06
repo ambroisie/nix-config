@@ -5,6 +5,9 @@ lua << EOF
 local cmp = require("cmp")
 
 cmp.setup({
+    view = {
+        entries = "native",
+    },
     sources = {
         { name = "buffer" },
         { name = "nvim_lsp" },
