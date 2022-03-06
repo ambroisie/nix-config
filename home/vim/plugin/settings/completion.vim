@@ -12,7 +12,7 @@ cmp.setup({
         { name = "path", priority_weight = 110 },
         { name = "nvim_lsp", priority_weight = 100 },
         { name = "nvim_lua", priority_weight = 90 },
-        { name = "buffer", priority_weight = 50 },
+        { name = "buffer", max_item_count = 5, priority_weight = 50 },
     },
     sorting = {
         comparators = {
