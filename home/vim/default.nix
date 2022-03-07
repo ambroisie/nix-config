@@ -71,9 +71,9 @@ in
       # Completion
       nvim-cmp # Completion engine
       cmp-buffer # Words from open buffers
-      cmp-path # Path name suggestions
       cmp-nvim-lsp # LSP suggestions
       cmp-nvim-lua # NeoVim lua API
+      cmp-path # Path name suggestions
       cmp-under-comparator # Sort items that start with '_' lower
       luasnip # Snippet manager compatible with LSP
 
