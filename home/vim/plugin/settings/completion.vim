@@ -65,6 +65,7 @@ cmp.setup({
         { name = "buffer", max_item_count = 5, priority_weight = 50 },
     },
     sorting = {
+        priority_weight = 100,
         comparators = {
             cmp.config.compare.offset,
             cmp.config.compare.exact,
