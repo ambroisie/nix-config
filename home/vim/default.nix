@@ -76,6 +76,7 @@ in
       cmp-nvim-lua # NeoVim lua API
 
       # UX improvements
+      dressing-nvim # Integrate native UI hooks with Telescope etc...
       gitsigns-nvim # Fast git UI integration
       which-key-nvim # Show available mappings
       telescope-fzf-native-nvim # Use 'fzf' fuzzy matching algorithm
