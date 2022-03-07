@@ -9,6 +9,9 @@ ts_config.setup({
     indent = {
         enable = true,
     },
+    context_commentstring = {
+        enable = true,
+    },
     textobjects = {
         select = {
             enable = true,
