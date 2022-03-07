@@ -20,6 +20,7 @@ in
   config.home.packages = with pkgs; lib.mkIf cfg.enable ([
     file
     mosh
+    ripgrep
     rr
     termite.terminfo
   ] ++ cfg.additionalPackages);
