@@ -75,6 +75,7 @@ in
       cmp-nvim-lsp # LSP suggestions
       cmp-nvim-lua # NeoVim lua API
       cmp-under-comparator # Sort items that start with '_' lower
+      luasnip # Snippet manager compatible with LSP
 
       # UX improvements
       dressing-nvim # Integrate native UI hooks with Telescope etc...
