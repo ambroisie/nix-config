@@ -5,6 +5,54 @@ lua << EOF
 local cmp = require("cmp")
 
 cmp.setup({
+    mapping = {
+        ["<Down>"] = cmp.mapping({
+            i = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+            c = function(fallback)
+                cmp.close()
+                vim.schedule(cmp.suspend())
+                fallback()
+            end,
+        }),
+        ["<Up>"] = cmp.mapping({
+            i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+            c = function(fallback)
+                cmp.close()
+                vim.schedule(cmp.suspend())
+                fallback()
+            end,
+        }),
+        ["<Tab>"] = cmp.mapping({
+            c = function(fallback)
+                if #cmp.core:get_sources() > 0 and not require("cmp.config").is_native_menu() then
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    else
+                        cmp.complete()
+                    end
+                else
+                    fallback()
+                end
+            end,
+        }),
+        ["<S-Tab>"] = cmp.mapping({
+            c = function(fallback)
+                if #cmp.core:get_sources() > 0 and not require("cmp.config").is_native_menu() then
+                    if cmp.visible() then
+                        cmp.select_prev_item()
+                    else
+                        cmp.complete()
+                    end
+                else
+                    fallback()
+                end
+            end,
+        }),
+        ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }), { "i", "c" }),
+        ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }), { "i", "c" }),
+        ["<C-y>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false }),
+        ["<C-e>"] = cmp.mapping.abort(),
+    },
     view = {
         entries = "native",
     },
