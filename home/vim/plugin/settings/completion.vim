@@ -13,22 +13,6 @@ cmp.setup({
         end,
     },
     mapping = {
-        ["<Down>"] = cmp.mapping({
-            i = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-            c = function(fallback)
-                cmp.close()
-                vim.schedule(cmp.suspend())
-                fallback()
-            end,
-        }),
-        ["<Up>"] = cmp.mapping({
-            i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-            c = function(fallback)
-                cmp.close()
-                vim.schedule(cmp.suspend())
-                fallback()
-            end,
-        }),
         ["<Tab>"] = function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
