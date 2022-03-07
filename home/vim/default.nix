@@ -78,6 +78,7 @@ in
       # UX improvements
       gitsigns-nvim # Fast git UI integration
       which-key-nvim # Show available mappings
+      telescope-fzf-native-nvim # Use 'fzf' fuzzy matching algorithm
       telescope-nvim # Fuzzy finder interface
     ];
 
