@@ -57,7 +57,6 @@ lualine.setup({
     },
     extensions = {
         "fugitive",
-        "fzf",
         "quickfix",
     },
 })
