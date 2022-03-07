@@ -76,6 +76,7 @@ in
       cmp-nvim-lua # NeoVim lua API
       cmp-path # Path name suggestions
       cmp-under-comparator # Sort items that start with '_' lower
+      friendly-snippets # LSP snippets collection
       luasnip # Snippet manager compatible with LSP
 
       # UX improvements
