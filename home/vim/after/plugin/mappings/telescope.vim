@@ -8,6 +8,8 @@ local keys = {
         b = { telescope_builtin.buffers, "Open buffers" },
         f = { telescope_builtin.git_files, "Git tracked files" },
         F = { telescope_builtin.find_files, "Files" },
+        g = { telescope_builtin.live_grep, "Grep string" },
+        G = { telescope_builtin.grep_string, "Grep string under cursor" },
     },
 }
 
