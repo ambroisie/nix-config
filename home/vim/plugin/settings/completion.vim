@@ -3,6 +3,7 @@ set completeopt=menu,menuone,noselect
 
 lua << EOF
 local cmp = require("cmp")
+local cmp_under_comparator = require("cmp-under-comparator")
 
 cmp.setup({
     mapping = {
@@ -67,6 +68,7 @@ cmp.setup({
             cmp.config.compare.offset,
             cmp.config.compare.exact,
             cmp.config.compare.score,
+            cmp_under_comparator.under,
             cmp.config.compare.kind,
             cmp.config.compare.sort_text,
             cmp.config.compare.length,

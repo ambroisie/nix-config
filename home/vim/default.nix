@@ -74,6 +74,7 @@ in
       cmp-path # Path name suggestions
       cmp-nvim-lsp # LSP suggestions
       cmp-nvim-lua # NeoVim lua API
+      cmp-under-comparator # Sort items that start with '_' lower
 
       # UX improvements
       dressing-nvim # Integrate native UI hooks with Telescope etc...
