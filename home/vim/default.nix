@@ -59,8 +59,6 @@ in
       vim-qf # Better quick-fix list
 
       # Other wrappers
-      fzfWrapper # The vim plugin inside the 'fzf' package
-      fzf-vim # Fuzzy commands
       git-messenger-vim # A simple blame window
 
       # LSP and linting
@@ -68,7 +66,7 @@ in
       null-ls-nvim # LSP integration for linters and formatters
       (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars)) # Better highlighting
       nvim-treesitter-textobjects # More textobjects
-      plenary-nvim # 'null-ls' dependency
+      plenary-nvim # 'null-ls', 'telescope' dependency
 
       # Completion
       nvim-cmp # Completion engine
@@ -80,6 +78,7 @@ in
       # UX improvements
       gitsigns-nvim # Fast git UI integration
       which-key-nvim # Show available mappings
+      telescope-nvim # Fuzzy finder interface
     ];
 
     extraConfig = builtins.readFile ./init.vim;
