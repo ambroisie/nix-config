@@ -1,9 +1,10 @@
 lua << EOF
 local null_ls = require("null-ls")
+local lsp = require("ambroisie.lsp")
 local utils = require("ambroisie.utils")
 
 null_ls.setup({
-    on_attach = utils.on_attach,
+    on_attach = lsp.on_attach,
 })
 
 -- C, C++
