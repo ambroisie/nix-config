@@ -68,6 +68,11 @@ in
             }
             {
               block = "sound";
+              device_kind = "source"; # Microphone status
+              format = ""; # Only show icon
+            }
+            {
+              block = "sound";
               show_volume_when_muted = true;
             }
             {
