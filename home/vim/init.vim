@@ -82,6 +82,8 @@ set background=dark
 let g:gruvbox_plugin_hi_groups=1
 " Include filetype integration
 let g:gruvbox_filetype_hi_groups=1
+" 24 bit colors
+set termguicolors
 " Use my preferred colorscheme
 colorscheme gruvbox8
 " }}}
