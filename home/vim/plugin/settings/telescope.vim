@@ -2,6 +2,14 @@ lua << EOF
 local telescope = require("telescope")
 
 telescope.setup({
+    defaults = {
+        mappings = {
+            i = {
+                -- I want the normal readline mappings rather than scrolling
+                ["<C-u>"] = false,
+            }
+        }
+    },
     extensions = {
         fzf = {
             fuzzy = true,
