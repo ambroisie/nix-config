@@ -5,6 +5,7 @@ telescope.setup({
     defaults = {
         mappings = {
             i = {
+                ["<C-h>"] = "which_key",
                 -- I want the normal readline mappings rather than scrolling
                 ["<C-u>"] = false,
             }
