@@ -38,8 +38,14 @@ null_ls.register({
 -- Python
 null_ls.register({
     null_ls.builtins.diagnostics.flake8.with({
+        -- Only used if available, but prefer pflake8 if available
+        condition = function()
+            return utils.is_executable("flake8") and not utils.is_executable("pflake8")
+        end,
+    }),
+    null_ls.builtins.diagnostics.pyproject_flake8.with({
         -- Only used if available
-        condition = utils.is_executable_condition("flake8"),
+        condition = utils.is_executable_condition("pflake8"),
     }),
     null_ls.builtins.diagnostics.mypy.with({
         -- Only used if available
