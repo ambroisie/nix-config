@@ -120,6 +120,10 @@ in
         defaultBranch = "main";
       };
 
+      merge = {
+        conflictStyle = "zdiff3";
+      };
+
       pull = {
         # Avoid useless merge commits
         rebase = true;
