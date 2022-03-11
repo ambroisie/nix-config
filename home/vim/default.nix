@@ -88,6 +88,7 @@ in
       # UX improvements
       dressing-nvim # Integrate native UI hooks with Telescope etc...
       gitsigns-nvim # Fast git UI integration
+      nvim-notify # Better notification API
       nvim-surround # Deal with pairs, now in Lua
       telescope-fzf-native-nvim # Use 'fzf' fuzzy matching algorithm
       telescope-lsp-handlers-nvim # Use 'telescope' for various LSP actions
