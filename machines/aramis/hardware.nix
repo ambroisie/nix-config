@@ -29,6 +29,8 @@
       enable = true;
 
       emulateWheel = true; # Holding middle buttons allows scrolling
+
+      device = "TPPS/2 Elan TrackPoint"; # Use the correct device name
     };
   };
 }
