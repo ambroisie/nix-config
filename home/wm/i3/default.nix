@@ -370,6 +370,20 @@ in
           # FIXME
           # { commdand; always; notification; }
         ];
+
+        window = {
+          commands = [
+            # Make htop window bigger
+            {
+              criteria = { title = "^htop$"; };
+              command = "resize set 80 ppt 80 ppt";
+            }
+            {
+              criteria = { title = "^htop$"; };
+              command = "move position center";
+            }
+          ];
+        };
       };
     };
   };
