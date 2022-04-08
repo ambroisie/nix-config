@@ -18,6 +18,11 @@ in
   "drone/secret.age".publicKeys = all;
   "drone/ssh/private-key.age".publicKeys = all;
 
+  "gitea/mail-password.age" = {
+    owner = "git";
+    publicKeys = all;
+  };
+
   "lohr/secret.age".publicKeys = all;
   "lohr/ssh-key.age".publicKeys = all;
 
