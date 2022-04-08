@@ -1,5 +1,5 @@
 # Deployed services
-{ config, ... }:
+{ config, lib, ... }:
 let
   secrets = config.age.secrets;
 in
@@ -39,7 +39,15 @@ in
       enable = true;
     };
     # Gitea forge
-    gitea.enable = true;
+    gitea = {
+      enable = true;
+      mail = {
+        enable = true;
+        host = "smtp.migadu.com:465";
+        user = lib.my.mkMailAddress "gitea" "belanyi.fr";
+        passwordFile = secrets."gitea/mail-password".path;
+      };
+    };
     # Meta-indexers
     indexers = {
       prowlarr.enable = true;
