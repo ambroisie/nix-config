@@ -35,12 +35,8 @@ in
         }
         {
           name = "agkozak-zsh-prompt";
-          src = fetchFromGitHub {
-            owner = "agkozak";
-            repo = "agkozak-zsh-prompt";
-            rev = "v3.9.0";
-            sha256 = "sha256-VTRL+8ph2eI7iPht15epkLggAgtLGxB3DORFTW5GrhE=";
-          };
+          file = "share/zsh/site-functions/agkozak-zsh-prompt.plugin.zsh";
+          src = pkgs.agkozak-zsh-prompt;
         }
       ];
 
