@@ -65,7 +65,16 @@
     , pre-commit-hooks
     }:
     let
-      inherit (futils.lib) eachDefaultSystem;
+      inherit (futils.lib) eachSystem system;
+
+      mySystems = [
+        system.aarch64-darwin
+        system.aarch64-linux
+        system.x86_64-darwin
+        system.x86_64-linux
+      ];
+
+      eachMySystem = eachSystem mySystems;
 
       lib = nixpkgs.lib.extend (self: super: {
         my = import ./lib { inherit inputs; pkgs = nixpkgs; lib = self; };
@@ -100,7 +109,7 @@
         };
       };
     in
-    eachDefaultSystem
+    eachMySystem
       (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
