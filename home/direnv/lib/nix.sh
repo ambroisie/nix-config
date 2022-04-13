@@ -7,7 +7,8 @@ use_pkgs() {
         return 1
     fi
 
-    local DEFAULT_FLAKE="pkgs"
+    # Use user-provided default value, or fallback to nixpkgs
+    local DEFAULT_FLAKE="${DIRENV_DEFAULT_FLAKE:-nixpkgs}"
 
     # Allow changing the default flake through a command line switch
     if [ "$1" = "-f" ] || [ "$1" = "--flake" ]; then
