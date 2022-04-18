@@ -137,15 +137,17 @@
 
         defaultApp = apps.diff-flake;
 
-        devShell = pkgs.mkShell {
-          name = "NixOS-config";
+        devShells = {
+          default = pkgs.mkShell {
+            name = "NixOS-config";
 
-          nativeBuildInputs = with pkgs; [
-            gitAndTools.pre-commit
-            nixpkgs-fmt
-          ];
+            nativeBuildInputs = with pkgs; [
+              gitAndTools.pre-commit
+              nixpkgs-fmt
+            ];
 
-          inherit (self.checks.${system}.pre-commit) shellHook;
+            inherit (self.checks.${system}.pre-commit) shellHook;
+          };
         };
 
         packages =
@@ -157,8 +159,6 @@
           in
           finalPackages;
       }) // {
-      overlay = self.overlays.pkgs;
-
       overlays = import ./overlays // {
         lib = final: prev: { inherit lib; };
         pkgs = final: prev: {
