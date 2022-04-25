@@ -25,6 +25,21 @@ in
         package = pkgs.pulseaudioFull;
       };
 
+      # FIXME: waiting for NixOS module configuration
+      environment.etc = {
+        "wireplumber/bluetooth.lua.d/50-bluez-config.lua".text = ''
+          bluez_monitor.properties = {
+            ["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
+            -- mSBC provides better audio + microphone
+            ["bluez5.enable-msbc"] = true,
+            -- SBC XQ provides better audio
+            ["bluez5.enable-sbc-xq"] = true,
+            -- Hardware volume control
+            ["bluez5.enable-hw-volume"] = true,
+          }
+        '';
+      };
+
       services.pipewire = {
         media-session.config.bluez-monitor.rules = [
           {
