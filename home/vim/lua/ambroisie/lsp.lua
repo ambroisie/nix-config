@@ -54,6 +54,7 @@ M.on_attach = function(client, bufnr)
 
     local keys = {
         K = { vim.lsp.buf.hover, "Show symbol information" },
+        ["<C-k>"] = { vim.lsp.buf.signature_help, "Show signature information" },
         ["gd"] = { vim.lsp.buf.definition, "Go to definition" },
         ["gD"] = { vim.lsp.buf.declaration, "Go to declaration" },
         ["gi"] = { vim.lsp.buf.implementation, "Go to implementation" },
