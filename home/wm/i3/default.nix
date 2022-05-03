@@ -376,11 +376,7 @@ in
             # Make htop window bigger
             {
               criteria = { title = "^htop$"; };
-              command = "resize set 80 ppt 80 ppt";
-            }
-            {
-              criteria = { title = "^htop$"; };
-              command = "move position center";
+              command = "resize set 80 ppt 80 ppt, move position center";
             }
           ];
         };
