@@ -22,7 +22,6 @@ in
     file
     mosh
     ripgrep
-    rr
     termite.terminfo
   ] ++ cfg.additionalPackages);
 }
