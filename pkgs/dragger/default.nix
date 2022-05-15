@@ -23,7 +23,7 @@ qt5.mkDerivation rec {
     description = "A CLI drag-and-drop tool";
     homepage = "https://gitea.belanyi.fr/ambroisie/dragger";
     license = licenses.mit;
-    maintainers = [ ambroisie ];
+    maintainers = with maintainers; [ ambroisie ];
     platforms = platforms.linux;
   };
 }
