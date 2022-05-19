@@ -57,5 +57,8 @@ cmp.setup({
             cmp.config.compare.order,
         },
     },
+    experimental = {
+        ghost_text = true,
+    },
 })
 EOF
