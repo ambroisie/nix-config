@@ -1,3 +1,3 @@
 {
-  sabnzbd-fix-missing-packages = import ./sabnzbd-fix-missing-dependencies;
+  # NOTE: no overlays at the moment
 }
