@@ -21,8 +21,8 @@
     ./paperless
     ./pirate
     ./podgrab
-    ./postgresql-backup
     ./postgresql
+    ./postgresql-backup
     ./quassel
     ./rss-bridge
     ./sabnzbd
@@ -30,5 +30,6 @@
     ./tlp
     ./transmission
     ./wireguard
+    ./woodpecker
   ];
 }

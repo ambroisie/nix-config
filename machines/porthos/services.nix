@@ -135,6 +135,13 @@ in
       enable = true;
       credentialsFile = secrets."transmission/credentials".path;
     };
+    # Open-Source CI 
+    woodpecker = {
+      enable = true;
+      runners = [ "docker" "local" ];
+      secretFile = secrets."woodpecker/gitea".path;
+      sharedSecretFile = secrets."woodpecker/secret".path;
+    };
     # Simple, in-kernel VPN
     wireguard = {
       enable = true;
