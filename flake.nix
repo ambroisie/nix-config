@@ -25,6 +25,7 @@
       ref = "master";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        utils.follows = "futils";
       };
     };
 
