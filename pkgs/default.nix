@@ -39,4 +39,12 @@ pkgs.lib.makeScope pkgs.newScope (pkgs: {
   vimix-cursors = pkgs.callPackage ./vimix-cursors { };
 
   volantes-cursors = pkgs.callPackage ./volantes-cursors { };
+
+  woodpecker-agent = pkgs.callPackage ./woodpecker/agent.nix { };
+
+  woodpecker-cli = pkgs.callPackage ./woodpecker/cli.nix { };
+
+  woodpecker-server = pkgs.callPackage ./woodpecker/server.nix {
+    woodpecker-frontend = pkgs.callPackage ./woodpecker/frontend.nix { };
+  };
 })
