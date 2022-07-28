@@ -2,6 +2,7 @@
 { config, lib, ... }:
 let
   cfg = config.my.services.grocy;
+  grocyDomain = "grocy.${config.networking.domain}";
 in
 {
   options.my.services.grocy = with lib; {
@@ -13,10 +14,11 @@ in
       enable = true;
 
       # The service sets up the reverse proxy automatically
-      hostName = "grocy.${config.networking.domain}";
+      hostName = grocyDomain;
 
+      # Configure SSL by hand
       nginx = {
-        enableSSL = true;
+        enableSSL = false;
       };
 
       settings = {
@@ -28,6 +30,11 @@ in
           showWeekNumber = true;
         };
       };
+    };
+
+    services.nginx.virtualHosts."${grocyDomain}" = {
+      forceSSL = true;
+      useACMEHost = config.networking.domain;
     };
   };
 }
