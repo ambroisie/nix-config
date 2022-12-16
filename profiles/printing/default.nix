@@ -6,6 +6,23 @@ in
   options.my.profiles.printing = with lib; {
     enable = mkEnableOption "printing profile";
 
+    papersize = mkOption {
+      type = with types; either str (enum [
+        "a3"
+        "a4"
+        "a5"
+        "b5"
+        "letter"
+        "legal"
+        "executive"
+        "note"
+        "11x17"
+      ]);
+      default = "a4";
+      example = "paper";
+      description = "preferred paper size";
+    };
+
     usb = {
       enable = my.mkDisableOption "USB printers";
     };
@@ -30,6 +47,11 @@ in
         mfcl3770cdwcupswrapper
       ];
     };
+
+    # Setup paper size
+    systemd.services.cups.serviceConfig.Environment = [
+      "PAPERSIZE=${cfg.papersize}"
+    ];
 
     # Allow using USB printers
     services.ipp-usb = lib.mkIf cfg.usb.enable {
