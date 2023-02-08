@@ -166,6 +166,15 @@ in
           };
         };
       }
+      {
+        condition = "gitdir:~/git/work/";
+        contents = {
+          user = {
+            name = "Bruno BELANYI";
+            email = mkMailAddress "ambroisie" "google.com";
+          };
+        };
+      }
     ];
 
     ignores =
