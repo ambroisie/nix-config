@@ -57,6 +57,11 @@ in
         source ${./completion-styles.zsh}
         source ${./extra-mappings.zsh}
         source ${./options.zsh}
+
+        # Source local configuration
+        if [ -f "$ZDOTDIR/zshrc.local" ]; then
+          source "$ZDOTDIR/zshrc.local"
+        fi
       '';
 
       localVariables = {
