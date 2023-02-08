@@ -53,11 +53,11 @@ in
         ''
       ;
 
-      initExtra = lib.concatMapStrings builtins.readFile [
-        ./completion-styles.zsh
-        ./extra-mappings.zsh
-        ./options.zsh
-      ];
+      initExtra = ''
+        source ${./completion-styles.zsh}
+        source ${./extra-mappings.zsh}
+        source ${./options.zsh}
+      '';
 
       localVariables = {
         # I like having the full path
