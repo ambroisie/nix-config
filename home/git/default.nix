@@ -120,6 +120,11 @@ in
         defaultBranch = "main";
       };
 
+      # Local configuration, not-versioned
+      include = {
+        path = "config.local";
+      };
+
       merge = {
         conflictStyle = "zdiff3";
       };
