@@ -35,11 +35,11 @@ in
     })
 
     (lib.mkIf cfg.addToNixPath {
-      nix.nixPath = options.nix.nixPath.default ++ [
+      nix.nixPath = [
         "self=${inputs.self}"
         "pkgs=${inputs.nixpkgs}"
         "nur=${inputs.nur}"
-      ];
+      ++ options.nix.nixPath.default;
     })
   ]);
 }
