@@ -10,6 +10,8 @@ in
     addToRegistry = my.mkDisableOption "add inputs and self to registry";
 
     addToNixPath = my.mkDisableOption "add inputs and self to nix path";
+
+    overrideNixpkgs = my.mkDisableOption "point nixpkgs to pinned system version";
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
@@ -29,6 +31,8 @@ in
         self.flake = inputs.self;
         # Use pinned nixpkgs when using `nix run pkgs#<whatever>`
         pkgs.flake = inputs.nixpkgs;
+        # ... And with `nix run nixpkgs#<whatever>`
+        nixpkgs.flake = lib.mkIf cfg.overrideNixpkgs inputs.nixpkgs;
         # Add NUR to run some packages that are only present there
         nur.flake = inputs.nur;
       };
@@ -39,6 +43,8 @@ in
         "self=${inputs.self}"
         "pkgs=${inputs.nixpkgs}"
         "nur=${inputs.nur}"
+      ]
+      ++ lib.optional cfg.overrideNixpkgs "nixpkgs=${inputs.nixpkgs}"
       ++ options.nix.nixPath.default;
     })
   ]);
