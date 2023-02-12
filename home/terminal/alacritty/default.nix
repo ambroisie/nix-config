@@ -8,13 +8,8 @@ in
       enable = true;
 
       settings = {
-        env = {
-          # DPI scaling means the font is way too big otherwise
-          WINIT_X11_SCALE_FACTOR = "1.0";
-        };
-
         font = {
-          size = 9;
+          size = 5.5;
         };
 
         colors = {
