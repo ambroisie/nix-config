@@ -12,6 +12,26 @@
       };
     };
 
+    deploy-rs = {
+      type = "github";
+      owner = "serokell";
+      repo = "deploy-rs";
+      ref = "master";
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        nixpkgs.follows = "nixpkgs";
+        utils.follows = "futils";
+      };
+    };
+
+    flake-compat = {
+      type = "github";
+      owner = "edolstra";
+      repo = "flake-compat";
+      ref = "master";
+      flake = false;
+    };
+
     flake-parts = {
       type = "github";
       owner = "hercules-ci";
@@ -59,6 +79,7 @@
       repo = "pre-commit-hooks.nix";
       ref = "master";
       inputs = {
+        flake-compat.follows = "flake-compat";
         flake-utils.follows = "futils";
         nixpkgs.follows = "nixpkgs";
         nixpkgs-stable.follows = "nixpkgs";

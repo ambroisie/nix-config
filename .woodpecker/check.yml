@@ -1,11 +1,21 @@
 labels:
-  type: exec
+  backend: exec
 
 pipeline:
 - name: nix flake check
   image: bash
   commands:
   - nix flake check
+
+- name: deploy
+  image: bash
+  commands:
+  # We already ran the checks in the previous step
+  - deploy --skip-checks
+  when:
+    # FIXME: disable PR
+    branch:
+    - main
 
 - name: notifiy
   image: bash
