@@ -7,6 +7,7 @@
     ./blog
     ./calibre-web
     ./drone
+    ./fail2ban
     ./flood
     ./gitea
     ./grocy
