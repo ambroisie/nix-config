@@ -6,6 +6,11 @@ colorscheme dark
 
 " Make tridactyl open Vim in my prefered terminal
 set editorcmd @editorcmd@
+
+" Remove editor file after use
+alias editor_rm composite editor | jsb -p tri.native.run(`rm -f '${JS_ARG[0]}'`)
+bind --mode=insert <C-i> editor_rm
+bind --mode=input <C-i> editor_rm
 " }}}
 
 " Binds {{{
