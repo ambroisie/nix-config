@@ -7,6 +7,8 @@ in
   options.my.system.nix = with lib; {
     enable = my.mkDisableOption "nix configuration";
 
+    linkInputs = my.mkDisableOption "link inputs to `/etc/nix/inputs/`";
+
     addToRegistry = my.mkDisableOption "add inputs and self to registry";
 
     addToNixPath = my.mkDisableOption "add inputs and self to nix path";
@@ -36,6 +38,24 @@ in
         # Add NUR to run some packages that are only present there
         nur.flake = inputs.nur;
       };
+    })
+
+    (lib.mkIf cfg.linkInputs {
+      environment.etc =
+        let
+          makeLink = n: v: {
+            name = "nix/inputs/${n}";
+            value = { source = v.outPath; };
+          };
+          makeLinks = lib.mapAttrs' makeLink;
+        in
+        makeLinks {
+          inherit (inputs)
+            self
+            nixpkgs
+            nur
+            ;
+        };
     })
 
     (lib.mkIf cfg.addToNixPath {
