@@ -24,7 +24,7 @@ in
       pain-control
       # Better session management
       sessionist
-      (lib.optionalAttrs hasGUI {
+      {
         # X clipboard integration
         plugin = yank;
         extraConfig = ''
@@ -33,7 +33,7 @@ in
           # Stay in copy mode after yanking
           set -g @yank_action 'copy-pipe'
         '';
-      })
+      }
       {
         # Show when prefix has been pressed
         plugin = prefix-highlight;
