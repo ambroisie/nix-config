@@ -3,8 +3,8 @@ let
   cfg = config.my.home.zsh;
 in
 {
-  options.my.home.zsh = with lib.my; {
-    enable = mkDisableOption "zsh configuration";
+  options.my.home.zsh = with lib; {
+    enable = my.mkDisableOption "zsh configuration";
   };
 
   config = lib.mkIf cfg.enable {
