@@ -6,9 +6,7 @@ in
   options.my.home.zsh = with lib; {
     enable = my.mkDisableOption "zsh configuration";
 
-    launchTmux = mkEnableOption "auto launch tmux at shell start" // {
-      default = config.my.home.tmux.enable;
-    };
+    launchTmux = mkEnableOption "auto launch tmux at shell start";
   };
 
   config = lib.mkIf cfg.enable {
