@@ -5,6 +5,10 @@ in
 {
   options.my.home.zsh = with lib; {
     enable = my.mkDisableOption "zsh configuration";
+
+    launchTmux = mkEnableOption "auto launch tmux at shell start" // {
+      default = config.my.home.tmux.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -44,14 +48,16 @@ in
       defaultKeymap = "emacs";
 
       # Make those happen early to avoid doing double the work
-      initExtraFirst =
-        lib.optionalString config.my.home.tmux.enable ''
-          # Launch tmux unless already inside one
-          if [ -z "$TMUX" ]; then
-            exec tmux new-session
-          fi
-        ''
-      ;
+      initExtraFirst = ''
+        ${
+          lib.optionalString cfg.launchTmux ''
+            # Launch tmux unless already inside one
+            if [ -z "$TMUX" ]; then
+              exec tmux new-session
+            fi
+          ''
+        }
+      '';
 
       initExtra = ''
         source ${./completion-styles.zsh}
