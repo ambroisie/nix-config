@@ -18,6 +18,18 @@ in
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
     {
+      assertions = [
+        {
+          assertion = cfg.addToNixPath -> cfg.linkInputs;
+          message = ''
+            enabling `my.system.nix.addToNixPath` needs to have
+            `my.system.nix.linkInputs = true`
+          '';
+        }
+      ];
+    }
+
+    {
       nix = {
         package = pkgs.nix;
 
@@ -60,11 +72,11 @@ in
 
     (lib.mkIf cfg.addToNixPath {
       nix.nixPath = [
-        "self=${inputs.self}"
-        "pkgs=${inputs.nixpkgs}"
-        "nur=${inputs.nur}"
+        "self=/etc/nix/inputs/self"
+        "pkgs=/etc/nix/inputs/nixpkgs"
+        "nur=/etc/nix/inputs/nur"
       ]
-      ++ lib.optional cfg.overrideNixpkgs "nixpkgs=${inputs.nixpkgs}"
+      ++ lib.optional cfg.overrideNixpkgs "nixpkgs=/etc/nix/inputs/nixpkgs"
       ++ options.nix.nixPath.default;
     })
   ]);
