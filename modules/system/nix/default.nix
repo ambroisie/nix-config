@@ -73,11 +73,8 @@ in
 
     (lib.mkIf cfg.addToNixPath {
       nix.nixPath = [
-        "self=/etc/nix/inputs/self"
-        "pkgs=/etc/nix/inputs/pkgs"
-        "nur=/etc/nix/inputs/nur"
+        "/etc/nix/inputs"
       ]
-      ++ lib.optional cfg.overrideNixpkgs "nixpkgs=/etc/nix/inputs/nixpkgs"
       ++ options.nix.nixPath.default;
     })
   ]);
