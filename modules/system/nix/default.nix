@@ -60,20 +60,21 @@ in
             value = { source = v.outPath; };
           };
           makeLinks = lib.mapAttrs' makeLink;
+          channels = {
+            self = inputs.self;
+            pkgs = inputs.nixpkgs;
+            nur = inputs.nur;
+          } // lib.optionalAttrs cfg.overrideNixpkgs {
+            nixpkgs = inputs.nixpkgs;
+          };
         in
-        makeLinks {
-          inherit (inputs)
-            self
-            nixpkgs
-            nur
-            ;
-        };
+        makeLinks channels;
     })
 
     (lib.mkIf cfg.addToNixPath {
       nix.nixPath = [
         "self=/etc/nix/inputs/self"
-        "pkgs=/etc/nix/inputs/nixpkgs"
+        "pkgs=/etc/nix/inputs/pkgs"
         "nur=/etc/nix/inputs/nur"
       ]
       ++ lib.optional cfg.overrideNixpkgs "nixpkgs=/etc/nix/inputs/nixpkgs"
