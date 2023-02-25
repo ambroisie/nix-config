@@ -22,6 +22,8 @@ in
   options.my.home.nix = with lib; {
     enable = my.mkDisableOption "nix configuration";
 
+    linkInputs = my.mkDisableOption "link inputs to `$XDG_CONFIG_HOME/nix/inputs`";
+
     addToRegistry = my.mkDisableOption "add inputs and self to registry";
 
     overrideNixpkgs = my.mkDisableOption "point nixpkgs to pinned system version";
@@ -45,6 +47,18 @@ in
           makeEntries = lib.mapAttrs (lib.const makeEntry);
         in
         makeEntries channels;
+    })
+
+    (lib.mkIf cfg.linkInputs {
+      xdg.configFile =
+        let
+          makeLink = n: v: {
+            name = "nix/inputs/${n}";
+            value = { source = v.outPath; };
+          };
+          makeLinks = lib.mapAttrs' makeLink;
+        in
+        makeLinks channels;
     })
   ]);
 }
