@@ -15,7 +15,7 @@ in
   config = lib.mkIf cfg.enable (lib.mkMerge [
     {
       nix = {
-        package = lib.mkDefault pkgs.nix;
+        package = lib.mkDefault pkgs.nix; # NixOS module sets it unconditionally
 
         settings = {
           experimental-features = [ "nix-command" "flakes" ];
