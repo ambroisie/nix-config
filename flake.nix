@@ -80,34 +80,6 @@
 
       eachMySystem = eachSystem mySystems;
 
-      defaultModules = [
-        ({ ... }: {
-          # Let 'nixos-version --json' know about the Git revision
-          system.configurationRevision = self.rev or "dirty";
-        })
-        {
-          nixpkgs.overlays = (lib.attrValues self.overlays) ++ [
-            nur.overlay
-          ];
-        }
-        # Include generic settings
-        ./modules
-        # Include bundles of settings
-        ./profiles
-      ];
-
-      buildHost = name: system: lib.nixosSystem {
-        inherit system;
-        modules = defaultModules ++ [
-          (./. + "/machines/${name}")
-        ];
-        specialArgs = {
-          # Use my extended lib in NixOS configuration
-          inherit lib;
-          # Inject inputs to use them in global registry
-          inherit inputs;
-        };
-      };
     in
     eachMySystem
       (system:
@@ -164,9 +136,6 @@
 
       overlays = import ./flake/overlays.nix inputs;
 
-      nixosConfigurations = lib.mapAttrs buildHost {
-        aramis = "x86_64-linux";
-        porthos = "x86_64-linux";
-      };
+      nixosConfigurations = import ./flake/nixos.nix inputs;
     };
 }
