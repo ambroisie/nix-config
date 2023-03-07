@@ -120,21 +120,7 @@
           default = apps.diff-flake;
         };
 
-        checks = {
-          pre-commit = pre-commit-hooks.lib.${system}.run {
-            src = ./.;
-
-            hooks = {
-              nixpkgs-fmt = {
-                enable = true;
-              };
-
-              shellcheck = {
-                enable = true;
-              };
-            };
-          };
-        };
+        checks = import ./flake/checks.nix inputs system;
 
         devShells = {
           default = pkgs.mkShell {
