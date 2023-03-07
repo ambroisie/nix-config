@@ -199,12 +199,7 @@
       }) // {
       inherit lib;
 
-      overlays = import ./overlays // {
-        lib = final: prev: { inherit lib; };
-        pkgs = final: prev: {
-          ambroisie = prev.recurseIntoAttrs (import ./pkgs { pkgs = prev; });
-        };
-      };
+      overlays = import ./flake/overlays.nix inputs;
 
       nixosConfigurations = lib.mapAttrs buildHost {
         aramis = "x86_64-linux";
