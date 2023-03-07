@@ -122,18 +122,7 @@
 
         checks = import ./flake/checks.nix inputs system;
 
-        devShells = {
-          default = pkgs.mkShell {
-            name = "NixOS-config";
-
-            nativeBuildInputs = with pkgs; [
-              gitAndTools.pre-commit
-              nixpkgs-fmt
-            ];
-
-            inherit (self.checks.${system}.pre-commit) shellHook;
-          };
-        };
+        devShells = import ./flake/dev-shells.nix inputs system;
 
         packages =
           let
