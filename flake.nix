@@ -111,9 +111,6 @@
     in
     eachMySystem
       (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
       rec {
         apps = {
           diff-flake = futils.lib.mkApp { drv = packages.diff-flake; };
@@ -124,14 +121,7 @@
 
         devShells = import ./flake/dev-shells.nix inputs system;
 
-        packages =
-          let
-            inherit (futils.lib) filterPackages flattenTree;
-            packages = import ./pkgs { inherit pkgs; };
-            flattenedPackages = flattenTree packages;
-            finalPackages = filterPackages system flattenedPackages;
-          in
-          finalPackages;
+        packages = import ./flake/packages.nix inputs system;
 
         # Work-around for https://github.com/nix-community/home-manager/issues/3075
         legacyPackages = {
