@@ -67,6 +67,8 @@
     , pre-commit-hooks
     }:
     let
+      inherit (self) lib;
+
       inherit (futils.lib) eachSystem system;
 
       mySystems = [
@@ -77,10 +79,6 @@
       ];
 
       eachMySystem = eachSystem mySystems;
-
-      lib = nixpkgs.lib.extend (self: super: {
-        my = import ./lib { inherit inputs; pkgs = nixpkgs; lib = self; };
-      });
 
       defaultModules = [
         ({ ... }: {
@@ -197,7 +195,7 @@
           };
         };
       }) // {
-      inherit lib;
+      lib = import ./flake/lib.nix inputs;
 
       overlays = import ./flake/overlays.nix inputs;
 
