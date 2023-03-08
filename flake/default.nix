@@ -1,4 +1,5 @@
 { self
+, flake-parts
 , futils
 , home-manager
 , nixpkgs
@@ -77,4 +78,8 @@ let
     nixosConfigurations = import ./nixos.nix inputs;
   };
 in
-(eachMySystem systemDependant) // systemIndependant
+flake-parts.lib.mkFlake { inherit inputs; } {
+  systems = mySystems;
+
+  flake = (eachMySystem systemDependant) // systemIndependant;
+}
