@@ -26,8 +26,6 @@ let
       default = self.apps.${system}.diff-flake;
     };
 
-    checks = import ./checks.nix inputs system;
-
     devShells = import ./dev-shells.nix inputs system;
 
     packages = import ./packages.nix inputs system;
@@ -74,6 +72,7 @@ flake-parts.lib.mkFlake { inherit inputs; } {
   systems = mySystems;
 
   imports = [
+    ./checks.nix
     ./lib.nix
     ./nixos.nix
     ./overlays.nix
