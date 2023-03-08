@@ -69,18 +69,15 @@ let
       };
     };
   };
-
-  systemIndependant = {
-    nixosConfigurations = import ./nixos.nix inputs;
-  };
 in
 flake-parts.lib.mkFlake { inherit inputs; } {
   systems = mySystems;
 
   imports = [
     ./lib.nix
+    ./nixos.nix
     ./overlays.nix
   ];
 
-  flake = (eachMySystem systemDependant) // systemIndependant;
+  flake = (eachMySystem systemDependant);
 }
