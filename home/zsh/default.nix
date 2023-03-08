@@ -26,7 +26,7 @@ in
         expireDuplicatesFirst = true;
         ignoreSpace = true;
         ignoreDups = true;
-        share = false;
+        share = true;
         path = "${config.xdg.dataHome}/zsh/zsh_history";
       };
 
