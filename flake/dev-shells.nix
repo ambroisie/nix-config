@@ -1,17 +1,17 @@
-{ self, nixpkgs, ... }:
-system:
-let
-  pkgs = nixpkgs.legacyPackages.${system};
-in
+{ inputs, ... }:
 {
-  default = pkgs.mkShell {
-    name = "NixOS-config";
+  perSystem = { self', pkgs, ... }: {
+    devShells = {
+      default = pkgs.mkShell {
+        name = "NixOS-config";
 
-    nativeBuildInputs = with pkgs; [
-      gitAndTools.pre-commit
-      nixpkgs-fmt
-    ];
+        nativeBuildInputs = with pkgs; [
+          gitAndTools.pre-commit
+          nixpkgs-fmt
+        ];
 
-    inherit (self.checks.${system}.pre-commit) shellHook;
+        inherit (self'.checks.pre-commit) shellHook;
+      };
+    };
   };
 }

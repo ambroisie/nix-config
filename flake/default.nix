@@ -26,8 +26,6 @@ let
       default = self.apps.${system}.diff-flake;
     };
 
-    devShells = import ./dev-shells.nix inputs system;
-
     packages = import ./packages.nix inputs system;
 
     # Work-around for https://github.com/nix-community/home-manager/issues/3075
@@ -73,6 +71,7 @@ flake-parts.lib.mkFlake { inherit inputs; } {
 
   imports = [
     ./checks.nix
+    ./dev-shells.nix
     ./lib.nix
     ./nixos.nix
     ./overlays.nix
