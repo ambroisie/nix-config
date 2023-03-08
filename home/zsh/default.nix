@@ -23,6 +23,7 @@ in
         size = 500000;
         save = 500000;
         extended = true;
+        expireDuplicatesFirst = true;
         ignoreSpace = true;
         ignoreDups = true;
         share = false;
