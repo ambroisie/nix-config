@@ -73,13 +73,15 @@ let
   systemIndependant = {
     lib = import ./lib.nix inputs;
 
-    overlays = import ./overlays.nix inputs;
-
     nixosConfigurations = import ./nixos.nix inputs;
   };
 in
 flake-parts.lib.mkFlake { inherit inputs; } {
   systems = mySystems;
+
+  imports = [
+    ./overlays.nix
+  ];
 
   flake = (eachMySystem systemDependant) // systemIndependant;
 }
