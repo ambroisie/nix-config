@@ -26,8 +26,6 @@ let
       default = self.apps.${system}.diff-flake;
     };
 
-    packages = import ./packages.nix inputs system;
-
     # Work-around for https://github.com/nix-community/home-manager/issues/3075
     legacyPackages = {
       homeConfigurations = {
@@ -75,6 +73,7 @@ flake-parts.lib.mkFlake { inherit inputs; } {
     ./lib.nix
     ./nixos.nix
     ./overlays.nix
+    ./packages.nix
   ];
 
   flake = (eachMySystem systemDependant);
