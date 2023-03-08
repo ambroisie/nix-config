@@ -21,11 +21,6 @@ let
   eachMySystem = eachSystem mySystems;
 
   systemDependant = system: {
-    apps = {
-      diff-flake = futils.lib.mkApp { drv = self.packages.${system}.diff-flake; };
-      default = self.apps.${system}.diff-flake;
-    };
-
     # Work-around for https://github.com/nix-community/home-manager/issues/3075
     legacyPackages = {
       homeConfigurations = {
@@ -68,6 +63,7 @@ flake-parts.lib.mkFlake { inherit inputs; } {
   systems = mySystems;
 
   imports = [
+    ./apps.nix
     ./checks.nix
     ./dev-shells.nix
     ./lib.nix
