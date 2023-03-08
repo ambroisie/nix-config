@@ -71,8 +71,6 @@ let
   };
 
   systemIndependant = {
-    lib = import ./lib.nix inputs;
-
     nixosConfigurations = import ./nixos.nix inputs;
   };
 in
@@ -80,6 +78,7 @@ flake-parts.lib.mkFlake { inherit inputs; } {
   systems = mySystems;
 
   imports = [
+    ./lib.nix
     ./overlays.nix
   ];
 
