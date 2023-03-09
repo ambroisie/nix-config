@@ -21,7 +21,7 @@ let
   buildHost = name: system: lib.nixosSystem {
     inherit system;
     modules = defaultModules ++ [
-      "${self}/machines/${name}"
+      "${self}/hosts/nixos/${name}"
     ];
     specialArgs = {
       # Use my extended lib in NixOS configuration
