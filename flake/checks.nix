@@ -1,11 +1,15 @@
 { self, inputs, ... }:
 {
-  perSystem = { system, ... }: {
-    checks = {
-      # NOTE: seems like inputs' does not output the 'lib' attribute
-      pre-commit = inputs.pre-commit-hooks.lib.${system}.run {
-        src = self;
+  imports = [
+    inputs.pre-commit-hooks.flakeModule
+  ];
 
+  perSystem = { system, ... }: {
+    pre-commit = {
+      # Add itself to `nix flake check`
+      check.enable = true;
+
+      settings = {
         hooks = {
           nixpkgs-fmt = {
             enable = true;
