@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  perSystem = { self', pkgs, ... }: {
+  perSystem = { self', config, pkgs, ... }: {
     devShells = {
       default = pkgs.mkShell {
         name = "NixOS-config";
@@ -10,7 +10,9 @@
           nixpkgs-fmt
         ];
 
-        inherit (self'.checks.pre-commit) shellHook;
+        shellHook = ''
+          ${config.pre-commit.installationScript}
+        '';
       };
     };
   };
