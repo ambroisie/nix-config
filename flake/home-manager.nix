@@ -38,14 +38,24 @@ let
       inherit inputs;
     };
   };
+
+  hosts = {
+    "ambroisie@ambroisie" = "x86_64-linux"; # Unfortunate naming here...
+  };
 in
 {
   perSystem = { system, ... }: {
     # Work-around for https://github.com/nix-community/home-manager/issues/3075
     legacyPackages = {
-      homeConfigurations = lib.mapAttrs mkHome {
-        ambroisie = system;
-      };
+      homeConfigurations =
+        let
+          filteredHosts = lib.filterAttrs (_: v: v == system) hosts;
+          allHosts = filteredHosts // {
+            # Default configuration
+            ambroisie = system;
+          };
+        in
+        lib.mapAttrs mkHome allHosts;
     };
   };
 }
