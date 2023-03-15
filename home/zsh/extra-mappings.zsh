@@ -67,3 +67,17 @@ if [ -n "${terminfo[knp]}" ]; then
   bindkey -M viins "${terminfo[knp]}" down-line-or-history
   bindkey -M vicmd "${terminfo[knp]}" down-line-or-history
 fi
+
+# Home goes to the beginning of the line
+if [ -n "${terminfo[khome]}" ]; then
+    bindkey -M emacs "${terminfo[khome]}" beginning-of-line
+    bindkey -M viins "${terminfo[khome]}" beginning-of-line
+    bindkey -M vicmd "${terminfo[khome]}" beginning-of-line
+fi
+
+# End goes to the end of the line
+if [ -n "${terminfo[kend]}" ]; then
+    bindkey -M emacs "${terminfo[kend]}"  end-of-line
+    bindkey -M viins "${terminfo[kend]}"  end-of-line
+    bindkey -M vicmd "${terminfo[kend]}"  end-of-line
+fi
