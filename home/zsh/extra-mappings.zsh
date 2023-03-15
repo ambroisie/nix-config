@@ -65,6 +65,28 @@ else
     bindkey -M vicmd '^[[Z' reverse-menu-complete
 fi
 
+# Ctrl-Left moves backward one word
+if [ -n "${terminfo[kLFT5]}" ]; then
+    bindkey -M emacs "${terminfo[kLFT5]}" backward-word
+    bindkey -M viins "${terminfo[kLFT5]}" backward-word
+    bindkey -M vicmd "${terminfo[kLFT5]}" backward-word
+else
+    bindkey -M emacs '^[[1;5D' backward-word
+    bindkey -M viins '^[[1;5D' backward-word
+    bindkey -M vicmd '^[[1;5D' backward-word
+fi
+
+# Ctrl-Right moves forward one word
+if [ -n "${terminfo[kRIT5]}" ]; then
+    bindkey -M emacs "${terminfo[kRIT5]}" forward-word
+    bindkey -M viins "${terminfo[kRIT5]}" forward-word
+    bindkey -M vicmd "${terminfo[kRIT5]}" forward-word
+else
+    bindkey -M emacs '^[[1;5C' forward-word
+    bindkey -M viins '^[[1;5C' forward-word
+    bindkey -M vicmd '^[[1;5C' forward-word
+fi
+
 # PageUp goes backwards in history
 if [ -n "${terminfo[kpp]}" ]; then
     bindkey -M emacs "${terminfo[kpp]}" up-line-or-history
