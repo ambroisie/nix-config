@@ -53,3 +53,17 @@ else
     bindkey -M viins '^[[Z' reverse-menu-complete
     bindkey -M vicmd '^[[Z' reverse-menu-complete
 fi
+
+# PageUp goes backwards in history
+if [ -n "${terminfo[kpp]}" ]; then
+    bindkey -M emacs "${terminfo[kpp]}" up-line-or-history
+    bindkey -M viins "${terminfo[kpp]}" up-line-or-history
+    bindkey -M vicmd "${terminfo[kpp]}" up-line-or-history
+fi
+
+# PageDown goes forward in history
+if [ -n "${terminfo[knp]}" ]; then
+  bindkey -M emacs "${terminfo[knp]}" down-line-or-history
+  bindkey -M viins "${terminfo[knp]}" down-line-or-history
+  bindkey -M vicmd "${terminfo[knp]}" down-line-or-history
+fi
