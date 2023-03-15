@@ -15,6 +15,19 @@ if ! { [ "$TERM" != emacs ] && (( ${+terminfo} )) 2>/dev/null; }; then
     return
 fi
 
+# Make sure that the terminal is in application mode when zle is active, since
+# only then values from $terminfo are valid
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+    autoload -Uz add-zle-hook-widget
+
+    zle_application_mode_start() { echoti smkx; }
+    zle_application_mode_stop() { echoti rmkx; }
+
+    add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+    add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+fi
+
+
 # Fix delete key not working
 if [ -n "${terminfo[kdch1]}" ]; then
     bindkey -M emacs "${terminfo[kdch1]}" delete-char
