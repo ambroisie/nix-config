@@ -43,6 +43,17 @@ else
     bindkey -M vicmd "^[3;5~" delete-char
 fi
 
+# Ctrl-Delete to delete a whole word forward
+if [ -n "${terminfo[kdl1]}" ]; then
+    bindkey -M emacs "${terminfo[kdl1]}" kill-word
+    bindkey -M viins "${terminfo[kdl1]}" kill-word
+    bindkey -M vicmd "${terminfo[kdl1]}" kill-word
+else
+    bindkey -M emacs '^[[3;5~' kill-word
+    bindkey -M viins '^[[3;5~' kill-word
+    bindkey -M vicmd '^[[3;5~' kill-word
+fi
+
 # Enable Shift-Tab to go backwards in completion list
 if [ -n "${terminfo[kcbt]}" ]; then
     bindkey -M emacs "${terminfo[kcbt]}" reverse-menu-complete
