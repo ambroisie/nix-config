@@ -22,13 +22,9 @@ sanitize_output() {
 
 add_shell() {
     local SYSTEM
-    if [ $# -gt 0 ] && [ -n "$1" ]; then
-        SYSTEM="$1"
-    else
-        SYSTEM="$(nix eval --raw --impure --expr 'builtins.currentSystem')"
-    fi
+    SYSTEM="$(nix eval --raw --impure --expr 'builtins.currentSystem')"
     # Use 'inputDerivation' attribute to make sure that it is build-able
-    FLAKE_OUTPUTS+=("devShells.$SYSTEM.default.inputDerivation")
+    FLAKE_OUTPUTS+=("devShells.$SYSTEM.$1.inputDerivation")
 }
 
 add_host() {
@@ -56,10 +52,10 @@ usage() {
     print_err "    specify the name of a NixOS output configuration whose"
     print_err "    closure should be diffed, can be used multiple times"
     print_err "    if no host name is given, defaults to current hostname"
-    print_err "  --shell [system]"
-    print_err "    specify a specific system's devShell output whose closure"
+    print_err "  --shell [name]"
+    print_err "    specify a specific devShell configuration name whose closure"
     print_err "    should be diffed, can be used multiple times"
-    print_err "    if no system is given, defaults to current system"
+    print_err "    if no name is given, defaults to 'default'"
     print_err ""
     print_err "when no flake outputs are specified, automatically queries for"
     print_err "all NixOS configurations, and devShell for current system"
@@ -108,7 +104,7 @@ parse_args() {
                     add_shell "$1"
                     shift
                 else
-                    add_shell
+                    add_shell "default"
                 fi
                 ;;
             --)
@@ -152,7 +148,7 @@ if [ "${#FLAKE_OUTPUTS[@]}" -eq 0 ]; then
     for host in $(list_nixos_configurations); do
         add_host "$host"
     done
-    add_shell
+    add_shell "default"
 fi
 
 for out in "${FLAKE_OUTPUTS[@]}"; do
