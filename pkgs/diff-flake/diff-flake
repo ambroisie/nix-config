@@ -24,17 +24,17 @@ current_system() {
     nix eval --raw --impure --expr 'builtins.currentSystem'
 }
 
-add_shell() {
-    # Use 'inputDerivation' attribute to make sure that it is build-able
-    FLAKE_OUTPUTS+=("devShells.\"$(current_system)\".\"$1\".inputDerivation")
-}
-
 add_home() {
     FLAKE_OUTPUTS+=("homeConfigurations.\"$1\".activationPackage")
 }
 
 add_host() {
     FLAKE_OUTPUTS+=("nixosConfigurations.\"$1\".config.system.build.toplevel")
+}
+
+add_shell() {
+    # Use 'inputDerivation' attribute to make sure that it is build-able
+    FLAKE_OUTPUTS+=("devShells.\"$(current_system)\".\"$1\".inputDerivation")
 }
 
 usage() {
