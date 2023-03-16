@@ -20,11 +20,13 @@ sanitize_output() {
     fi
 }
 
+current_system() {
+    nix eval --raw --impure --expr 'builtins.currentSystem'
+}
+
 add_shell() {
-    local SYSTEM
-    SYSTEM="$(nix eval --raw --impure --expr 'builtins.currentSystem')"
     # Use 'inputDerivation' attribute to make sure that it is build-able
-    FLAKE_OUTPUTS+=("devShells.$SYSTEM.$1.inputDerivation")
+    FLAKE_OUTPUTS+=("devShells.$(current_system).\"$1\".inputDerivation")
 }
 
 add_host() {
@@ -58,7 +60,7 @@ usage() {
     print_err "    if no name is given, defaults to 'default'"
     print_err ""
     print_err "when no flake outputs are specified, automatically queries for"
-    print_err "all NixOS configurations, and devShell for current system"
+    print_err "all NixOS configurations, and devShells for current system"
 }
 
 is_option() {
@@ -126,6 +128,12 @@ list_nixos_configurations() {
         --raw
 }
 
+list_dev_shells() {
+    nix eval ".#devShells.$(current_system)" \
+        --apply 'attrs: with builtins; concatStringsSep "\n" (attrNames attrs)' \
+        --raw
+}
+
 diff_output() {
     local PREV NEW;
     PREV="$(mktemp --dry-run)"
@@ -148,7 +156,9 @@ if [ "${#FLAKE_OUTPUTS[@]}" -eq 0 ]; then
     for host in $(list_nixos_configurations); do
         add_host "$host"
     done
-    add_shell "default"
+    for shell in $(list_dev_shells); do
+        add_shell "$shell"
+    done
 fi
 
 for out in "${FLAKE_OUTPUTS[@]}"; do
