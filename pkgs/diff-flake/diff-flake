@@ -26,15 +26,15 @@ current_system() {
 
 add_shell() {
     # Use 'inputDerivation' attribute to make sure that it is build-able
-    FLAKE_OUTPUTS+=("devShells.$(current_system).\"$1\".inputDerivation")
+    FLAKE_OUTPUTS+=("devShells.\"$(current_system)\".\"$1\".inputDerivation")
 }
 
 add_home() {
-    FLAKE_OUTPUTS+=("homeConfigurations.$1.activationPackage")
+    FLAKE_OUTPUTS+=("homeConfigurations.\"$1\".activationPackage")
 }
 
 add_host() {
-    FLAKE_OUTPUTS+=("nixosConfigurations.$1.config.system.build.toplevel")
+    FLAKE_OUTPUTS+=("nixosConfigurations.\"$1\".config.system.build.toplevel")
 }
 
 usage() {
@@ -151,7 +151,7 @@ list_nixos_configurations() {
 }
 
 list_dev_shells() {
-    nix eval ".#devShells.$(current_system)" \
+    nix eval ".#devShells.\"$(current_system)\"" \
         --apply 'attrs: with builtins; concatStringsSep "\n" (attrNames attrs)' \
         --raw
 }
