@@ -7,8 +7,8 @@ let
   ];
 in
 {
-  options.my.home.tmux = with lib.my; {
-    enable = mkDisableOption "tmux terminal multiplexer";
+  options.my.home.tmux = with lib; {
+    enable = my.mkDisableOption "tmux terminal multiplexer";
   };
 
   config.programs.tmux = lib.mkIf cfg.enable {
