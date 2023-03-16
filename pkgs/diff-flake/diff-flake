@@ -29,6 +29,10 @@ add_shell() {
     FLAKE_OUTPUTS+=("devShells.$(current_system).\"$1\".inputDerivation")
 }
 
+add_home() {
+    FLAKE_OUTPUTS+=("homeConfigurations.$1.activationPackage")
+}
+
 add_host() {
     FLAKE_OUTPUTS+=("nixosConfigurations.$1.config.system.build.toplevel")
 }
@@ -50,6 +54,10 @@ usage() {
     print_err "  -p, --previous-rev"
     print_err "    which git revision should be considered the 'previous' state,"
     print_err "    defaults to HEAD~"
+    print_err "  --home [name]"
+    print_err "    specify the name of a home-manager output configuration whose"
+    print_err "    closure should be diffed, can be used multiple times"
+    print_err "    if no configuration name is given, defaults to current username"
     print_err "  --host [name]"
     print_err "    specify the name of a NixOS output configuration whose"
     print_err "    closure should be diffed, can be used multiple times"
@@ -93,6 +101,14 @@ parse_args() {
                 PREVIOUS_REV="$(git rev-parse "$1")"
                 shift
                 ;;
+            --home)
+                if [ $# -gt 0 ] && ! is_option "$1"; then
+                    add_home "$1"
+                    shift
+                else
+                    add_home "$USER"
+                fi
+                ;;
             --host)
                 if [ $# -gt 0 ] && ! is_option "$1"; then
                     add_host "$1"
@@ -120,6 +136,12 @@ parse_args() {
                 ;;
         esac
     done
+}
+
+list_home_configurations() {
+    nix eval '.#homeConfigurations' \
+        --apply 'attrs: with builtins; concatStringsSep "\n" (attrNames attrs)' \
+        --raw
 }
 
 list_nixos_configurations() {
@@ -153,6 +175,9 @@ diff_output() {
 parse_args "$@"
 
 if [ "${#FLAKE_OUTPUTS[@]}" -eq 0 ]; then
+    for home in $(list_home_configurations); do
+        add_home "$home"
+    done
     for host in $(list_nixos_configurations); do
         add_host "$host"
     done
