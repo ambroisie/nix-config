@@ -80,7 +80,7 @@ in
           in
           [
             {
-              statusCommand = "${i3status-rs} ${barConfigPath}";
+              statusCommand = "${i3status-rs} ~/${barConfigPath}";
               trayOutput = "primary";
               position = "top";
 
