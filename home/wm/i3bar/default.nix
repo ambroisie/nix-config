@@ -13,6 +13,8 @@ in
     programs.i3status-rust = {
       enable = true;
 
+      package = pkgs.i3status-rust_0_22;
+
       bars = {
         top = {
           icons = "awesome5";
