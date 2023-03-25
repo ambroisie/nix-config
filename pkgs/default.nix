@@ -48,5 +48,7 @@ pkgs.lib.makeScope pkgs.newScope (pkgs: {
 
   woodpecker-frontend = pkgs.callPackage ./woodpecker/frontend.nix { };
 
+  woodpecker-plugin-git = pkgs.callPackage ./woodpecker-plugin-git { };
+
   woodpecker-server = pkgs.callPackage ./woodpecker/server.nix { };
 })
