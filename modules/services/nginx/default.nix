@@ -236,8 +236,8 @@ in
       recommendedBrotliSettings = true;
       recommendedGzipSettings = true;
       recommendedOptimisation = true;
-      recommendedTlsSettings = true;
       recommendedProxySettings = true;
+      recommendedTlsSettings = true;
       recommendedZstdSettings = true;
 
       virtualHosts =
