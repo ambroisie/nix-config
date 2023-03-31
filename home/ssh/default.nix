@@ -34,8 +34,8 @@ in
         user = "git";
       };
 
-      "gitea.belanyi.fr" = {
-        hostname = "gitea.belanyi.fr";
+      "git.belanyi.fr" = {
+        hostname = "git.belanyi.fr";
         identityFile = "~/.ssh/shared_rsa";
         user = "git";
       };
