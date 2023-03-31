@@ -45,12 +45,6 @@ in
         identityFile = "~/.ssh/shared_rsa";
         user = "ambroisie";
       };
-
-      work = {
-        hostname = "workspaces.dgexsol.fr";
-        identityFile = "~/.ssh/shared_rsa";
-        user = "bruno_belanyi";
-      };
     };
 
     extraConfig = ''
