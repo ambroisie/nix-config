@@ -7,7 +7,7 @@ stdenvNoCC.mkDerivation rec {
     owner = "ambroisie";
     repo = "matrix-notifier";
     rev = "v${version}";
-    hash = "sha256-JiKPDrr9wyD2q5Vsac+OkFdvrDkx6mj/oC7XDVnka74=";
+    hash = "sha256-NE9RO0ep2ibrT9EUPGTnUE3ofdNTCHwelxnX9tCflg0=";
   };
 
   nativeBuildInputs = [
