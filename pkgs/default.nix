@@ -28,8 +28,6 @@ pkgs.lib.makeScope pkgs.newScope (pkgs: {
 
   pnpm-lock-export = pkgs.callPackage ./pnpm-lock-export { };
 
-  rofi-bluetooth = pkgs.callPackage ./rofi-bluetooth { };
-
   unbound-zones-adblock = pkgs.callPackage ./unbound-zones-adblock { };
 
   unified-hosts-lists = pkgs.callPackage ./unified-hosts-lists { };
