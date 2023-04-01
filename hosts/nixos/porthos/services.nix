@@ -73,7 +73,7 @@ in
       enable = true;
       mailConfigFile = secrets."matrix/mail".path;
       # Only necessary when doing the initial registration
-      # secret = "change-me";
+      secretFile = secrets."matrix/secret".path;
     };
     miniflux = {
       enable = true;
