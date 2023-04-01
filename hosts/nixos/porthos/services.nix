@@ -148,5 +148,14 @@ in
       enable = true;
       startAtBoot = true; # Server must be started to ensure clients can connect
     };
+    woodpecker = {
+      enable = true;
+      # Avoid clashes with drone
+      port = 3035;
+      rpcPort = 3036;
+      runners = [ "docker" "exec" ];
+      secretFile = secrets."woodpecker/gitea".path;
+      sharedSecretFile = secrets."woodpecker/secret".path;
+    };
   };
 }
