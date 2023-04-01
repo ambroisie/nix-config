@@ -18,8 +18,6 @@ pkgs.lib.makeScope pkgs.newScope (pkgs: {
 
   ff2mpv-go = pkgs.callPackage ./ff2mpv-go { };
 
-  havm = pkgs.callPackage ./havm { };
-
   i3-get-window-criteria = pkgs.callPackage ./i3-get-window-criteria { };
 
   lohr = pkgs.callPackage ./lohr { };
