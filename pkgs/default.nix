@@ -24,8 +24,6 @@ pkgs.lib.makeScope pkgs.newScope (pkgs: {
 
   matrix-notifier = pkgs.callPackage ./matrix-notifier { };
 
-  nolimips = pkgs.callPackage ./nolimips { };
-
   osc52 = pkgs.callPackage ./osc52 { };
 
   pnpm-lock-export = pkgs.callPackage ./pnpm-lock-export { };
