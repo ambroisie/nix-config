@@ -71,7 +71,7 @@ in
             }
             {
               block = "battery";
-              format = " $percentage ($time) ";
+              format = " $icon $percentage ($time) ";
               full_format = " $icon $percentage ";
             }
             {
