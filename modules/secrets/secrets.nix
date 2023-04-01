@@ -30,7 +30,10 @@ in
     owner = "matrix-synapse";
     publicKeys = all;
   };
-  "matrix/secret.age".publicKeys = all;
+  "matrix/secret.age" = {
+    owner = "matrix-synapse";
+    publicKeys = all;
+  };
 
   "miniflux/credentials.age".publicKeys = all;
 
