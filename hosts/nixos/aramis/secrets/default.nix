@@ -16,5 +16,10 @@
         secrets = import ./secrets.nix;
       in
       lib.mapAttrs' convertSecrets secrets;
+
+    identityPaths = [
+      # Due to being a laptop, this host does not itself have any SSH keys
+      "/home/ambroisie/.ssh/id_ed25519"
+    ];
   };
 }

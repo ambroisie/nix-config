@@ -20,10 +20,5 @@
         secrets = import ./secrets.nix;
       in
       lib.mapAttrs' convertSecrets secrets;
-
-    identityPaths = options.age.identityPaths.default ++ [
-      # FIXME: hard-coded path, could be inexistent
-      "/home/ambroisie/.ssh/id_ed25519"
-    ];
   };
 }
