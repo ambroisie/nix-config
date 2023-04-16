@@ -9,5 +9,5 @@ let
   ];
 in
 {
-  # Add secrets here
+  "wireguard/private-key.age".publicKeys = all;
 }
