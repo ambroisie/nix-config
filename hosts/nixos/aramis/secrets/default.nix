@@ -19,7 +19,7 @@
 
     identityPaths = [
       # Due to being a laptop, this host does not itself have any SSH keys
-      "/home/ambroisie/.ssh/id_ed25519"
+      "/home/ambroisie/.ssh/agenix"
     ];
   };
 }
