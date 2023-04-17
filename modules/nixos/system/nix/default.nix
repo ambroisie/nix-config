@@ -54,7 +54,12 @@ in
       nix = {
         package = pkgs.nix;
 
+        # FIXME: waiting on https://github.com/NixOS/nixpkgs/pull/146515
+        # FIXME: look at https://github.com/SuperSandro2000/nixos-modules/blob/master/modules/nix.nix
         settings = {
+          # I like XDG-compliance
+          use-xdg-base-directories = true;
+
           experimental-features = [ "nix-command" "flakes" ];
         };
       };

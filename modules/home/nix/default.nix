@@ -48,7 +48,11 @@ in
       nix = {
         package = lib.mkDefault pkgs.nix; # NixOS module sets it unconditionally
 
+        # FIXME: waiting on https://github.com/nix-community/home-manager/pull/3876
         settings = {
+          # I like XDG-compliance
+          use-xdg-base-directories = true;
+
           experimental-features = [ "nix-command" "flakes" ];
         };
       };
