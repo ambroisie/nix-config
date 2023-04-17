@@ -87,15 +87,6 @@ get_creds() {
     get_pgp
 }
 
-setup_gpg() {
-    info 'Setting up loopback pinentry for GnuPG'
-    echo "allow-loopback-pinentry" > ~/.gnupg/gpg-agent.conf
-
-    info 'Signing dummy message to ensure GnuPG key is usable by `git-crypt`'
-    echo whatever | gpg --clearsign --armor --pinentry loopback --output /dev/null
-}
-
 [ -z "$NOCREDS" ] && get_creds
-[ -z "$NOGPG" ] && setup_gpg
 
 nix --experimental-features 'nix-command flakes' develop
