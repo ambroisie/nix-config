@@ -66,6 +66,9 @@ set list
 " Show a tab as an arrow, trailing spaces as ¤, non-breaking spaces as dots
 set listchars=tab:>─,trail:·,nbsp:¤
 
+" Use patience diff
+set diffopt+=algorithm:patience
+
 " Don't redraw when executing macros
 set lazyredraw
 
