@@ -102,12 +102,10 @@ set ignorecase
 set smartcase
 " }}}
 
-" Import settings when inside a git repository {{{
+" Project-local settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let git_settings=system("git config --get vim.settings")
-if strlen(git_settings)
-    exe "set" git_settings
-endif
+" Securely read `.nvim.lua` or `.nvimrc`.
+set exrc
 " }}}
 
 " vim: foldmethod=marker
