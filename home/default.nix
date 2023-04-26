@@ -4,6 +4,7 @@
     ./bat
     ./bluetooth
     ./comma
+    ./dircolors
     ./direnv
     ./discord
     ./documentation

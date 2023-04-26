@@ -104,9 +104,5 @@ in
       # Enable VTE integration
       enableVteIntegration = true;
     };
-
-    programs.dircolors = {
-      enable = true;
-    };
   };
 }
