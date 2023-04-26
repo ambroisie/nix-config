@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./atuin
     ./bat
     ./bluetooth
     ./comma
