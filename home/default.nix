@@ -10,6 +10,7 @@
     ./feh
     ./firefox
     ./flameshot
+    ./fzf
     ./gammastep
     ./gdb
     ./git
