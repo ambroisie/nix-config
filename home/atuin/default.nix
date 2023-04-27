@@ -21,6 +21,8 @@ in
         update_check = false;
         # I don't care for the fancy display
         style = "compact";
+        # Get closer to fzf's fuzzy search
+        search_mode = "skim";
       };
     };
   };
