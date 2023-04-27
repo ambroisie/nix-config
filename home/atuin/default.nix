@@ -23,6 +23,8 @@ in
         style = "compact";
         # Get closer to fzf's fuzzy search
         search_mode = "skim";
+        # Show long command lines at the bottom
+        show_preview = true;
       };
     };
   };
