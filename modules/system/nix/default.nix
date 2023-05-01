@@ -22,6 +22,10 @@ in
   options.my.system.nix = with lib; {
     enable = my.mkDisableOption "nix configuration";
 
+    cache = {
+      selfHosted = my.mkDisableOption "self-hosted cache";
+    };
+
     inputs = {
       link = my.mkDisableOption "link inputs to `/etc/nix/inputs/`";
 
@@ -55,6 +59,22 @@ in
         };
       };
     }
+
+    (lib.mkIf cfg.cache.selfHosted {
+      nix = {
+        settings = {
+          # The NixOS module adds the official Hydra cache by default
+          # No need to use `extra-*` options.
+          substituters = [
+            "https://cache.belanyi.fr/"
+          ];
+
+          trusted-public-keys = [
+            "cache.belanyi.fr:LPhrTqufwfxTceg1nRWueDWf7/2zSVY9K00pq2UI7tw="
+          ];
+        };
+      };
+    })
 
     (lib.mkIf cfg.inputs.addToRegistry {
       nix.registry =
