@@ -11,6 +11,8 @@ M.on_attach = function(client, bufnr)
     vim.diagnostic.config({
         -- Disable virtual test next to affected regions
         virtual_text = false,
+        -- Also disable virtual diagnostics under the affected regions
+        virtual_lines = false,
         -- Show diagnostics signs
         signs = true,
         -- Underline offending regions
