@@ -21,17 +21,6 @@ M.on_attach = function(client, bufnr)
         severity_sort = true,
     })
 
-    -- Show diagnostics on "hover"
-    local augroup = vim.api.nvim_create_augroup("DiagnosticsHover", {})
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-    vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-            vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})
-        end,
-    })
-
     -- Format on save
     lsp_format.on_attach(client, bufnr)
 
