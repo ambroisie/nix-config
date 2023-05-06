@@ -1,13 +1,25 @@
-" Idea for toggling taken from jeffkreeftmeijer
+lua << EOF
+-- Show lines numbers
+vim.opt.number = true
 
-" Show line numbers
-set number
+local numbertoggle = vim.api.nvim_create_augroup("numbertoggle", { clear = true })
 
-augroup numbertoggle
-    autocmd!
-    " Toggle numbers between relative and absolute when changing buffers
-    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
-    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
-    " Disable line numbers and relative line numbers in terminal
-    autocmd TermOpen * setlocal nonu nornu
-augroup END
+-- Toggle numbers between relative and absolute when changing buffers
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
+    pattern = "*",
+    group = numbertoggle,
+    command = "if &nu | setlocal rnu | endif",
+})
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
+    pattern = "*",
+    group = numbertoggle,
+    command = "if &nu | setlocal nornu | endif",
+})
+
+-- Never show the sign column in a terminal buffer
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+    pattern = "*",
+    group = numbertoggle,
+    command = "setlocal nonu nornu",
+})
+EOF
