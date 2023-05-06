@@ -1,5 +1,11 @@
-" A few useful sets of abbreviations
+lua << EOF
+local abbreviations = {
+    -- A few things that are hard to write in ASCII
+    ["(R)"] = "©",
+    ["(TM)"] = "™",
+}
 
-" A few things that are hard to write in ASCII
-abbreviate (R) ©
-abbreviate (TM) ™
+for text, result in pairs(abbreviations) do
+    vim.cmd.abbreviate(text, result)
+end
+EOF
