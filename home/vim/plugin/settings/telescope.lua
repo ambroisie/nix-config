@@ -7,8 +7,8 @@ telescope.setup({
                 ["<C-h>"] = "which_key",
                 -- I want the normal readline mappings rather than scrolling
                 ["<C-u>"] = false,
-            }
-        }
+            },
+        },
     },
     extensions = {
         fzf = {
