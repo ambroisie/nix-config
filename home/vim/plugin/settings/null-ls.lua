@@ -1,4 +1,3 @@
-lua << EOF
 local null_ls = require("null-ls")
 local lsp = require("ambroisie.lsp")
 local utils = require("ambroisie.utils")
@@ -122,4 +121,3 @@ null_ls.register({
         condition = utils.is_executable_condition("shfmt"),
     }),
 })
-EOF

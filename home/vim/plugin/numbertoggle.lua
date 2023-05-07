@@ -1,4 +1,3 @@
-lua << EOF
 -- Show lines numbers
 vim.opt.number = true
 
@@ -22,4 +21,3 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
     group = numbertoggle,
     command = "setlocal nonu nornu",
 })
-EOF

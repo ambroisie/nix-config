@@ -1,4 +1,3 @@
-lua << EOF
 local gitsigns = require('gitsigns')
 local wk = require("which-key")
 
@@ -57,4 +56,3 @@ local visual = {
 wk.register(keys, { buffer = bufnr })
 wk.register(objects, { buffer = bufnr, mode = "o" })
 wk.register(visual, { buffer = bufnr, mode = "x" })
-EOF

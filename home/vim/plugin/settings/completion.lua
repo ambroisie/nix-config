@@ -1,4 +1,3 @@
-lua << EOF
 -- Show completion menu in all cases, and don't select anything
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
@@ -61,4 +60,3 @@ cmp.setup({
         ghost_text = true,
     },
 })
-EOF
