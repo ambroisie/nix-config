@@ -1,7 +1,7 @@
-" Show completion menu in all cases, and don't select anything
-set completeopt=menu,menuone,noselect
-
 lua << EOF
+-- Show completion menu in all cases, and don't select anything
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
 local cmp = require("cmp")
 local cmp_under_comparator = require("cmp-under-comparator")
 local luasnip = require("luasnip")
