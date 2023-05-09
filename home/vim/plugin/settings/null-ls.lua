@@ -6,6 +6,18 @@ null_ls.setup({
     on_attach = lsp.on_attach,
 })
 
+-- Bazel
+null_ls.register({
+    null_ls.builtins.diagnostics.buildifier.with({
+        -- Only used if available
+        condition = utils.is_executable_condition("buildifier"),
+    }),
+    null_ls.builtins.formatting.buildifier.with({
+        -- Only used if available
+        condition = utils.is_executable_condition("buildifier"),
+    }),
+})
+
 -- C, C++
 null_ls.register({
     null_ls.builtins.formatting.clang_format.with({
