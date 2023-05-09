@@ -116,6 +116,8 @@ null_ls.register({
         -- Indent with 4 spaces, simplify the code, indent switch cases,
         -- add space after redirection, use POSIX
         extra_args = { "-i", "4", "-s", "-ci", "-sr", "-ln", "posix" },
+        -- Restrict to POSIX sh
+        filetypes = { "sh" },
         -- Only used if available
         condition = utils.is_executable_condition("shfmt"),
     }),
