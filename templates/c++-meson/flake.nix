@@ -86,8 +86,6 @@
       {
         checks = {
           inherit (self.packages.${system}) project;
-
-          inherit pre-commit;
         };
 
         devShells = {

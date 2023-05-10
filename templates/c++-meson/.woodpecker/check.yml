@@ -2,6 +2,11 @@ labels:
   type: exec
 
 pipeline:
+- name: pre-commit checks
+  image: bash
+  commands:
+  - nix shell . -c pre-commit run --all
+
 - name: nix flake check
   image: bash
   commands:
