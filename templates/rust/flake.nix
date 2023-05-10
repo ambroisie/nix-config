@@ -42,8 +42,6 @@
               lockFile = "${self}/Cargo.lock";
             };
 
-            doCheck = true;
-
             meta = with lib; {
               description = "A Rust project";
               homepage = "https://gitea.belanyi.fr/ambroisie/project";
