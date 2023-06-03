@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.my.programs.steam;
+
+  steam = pkgs.steam;
 in
 {
   options.my.programs.steam = with lib; {
@@ -26,13 +28,13 @@ in
       (pkgs.writeScriptBin "steam" ''
         #!/bin/sh
         mkdir -p "${cfg.dataDir}"
-        HOME="${cfg.dataDir}" exec ${pkgs.steam}/bin/steam "$@"
+        HOME="${cfg.dataDir}" exec ${lib.getExe steam} "$@"
       '')
       # Same, for GOG and other such games
       (pkgs.writeScriptBin "steam-run" ''
         #!/bin/sh
         mkdir -p "${cfg.dataDir}"
-        HOME="${cfg.dataDir}" exec ${pkgs.steam-run}/bin/steam-run "$@"
+        HOME="${cfg.dataDir}" exec ${lib.getExe steam.run}  "$@"
       '')
     ];
   };
