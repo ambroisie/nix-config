@@ -20,6 +20,17 @@ in
 
       # Allow DNS resolution in the default network
       defaultNetwork.dnsname.enable = true;
+
+      # Remove unused data on a weekly basis
+      autoPrune = {
+        enable = true;
+
+        dates = "weekly";
+
+        flags = [
+          "--all"
+        ];
+      };
     };
   };
 }
