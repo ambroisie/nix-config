@@ -19,7 +19,9 @@ in
       dockerSocket.enable = true;
 
       # Allow DNS resolution in the default network
-      defaultNetwork.dnsname.enable = true;
+      defaultNetwork.settings = {
+        dns_enabled = true;
+      };
 
       # Remove unused data on a weekly basis
       autoPrune = {
