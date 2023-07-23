@@ -62,6 +62,7 @@ in
       ambroisie.i3-get-window-criteria # little helper for i3 configuration
       arandr # Used by a mapping
       playerctl # Used by a mapping
+      xdotool # Used by 'rofi-rbw', in a mapping
     ];
 
     xsession.windowManager.i3 = {
@@ -188,6 +189,7 @@ in
             "${modifier}+d" = "exec rofi -show drun -disable-history";
             "${modifier}+Shift+d" = "exec rofi -show run -disable-history";
             "${modifier}+p" = "exec --no-startup-id flameshot gui";
+            "${modifier}+Ctrl+p" = "exec ${lib.getExe pkgs.rofi-rbw}";
             "${modifier}+Shift+p" = "exec rofi -show emoji";
             "${modifier}+b" =
               let
