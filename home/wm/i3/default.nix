@@ -27,13 +27,13 @@ let
   genMovementBindings = f: addVimKeyBindings (lib.my.genAttrs' movementKeys f);
 
   # Used in multiple scripts to show messages through keybindings
-  notify-send = "${pkgs.libnotify}/bin/notify-send";
+  notify-send = lib.getExe pkgs.libnotify;
 
   # Screen backlight management
-  changeBacklight = "${pkgs.ambroisie.change-backlight}/bin/change-backlight";
+  changeBacklight = lib.getExe pkgs.ambroisie.change-backlight;
 
   # Audio and volume management
-  changeAudio = "${pkgs.ambroisie.change-audio}/bin/change-audio";
+  changeAudio = lib.getExe pkgs.ambroisie.change-audio;
 
   # Lock management
   toggleXautolock =
