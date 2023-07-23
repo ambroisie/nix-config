@@ -61,7 +61,6 @@ in
       ambroisie.dragger # drag-and-drop from the CLI
       ambroisie.i3-get-window-criteria # little helper for i3 configuration
       arandr # Used by a mapping
-      pamixer # Used by a mapping
       playerctl # Used by a mapping
     ];
 
