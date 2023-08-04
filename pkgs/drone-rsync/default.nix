@@ -34,6 +34,7 @@ stdenvNoCC.mkDerivation rec {
     description = "Helper script to run rsync in a CI pipeline";
     homepage = "https://git.belanyi.fr/ambroisie/nix-config";
     license = with licenses; [ mit ];
+    mainProgram = "drone-rsync";
     maintainers = with maintainers; [ ambroisie ];
     platforms = platforms.unix;
   };

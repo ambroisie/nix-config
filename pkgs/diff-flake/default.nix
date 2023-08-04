@@ -34,6 +34,7 @@ stdenvNoCC.mkDerivation rec {
     description = "Nix flake helper to visualize changes in closures";
     homepage = "https://git.belanyi.fr/ambroisie/nix-config";
     license = with licenses; [ mit ];
+    mainProgram = "diff-flake";
     maintainers = with maintainers; [ ambroisie ];
     platforms = platforms.unix;
   };

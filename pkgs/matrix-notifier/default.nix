@@ -38,6 +38,7 @@ stdenvNoCC.mkDerivation rec {
     '';
     homepage = "https://git.belanyi.fr/ambroisie/${pname}";
     license = licenses.mit;
+    mainProgram = "matrix-notifier";
     maintainers = with maintainers; [ ambroisie ];
     platforms = platforms.unix;
   };
