@@ -34,7 +34,7 @@ stdenvNoCC.mkDerivation rec {
     '';
     homepage = "https://git.belanyi.fr/ambroisie/nix-config";
     license = with licenses; [ mit ];
-    platforms = platforms.linux;
     maintainers = with maintainers; [ ambroisie ];
+    platforms = platforms.linux;
   };
 }

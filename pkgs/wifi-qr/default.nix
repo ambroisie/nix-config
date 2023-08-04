@@ -74,7 +74,7 @@ stdenvNoCC.mkDerivation rec {
     description = "WiFi password sharing via QR codes";
     homepage = "https://github.com/kokoye2007/wifi-qr";
     license = with licenses; [ gpl3Plus ];
-    platforms = platforms.linux;
     maintainers = with maintainers; [ ambroisie ];
+    platforms = platforms.linux;
   };
 }
