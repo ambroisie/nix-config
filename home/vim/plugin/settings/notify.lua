@@ -1,4 +1,5 @@
 local notify = require("notify")
+local lsp_notify = require("lsp-notify")
 
 notify.setup({
     icons = {
@@ -12,3 +13,5 @@ notify.setup({
 })
 
 vim.notify = notify
+
+lsp_notify.setup({})
