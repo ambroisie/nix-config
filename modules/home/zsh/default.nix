@@ -15,6 +15,16 @@ in
     enable = my.mkDisableOption "zsh configuration";
 
     launchTmux = mkEnableOption "auto launch tmux at shell start";
+
+    notify = {
+      enable = mkEnableOption "zsh-done notification";
+
+      ssh = {
+        enable = mkEnableOption "notify through SSH/non-graphical connections";
+
+        useOsc777 = lib.my.mkDisableOption "use OSC-777 for notifications";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
@@ -93,5 +103,35 @@ in
         enableVteIntegration = true;
       };
     }
+
+    (lib.mkIf cfg.notify.enable {
+      programs.zsh = {
+        plugins = [
+          {
+            name = "zsh-done";
+            file = "share/zsh/site-functions/done.plugin.zsh";
+            src = pkgs.ambroisie.zsh-done;
+          }
+        ];
+
+        # `localVariables` values don't get merged correctly due to their type,
+        # don't use `mkIf`
+        localVariables = { }
+          # Enable `zsh-done` through SSH, if configured
+          // lib.optionalAttrs cfg.notify.ssh.enable { DONE_ALLOW_NONGRAPHICAL = 1; }
+        ;
+
+        # Use OSC-777 to send the notification through SSH
+        initExtra = lib.mkIf cfg.notify.ssh.useOsc777 ''
+          done_send_notification() {
+            local exit_status="$1"
+            local title="$2"
+            local message="$3"
+
+            ${lib.getExe pkgs.ambroisie.osc777} "$title" "$message"
+          }
+        '';
+      };
+    })
   ]);
 }
