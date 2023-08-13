@@ -17,79 +17,81 @@ in
     launchTmux = mkEnableOption "auto launch tmux at shell start";
   };
 
-  config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      zsh-completions
-    ];
-
-    programs.zsh = {
-      enable = true;
-      dotDir = "${relativeXdgConfig}/zsh"; # Don't clutter $HOME
-      enableCompletion = true;
-
-      history = {
-        size = 500000;
-        save = 500000;
-        extended = true;
-        expireDuplicatesFirst = true;
-        ignoreSpace = true;
-        ignoreDups = true;
-        share = false;
-        path = "${config.xdg.dataHome}/zsh/zsh_history";
-      };
-
-      plugins = [
-        {
-          name = "fast-syntax-highlighting";
-          file = "share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh";
-          src = pkgs.zsh-fast-syntax-highlighting;
-        }
-        {
-          name = "agkozak-zsh-prompt";
-          file = "share/zsh/site-functions/agkozak-zsh-prompt.plugin.zsh";
-          src = pkgs.agkozak-zsh-prompt;
-        }
+  config = lib.mkIf cfg.enable (lib.mkMerge [
+    {
+      home.packages = with pkgs; [
+        zsh-completions
       ];
 
-      # Modal editing is life, but CLI benefits from emacs gymnastics
-      defaultKeymap = "emacs";
+      programs.zsh = {
+        enable = true;
+        dotDir = "${relativeXdgConfig}/zsh"; # Don't clutter $HOME
+        enableCompletion = true;
 
-      # Make those happen early to avoid doing double the work
-      initExtraFirst = ''
-        ${
-          lib.optionalString cfg.launchTmux ''
-            # Launch tmux unless already inside one
-            if [ -z "$TMUX" ]; then
-              exec tmux new-session
-            fi
-          ''
-        }
-      '';
+        history = {
+          size = 500000;
+          save = 500000;
+          extended = true;
+          expireDuplicatesFirst = true;
+          ignoreSpace = true;
+          ignoreDups = true;
+          share = false;
+          path = "${config.xdg.dataHome}/zsh/zsh_history";
+        };
 
-      initExtra = ''
-        source ${./completion-styles.zsh}
-        source ${./extra-mappings.zsh}
-        source ${./options.zsh}
+        plugins = [
+          {
+            name = "fast-syntax-highlighting";
+            file = "share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh";
+            src = pkgs.zsh-fast-syntax-highlighting;
+          }
+          {
+            name = "agkozak-zsh-prompt";
+            file = "share/zsh/site-functions/agkozak-zsh-prompt.plugin.zsh";
+            src = pkgs.agkozak-zsh-prompt;
+          }
+        ];
 
-        # Source local configuration
-        if [ -f "$ZDOTDIR/zshrc.local" ]; then
-          source "$ZDOTDIR/zshrc.local"
-        fi
-      '';
+        # Modal editing is life, but CLI benefits from emacs gymnastics
+        defaultKeymap = "emacs";
 
-      localVariables = {
-        # I like having the full path
-        AGKOZAK_PROMPT_DIRTRIM = 0;
-        # Because I *am* from EPITA
-        AGKOZAK_PROMPT_CHAR = [ "42sh$" "42sh#" ":" ];
-        # Easy on the eyes
-        AGKOZAK_COLORS_BRANCH_STATUS = "magenta";
-        # I don't like moving my eyes
-        AGKOZAK_LEFT_PROMPT_ONLY = 1;
+        # Make those happen early to avoid doing double the work
+        initExtraFirst = ''
+          ${
+            lib.optionalString cfg.launchTmux ''
+              # Launch tmux unless already inside one
+              if [ -z "$TMUX" ]; then
+                exec tmux new-session
+              fi
+            ''
+          }
+        '';
+
+        initExtra = ''
+          source ${./completion-styles.zsh}
+          source ${./extra-mappings.zsh}
+          source ${./options.zsh}
+
+          # Source local configuration
+          if [ -f "$ZDOTDIR/zshrc.local" ]; then
+            source "$ZDOTDIR/zshrc.local"
+          fi
+        '';
+
+        localVariables = {
+          # I like having the full path
+          AGKOZAK_PROMPT_DIRTRIM = 0;
+          # Because I *am* from EPITA
+          AGKOZAK_PROMPT_CHAR = [ "42sh$" "42sh#" ":" ];
+          # Easy on the eyes
+          AGKOZAK_COLORS_BRANCH_STATUS = "magenta";
+          # I don't like moving my eyes
+          AGKOZAK_LEFT_PROMPT_ONLY = 1;
+        };
+
+        # Enable VTE integration
+        enableVteIntegration = true;
       };
-
-      # Enable VTE integration
-      enableVteIntegration = true;
-    };
-  };
+    }
+  ]);
 }
