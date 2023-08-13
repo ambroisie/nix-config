@@ -56,7 +56,7 @@ in
         defaultKeymap = "emacs";
 
         # Make those happen early to avoid doing double the work
-        initExtraFirst = ''
+        initExtraFirst = lib.mkBefore ''
           ${
             lib.optionalString cfg.launchTmux ''
               # Launch tmux unless already inside one
@@ -67,7 +67,7 @@ in
           }
         '';
 
-        initExtra = ''
+        initExtra = lib.mkAfter ''
           source ${./completion-styles.zsh}
           source ${./extra-mappings.zsh}
           source ${./options.zsh}
