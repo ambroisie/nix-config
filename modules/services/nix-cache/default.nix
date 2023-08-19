@@ -1,11 +1,11 @@
 # Binary cache through nix-serve
 { config, lib, pkgs, ... }:
 let
-  cfg = config.my.services.nix-serve;
+  cfg = config.my.services.nix-cache;
 in
 {
-  options.my.services.nix-serve = with lib; {
-    enable = mkEnableOption "nix-serve binary cache";
+  options.my.services.nix-cache = with lib; {
+    enable = mkEnableOption "nix binary cache";
 
     port = mkOption {
       type = types.port;
@@ -16,7 +16,7 @@ in
 
     secretKeyFile = mkOption {
       type = types.str;
-      example = "/run/secrets/nix-serve";
+      example = "/run/secrets/nix-cache";
       description = "Secret signing key for the cache";
     };
 
