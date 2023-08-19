@@ -1,5 +1,5 @@
-# Binary cache through nix-serve
-{ config, lib, pkgs, ... }:
+# Binary cache
+{ config, lib, ... }:
 let
   cfg = config.my.services.nix-cache;
 in
@@ -32,19 +32,15 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    services.nix-serve = {
+    services.harmonia = {
       enable = true;
 
-      bindAddress = "127.0.0.1";
+      settings = {
+        bind = "127.0.0.1:${toString cfg.port}";
+        inherit (cfg) priority;
+      };
 
-      inherit (cfg)
-        port
-        secretKeyFile
-        ;
-
-      package = pkgs.nix-serve-ng;
-
-      extraParams = "--priority=${toString cfg.priority}";
+      signKeyPath = cfg.secretKeyFile;
     };
 
     my.services.nginx.virtualHosts = [
