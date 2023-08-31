@@ -11,7 +11,6 @@ BOLD_GREEN="\e[0;1;32m"
 
 RESET="\e[0m"
 
-DEST="$HOME/.config/nixpkgs"
 BW_SESSION=""
 
 warn() {
