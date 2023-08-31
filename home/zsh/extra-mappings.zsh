@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # shellcheck disable=2154
 
 # Fix Ctrl+u killing from the cursor instead of the whole line

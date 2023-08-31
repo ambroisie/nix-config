@@ -1,5 +1,6 @@
 #!/usr/bin/env nix-shell
 #! nix-shell -i bash -p bitwarden-cli git gnupg jq nix
+# shellcheck shell=bash
 
 # Command failure is script failure
 set -e

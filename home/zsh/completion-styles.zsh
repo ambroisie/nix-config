@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 # Style the completion a bit
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # Show a prompt on selection
