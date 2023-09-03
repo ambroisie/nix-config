@@ -13,26 +13,44 @@ let
     sonarr = 8989;
   };
 
-  managers = with lib.attrsets;
-    (mapAttrs
-      (_: _: {
-        enable = true;
-        group = "media";
-      })
-      ports);
+  mkService = service: {
+    services.${service} = {
+      enable = true;
+      group = "media";
+    };
+  };
 
-  redirections = lib.flip lib.mapAttrsToList ports
-    (subdomain: port: { inherit subdomain port; });
+  mkRedirection = service: {
+    my.services.nginx.virtualHosts = [
+      {
+        subdomain = service;
+        port = ports.${service};
+      }
+    ];
+  };
+
+  mkFullConfig = service: lib.mkMerge [
+    (mkService service)
+    (mkRedirection service)
+  ];
 in
 {
   options.my.services.pirate = {
     enable = lib.mkEnableOption "Media automation";
   };
 
-  config = lib.mkIf cfg.enable {
-    services = managers;
-    my.services.nginx.virtualHosts = redirections;
-    # Set-up media group
-    users.groups.media = { };
-  };
+  config = lib.mkIf cfg.enable (lib.mkMerge [
+    {
+      # Set-up media group
+      users.groups.media = { };
+    }
+    # Bazarr for subtitles
+    (mkFullConfig "bazarr")
+    # Lidarr for music
+    (mkFullConfig "lidarr")
+    # Radarr for movies
+    (mkFullConfig "radarr")
+    # Sonarr for shows
+    (mkFullConfig "sonarr")
+  ]);
 }
