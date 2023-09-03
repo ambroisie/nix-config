@@ -29,6 +29,24 @@ let
     ];
   };
 
+  mkFail2Ban = service: {
+    services.fail2ban.jails = {
+      ${service} = ''
+        enabled = true
+        filter = ${service}
+        action = iptables-allports
+      '';
+    };
+
+    environment.etc = {
+      "fail2ban/filter.d/${service}.conf".text = ''
+        [Definition]
+        failregex = ^.*\|Warn\|Auth\|Auth-Failure ip <HOST> username .*$
+        journalmatch = _SYSTEMD_UNIT=${service}.service
+      '';
+    };
+  };
+
   mkFullConfig = service: lib.mkMerge [
     (mkService service)
     (mkRedirection service)
@@ -44,13 +62,16 @@ in
       # Set-up media group
       users.groups.media = { };
     }
-    # Bazarr for subtitles
+    # Bazarr does not log authentication failures...
     (mkFullConfig "bazarr")
     # Lidarr for music
     (mkFullConfig "lidarr")
+    (mkFail2Ban "lidarr")
     # Radarr for movies
     (mkFullConfig "radarr")
+    (mkFail2Ban "radarr")
     # Sonarr for shows
     (mkFullConfig "sonarr")
+    (mkFail2Ban "sonarr")
   ]);
 }
