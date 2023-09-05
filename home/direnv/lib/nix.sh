@@ -9,6 +9,8 @@ use_pkgs() {
 
     # Use user-provided default value, or fallback to nixpkgs
     local DEFAULT_FLAKE="${DIRENV_DEFAULT_FLAKE:-nixpkgs}"
+    # Additional args that should be forwarded to `nix`
+    local args=()
 
     # Allow changing the default flake through a command line switch
     while true; do
@@ -16,6 +18,10 @@ use_pkgs() {
             -f|--flake)
                 DEFAULT_FLAKE="$2"
                 shift 2
+                ;;
+            -i|--impure)
+                args+=(--impure)
+                shift
                 ;;
             --)
                 shift
@@ -39,5 +45,5 @@ use_pkgs() {
     done
 
     # shellcheck disable=2154
-    direnv_load nix shell "${packages[@]}" --command "$direnv" dump
+    direnv_load nix shell "${args[@]}" "${packages[@]}" --command "$direnv" dump
 }
