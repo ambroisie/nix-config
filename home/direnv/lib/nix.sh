@@ -23,6 +23,11 @@ use_pkgs() {
                 args+=(--impure)
                 shift
                 ;;
+            -u|--unfree)
+                args+=(--impure)
+                export NIXPKGS_ALLOW_UNFREE=1
+                shift
+                ;;
             --)
                 shift
                 break
@@ -46,4 +51,7 @@ use_pkgs() {
 
     # shellcheck disable=2154
     direnv_load nix shell "${args[@]}" "${packages[@]}" --command "$direnv" dump
+
+    # Clean-up after ourselves (assumes the user does not set them before us)
+    unset NIXPKGS_ALLOW_UNFREE
 }
