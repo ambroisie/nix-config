@@ -15,6 +15,11 @@ use_pkgs() {
     # Allow changing the default flake through a command line switch
     while true; do
         case "$1" in
+            -b|--broken)
+                args+=(--impure)
+                export NIXPKGS_ALLOW_BROKEN=1
+                shift
+                ;;
             -f|--flake)
                 DEFAULT_FLAKE="$2"
                 shift 2
@@ -58,6 +63,7 @@ use_pkgs() {
     direnv_load nix shell "${args[@]}" "${packages[@]}" --command "$direnv" dump
 
     # Clean-up after ourselves (assumes the user does not set them before us)
+    unset NIXPKGS_ALLOW_BROKEN
     unset NIXPKGS_ALLOW_INSECURE
     unset NIXPKGS_ALLOW_UNFREE
 }
