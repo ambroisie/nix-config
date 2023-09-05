@@ -11,10 +11,21 @@ use_pkgs() {
     local DEFAULT_FLAKE="${DIRENV_DEFAULT_FLAKE:-nixpkgs}"
 
     # Allow changing the default flake through a command line switch
-    if [ "$1" = "-f" ] || [ "$1" = "--flake" ]; then
-        DEFAULT_FLAKE="$2"
-        shift 2
-    fi
+    while true; do
+        case "$1" in
+            -f|--flake)
+                DEFAULT_FLAKE="$2"
+                shift 2
+                ;;
+            --)
+                shift
+                break
+                ;;
+            *)
+                break
+                ;;
+        esac
+    done
 
 
     # Allow specifying a full installable, or just a package name and use the default flake
