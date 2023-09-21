@@ -60,6 +60,7 @@ in
       ++ (lib.optionals config.virtualisation.docker.enable [
         "/var/lib/docker"
       ])
+      # FIXME: podman
       ++ cfg.directories
       ;
     };
