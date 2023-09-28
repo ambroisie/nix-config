@@ -117,6 +117,15 @@ in
           };
         };
       }
+      # Dummy VHosts for port collision detection
+      {
+        subdomain = "matrix-federation";
+        port = federationPort.private;
+      }
+      {
+        subdomain = "matrix-client";
+        port = clientPort.private;
+      }
     ];
 
     # Those are too complicated to use my wrapper...
