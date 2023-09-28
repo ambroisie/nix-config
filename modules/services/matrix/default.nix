@@ -13,6 +13,7 @@ let
   federationPort = { public = 8448; private = 11338; };
   clientPort = { public = 443; private = 11339; };
   domain = config.networking.domain;
+  matrixDomain = "matrix.${domain}";
 in
 {
   options.my.services.matrix = with lib; {
@@ -52,7 +53,7 @@ in
 
       settings = {
         server_name = domain;
-        public_baseurl = "https://matrix.${domain}";
+        public_baseurl = "https://${matrixDomain}";
 
         enable_registration = false;
 
@@ -98,7 +99,7 @@ in
           conf = {
             default_server_config = {
               "m.homeserver" = {
-                "base_url" = "https://matrix.${domain}";
+                "base_url" = "https://${matrixDomain}";
                 "server_name" = domain;
               };
               "m.identity_server" = {
@@ -120,7 +121,7 @@ in
 
     # Those are too complicated to use my wrapper...
     services.nginx.virtualHosts = {
-      "matrix.${domain}" = {
+      ${matrixDomain} = {
         onlySSL = true;
         useACMEHost = domain;
 
@@ -148,9 +149,9 @@ in
       };
 
       # same as above, but listening on the federation port
-      "matrix.${domain}_federation" = {
+      "${matrixDomain}_federation" = {
         onlySSL = true;
-        serverName = "matrix.${domain}";
+        serverName = matrixDomain;
         useACMEHost = domain;
 
         locations."/".return = "404";
@@ -171,7 +172,7 @@ in
 
         locations."= /.well-known/matrix/server".extraConfig =
           let
-            server = { "m.server" = "matrix.${domain}:${toString federationPort.public}"; };
+            server = { "m.server" = "${matrixDomain}:${toString federationPort.public}"; };
           in
           ''
             add_header Content-Type application/json;
@@ -181,7 +182,7 @@ in
         locations."= /.well-known/matrix/client".extraConfig =
           let
             client = {
-              "m.homeserver" = { "base_url" = "https://matrix.${domain}"; };
+              "m.homeserver" = { "base_url" = "https://${matrixDomain}"; };
               "m.identity_server" = { "base_url" = "https://vector.im"; };
             };
             # ACAO required to allow element-web on any URL to request this json file
