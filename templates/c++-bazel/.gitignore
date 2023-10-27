@@ -1,0 +1,6 @@
+# Bazel build directories
+/bazel-*/
+
+# Nix generated files
+/.pre-commit-config.yaml
+/result
