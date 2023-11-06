@@ -12,7 +12,7 @@ in
         WOODPECKER_HOST = "https://woodpecker.${config.networking.domain}";
         WOODPECKER_DATABASE_DRIVER = "postgres";
         WOODPECKER_DATABASE_DATASOURCE = "postgres:///woodpecker?host=/run/postgresql";
-        WOODPECKER_ADMIN = "${cfg.admin}";
+        WOODPECKER_ADMIN = cfg.admin;
         WOODPECKER_SERVER_ADDR = ":${toString cfg.port}";
         WOODPECKER_GRPC_ADDR = ":${toString cfg.rpcPort}";
 
