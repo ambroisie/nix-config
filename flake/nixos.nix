@@ -13,7 +13,7 @@ let
       ];
     }
     # Include generic settings
-    "${self}/modules"
+    "${self}/modules/nixos"
     # Include bundles of settings
     "${self}/profiles"
   ];
