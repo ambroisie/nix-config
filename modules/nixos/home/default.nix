@@ -14,7 +14,7 @@ in
   config = lib.mkIf cfg.enable {
     home-manager = {
       # Not a fan of out-of-directory imports, but this is a good exception
-      users.${config.my.user.name} = import "${inputs.self}/home";
+      users.${config.my.user.name} = import "${inputs.self}/modules/home";
 
       # Nix Flakes compatibility
       useGlobalPkgs = true;
