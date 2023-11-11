@@ -39,6 +39,13 @@
       };
     };
 
+    impermanence = {
+      type = "github";
+      owner = "nix-community";
+      repo = "impermanence";
+      ref = "master";
+    };
+
     nixpkgs = {
       type = "github";
       owner = "NixOS";
