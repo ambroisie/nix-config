@@ -40,6 +40,11 @@ let
   };
 
   mkHome = name: mkHomeCommon [ "${self}/hosts/homes/${name}" ];
+
+  mkNixosHome = name: mkHomeCommon [
+    "${self}/hosts/nixos/${name}/home.nix"
+    "${self}/hosts/nixos/${name}/profiles.nix"
+  ];
 in
 {
   hosts.homes = {
@@ -57,8 +62,18 @@ in
             # Default configuration
             ambroisie = system;
           };
+          homeManagerHomes = lib.mapAttrs mkHome allHomes;
+
+          filteredNixosHosts = lib.filterAttrs (_: v: v == system) hosts.nixos;
+          nixosHomes' = lib.mapAttrs mkNixosHome filteredNixosHosts;
+          nixosHomeUsername = (host: self.nixosConfigurations.${host}.config.my.user.name);
+          nixosHomes = lib.mapAttrs' (host: lib.nameValuePair "${nixosHomeUsername host}@${host}") nixosHomes';
         in
-        lib.mapAttrs mkHome allHomes;
+        lib.foldl' lib.mergeAttrs { }
+          [
+            homeManagerHomes
+            nixosHomes
+          ];
     };
   };
 }
