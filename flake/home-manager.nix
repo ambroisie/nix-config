@@ -25,12 +25,10 @@ let
     "${self}/modules/common"
   ];
 
-  mkHome = name: system: inputs.home-manager.lib.homeManagerConfiguration {
+  mkHomeCommon = mainModules: system: inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.${system};
 
-    modules = defaultModules ++ [
-      "${self}/hosts/homes/${name}"
-    ];
+    modules = defaultModules ++ mainModules;
 
     # Use my extended lib in NixOS configuration
     inherit (self) lib;
@@ -41,6 +39,7 @@ let
     };
   };
 
+  mkHome = name: mkHomeCommon [ "${self}/hosts/homes/${name}" ];
 in
 {
   hosts.homes = {
