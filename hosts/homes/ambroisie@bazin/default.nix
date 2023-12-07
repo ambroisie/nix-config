@@ -1,11 +1,13 @@
 # Google Cloudtop configuration
 { lib, pkgs, ... }:
 {
-  programs.git.package = lib.mkForce pkgs.emptyDirectory;
-
   services.gpg-agent.enable = lib.mkForce false;
 
   my.home = {
+    git = {
+      package = pkgs.emptyDirectory;
+    };
+
     tmux = {
       # I use scripts that use the passthrough sequence often on this host
       enablePassthrough = true;
