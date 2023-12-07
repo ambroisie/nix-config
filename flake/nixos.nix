@@ -1,4 +1,4 @@
-{ self, inputs, lib, ... }:
+{ self, config, inputs, lib, ... }:
 let
   defaultModules = [
     {
@@ -32,8 +32,12 @@ let
   };
 in
 {
-  flake.nixosConfigurations = lib.mapAttrs buildHost {
-    aramis = "x86_64-linux";
-    porthos = "x86_64-linux";
+  config = {
+    hosts.nixos = {
+      aramis = "x86_64-linux";
+      porthos = "x86_64-linux";
+    };
+
+    flake.nixosConfigurations = lib.mapAttrs buildHost config.hosts.nixos;
   };
 }
