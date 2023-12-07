@@ -1,5 +1,7 @@
-{ self, inputs, lib, ... }:
+{ self, config, inputs, lib, ... }:
 let
+  inherit (config) hosts;
+
   defaultModules = [
     # Include generic settings
     "${self}/modules/home"
@@ -39,18 +41,19 @@ let
     };
   };
 
-  homes = {
+in
+{
+  hosts.homes = {
     "ambroisie@bazin" = "x86_64-linux";
     "ambroisie@mousqueton" = "x86_64-linux";
   };
-in
-{
+
   perSystem = { system, ... }: {
     # Work-around for https://github.com/nix-community/home-manager/issues/3075
     legacyPackages = {
       homeConfigurations =
         let
-          filteredHomes = lib.filterAttrs (_: v: v == system) homes;
+          filteredHomes = lib.filterAttrs (_: v: v == system) hosts.homes;
           allHomes = filteredHomes // {
             # Default configuration
             ambroisie = system;
