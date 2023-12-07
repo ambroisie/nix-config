@@ -13,5 +13,11 @@
       # HTerm uses `xterm-256color` as its `$TERM`, so use that here
       trueColorTerminals = [ "xterm-256color" ];
     };
+
+    ssh = {
+      mosh = {
+        package = pkgs.emptyDirectory;
+      };
+    };
   };
 }
