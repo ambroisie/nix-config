@@ -1,10 +1,16 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.my.home.ssh;
 in
 {
   options.my.home.ssh = with lib; {
     enable = my.mkDisableOption "ssh configuration";
+
+    mosh = {
+      enable = my.mkDisableOption "mosh configuration";
+
+      package = mkPackageOption pkgs "mosh" { };
+    };
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
@@ -54,5 +60,11 @@ in
         '';
       };
     }
+
+    (lib.mkIf cfg.mosh.enable {
+      home.packages = [
+        cfg.mosh.package
+      ];
+    })
   ]);
 }
