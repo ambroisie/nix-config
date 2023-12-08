@@ -17,9 +17,11 @@ in
     };
   };
 
-  config.home.packages = with pkgs; lib.mkIf cfg.enable ([
-    fd
-    file
-    ripgrep
-  ] ++ cfg.additionalPackages);
+  config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; ([
+      fd
+      file
+      ripgrep
+    ] ++ cfg.additionalPackages);
+  };
 }
