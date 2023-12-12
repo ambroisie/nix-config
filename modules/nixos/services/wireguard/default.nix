@@ -261,5 +261,17 @@ in
     (lib.mkIf (cfg.internal.enable && !cfg.internal.startAtBoot) {
       systemd.services."wg-quick-${cfg.internal.name}".wantedBy = lib.mkForce [ ];
     })
+
+    # Make systemd shut down one service when starting the other
+    (lib.mkIf (cfg.internal.enable) {
+      systemd.services."wg-quick-${cfg.iface}" = {
+        conflicts = [ "wg-quick-${cfg.internal.name}.service" ];
+        after = [ "wg-quick-${cfg.internal.name}.service" ];
+      };
+      systemd.services."wg-quick-${cfg.internal.name}" = {
+        conflicts = [ "wg-quick-${cfg.iface}.service" ];
+        after = [ "wg-quick-${cfg.iface}.service" ];
+      };
+    })
   ]);
 }
