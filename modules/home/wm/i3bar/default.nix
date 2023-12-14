@@ -17,7 +17,7 @@ in
         top = {
           icons = "awesome5";
 
-          blocks = builtins.filter (attr: attr != { }) [
+          blocks = builtins.filter (attr: attr != { }) (lib.flatten [
             {
               block = "music";
               # This format seems to remove the block when not playing, somehow
@@ -92,7 +92,7 @@ in
               format = " $icon $timestamp.datetime(f:'%F %T') ";
               interval = 5;
             }
-          ];
+          ]);
         };
       };
     };
