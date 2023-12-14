@@ -32,8 +32,6 @@ pkgs.lib.makeScope pkgs.newScope (pkgs: {
 
   unified-hosts-lists = pkgs.callPackage ./unified-hosts-lists { };
 
-  vimix-cursors = pkgs.callPackage ./vimix-cursors { };
-
   wifi-qr = pkgs.callPackage ./wifi-qr { };
 
   zsh-done = pkgs.callPackage ./zsh-done { };
