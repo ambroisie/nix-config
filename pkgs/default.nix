@@ -16,8 +16,6 @@ pkgs.lib.makeScope pkgs.newScope (pkgs: {
 
   drone-scp = pkgs.callPackage ./drone-scp { };
 
-  ff2mpv-go = pkgs.callPackage ./ff2mpv-go { };
-
   i3-get-window-criteria = pkgs.callPackage ./i3-get-window-criteria { };
 
   lohr = pkgs.callPackage ./lohr { };
