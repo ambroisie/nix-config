@@ -59,6 +59,19 @@ in
             {
               block = "disk_space";
             }
+            (lib.optionals cfg.vpn.enable
+              (
+                let
+                  defaults = {
+                    block = "service_status";
+                    active_state = "Good";
+                    inactive_format = "";
+                    inactive_state = "Idle";
+                  };
+                in
+                builtins.map (block: defaults // block) cfg.vpn.blockConfigs
+              )
+            )
             {
               block = "net";
               format = " $icon{| $ssid|} $ip{| $signal_strength|} ";
