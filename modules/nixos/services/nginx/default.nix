@@ -403,7 +403,7 @@ in
     };
 
     my.services.nginx.virtualHosts = {
-      login = {
+      ${cfg.sso.subdomain} = {
         inherit (cfg.sso) port;
       };
     };
