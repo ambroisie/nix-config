@@ -33,7 +33,6 @@ in
 
     my.services.nginx.virtualHosts = {
       podgrab = {
-        subdomain = "podgrab";
         inherit (cfg) port;
       };
     };

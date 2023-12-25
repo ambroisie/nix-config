@@ -60,8 +60,7 @@ in
 
     # This is a weird setup
     my.services.nginx.virtualHosts = {
-      vikunja = {
-        inherit subdomain;
+      ${subdomain} = {
         # Serve the root for the web-ui
         root = config.services.vikunja.package-frontend;
 

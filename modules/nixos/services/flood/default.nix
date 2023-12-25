@@ -42,7 +42,6 @@ in
 
     my.services.nginx.virtualHosts = {
       flood = {
-        subdomain = "flood";
         inherit (cfg) port;
       };
     };

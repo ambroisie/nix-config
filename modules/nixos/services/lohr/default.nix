@@ -100,7 +100,6 @@ in
 
     my.services.nginx.virtualHosts = {
       lohr = {
-        subdomain = "lohr";
         inherit (cfg) port;
       };
     };

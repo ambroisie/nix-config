@@ -145,7 +145,6 @@ in
 
     my.services.nginx.virtualHosts = {
       paperless = {
-        subdomain = "paperless";
         inherit (cfg) port;
         sso = {
           enable = true;

@@ -72,7 +72,6 @@ in
 
     my.services.nginx.virtualHosts = {
       recipes = {
-        subdomain = "recipes";
         inherit (cfg) port;
       };
     };

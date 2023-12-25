@@ -30,7 +30,6 @@ in
 
       my.services.nginx.virtualHosts = {
         jackett = {
-          subdomain = "jackett";
           port = jackettPort;
         };
       };
@@ -43,7 +42,6 @@ in
 
       my.services.nginx.virtualHosts = {
         nzbhydra = {
-          subdomain = "nzbhydra";
           port = nzbhydraPort;
         };
       };
@@ -56,7 +54,6 @@ in
 
       my.services.nginx.virtualHosts = {
         prowlarr = {
-          subdomain = "prowlarr";
           port = prowlarrPort;
         };
       };

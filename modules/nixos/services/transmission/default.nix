@@ -82,7 +82,6 @@ in
     # seems to have stalled
     my.services.nginx.virtualHosts = {
       transmission = {
-        subdomain = "transmission";
         inherit (cfg) port;
       };
     };

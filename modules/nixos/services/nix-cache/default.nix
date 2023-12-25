@@ -45,7 +45,6 @@ in
 
     my.services.nginx.virtualHosts = {
       cache = {
-        subdomain = "cache";
         inherit (cfg) port;
       };
     };

@@ -19,7 +19,6 @@ in
 
     my.services.nginx.virtualHosts = {
       jellyfin = {
-        subdomain = "jellyfin";
         port = 8096;
         extraConfig = {
           locations."/" = {

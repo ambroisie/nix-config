@@ -119,12 +119,10 @@ in
     my.services.nginx.virtualHosts = {
       # Proxy to Gitea
       git = {
-        subdomain = "git";
         inherit (cfg) port;
       };
       # Redirect `gitea.` to actual forge subdomain
       gitea = {
-        subdomain = "gitea";
         redirect = config.services.gitea.settings.server.ROOT_URL;
       };
     };

@@ -23,7 +23,6 @@ let
   mkRedirection = service: {
     my.services.nginx.virtualHosts = {
       ${service} = {
-        subdomain = service;
         port = ports.${service};
       };
     };

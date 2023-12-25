@@ -49,7 +49,6 @@ in
 
     my.services.nginx.virtualHosts = {
       music = {
-        subdomain = "music";
         inherit (cfg) port;
       };
     };

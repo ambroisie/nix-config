@@ -47,7 +47,6 @@ in
 
     my.services.nginx.virtualHosts = {
       drone = {
-        subdomain = "drone";
         inherit (cfg) port;
       };
     };

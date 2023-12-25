@@ -404,7 +404,6 @@ in
 
     my.services.nginx.virtualHosts = {
       login = {
-        subdomain = "login";
         inherit (cfg.sso) port;
       };
     };

@@ -5,7 +5,6 @@ let
   domain = config.networking.domain;
 
   makeHostInfo = subdomain: {
-    inherit subdomain;
     root = "/var/www/${subdomain}";
   };
 

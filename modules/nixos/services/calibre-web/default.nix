@@ -42,7 +42,6 @@ in
 
     my.services.nginx.virtualHosts = {
       library = {
-        subdomain = "library";
         inherit (cfg) port;
       };
     };

@@ -20,7 +20,6 @@ in
 
     my.services.nginx.virtualHosts = {
       sabnzbd = {
-        subdomain = "sabnzbd";
         inherit port;
       };
     };
