@@ -5,10 +5,11 @@ let
 
   domain = config.networking.domain;
 
-  virtualHostOption = with lib; types.submodule {
+  virtualHostOption = with lib; types.submodule ({ name, ... }: {
     options = {
       subdomain = mkOption {
         type = types.str;
+        default = name;
         example = "dev";
         description = ''
           Which subdomain, under config.networking.domain, to use
@@ -72,7 +73,7 @@ let
         '';
       };
     };
-  };
+  });
 in
 {
   imports = [
@@ -106,11 +107,9 @@ in
             port = 8080;
           };
           dev = {
-            subdomain = "dev";
             root = "/var/www/dev";
           };
           jellyfin = {
-            subdomain = "jellyfin";
             port = 8096;
             extraConfig = {
               locations."/socket" = {
