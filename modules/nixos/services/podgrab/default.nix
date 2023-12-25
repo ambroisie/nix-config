@@ -31,11 +31,11 @@ in
       inherit (cfg) passwordFile port;
     };
 
-    my.services.nginx.virtualHosts = [
-      {
+    my.services.nginx.virtualHosts = {
+      podgrab = {
         subdomain = "podgrab";
         inherit (cfg) port;
-      }
-    ];
+      };
+    };
   };
 }

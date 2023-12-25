@@ -52,16 +52,16 @@ in
       }];
     };
 
-    my.services.nginx.virtualHosts = [
-      {
+    my.services.nginx.virtualHosts = {
+      woodpecker = {
         subdomain = "woodpecker";
         inherit (cfg) port;
-      }
+      };
       # I might want to be able to RPC from other hosts in the future
-      {
+      woodpecker-rpc = {
         subdomain = "woodpecker-rpc";
         port = cfg.rpcPort;
-      }
-    ];
+      };
+    };
   };
 }

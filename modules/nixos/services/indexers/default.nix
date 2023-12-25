@@ -28,12 +28,12 @@ in
         };
       };
 
-      my.services.nginx.virtualHosts = [
-        {
+      my.services.nginx.virtualHosts = {
+        jackett = {
           subdomain = "jackett";
           port = jackettPort;
-        }
-      ];
+        };
+      };
     })
 
     (lib.mkIf cfg.nzbhydra.enable {
@@ -41,12 +41,12 @@ in
         enable = true;
       };
 
-      my.services.nginx.virtualHosts = [
-        {
+      my.services.nginx.virtualHosts = {
+        nzbhydra = {
           subdomain = "nzbhydra";
           port = nzbhydraPort;
-        }
-      ];
+        };
+      };
     })
 
     (lib.mkIf cfg.prowlarr.enable {
@@ -54,12 +54,12 @@ in
         enable = true;
       };
 
-      my.services.nginx.virtualHosts = [
-        {
+      my.services.nginx.virtualHosts = {
+        prowlarr = {
           subdomain = "prowlarr";
           port = prowlarrPort;
-        }
-      ];
+        };
+      };
 
       services.fail2ban.jails = {
         prowlarr = ''

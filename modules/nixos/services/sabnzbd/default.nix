@@ -18,12 +18,12 @@ in
     # Set-up media group
     users.groups.media = { };
 
-    my.services.nginx.virtualHosts = [
-      {
+    my.services.nginx.virtualHosts = {
+      sabnzbd = {
         subdomain = "sabnzbd";
         inherit port;
-      }
-    ];
+      };
+    };
 
     services.fail2ban.jails = {
       sabnzbd = ''

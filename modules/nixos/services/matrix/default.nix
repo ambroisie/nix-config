@@ -117,9 +117,9 @@ in
       };
     };
 
-    my.services.nginx.virtualHosts = [
+    my.services.nginx.virtualHosts = {
       # Element Web app deployment
-      {
+      chat = {
         subdomain = "chat";
         root = pkgs.element-web.override {
           conf = {
@@ -145,22 +145,22 @@ in
             };
           };
         };
-      }
+      };
       # Dummy VHosts for port collision detection
-      {
+      matrix-federation = {
         subdomain = "matrix-federation";
         port = federationPort.private;
-      }
-      {
+      };
+      matrix-client = {
         subdomain = "matrix-client";
         port = clientPort.private;
-      }
+      };
       # Sliding sync
-      {
+      matrix-sync = {
         subdomain = "matrix-sync";
         inherit (cfg.slidingSync) port;
-      }
-    ];
+      };
+    };
 
     # Those are too complicated to use my wrapper...
     services.nginx.virtualHosts = {

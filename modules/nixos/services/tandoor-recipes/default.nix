@@ -70,11 +70,11 @@ in
       ];
     };
 
-    my.services.nginx.virtualHosts = [
-      {
+    my.services.nginx.virtualHosts = {
+      recipes = {
         subdomain = "recipes";
         inherit (cfg) port;
-      }
-    ];
+      };
+    };
   };
 }

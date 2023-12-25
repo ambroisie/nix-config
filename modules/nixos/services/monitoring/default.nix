@@ -125,11 +125,11 @@ in
       ];
     };
 
-    my.services.nginx.virtualHosts = [
-      {
+    my.services.nginx.virtualHosts = {
+      monitoring = {
         subdomain = "monitoring";
         inherit (cfg.grafana) port;
-      }
-    ];
+      };
+    };
   };
 }

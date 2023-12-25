@@ -59,8 +59,8 @@ in
     };
 
     # This is a weird setup
-    my.services.nginx.virtualHosts = [
-      {
+    my.services.nginx.virtualHosts = {
+      vikunja = {
         inherit subdomain;
         # Serve the root for the web-ui
         root = config.services.vikunja.package-frontend;
@@ -80,8 +80,8 @@ in
             };
           };
         };
-      }
-    ];
+      };
+    };
 
     systemd.services.vikunja-api = {
       serviceConfig = {

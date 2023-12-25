@@ -43,11 +43,11 @@ in
       signKeyPath = cfg.secretKeyFile;
     };
 
-    my.services.nginx.virtualHosts = [
-      {
+    my.services.nginx.virtualHosts = {
+      cache = {
         subdomain = "cache";
         inherit (cfg) port;
-      }
-    ];
+      };
+    };
   };
 }

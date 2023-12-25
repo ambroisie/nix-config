@@ -143,8 +143,8 @@ in
       extraGroups = [ "media" ];
     };
 
-    my.services.nginx.virtualHosts = [
-      {
+    my.services.nginx.virtualHosts = {
+      paperless = {
         subdomain = "paperless";
         inherit (cfg) port;
         sso = {
@@ -155,8 +155,8 @@ in
         extraConfig = {
           locations."/".proxyWebsockets = true;
         };
-      }
-    ];
+      };
+    };
 
     my.services.backup = {
       paths = [

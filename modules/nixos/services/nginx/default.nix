@@ -97,19 +97,19 @@ in
     };
 
     virtualHosts = mkOption {
-      type = types.listOf virtualHostOption;
-      default = [ ];
+      type = types.attrsOf virtualHostOption;
+      default = { };
       example = litteralExample ''
-        [
-          {
-            subdomain = "gitea";
+        {
+          gitea = {
+            subdomain = "git";
             port = 8080;
-          }
-          {
+          };
+          dev = {
             subdomain = "dev";
             root = "/var/www/dev";
-          }
-          {
+          };
+          jellyfin = {
             subdomain = "jellyfin";
             port = 8096;
             extraConfig = {
@@ -118,8 +118,8 @@ in
                 proxyWebsockets = true;
               };
             };
-          }
-        ]
+          };
+        }
       '';
       description = ''
         List of virtual hosts to set-up using default settings.
@@ -190,7 +190,7 @@ in
 
   config = lib.mkIf cfg.enable {
     assertions = [ ]
-      ++ (lib.flip builtins.map cfg.virtualHosts ({ subdomain, ... } @ args:
+      ++ (lib.flip lib.mapAttrsToList cfg.virtualHosts (_: { subdomain, ... } @ args:
       let
         conflicts = [ "port" "root" "socket" "redirect" ];
         optionsNotNull = builtins.map (v: args.${v} != null) conflicts;
@@ -209,7 +209,7 @@ in
         ports = lib.my.mapFilter
           (v: v != null)
           ({ port, ... }: port)
-          cfg.virtualHosts;
+          (lib.attrValues cfg.virtualHosts);
         portCounts = lib.my.countValues ports;
         nonUniquesCounts = lib.filterAttrs (_: v: v != 1) portCounts;
         nonUniques = builtins.attrNames nonUniquesCounts;
@@ -221,7 +221,7 @@ in
       map mkAssertion nonUniques
     ) ++ (
       let
-        subs = map ({ subdomain, ... }: subdomain) cfg.virtualHosts;
+        subs = lib.mapAttrsToList (_: { subdomain, ... }: subdomain) cfg.virtualHosts;
         subsCounts = lib.my.countValues subs;
         nonUniquesCounts = lib.filterAttrs (_: v: v != 1) subsCounts;
         nonUniques = builtins.attrNames nonUniquesCounts;
@@ -325,7 +325,7 @@ in
             ])
           );
         in
-        lib.my.genAttrs' cfg.virtualHosts mkVHost;
+        lib.my.genAttrs' (lib.attrValues cfg.virtualHosts) mkVHost;
 
       sso = {
         enable = true;
@@ -403,12 +403,12 @@ in
       };
     };
 
-    my.services.nginx.virtualHosts = [
-      {
+    my.services.nginx.virtualHosts = {
+      login = {
         subdomain = "login";
         inherit (cfg.sso) port;
-      }
-    ];
+      };
+    };
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 

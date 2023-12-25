@@ -45,11 +45,11 @@ in
       }];
     };
 
-    my.services.nginx.virtualHosts = [
-      {
+    my.services.nginx.virtualHosts = {
+      drone = {
         subdomain = "drone";
         inherit (cfg) port;
-      }
-    ];
+      };
+    };
   };
 }

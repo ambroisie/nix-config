@@ -40,12 +40,12 @@ in
     # Set-up media group
     users.groups.media = { };
 
-    my.services.nginx.virtualHosts = [
-      {
+    my.services.nginx.virtualHosts = {
+      library = {
         subdomain = "library";
         inherit (cfg) port;
-      }
-    ];
+      };
+    };
 
     my.services.backup = {
       paths = [
