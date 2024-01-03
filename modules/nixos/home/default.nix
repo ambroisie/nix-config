@@ -13,8 +13,13 @@ in
 
   config = lib.mkIf cfg.enable {
     home-manager = {
-      # Not a fan of out-of-directory imports, but this is a good exception
-      users.${config.my.user.name} = import "${inputs.self}/modules/home";
+      users.${config.my.user.name} = {
+        # Not a fan of out-of-directory imports, but this is a good exception
+        imports = [
+          "${inputs.self}/modules/common"
+          "${inputs.self}/modules/home"
+        ];
+      };
 
       # Nix Flakes compatibility
       useGlobalPkgs = true;
