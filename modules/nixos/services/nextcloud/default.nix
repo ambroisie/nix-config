@@ -41,6 +41,9 @@ in
         adminpassFile = cfg.passwordFile;
         dbtype = "pgsql";
         dbhost = "/run/postgresql";
+      };
+
+      extraOptions = {
         overwriteProtocol = "https"; # Nginx only allows SSL
       };
 
