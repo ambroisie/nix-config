@@ -7,6 +7,7 @@
     ./hardware.nix
     ./home.nix
     ./networking.nix
+    ./profiles.nix
     ./secrets
     ./services.nix
     ./system.nix
