@@ -2,7 +2,6 @@
 { ... }:
 {
   imports = [
-    ./bluetooth
     ./devices
     ./gtk
     ./laptop

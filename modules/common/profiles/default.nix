@@ -2,6 +2,6 @@
 { ... }:
 {
   imports = [
-    # FIXME: empty
+    ./bluetooth
   ];
 }
