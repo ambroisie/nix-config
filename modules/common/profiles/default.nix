@@ -7,5 +7,6 @@
     ./gtk
     ./laptop
     ./wm
+    ./x
   ];
 }

@@ -5,7 +5,6 @@
   imports = [
     ./hardware
     ./home
-    ./profiles
     ./programs
     ./secrets
     ./services
