@@ -12,6 +12,8 @@ let
     }
     # Include generic settings
     "${self}/modules/nixos"
+    # Import common modules
+    "${self}/modules/common"
   ];
 
   buildHost = name: system: lib.nixosSystem {
