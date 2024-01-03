@@ -6,5 +6,6 @@
     ./devices
     ./gtk
     ./laptop
+    ./wm
   ];
 }
