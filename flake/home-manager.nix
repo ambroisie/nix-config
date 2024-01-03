@@ -19,6 +19,8 @@ let
       # Enable home-manager
       programs.home-manager.enable = true;
     }
+    # Import common modules
+    "${self}/modules/common"
   ];
 
   mkHome = name: system: inputs.home-manager.lib.homeManagerConfiguration {
