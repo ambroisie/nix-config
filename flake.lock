@@ -86,7 +86,9 @@
     },
     "futils": {
       "inputs": {
-        "systems": "systems"
+        "systems": [
+          "systems"
+        ]
       },
       "locked": {
         "lastModified": 1701680307,
@@ -214,7 +216,8 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
-        "pre-commit-hooks": "pre-commit-hooks"
+        "pre-commit-hooks": "pre-commit-hooks",
+        "systems": "systems"
       }
     },
     "systems": {
@@ -228,6 +231,7 @@
       },
       "original": {
         "owner": "nix-systems",
+        "ref": "main",
         "repo": "default",
         "type": "github"
       }
