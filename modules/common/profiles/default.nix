@@ -5,5 +5,6 @@
     ./bluetooth
     ./devices
     ./gtk
+    ./laptop
   ];
 }

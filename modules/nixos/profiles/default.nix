@@ -2,7 +2,6 @@
 { ... }:
 {
   imports = [
-    ./laptop
     ./wm
     ./x
   ];
