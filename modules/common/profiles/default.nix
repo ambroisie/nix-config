@@ -4,5 +4,6 @@
   imports = [
     ./bluetooth
     ./devices
+    ./gtk
   ];
 }

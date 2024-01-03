@@ -2,7 +2,6 @@
 { ... }:
 {
   imports = [
-    ./gtk
     ./laptop
     ./wm
     ./x
