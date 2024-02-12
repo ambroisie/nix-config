@@ -12,7 +12,7 @@ let
       # Use pinned nixpkgs when using `nix run pkgs#<whatever>`
       pkgs = inputs.nixpkgs;
     }
-    (lib.optionalAttrs cfg.overrideNixpkgs {
+    (lib.optionalAttrs cfg.inputs.overrideNixpkgs {
       # ... And with `nix run nixpkgs#<whatever>`
       nixpkgs = inputs.nixpkgs;
     })
@@ -22,20 +22,22 @@ in
   options.my.home.nix = with lib; {
     enable = my.mkDisableOption "nix configuration";
 
-    linkInputs = my.mkDisableOption "link inputs to `$XDG_CONFIG_HOME/nix/inputs`";
+    inputs = {
+      link = my.mkDisableOption "link inputs to `/etc/nix/inputs/`";
 
-    addToRegistry = my.mkDisableOption "add inputs and self to registry";
+      addToRegistry = my.mkDisableOption "add inputs and self to registry";
 
-    addToNixPath = my.mkDisableOption "add inputs and self to nix path";
+      addToNixPath = my.mkDisableOption "add inputs and self to nix path";
 
-    overrideNixpkgs = my.mkDisableOption "point nixpkgs to pinned system version";
+      overrideNixpkgs = my.mkDisableOption "point nixpkgs to pinned system version";
+    };
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
     {
       assertions = [
         {
-          assertion = cfg.addToNixPath -> cfg.linkInputs;
+          assertion = cfg.inputs.addToNixPath -> cfg.inputs.link;
           message = ''
             enabling `my.home.nix.addToNixPath` needs to have
             `my.home.nix.linkInputs = true`
@@ -54,7 +56,7 @@ in
       };
     }
 
-    (lib.mkIf cfg.addToRegistry {
+    (lib.mkIf cfg.inputs.addToRegistry {
       nix.registry =
         let
           makeEntry = v: { flake = v; };
@@ -63,7 +65,7 @@ in
         makeEntries channels;
     })
 
-    (lib.mkIf cfg.linkInputs {
+    (lib.mkIf cfg.inputs.link {
       xdg.configFile =
         let
           makeLink = n: v: {
@@ -75,7 +77,7 @@ in
         makeLinks channels;
     })
 
-    (lib.mkIf cfg.addToNixPath {
+    (lib.mkIf cfg.inputs.addToNixPath {
       home.sessionVariables.NIX_PATH = "${config.xdg.configHome}/nix/inputs\${NIX_PATH:+:$NIX_PATH}";
     })
   ]);
