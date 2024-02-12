@@ -21,5 +21,17 @@
         package = pkgs.emptyDirectory;
       };
     };
+
+    zsh = {
+      notify = {
+        enable = true;
+
+        ssh = {
+          enable = true;
+          # `notify-send` is proxied to the ChromeOS layer
+          useOsc777 = false;
+        };
+      };
+    };
   };
 }
