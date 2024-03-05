@@ -10,8 +10,8 @@
     enable = mkEnableOption "Woodpecker CI";
     forge = mkOption {
       type = types.enum [ "gitea" "forgejo" ];
-      default = "gitea";
-      example = "forgejo";
+      default = "forgejo";
+      example = "gitea";
       description = "Which Forge to connect to";
     };
     runners = mkOption {
