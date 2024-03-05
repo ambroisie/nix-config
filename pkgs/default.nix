@@ -28,6 +28,8 @@ pkgs.lib.makeScope pkgs.newScope (pkgs: {
 
   rbw-pass = pkgs.callPackage ./rbw-pass { };
 
+  sqlite_orm = pkgs.callPackage ./sqlite_orm { };
+
   unbound-zones-adblock = pkgs.callPackage ./unbound-zones-adblock { };
 
   zsh-done = pkgs.callPackage ./zsh-done { };
