@@ -10,6 +10,8 @@ pkgs.lib.makeScope pkgs.newScope (pkgs: {
 
   diff-flake = pkgs.callPackage ./diff-flake { };
 
+  digestpp = pkgs.callPackage ./digestpp { };
+
   dragger = pkgs.callPackage ./dragger { };
 
   drone-rsync = pkgs.callPackage ./drone-rsync { };
