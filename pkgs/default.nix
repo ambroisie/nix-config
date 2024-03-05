@@ -1,5 +1,7 @@
 { pkgs }:
 pkgs.lib.makeScope pkgs.newScope (pkgs: {
+  bt-migrate = pkgs.callPackage ./bt-migrate { };
+
   bw-pass = pkgs.callPackage ./bw-pass { };
 
   change-audio = pkgs.callPackage ./change-audio { };
