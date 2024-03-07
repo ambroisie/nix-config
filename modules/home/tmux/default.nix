@@ -23,6 +23,8 @@ in
     terminalFeatures = mkOption {
       type = with types; attrsOf (submodule {
         options = {
+          hyperlinks = my.mkDisableOption "hyperlinks through OSC8";
+
           trueColor = my.mkDisableOption "24-bit (RGB) color support";
         };
       });
@@ -101,6 +103,8 @@ in
         ''
       }
 
+      # Force OSC8 hyperlinks for each relevant $TERM
+      ${mkTerminalFlags "hyperlinks" "hyperlinks"}
       # Force 24-bit color for each relevant $TERM
       ${mkTerminalFlags "trueColor" "RGB"}
     '';
