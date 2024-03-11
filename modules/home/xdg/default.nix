@@ -46,8 +46,6 @@ in
     GRADLE_USER_HOME = "${dataHome}/gradle";
     HISTFILE = "${dataHome}/bash/history";
     INPUTRC = "${configHome}/readline/inputrc";
-    LESSHISTFILE = "${dataHome}/less/history";
-    LESSKEY = "${configHome}/less/lesskey";
     PSQL_HISTORY = "${dataHome}/psql_history";
     PYTHONPYCACHEPREFIX = "${cacheHome}/python/";
     PYTHONUSERBASE = "${dataHome}/python/";
