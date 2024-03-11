@@ -74,3 +74,12 @@ if utils.is_executable("rust-analyzer") then
         on_attach = lsp.on_attach,
     })
 end
+
+-- Shell
+if utils.is_executable("bash-language-server") then
+    lspconfig.bashls.setup({
+        filetypes = { "bash", "sh", "zsh" },
+        capabilities = capabilities,
+        on_attach = lsp.on_attach,
+    })
+end

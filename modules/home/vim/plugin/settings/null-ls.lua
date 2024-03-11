@@ -63,22 +63,6 @@ null_ls.register({
 
 -- Shell (non-POSIX)
 null_ls.register({
-    require("none-ls-shellcheck.diagnostics").with({
-        -- Restrict to bash and zsh
-        filetypes = { "bash", "zsh" },
-        -- Only used if available
-        condition = utils.is_executable_condition("shellcheck"),
-    }),
-    require("none-ls-shellcheck.code_actions").with({
-        -- Show error code in message
-        diagnostics_format = "[#{c}] #{m}",
-        -- Require explicit empty string test, use bash dialect
-        extra_args = { "-s", "bash", "-o", "avoid-nullary-conditions" },
-        -- Restrict to bash and zsh
-        filetypes = { "bash", "zsh" },
-        -- Only used if available
-        condition = utils.is_executable_condition("shellcheck"),
-    }),
     null_ls.builtins.formatting.shfmt.with({
         -- Indent with 4 spaces, simplify the code, indent switch cases,
         -- add space after redirection, use bash dialect
@@ -92,22 +76,6 @@ null_ls.register({
 
 -- Shell (POSIX)
 null_ls.register({
-    require("none-ls-shellcheck.diagnostics").with({
-        -- Restrict to POSIX sh
-        filetypes = { "sh" },
-        -- Only used if available
-        condition = utils.is_executable_condition("shellcheck"),
-    }),
-    require("none-ls-shellcheck.code_actions").with({
-        -- Show error code in message
-        diagnostics_format = "[#{c}] #{m}",
-        -- Require explicit empty string test
-        extra_args = { "-o", "avoid-nullary-conditions" },
-        -- Restrict to POSIX sh
-        filetypes = { "sh" },
-        -- Only used if available
-        condition = utils.is_executable_condition("shellcheck"),
-    }),
     null_ls.builtins.formatting.shfmt.with({
         -- Indent with 4 spaces, simplify the code, indent switch cases,
         -- add space after redirection, use POSIX
