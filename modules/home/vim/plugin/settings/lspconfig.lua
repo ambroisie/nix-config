@@ -29,6 +29,14 @@ if utils.is_executable("clangd") then
     })
 end
 
+-- Haskell
+if utils.is_executable("haskell-language-server-wrapper") then
+    lspconfig.hls.setup({
+        capabilities = capabilities,
+        on_attach = lsp.on_attach,
+    })
+end
+
 -- Nix
 if utils.is_executable("nil") then
     lspconfig.nil_ls.setup({
