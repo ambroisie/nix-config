@@ -31,11 +31,9 @@ null_ls.register({
 -- Nix
 null_ls.register({
     null_ls.builtins.formatting.nixpkgs_fmt.with({
-        -- Only used if available, but prefer rnix if available
+        -- Only used if available, but prefer LSP if available
         condition = function()
-            return utils.is_executable("nixpkgs-fmt")
-                and not utils.is_executable("rnix-lsp")
-                and not utils.is_executable("nil")
+            return utils.is_executable("nixpkgs-fmt") and not utils.is_executable("nil")
         end,
     }),
 })

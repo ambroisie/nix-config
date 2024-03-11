@@ -45,13 +45,6 @@ if utils.is_executable("nil") then
     })
 end
 
-if utils.is_executable("rnix-lsp") then
-    lspconfig.rnix.setup({
-        capabilities = capabilities,
-        on_attach = lsp.on_attach,
-    })
-end
-
 -- Python
 if utils.is_executable("pyright") then
     lspconfig.pyright.setup({
