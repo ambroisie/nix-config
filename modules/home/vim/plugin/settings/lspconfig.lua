@@ -52,6 +52,13 @@ if utils.is_executable("pyright") then
     })
 end
 
+if utils.is_executable("ruff-lsp") then
+    lspconfig.ruff_lsp.setup({
+        capabilities = capabilities,
+        on_attach = lsp.on_attach,
+    })
+end
+
 -- Rust
 if utils.is_executable("rust-analyzer") then
     lspconfig.rust_analyzer.setup({
