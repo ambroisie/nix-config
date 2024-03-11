@@ -68,6 +68,7 @@ in
       lsp-format-nvim # Simplified formatting configuration
       lsp_lines-nvim # Show diagnostics *over* regions
       none-ls-nvim # LSP integration for linters and formatters
+      none-ls-shellcheck-nvim # shellcheck shim for none-ls
       nvim-treesitter.withAllGrammars # Better highlighting
       nvim-treesitter-textobjects # More textobjects
       nvim-ts-context-commentstring # Comment string in nested language blocks
