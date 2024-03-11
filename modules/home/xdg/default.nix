@@ -55,5 +55,6 @@ in
     REDISCLI_HISTFILE = "${dataHome}/redis/rediscli_history";
     REPO_CONFIG_DIR = "${configHome}/repo";
     XCOMPOSECACHE = "${dataHome}/X11/xcompose";
+    _JAVA_OPTIONS = "-Djava.util.prefs.userRoot=${configHome}/java";
   };
 }
