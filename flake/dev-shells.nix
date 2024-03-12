@@ -7,6 +7,7 @@
 
         nativeBuildInputs = with pkgs; [
           gitAndTools.pre-commit
+          lua-language-server
           nixpkgs-fmt
         ];
 
