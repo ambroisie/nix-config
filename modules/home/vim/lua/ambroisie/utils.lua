@@ -40,11 +40,11 @@ M.is_ssh = function()
     return false
 end
 
---- list all active LSP clients for current buffer
+--- list all active LSP clients for specific buffer, or all buffers
 --- @param bufnr int? buffer number
 --- @return table all active LSP client names
 M.list_lsp_clients = function(bufnr)
-    local clients = vim.lsp.get_active_clients({ bufnr = bufnr or 0 })
+    local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
     local names = {}
 
     for _, client in ipairs(clients) do
