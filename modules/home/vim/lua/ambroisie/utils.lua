@@ -44,7 +44,7 @@ end
 --- @param bufnr int? buffer number
 --- @return table all active LSP client names
 M.list_lsp_clients = function(bufnr)
-    local clients = vim.lsp.buf_get_clients(bufnr)
+    local clients = vim.lsp.get_active_clients({ bufnr = bufnr or 0 })
     local names = {}
 
     for _, client in ipairs(clients) do
