@@ -15,7 +15,7 @@ end
 
 --- return a function that checks if a given command is executable
 --- @param cmd string? command to check
---- @return fun(cmd: string): boolean executable
+--- @return fun(): boolean executable
 M.is_executable_condition = function(cmd)
     return function()
         return M.is_executable(cmd)
