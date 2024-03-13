@@ -88,6 +88,17 @@ set background=dark
 
 " 24 bit colors
 set termguicolors
+" Setup some overrides for gruvbox
+lua << EOF
+local gruvbox = require("gruvbox")
+
+gruvbox.setup({
+    overrides = {
+        -- Only URLs should be underlined
+        ["@string.special.path"] = { link = "GruvboxOrange" },
+    }
+})
+EOF
 " Use my preferred colorscheme
 colorscheme gruvbox
 " }}}
