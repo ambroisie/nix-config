@@ -91,11 +91,17 @@ set termguicolors
 " Setup some overrides for gruvbox
 lua << EOF
 local gruvbox = require("gruvbox")
+local colors = gruvbox.palette
 
 gruvbox.setup({
     overrides = {
         -- Only URLs should be underlined
         ["@string.special.path"] = { link = "GruvboxOrange" },
+        -- Revert back to the better diff highlighting
+        DiffAdd = { fg = colors.green, bg = "NONE" },
+        DiffChange = { fg = colors.aqua, bg = "NONE" },
+        DiffDelete = { fg = colors.red, bg = "NONE" },
+        DiffText = { fg = colors.yellow, bg = colors.bg0 },
     }
 })
 EOF
