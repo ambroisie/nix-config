@@ -134,6 +134,7 @@ in
     podgrab = {
       enable = true;
       passwordFile = secrets."podgrab/password".path;
+      dataDir = "/data/media/podcasts";
       port = 9598;
     };
     # Regular backups
