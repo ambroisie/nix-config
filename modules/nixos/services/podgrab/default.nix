@@ -29,7 +29,12 @@ in
     services.podgrab = {
       enable = true;
       inherit (cfg) passwordFile port;
+
+      group = "media";
     };
+
+    # Set-up media group
+    users.groups.media = { };
 
     my.services.nginx.virtualHosts = {
       podgrab = {
