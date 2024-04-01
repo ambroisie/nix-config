@@ -24,7 +24,7 @@ steps:
   - source: matrix_password
     target: pass
   commands:
-  - nix run '.#matrix-notifier'
+  - nix run github:ambroisie/matrix-notifier
   when:
     status:
     - failure
