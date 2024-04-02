@@ -99,7 +99,7 @@ in
         };
       };
       "${lohrHome}/.ssh/id_ed25519" = {
-        "f+" = {
+        "L+" = {
           user = "lohr";
           group = "lohr";
           mode = "0700";
