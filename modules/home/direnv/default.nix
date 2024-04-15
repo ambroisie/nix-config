@@ -8,8 +8,8 @@ in
 
     defaultFlake = mkOption {
       type = types.str;
-      default = "pkgs";
-      example = "nixpkgs";
+      default = "nixpkgs";
+      example = "pkgs";
       description = ''
         Which flake from the registry should be used for
         <command>use pkgs</command> by default.
