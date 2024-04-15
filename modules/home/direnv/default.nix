@@ -7,8 +7,8 @@ in
     enable = my.mkDisableOption "direnv configuration";
 
     defaultFlake = mkOption {
-      type = types.str;
-      default = "nixpkgs";
+      type = with types; nullOr str;
+      default = null;
       example = "pkgs";
       description = ''
         Which flake from the registry should be used for
@@ -39,7 +39,7 @@ in
       in
       lib.my.genAttrs' files linkLibFile;
 
-    home.sessionVariables = {
+    home.sessionVariables = lib.mkIf (cfg.defaultFlake != null) {
       DIRENV_DEFAULT_FLAKE = cfg.defaultFlake;
     };
   };
