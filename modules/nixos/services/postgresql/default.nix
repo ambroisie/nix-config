@@ -20,11 +20,6 @@ in
 
     # Taken from the manual
     (lib.mkIf cfg.upgradeScript {
-      containers.temp-pg.config.services.postgresql = {
-        enable = true;
-        package = pkgs.postgresql_13;
-      };
-
       environment.systemPackages =
         let
           pgCfg = config.services.postgresql;
