@@ -58,6 +58,13 @@ in
               --old-datadir "$OLDDATA" --new-datadir "$NEWDATA" \
               --old-bindir "$OLDBIN" --new-bindir "$NEWBIN" \
               "$@"
+
+            cat << EOF
+              Run the following commands after setting:
+              services.postgresql.package = pkgs.postgresql_${lib.versions.major newPackage.version}
+                  sudo -u postgres vacuumdb --all --analyze-in-stages
+                  ${newData}/delete_old_cluster.sh
+            EOF
           '')
         ];
     })
