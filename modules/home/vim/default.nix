@@ -58,7 +58,6 @@ in
 
       # General enhancements
       vim-qf # Better quick-fix list
-      nvim-osc52 # Send clipboard data through terminal escape for SSH
 
       # Other wrappers
       git-messenger-vim # A simple blame window
