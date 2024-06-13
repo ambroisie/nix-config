@@ -72,6 +72,13 @@ in
           intel-vaapi-driver
           libvdpau-va-gl
         ];
+
+        extraPackages32 = with pkgs.driversi686Linux; [
+          # VA API
+          intel-media-driver
+          intel-vaapi-driver
+          libvdpau-va-gl
+        ];
       };
     })
   ]);
