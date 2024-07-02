@@ -147,6 +147,11 @@ in
       ];
     };
 
+    my.system.persist.directories = [
+      config.services.forgejo.lfs.contentDir
+      config.services.forgejo.repositoryRoot
+    ];
+
     services.fail2ban.jails = {
       forgejo = ''
         enabled = true
