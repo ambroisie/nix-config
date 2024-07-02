@@ -147,6 +147,11 @@ in
       ];
     };
 
+    my.system.persist.directories = [
+      config.services.gitea.lfs.contentDir
+      config.services.gitea.repositoryRoot
+    ];
+
     services.fail2ban.jails = {
       forgejo = ''
         enabled = true
