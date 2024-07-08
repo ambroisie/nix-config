@@ -9,14 +9,7 @@ in
     rr = {
       enable = my.mkDisableOption "rr configuration";
 
-      package = mkOption {
-        type = types.package;
-        default = pkgs.rr;
-        defaultText = literalExample "pkgs.rr";
-        description = ''
-          Package providing rr
-        '';
-      };
+      package = mkPackageOption pkgs "rr" { };
     };
   };
 
