@@ -6,6 +6,8 @@ in
   options.my.home.gdb = with lib; {
     enable = my.mkDisableOption "gdb configuration";
 
+    package = mkPackageOption pkgs "gdb" { };
+
     rr = {
       enable = my.mkDisableOption "rr configuration";
 
@@ -16,7 +18,7 @@ in
   config = lib.mkIf cfg.enable (lib.mkMerge [
     {
       home.packages = with pkgs; [
-        gdb
+        cfg.package
       ];
 
       xdg = {
