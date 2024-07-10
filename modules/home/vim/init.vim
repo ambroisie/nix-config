@@ -38,8 +38,6 @@ set tabstop=8
 
 " File parameters {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Disable backups, we have source control for that
-set nobackup
 " Disable swapfiles too
 set noswapfile
 " }}}
