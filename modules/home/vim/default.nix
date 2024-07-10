@@ -46,7 +46,6 @@ in
       vim-repeat # Enanche '.' for plugins
       vim-rsi # Readline mappings
       vim-unimpaired # Some ex command mappings
-      vim-vinegar # Better netrw
 
       # Languages
       rust-vim
@@ -85,6 +84,7 @@ in
       dressing-nvim # Integrate native UI hooks with Telescope etc...
       gitsigns-nvim # Fast git UI integration
       nvim-surround # Deal with pairs, now in Lua
+      oil-nvim # Better alternative to NetrW
       telescope-fzf-native-nvim # Use 'fzf' fuzzy matching algorithm
       telescope-lsp-handlers-nvim # Use 'telescope' for various LSP actions
       telescope-nvim # Fuzzy finder interface
