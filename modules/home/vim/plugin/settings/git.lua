@@ -1,4 +1,5 @@
 local gitsigns = require("gitsigns")
+local utils = require("ambroisie.utils")
 local wk = require("which-key")
 
 --- Transform `f` into a function which acts on the current visual selection
@@ -11,16 +12,14 @@ local function make_visual(f)
 end
 
 local function nav_hunk(dir)
-    return function()
-        if vim.wo.diff then
-            local map = {
-                prev = "[c",
-                next = "]c",
-            }
-            vim.cmd.normal({ map[dir], bang = true })
-        else
-            gitsigns.nav_hunk(dir)
-        end
+    if vim.wo.diff then
+        local map = {
+            prev = "[c",
+            next = "]c",
+        }
+        vim.cmd.normal({ map[dir], bang = true })
+    else
+        gitsigns.nav_hunk(dir)
     end
 end
 
@@ -33,8 +32,8 @@ gitsigns.setup({
 
 local keys = {
     -- Navigation
-    ["[c"] = { nav_hunk("prev"), "Previous hunk/diff" },
-    ["]c"] = { nav_hunk("next"), "Next hunk/diff" },
+    ["[c"] = { utils.partial(nav_hunk, "prev"), "Previous hunk/diff" },
+    ["]c"] = { utils.partial(nav_hunk, "next"), "Next hunk/diff" },
 
     -- Commands
     ["<leader>g"] = {
@@ -42,8 +41,7 @@ local keys = {
         -- Actions
         b = { gitsigns.toggle_current_line_blame, "Toggle blame virtual text" },
         d = { gitsigns.diffthis, "Diff buffer" },
-        -- stylua: ignore
-        D = { function() gitsigns.diffthis("~") end, "Diff buffer against last commit" },
+        D = { utils.partial(gitsigns.diffthis, "~"), "Diff buffer against last commit" },
         g = { "<cmd>Git<CR>", "Git status" },
         h = { gitsigns.toggle_deleted, "Show deleted hunks" },
         L = { "<cmd>:sp<CR><C-w>T:Gllog --follow -- %:p<CR>", "Current buffer log" },
