@@ -28,6 +28,8 @@ gitsigns.setup({
         -- Show the blame quickly
         delay = 100,
     },
+    -- Work-around for https://github.com/lewis6991/gitsigns.nvim/issues/929
+    signs_staged_enable = false,
 })
 
 local keys = {
