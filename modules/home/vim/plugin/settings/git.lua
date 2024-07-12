@@ -10,6 +10,20 @@ local function make_visual(f)
     end
 end
 
+local function nav_hunk(dir)
+    return function()
+        if vim.wo.diff then
+            local map = {
+                prev = "[c",
+                next = "]c",
+            }
+            vim.cmd.normal({ map[dir], bang = true })
+        else
+            gitsigns.nav_hunk(dir)
+        end
+    end
+end
+
 gitsigns.setup({
     current_line_blame_opts = {
         -- Show the blame quickly
@@ -19,8 +33,8 @@ gitsigns.setup({
 
 local keys = {
     -- Navigation
-    ["[c"] = { "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", "Previous hunk/diff", expr = true },
-    ["]c"] = { "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", "Next hunk/diff", expr = true },
+    ["[c"] = { nav_hunk("prev"), "Previous hunk/diff" },
+    ["]c"] = { nav_hunk("next"), "Next hunk/diff" },
 
     -- Commands
     ["<leader>g"] = {
