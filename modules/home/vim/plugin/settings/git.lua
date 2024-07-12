@@ -1,6 +1,15 @@
 local gitsigns = require("gitsigns")
 local wk = require("which-key")
 
+--- Transform `f` into a function which acts on the current visual selection
+local function make_visual(f)
+    return function()
+        local first = vim.fn.line("v")
+        local last = vim.fn.line(".")
+        f({ first, last })
+    end
+end
+
 gitsigns.setup({
     current_line_blame_opts = {
         -- Show the blame quickly
@@ -43,13 +52,12 @@ local objects = {
 local visual = {
     ["ih"] = { gitsigns.select_hunk, "Git hunk" },
 
-    -- Only the actual command can make use of the visual selection...
     ["<leader>g"] = {
         name = "Git",
-        p = { ":Gitsigns preview_hunk<CR>", "Preview selection" },
-        r = { ":Gitsigns reset_hunk<CR>", "Restore selection" },
-        s = { ":Gitsigns stage_hunk<CR>", "Stage selection" },
-        u = { ":Gitsigns undo_stage_hunk<CR>", "Undo stage selection" },
+        p = { gitsigns.preview_hunk, "Preview selection" },
+        r = { make_visual(gitsigns.reset_hunk), "Restore selection" },
+        s = { make_visual(gitsigns.stage_hunk), "Stage selection" },
+        u = { gitsigns.undo_stage_hunk, "Undo stage selection" },
     },
 }
 
