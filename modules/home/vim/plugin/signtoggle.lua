@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "WinEnter" }, {
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "WinLeave" }, {
     pattern = "*",
     group = signtoggle,
-    command = "setlocal signcolumn=yes",
+    command = "setlocal signcolumn=no",
 })
 
 -- Never show the sign column in a terminal buffer
