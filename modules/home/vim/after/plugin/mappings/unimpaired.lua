@@ -86,7 +86,7 @@ local keys = {
         z = "Spell checking",
     },
     ["]o"] = {
-        name = "Option off",
+        name = "Disable option",
         b = "Light background",
         c = "Cursor line",
         d = "Diff",
@@ -105,7 +105,7 @@ local keys = {
         z = "Spell checking",
     },
     ["yo"] = {
-        name = "Option toggle",
+        name = "Toggle option",
         b = "Light background",
         c = "Cursor line",
         d = "Diff",
