@@ -28,7 +28,7 @@ oil.setup({
 })
 
 local keys = {
-    ["-"] = { oil.open, "Open parent directory" },
+    { "-", oil.open, desc = "Open parent directory" },
 }
 
-wk.register(keys)
+wk.add(keys)

@@ -26,14 +26,12 @@ telescope.load_extension("fzf")
 telescope.load_extension("lsp_handlers")
 
 local keys = {
-    f = {
-        name = "Fuzzy finder",
-        b = { telescope_builtin.buffers, "Open buffers" },
-        f = { telescope_builtin.git_files, "Git tracked files" },
-        F = { telescope_builtin.find_files, "Files" },
-        g = { telescope_builtin.live_grep, "Grep string" },
-        G = { telescope_builtin.grep_string, "Grep string under cursor" },
-    },
+    { "<leader>f", group = "Fuzzy finder" },
+    { "<leader>fb", telescope_builtin.buffers, desc = "Open buffers" },
+    { "<leader>ff", telescope_builtin.git_files, desc = "Git tracked files" },
+    { "<leader>fF", telescope_builtin.find_files, desc = "Files" },
+    { "<leader>fg", telescope_builtin.live_grep, desc = "Grep string" },
+    { "<leader>fG", telescope_builtin.grep_string, desc = "Grep string under cursor" },
 }
 
-wk.register(keys, { prefix = "<leader>" })
+wk.add(keys)
