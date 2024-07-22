@@ -38,9 +38,9 @@ set tabstop=8
 
 " File parameters {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable swap files
-set swapfile
-" And undo files
+" Disable swap files
+set noswapfile
+" Enable undo files
 set undofile
 " }}}
 
