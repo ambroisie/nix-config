@@ -48,11 +48,7 @@ in
       vim-unimpaired # Some ex command mappings
 
       # Languages
-      rust-vim
       vim-beancount
-      vim-jsonnet
-      vim-nix
-      vim-toml
 
       # General enhancements
       vim-qf # Better quick-fix list
