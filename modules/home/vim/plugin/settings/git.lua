@@ -54,8 +54,8 @@ local keys = {
         s = { gitsigns.stage_hunk, "Stage hunk" },
         S = { gitsigns.stage_buffer, "Stage buffer" },
         u = { gitsigns.undo_stage_hunk, "Undo stage hunk" },
-        ["["] = { gitsigns.prev_hunk, "Previous hunk" },
-        ["]"] = { gitsigns.next_hunk, "Next hunk" },
+        ["["] = { utils.partial(gitsigns.nav_hunk, "prev"), "Previous hunk" },
+        ["]"] = { utils.partial(gitsigns.nav_hunk, "next"), "Next hunk" },
     },
 }
 
