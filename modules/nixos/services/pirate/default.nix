@@ -10,6 +10,7 @@ let
     bazarr = 6767;
     lidarr = 8686;
     radarr = 7878;
+    readarr = 8787;
     sonarr = 8989;
   };
 
@@ -67,6 +68,10 @@ in
       enable = lib.my.mkDisableOption "Radarr";
     };
 
+    readarr = {
+      enable = lib.my.mkDisableOption "Readarr";
+    };
+
     sonarr = {
       enable = lib.my.mkDisableOption "Sonarr";
     };
@@ -85,6 +90,9 @@ in
     # Radarr for movies
     (mkFullConfig "radarr")
     (mkFail2Ban "radarr")
+    # Readarr for books
+    (mkFullConfig "readarr")
+    (mkFail2Ban "readarr")
     # Sonarr for shows
     (mkFullConfig "sonarr")
     (mkFail2Ban "sonarr")
