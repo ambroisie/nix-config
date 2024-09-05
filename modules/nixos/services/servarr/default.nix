@@ -4,7 +4,7 @@
 # [1]: https://youtu.be/I26Ql-uX6AM
 { config, lib, ... }:
 let
-  cfg = config.my.services.pirate;
+  cfg = config.my.services.servarr;
 
   ports = {
     bazarr = 6767;
@@ -53,7 +53,7 @@ let
   ]);
 in
 {
-  options.my.services.pirate = {
+  options.my.services.servarr = {
     enable = lib.mkEnableOption "Media automation";
 
     bazarr = {
