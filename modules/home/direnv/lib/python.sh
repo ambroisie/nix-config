@@ -9,7 +9,7 @@ layout_poetry() {
 
     if [[ ! -f pyproject.toml ]]; then
         # shellcheck disable=2016
-        log_error 'layout_poetry: no pyproject.toml found. Use `poetry new` or `poetry init` to create one first'
+        log_error 'layout_poetry: no pyproject.toml found. Use `poetry init` to create one first'
         return 1
     fi
 
