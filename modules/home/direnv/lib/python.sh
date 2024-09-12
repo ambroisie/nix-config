@@ -14,7 +14,7 @@ layout_poetry() {
     fi
 
     # create venv if it doesn't exist
-    poetry run true
+    poetry run -q -- true
 
     # shellcheck disable=2155
     export VIRTUAL_ENV=$(poetry env info --path)
