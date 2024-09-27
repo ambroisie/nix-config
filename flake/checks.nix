@@ -26,6 +26,10 @@
           stylua = {
             enable = true;
           };
+
+          typos = {
+            enable = true;
+          };
         };
       };
     };
