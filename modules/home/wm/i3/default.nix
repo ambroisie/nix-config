@@ -12,8 +12,7 @@ let
   movementKeys = [ "Left" "Down" "Up" "Right" ];
   vimMovementKeys = [ "h" "j" "k" "l" ];
   shutdownMode =
-    "(l)ock, (e)xit, switch_(u)ser, (h)ibernate, (r)eboot, (Shift+s)hutdown";
-
+    "(l)ock, (e)xit, switch_(u)ser, (h)ibernate, (r)eboot, (Shift+s)hutdown"; # spellchecker:disable-line
   # Takes an attrset of bindings for movement keys, transforms it to Vim keys
   toVimKeyBindings =
     let

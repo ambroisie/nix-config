@@ -49,7 +49,7 @@ in
             })
             (lib.optionalAttrs config.my.home.bluetooth.enable {
               block = "bluetooth";
-              mac = "F7:78:BA:76:52:F7";
+              mac = "F7:78:BA:76:52:F7"; # spellchecker:disable-line
               format = " $icon MX Ergo{ $percentage|} ";
               disconnected_format = "";
             })
