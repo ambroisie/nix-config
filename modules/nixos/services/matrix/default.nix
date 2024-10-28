@@ -26,21 +26,6 @@ in
       description = "Shared secret to register users";
     };
 
-    slidingSync = {
-      port = mkOption {
-        type = types.port;
-        default = 8009;
-        example = 8084;
-        description = "Port used by sliding sync server";
-      };
-
-      secretFile = mkOption {
-        type = types.str;
-        example = "/var/lib/matrix/sliding-sync-secret-file.env";
-        description = "Secret file which contains SYNCV3_SECRET definition";
-      };
-    };
-
     mailConfigFile = mkOption {
       type = types.str;
       example = "/var/lib/matrix/email-config.yaml";
@@ -106,17 +91,6 @@ in
       ] ++ lib.optional (cfg.secretFile != null) cfg.secretFile;
     };
 
-    services.matrix-sliding-sync = {
-      enable = true;
-
-      settings = {
-        SYNCV3_SERVER = "https://${matrixDomain}";
-        SYNCV3_BINDADDR = "127.0.0.1:${toString cfg.slidingSync.port}";
-      };
-
-      environmentFile = cfg.slidingSync.secretFile;
-    };
-
     my.services.nginx.virtualHosts = {
       # Element Web app deployment
       chat = {
@@ -129,9 +103,6 @@ in
               };
               "m.identity_server" = {
                 "base_url" = "https://vector.im";
-              };
-              "org.matrix.msc3575.proxy" = {
-                "url" = "https://matrix-sync.${domain}";
               };
             };
             showLabsSettings = true;
@@ -151,10 +122,6 @@ in
       };
       matrix-client = {
         port = clientPort.private;
-      };
-      # Sliding sync
-      matrix-sync = {
-        inherit (cfg.slidingSync) port;
       };
     };
 
@@ -178,11 +145,6 @@ in
 
             "/_matrix" = proxyToClientPort;
             "/_synapse/client" = proxyToClientPort;
-
-            # Sliding sync
-            "~ ^/(client/|_matrix/client/unstable/org.matrix.msc3575/sync)" = {
-              proxyPass = "http://${config.services.matrix-sliding-sync.settings.SYNCV3_BINDADDR}";
-            };
           };
 
         listen = [
@@ -228,7 +190,6 @@ in
             client = {
               "m.homeserver" = { "base_url" = "https://${matrixDomain}"; };
               "m.identity_server" = { "base_url" = "https://vector.im"; };
-              "org.matrix.msc3575.proxy" = { "url" = "https://matrix-sync.${domain}"; };
             };
             # ACAO required to allow element-web on any URL to request this json file
           in
