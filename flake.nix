@@ -43,6 +43,17 @@
       };
     };
 
+    nixgl = {
+      type = "github";
+      owner = "nix-community";
+      repo = "nixGL";
+      ref = "main";
+      inputs = {
+        flake-utils.follows = "futils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     nixpkgs = {
       type = "github";
       owner = "NixOS";
