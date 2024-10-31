@@ -28,6 +28,7 @@
     ./mail
     ./mpv
     ./nix
+    ./nix-gl
     ./nix-index
     ./nixpkgs
     ./nm-applet
