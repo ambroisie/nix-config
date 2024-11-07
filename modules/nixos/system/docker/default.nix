@@ -23,5 +23,9 @@ in
         ];
       };
     };
+
+    my.system.persist.directories = [
+      "/var/lib/docker"
+    ];
   };
 }
