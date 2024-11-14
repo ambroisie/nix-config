@@ -86,7 +86,7 @@ in
         type = types.str;
         example = "/var/lib/acme/creds.env";
         description = ''
-          Gandi API key file as an 'EnvironmentFile' (see `systemd.exec(5)`)
+          OVH API key file as an 'EnvironmentFile' (see `systemd.exec(5)`)
         '';
       };
     };
@@ -281,6 +281,7 @@ in
 
                 locations."/" = {
                   extraConfig =
+                    # FIXME: check that X-User is dropped otherwise
                     (args.extraConfig.locations."/".extraConfig or "") + ''
                       # Use SSO
                       auth_request /sso-auth;
@@ -414,7 +415,8 @@ in
         {
           "${domain}" = {
             extraDomainNames = [ "*.${domain}" ];
-            dnsProvider = "gandiv5";
+            dnsProvider = "ovh";
+            dnsPropagationCheck = false; # OVH is slow
             inherit (cfg.acme) credentialsFile;
           };
         };
