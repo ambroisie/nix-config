@@ -70,10 +70,13 @@ let
       extraConfig = mkOption {
         type = types.attrs; # FIXME: forward type of virtualHosts
         example = {
-          locations."/socket" = {
-            proxyPass = "http://127.0.0.1:8096/";
-            proxyWebsockets = true;
-          };
+          extraConfig = ''
+            add_header X-Clacks-Overhead "GNU Terry Pratchett";
+          '';
+
+          locations."/".extraConfig = ''
+            client_max_body_size 1G;
+          '';
         };
         default = { };
         description = ''
