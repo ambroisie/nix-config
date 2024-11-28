@@ -81,6 +81,9 @@ in
     ];
 
     extraConfig = ''
+      # Refresh configuration
+      bind-key -N "Source tmux.conf" R source-file ${config.xdg.configHome}/tmux/tmux.conf \; display-message "Sourced tmux.conf!"
+
       # Better vim mode
       bind-key -T copy-mode-vi 'v' send -X begin-selection
       ${
