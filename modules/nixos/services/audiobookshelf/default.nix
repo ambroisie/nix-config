@@ -34,6 +34,10 @@ in
       };
     };
 
+    my.system.persist.directories = [
+      "/var/lib/${config.services.audiobookshelf.dataDir}"
+    ];
+
     services.fail2ban.jails = {
       audiobookshelf = ''
         enabled = true
