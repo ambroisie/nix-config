@@ -30,11 +30,11 @@ in
     };
     # A tidy home is a tidy mind
     dataFile = {
-      "bash/.keep".text = "";
       "gdb/.keep".text = "";
       "tig/.keep".text = "";
     };
     stateFile = {
+      "bash/.keep".text = "";
       "python/.keep".text = "";
     };
   };
