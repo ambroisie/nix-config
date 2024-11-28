@@ -69,6 +69,11 @@ in
       };
     };
 
+    my.system.persist.directories = [
+      cfg.downloadDir
+      "/var/lib/aria2"
+    ];
+
     # NOTE: unfortunately aria2 does not log connection failures for fail2ban
   };
 }
