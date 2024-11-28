@@ -89,6 +89,10 @@ in
       ];
     };
 
+    my.system.persist.directories = [
+      "/var/lib/tandoor-recipes"
+    ];
+
     # NOTE: unfortunately tandoor-recipes does not log connection failures for fail2ban
   };
 }
