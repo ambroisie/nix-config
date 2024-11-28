@@ -30,7 +30,6 @@ in
     };
     # A tidy home is a tidy mind
     dataFile = {
-      "gdb/.keep".text = "";
       "tig/.keep".text = "";
     };
     stateFile = {
