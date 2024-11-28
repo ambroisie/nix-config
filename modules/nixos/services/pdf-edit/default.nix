@@ -54,6 +54,10 @@ in
       };
     };
 
+    my.system.persist.directories = [
+      "/var/lib/stirling-pdf"
+    ];
+
     services.fail2ban.jails = {
       stirling-pdf = ''
         enabled = true
