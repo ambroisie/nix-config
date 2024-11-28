@@ -33,5 +33,9 @@ in
         bantime = "10m";
       };
     };
+
+    my.system.persist.directories = [
+      "/var/lib/fail2ban"
+    ];
   };
 }
