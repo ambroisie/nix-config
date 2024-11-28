@@ -37,6 +37,12 @@ in
       useACMEHost = config.networking.domain;
     };
 
+    my.services.backup = {
+      paths = [
+        config.services.grocy.dataDir
+      ];
+    };
+
     # NOTE: unfortunately grocy does not log connection failures for fail2ban
   };
 }
