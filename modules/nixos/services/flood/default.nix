@@ -28,6 +28,10 @@ in
       };
     };
 
+    my.system.persist.directories = [
+      "/var/lib/flood"
+    ];
+
     # NOTE: unfortunately flood does not log connection failures for fail2ban
   };
 }
