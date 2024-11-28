@@ -58,6 +58,10 @@ in
         "/var/log" # Logs
         "/var/lib/nixos" # UID/GID maps
         "/var/lib/systemd/coredump" # Coredumps
+
+        "/var/lib/systemd" # FIXME: needed?
+        "/var/spool" # FIXME: needed?
+        "/var/tmp" # FIXME: needed?
       ]
       ++ lib.unique cfg.directories
       ;
