@@ -53,6 +53,11 @@ in
       };
     };
 
+    my.system.persist.directories = [
+      cfg.downloadDirectory
+      "/var/lib/pyload"
+    ];
+
     services.fail2ban.jails = {
       pyload = ''
         enabled = true
