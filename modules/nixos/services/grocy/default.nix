@@ -43,6 +43,10 @@ in
       ];
     };
 
+    my.system.persist.directories = [
+      config.services.grocy.dataDir
+    ];
+
     # NOTE: unfortunately grocy does not log connection failures for fail2ban
   };
 }
