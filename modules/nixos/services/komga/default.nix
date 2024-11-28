@@ -36,6 +36,10 @@ in
       };
     };
 
+    my.system.persist.directories = [
+      config.services.komga.stateDir
+    ];
+
     services.fail2ban.jails = {
       komga = ''
         enabled = true
