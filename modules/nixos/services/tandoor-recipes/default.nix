@@ -83,6 +83,12 @@ in
       };
     };
 
+    my.services.backup = {
+      paths = [
+        "/var/lib/tandoor-recipes"
+      ];
+    };
+
     # NOTE: unfortunately tandoor-recipes does not log connection failures for fail2ban
   };
 }
