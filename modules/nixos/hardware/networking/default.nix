@@ -23,6 +23,8 @@ in
     (lib.mkIf cfg.wireless.enable {
       networking.networkmanager.enable = true;
 
+      # IWD needs persistence if enabled
+
       # Persist NetworkManager files
       my.system.persist.files = [
         "/var/lib/NetworkManager/secret_key"
