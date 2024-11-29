@@ -50,7 +50,7 @@ in
         "/etc/machine-id" # Machine-specific ID
         "/etc/adjtime" # Clock drift factor and offsets
       ]
-      ++ cfg.files
+      ++ lib.unique cfg.files
       ;
 
       directories = [
@@ -59,7 +59,7 @@ in
         "/var/lib/nixos" # UID/GID maps
         "/var/lib/systemd/coredump" # Coredumps
       ]
-      ++ cfg.directories
+      ++ lib.unique cfg.directories
       ;
     };
   };
