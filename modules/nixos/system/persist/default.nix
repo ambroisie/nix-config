@@ -56,7 +56,7 @@ in
 
       directories = [
         "/etc/nixos" # In case it's storage directory of our configuration
-        "/var/log" # Logs
+        "/var/log"
         "/var/lib/nixos" # UID/GID maps
         "/var/lib/systemd/coredump" # Coredumps
         "/var/lib/systemd/coredump"
