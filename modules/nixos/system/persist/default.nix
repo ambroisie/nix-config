@@ -47,8 +47,9 @@ in
   config = lib.mkIf cfg.enable {
     environment.persistence."${cfg.mountPoint}" = {
       files = [
-        "/etc/machine-id" # Machine-specific ID
-        "/etc/adjtime" # Clock drift factor and offsets
+        "/etc/machine-id"
+        "/etc/adjtime"
+        "/var/lib/systemd/timesync/clock"
       ]
       ++ lib.unique cfg.files
       ;
