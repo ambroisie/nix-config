@@ -58,7 +58,6 @@ in
         "/etc/nixos" # In case it's storage directory of our configuration
         "/var/log"
         "/var/lib/nixos" # UID/GID maps
-        "/var/lib/systemd/coredump" # Coredumps
         "/var/lib/systemd/coredump"
         "/var/lib/systemd" # FIXME: needed?
         "/var/spool" # FIXME: needed?
