@@ -59,6 +59,7 @@ in
         "/var/log"
         "/var/lib/nixos" # UID/GID maps
         "/var/lib/systemd/coredump"
+
         "/var/lib/systemd" # FIXME: needed?
         "/var/spool" # FIXME: needed?
         "/var/tmp" # FIXME: needed?
