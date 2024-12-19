@@ -130,6 +130,7 @@ in
             { class = "^pavucontrol.*$"; }
             { class = "^Arandr$"; }
             { class = "^\\.blueman-manager-wrapped$"; }
+            { class = "^\\.arandr-wrapped$"; }
           ];
         };
 
