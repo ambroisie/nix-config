@@ -3,6 +3,10 @@ let
   cfg = config.my.home.xdg;
 in
 {
+  imports = [
+    ./mime-apps.nix
+  ];
+
   options.my.home.xdg = with lib; {
     enable = my.mkDisableOption "XDG configuration";
   };
