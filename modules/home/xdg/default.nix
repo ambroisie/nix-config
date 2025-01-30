@@ -3,6 +3,10 @@ let
   cfg = config.my.home.xdg;
 in
 {
+  imports = [
+    ./mime-apps.nix
+  ];
+
   options.my.home.xdg = with lib; {
     enable = my.mkDisableOption "XDG configuration";
   };
@@ -11,10 +15,6 @@ in
     enable = true;
     # File types
     mime.enable = true;
-    # File associations
-    mimeApps = {
-      enable = true;
-    };
     # User directories
     userDirs = {
       enable = true;
