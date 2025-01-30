@@ -180,6 +180,99 @@ in
           "x-scheme-handler/webcal" = app.calendar;
           "x-scheme-handler/webcals" = app.calendar;
           "x-www-browser" = app.browser;
+
+          # FIXME: relevant? https://bbs.archlinux.org/viewtopic.php?id=243125
+
+          # FIXME: shouldn't be necessary then
+          # "audio/AMR" = app.media.audio;
+          # "audio/aac" = app.media.audio;
+          # "audio/ac3" = app.media.audio;
+          # "audio/flac" = app.media.audio;
+          # "audio/mp2" = app.media.audio;
+          # "audio/mp4" = app.media.audio;
+          # "audio/mpeg" = app.media.audio;
+          # "audio/ogg" = app.media.audio;
+          # "audio/vnd.dts" = app.media.audio;
+          # "audio/vnd.dts.hd" = app.media.audio;
+          # "audio/vnd.rn-realaudio" = app.media.audio;
+          # "audio/webm" = app.media.audio;
+          # "audio/x-adpcm" = app.media.audio;
+          # "audio/x-aiff" = app.media.audio;
+          # "audio/x-ape" = app.media.audio;
+          # "audio/x-matroska" = app.media.audio;
+          # "audio/x-mpegurl" = app.media.audio;
+          # "audio/x-ms-asx" = app.media.audio;
+          # "audio/x-ms-wma" = app.media.audio;
+          # "audio/x-musepack" = app.media.audio;
+          # "audio/x-scpls" = app.media.audio;
+          # "audio/x-tta" = app.media.audio;
+          # "audio/x-vorbis+ogg" = app.media.audio;
+          # "audio/x-wav" = app.media.audio;
+          # "audio/x-wavpack" = app.media.audio;
+          # "image/bmp" = app.media.image.bitmap;
+          # "image/gif" = app.media.image.bitmap;
+          # "image/heif" = app.media.image.bitmap;
+          # "image/jpeg" = app.media.image.bitmap;
+          # "image/jpg" = app.media.image.bitmap;
+          # "image/pjpeg" = app.media.image.bitmap;
+          # "image/png" = app.media.image.bitmap;
+          # "image/tiff" = app.media.image.bitmap;
+          # "image/vnd.zbrush.pcx" = app.media.image.bitmap;
+          # "image/webp" = app.media.image.bitmap;
+          # "image/x-icb" = app.media.image.bitmap;
+          # "image/x-ico" = app.media.image.bitmap;
+          # "image/x-pcx" = app.media.image.bitmap;
+          # "image/x-portable-anymap" = app.media.image.bitmap;
+          # "image/x-portable-bitmap" = app.media.image.bitmap;
+          # "image/x-portable-graymap" = app.media.image.bitmap;
+          # "image/x-portable-pixmap" = app.media.image.bitmap;
+          # "image/x-tga" = app.media.image.bitmap;
+          # "image/x-xbitmap" = app.media.image.bitmap;
+          # "image/x-xpixmap" = app.media.image.bitmap;
+          # "image/x-xwindowdump" = app.media.image.bitmap;
+          # "text/tcl" = app.editor;
+          # "text/x-c++hdr" = app.editor;
+          # "text/x-c++src" = app.editor;
+          # "text/x-chdr" = app.editor;
+          # "text/x-csrc" = app.editor;
+          # "text/x-java" = app.editor;
+          # "text/x-makefile" = app.editor;
+          # "text/x-moc" = app.editor;
+          # "text/x-pascal" = app.editor;
+          # "text/x-tex" = app.editor;
+          # "video/3gpp" = app.media.video;
+          # "video/3gpp2" = app.media.video;
+          # "video/dv" = app.media.video;
+          # "video/mp2t" = app.media.video;
+          # "video/mp4" = app.media.video;
+          # "video/mpeg" = app.media.video;
+          # "video/ogg" = app.media.video;
+          # "video/quicktime" = app.media.video;
+          # "video/vnd.mpegurl" = app.media.video;
+          # "video/vnd.rn-realvideo" = app.media.video;
+          # "video/webm" = app.media.video;
+          # "video/x-flic" = app.media.video;
+          # "video/x-flv" = app.media.video;
+          # "video/x-matroska" = app.media.video;
+          # "video/x-ms-wmv" = app.media.video;
+          # "video/x-msvideo" = app.media.video;
+          # "video/x-ogm+ogg" = app.media.video;
+          # "video/x-theora+ogg" = app.media.video;
+
+          # FIXME: kind of weird formats, not quite adapted to attribute name
+          # "application/eps" = app.media.document.pdf
+          # "application/oxps" = app.media.document.pdf
+          # "application/postscript" = app.media.document.pdf
+          # "application/x-eps" = app.media.document.pdf
+          # "image/eps" = app.media.document.pdf
+          # "image/vnd.djvu" = app.media.document.pdf
+          # "image/vnd.djvu+multipage" = app.media.document.pdf
+          # "image/x-eps" = app.media.document.pdf
+
+          # FIXME: additionally interesting, but not necessary
+          # "x-scheme-handler/discord" = [ "discord.desktop" ];
+          # "x-scheme-handler/msteams" = [ "teams.desktop" ];
+          # "x-scheme-handler/slack" = [ "slack.desktop" ];
         };
       };
     };
