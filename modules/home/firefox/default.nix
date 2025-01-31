@@ -100,4 +100,8 @@ in
       };
     };
   };
+
+  config.my.home.xdg.mime-apps = lib.mkIf cfg.enable {
+    applications.editor = [ "firefox.desktop" ];
+  };
 }
