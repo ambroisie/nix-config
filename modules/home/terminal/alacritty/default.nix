@@ -48,5 +48,9 @@ in
         };
       };
     };
+
+    my.home.xdg.mime-apps = {
+      applications.terminal = [ "Alacritty.desktop" ];
+    };
   };
 }
