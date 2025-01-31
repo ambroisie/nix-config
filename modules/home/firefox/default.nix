@@ -79,4 +79,8 @@ in
       };
     };
   };
+
+  config.my.home.xdg.mime-apps = lib.mkIf cfg.enable {
+    applications.browser = "firefox.desktop";
+  };
 }
