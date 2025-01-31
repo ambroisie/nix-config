@@ -104,4 +104,8 @@ in
   };
 
   config.xdg.configFile = lib.mkIf cfg.enable configFiles;
+
+  config.my.home.xdg.mime-apps = lib.mkIf cfg.enable {
+    applications.editor = [ "nvim.desktop" ];
+  };
 }
