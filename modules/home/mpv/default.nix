@@ -17,5 +17,12 @@ in
         pkgs.mpvScripts.uosc # Nicer UI
       ];
     };
+
+    my.home.xdg.mime-apps = {
+      applications.media = {
+        audio = [ "mpv.desktop" ];
+        video = [ "mpv.desktop" ];
+      };
+    };
   };
 }
