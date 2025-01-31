@@ -49,5 +49,9 @@ in
         color15 = ${whiteBold}
       '';
     };
+
+    my.home.xdg.mime-apps = {
+      applications.terminal = [ "termite.desktop" ];
+    };
   };
 }
