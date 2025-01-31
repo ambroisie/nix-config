@@ -10,4 +10,11 @@ in
   config.programs.feh = lib.mkIf cfg.enable {
     enable = true;
   };
+
+  config.my.home.xdg.mime-apps = lib.mkIf cfg.enable {
+    applications.media.image = {
+      bitmap = [ "feh.desktop" ];
+      vector = [ "feh.desktop" ];
+    };
+  };
 }
