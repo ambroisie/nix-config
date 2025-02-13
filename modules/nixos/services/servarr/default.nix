@@ -5,6 +5,7 @@
 { lib, ... }:
 {
   imports = [
+    ./autobrr.nix
     ./bazarr.nix
     ./jackett.nix
     ./nzbhydra.nix
