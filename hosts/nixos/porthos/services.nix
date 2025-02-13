@@ -141,6 +141,9 @@ in
     # The whole *arr software suite
     servarr = {
       enableAll = true;
+      autobrr = {
+        enable = false;
+      };
       # ... But not Lidarr because I don't care for music that much
       lidarr = {
         enable = false;
