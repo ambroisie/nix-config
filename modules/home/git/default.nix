@@ -162,7 +162,7 @@ in
       };
     };
 
-    includes = [
+    includes = lib.mkAfter [
       # Multiple identities
       {
         condition = "gitdir:~/git/EPITA/";
