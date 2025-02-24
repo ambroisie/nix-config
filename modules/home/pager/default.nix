@@ -16,7 +16,6 @@ in
       LESS = "-R -+X -c";
       # Better XDG compliance
       LESSHISTFILE = "${config.xdg.stateHome}/less/history";
-      LESSKEY = "${config.xdg.configHome}/less/lesskey";
     };
   };
 }
