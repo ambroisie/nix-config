@@ -20,6 +20,8 @@ in
 
     enablePassthrough = mkEnableOption "tmux DCS passthrough sequence";
 
+    enableResurrect = mkEnableOption "tmux-resurrect plugin";
+
     terminalFeatures = mkOption {
       type = with types; attrsOf (submodule {
         options = {
@@ -79,6 +81,13 @@ in
           set -g status-right '#{prefix_highlight} %a %Y-%m-%d %H:%M'
         '';
       }
+      # Resurrect sessions
+      (lib.optionalAttrs cfg.enableResurrect {
+        plugin = resurrect;
+        extraConfig = ''
+          set -g @resurrect-dir '${config.xdg.stateHome}/tmux/resurrect'
+        '';
+      })
     ];
 
     extraConfig = ''
