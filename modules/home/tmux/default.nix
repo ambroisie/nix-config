@@ -52,6 +52,7 @@ in
     mouse = false; # I dislike mouse support
     focusEvents = true; # Report focus events
     terminal = "tmux-256color"; # I want accurate termcap info
+    aggressiveResize = true; # Automatic resize when switching client size
 
     plugins = with pkgs.tmuxPlugins; builtins.filter (attr: attr != { }) [
       # Open high-lighted files in copy mode
