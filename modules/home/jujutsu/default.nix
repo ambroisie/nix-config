@@ -36,8 +36,16 @@ in
 
         aliases = {
           jj = [ ];
+          # FIXME:
+          # * still not a big fan of the template
           lol = [ "log" "-r" "..@" "-T" "builtin_log_oneline" ];
           lola = [ "lol" "-r" "all()" ];
+          # FIXME: equivalent to `git switch -`
+          # See https://github.com/jj-vcs/jj/issues/2871
+          # Might be broken recently https://discord.com/channels/968932220549103686/1380272574709366989/1380432041983606855
+          # TODO:
+          # * `pick` (https://github.com/jj-vcs/jj/issues/5446): [ "util" "exec" "--" "bash" "-c" "jj log -p -r \"diff_contains($1)\"" "" ]
+          # * `root`: `jj workspace root` (barely necessary then)
         };
 
         ui = {
@@ -50,6 +58,31 @@ in
           # Does not honor `$PAGER` (anymore)
           pager = lib.mkDefault config.home.sessionVariables.PAGER;
         };
+
+        # FIXME: git equivalents
+        # I'd like a better formatted blame (more like delta's?)
+        # blame = {
+        #   coloring = "repeatedLines";
+        #   markIgnoredLines = true;
+        #   markUnblamables = true;
+        # };
+        # FIXME: log colors should probably match git
+        # FIXME: patience diff?
+        # FIXME: fetch prune/pruneTags?
+        # FIXME: pull.rebase=true? Probably true TBH
+        # FIXME: push.default=simple? Probably true TBH
+        # FIXME: conflict style? ui.conflict-marker-style=git is diff3, not zdiff3. Default looks fine-ish
+
+        # FIXME: from ma_9's config, plus my own stuff
+        # snapshot = {
+        #   auto-track = "none()";
+        # };
+        #
+        # ui = {
+        #   movement = {
+        #     edit = false;
+        #   };
+        # };
 
         templates = {
           # Equivalent to `commit.verbose = true` in Git
@@ -64,6 +97,9 @@ in
               diff.git(),
             )
           '';
+          # FIXME: use `diff.summary()` instead? Supported by syntax highlighting
+          # See https://github.com/jj-vcs/jj/issues/1946#issuecomment-2572986485
+          # FIXME: tree-sitter grammar isn't in `nvim-treesitter` (https://github.com/kareigu/tree-sitter-jjdescription)
           "commit_description(commit)" = ''
             concat(
               commit.description(), "\n",
