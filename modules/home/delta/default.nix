@@ -14,6 +14,10 @@ in
     git = {
       enable = my.mkDisableOption "git integration";
     };
+
+    jujutsu = {
+      enable = my.mkDisableOption "jujutsu integration";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -74,6 +78,24 @@ in
           path = configPath;
         }
       ];
+    };
+
+    programs.jujutsu = lib.mkIf cfg.jujutsu.enable {
+      settings = {
+        merge-tools = {
+          delta = {
+            # Errors are signaled with exit codes greater or equal to 2
+            diff-expected-exit-codes = [ 0 1 ];
+          };
+        };
+
+        ui = {
+          # Delta expects a `git diff` input
+          diff-formatter = ":git";
+
+          pager = [ (lib.getExe cfg.package) "--config=${configPath}" ];
+        };
+      };
     };
   };
 }
