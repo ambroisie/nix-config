@@ -38,6 +38,12 @@ in
           jj = [ ];
           lol = [ "log" "-r" "..@" "-T" "builtin_log_oneline" ];
           lola = [ "lol" "-r" "all()" ];
+          # FIXME: equivalent to `git switch -`
+          # See https://github.com/jj-vcs/jj/issues/2871
+          # Might be broken recently https://discord.com/channels/968932220549103686/1380272574709366989/1380432041983606855
+          # TODO:
+          # * `pick` (https://github.com/jj-vcs/jj/issues/5446): [ "util" "exec" "--" "bash" "-c" "jj log -p -r \"diff_contains($1)\"" "" ]
+          # * `root`: `jj workspace root` (barely necessary then)
         };
 
         ui = {
@@ -50,6 +56,27 @@ in
           # Does not honor `$PAGER` (anymore)
           pager = lib.mkDefault config.home.sessionVariables.PAGER;
         };
+
+        # FIXME: git equivalents
+        # I'd like a better formatted blame (more like delta's?)
+        # blame = {
+        #   coloring = "repeatedLines";
+        #   markIgnoredLines = true;
+        #   markUnblamables = true;
+        # };
+        # FIXME: patience diff?
+        # FIXME: fetch prune/pruneTags?
+
+        # FIXME: from ma_9's config, plus my own stuff
+        # snapshot = {
+        #   auto-track = "none()";
+        # };
+        #
+        # ui = {
+        #   movement = {
+        #     edit = false;
+        #   };
+        # };
 
         templates = {
           # Equivalent to `commit.verbose = true` in Git
