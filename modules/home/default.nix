@@ -24,6 +24,7 @@
     ./gtk
     ./htop
     ./jq
+    ./jujutsu
     ./keyboard
     ./mail
     ./mpv
