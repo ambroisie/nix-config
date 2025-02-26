@@ -11,6 +11,10 @@ in
     git = {
       enable = my.mkDisableOption "git integration";
     };
+
+    jujutsu = {
+      enable = my.mkDisableOption "jujutsu integration";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -42,6 +46,27 @@ in
           commit-style = "raw"; # Do not recolor meta information
           keep-plus-minus-markers = true;
           paging = "always";
+        };
+      };
+    };
+
+    # `jj log -p` does not use `delta`
+    # https://github.com/jj-vcs/jj/issues/4142
+    programs.jujutsu = lib.mkIf cfg.jujutsu.enable {
+      settings = {
+        merge-tools = {
+          delta = {
+            # Errors are signaled with exit codes greater or equal to 2
+            diff-expected-exit-codes = [ 0 1 ];
+          };
+        };
+
+        ui = {
+          # Delta expects a `git diff` input
+          diff-formatter = ":git";
+
+          # `finalPackage` automatically applied `--config` if necessary
+          pager = [ (lib.getExe config.programs.delta.finalPackage) ];
         };
       };
     };
