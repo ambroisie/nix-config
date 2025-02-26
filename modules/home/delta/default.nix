@@ -11,6 +11,10 @@ in
     git = {
       enable = my.mkDisableOption "git integration";
     };
+
+    jujutsu = {
+      enable = my.mkDisableOption "jujutsu integration";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -20,6 +24,9 @@ in
       inherit (cfg) package;
 
       enableGitIntegration = cfg.git.enable;
+      # `jj log -p` does not use `delta`
+      # https://github.com/jj-vcs/jj/issues/4142
+      enableJujutsuIntegration = cfg.jujutsu.enable;
 
       options = {
         features = "diff-highlight decorations";
