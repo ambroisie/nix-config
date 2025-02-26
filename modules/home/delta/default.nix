@@ -11,6 +11,10 @@ in
     git = {
       enable = my.mkDisableOption "git integration";
     };
+
+    jujutsu = {
+      enable = my.mkDisableOption "jujutsu integration";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -28,6 +32,13 @@ in
         message = ''
           `config.my.home.delta` relies on `config.programs.git` to be
           enabled.
+        '';
+      }
+      {
+        assertion = cfg.jujutsu.enable -> cfg.git.enable;
+        message = ''
+          `config.my.home.delta.jujutsu` relies on `config.my.home.delta.git`
+          being enabled.
         '';
       }
     ];
@@ -61,6 +72,24 @@ in
             keep-plus-minus-markers = true;
             paging = "always";
           };
+        };
+      };
+    };
+
+    programs.jujutsu = lib.mkIf cfg.jujutsu.enable {
+      settings = {
+        merge-tools = {
+          delta = {
+            # Errors are signaled with exit codes greater or equal to 2
+            diff-expected-exit-codes = [ 0 1 ];
+          };
+        };
+
+        ui = {
+          # Delta expects a `git diff` input
+          diff-formatter = ":git";
+
+          pager = "${lib.getExe cfg.package}";
         };
       };
     };
