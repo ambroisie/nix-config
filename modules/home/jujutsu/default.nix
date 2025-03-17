@@ -47,6 +47,28 @@ in
           pager = lib.mkDefault config.home.sessionVariables.PAGER;
         };
 
+        templates = {
+          # Equivalent to `commit.verbose = true` in Git
+          draft_commit_description = "commit_description_verbose(self)";
+        };
+
+        template-aliases = {
+          "commit_description_verbose(commit)" = ''
+            concat(
+              commit_description(commit),
+              "JJ: ignore-rest\n",
+              diff.git(),
+            )
+          '';
+          "commit_description(commit)" = ''
+            concat(
+              commit.description(), "\n",
+              "JJ: This commit contains the following changes:\n",
+              indent("JJ:    ", diff.stat(72)),
+            )
+          '';
+        };
+
         "--scope" = [
           # Multiple identities
           {
