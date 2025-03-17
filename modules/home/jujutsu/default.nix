@@ -74,6 +74,9 @@ in
               diff.git(),
             )
           '';
+          # FIXME: use `diff.summary()` instead? Supported by syntax highlighting
+          # See https://github.com/jj-vcs/jj/issues/1946#issuecomment-2572986485
+          # FIXME: tree-sitter grammar isn't in `nvim-treesitter` (https://github.com/kareigu/tree-sitter-jjdescription)
           "commit_description(commit)" = ''
             concat(
               commit.description(), "\n",
