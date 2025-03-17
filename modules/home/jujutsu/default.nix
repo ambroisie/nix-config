@@ -47,6 +47,11 @@ in
           pager = lib.mkDefault config.home.sessionVariables.PAGER;
         };
 
+        templates = {
+          # Equivalent to `commit.verbose = true` in Git
+          draft_commit_description = "builtin_draft_commit_description_with_diff";
+        };
+
         "--scope" = [
           # Multiple identities
           {
