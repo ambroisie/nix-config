@@ -46,7 +46,18 @@ in
           # * `root`: `jj workspace root` (barely necessary then)
         };
 
-        # FIXME: `extraConfig` equivalents...
+        # FIXME: git equivalents
+        # blame = {
+        #   coloring = "repeatedLines";
+        #   markIgnoredLines = true;
+        #   markUnblamables = true;
+        # };
+        # FIXME: log colors should probably match git
+        # FIXME: patience diff?
+        # FIXME: fetch prune/pruneTags?
+        # FIXME: pull.rebase=true? Probably true TBH
+        # FIXME: push.default=simple? Probably true TBH
+        # FIXME: conflict style? ui.conflict-marker-style=git is diff3/zdiff3
 
         # FIXME: from ma_9's config, plus my own stuff
         # snapshot = {
@@ -73,6 +84,9 @@ in
               diff.git(),
             )
           '';
+          # FIXME: use `diff.summary()` instead? Supported by syntax highlighting
+          # See https://github.com/jj-vcs/jj/issues/1946#issuecomment-2572986485
+          # FIXME: tree-sitter grammar isn't in `nvim-treesitter` (https://github.com/kareigu/tree-sitter-jjdescription)
           "commit_description(commit)" = ''
             concat(
               commit.description(), "\n",
