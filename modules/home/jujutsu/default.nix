@@ -119,5 +119,10 @@ in
         ];
       };
     };
+
+    # To drop in a `local.toml` configuration, not-versioned
+    xdg.configFile = {
+      "jj/conf.d/.keep".text = "";
+    };
   };
 }
