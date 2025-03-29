@@ -30,7 +30,7 @@ lualine.setup({
             { "mode" },
         },
         lualine_b = {
-            { "FugitiveHead" },
+            { "branch" },
             { "filename", symbols = { readonly = "🔒" } },
         },
         lualine_c = {
