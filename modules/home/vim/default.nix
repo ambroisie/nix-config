@@ -59,7 +59,6 @@ in
       # LSP and linting
       nvim-lspconfig # Easy LSP configuration
       lsp-format-nvim # Simplified formatting configuration
-      lsp_lines-nvim # Show diagnostics *over* regions
       none-ls-nvim # LSP integration for linters and formatters
       nvim-treesitter.withAllGrammars # Better highlighting
       nvim-treesitter-textobjects # More textobjects
