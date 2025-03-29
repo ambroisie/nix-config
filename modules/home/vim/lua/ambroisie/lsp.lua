@@ -5,14 +5,15 @@ local lsp_format = require("lsp-format")
 
 --- Move to the next/previous diagnostic, automatically showing the diagnostics
 --- float if necessary.
---- @param forward bool whether to go forward or backwards
-local function goto_diagnostic(forward)
+--- @param count number whether to go count or backwards
+local function goto_diagnostic(count)
     vim.validate({
-        forward = { forward, "boolean" },
+        count = { count, "number" },
     })
 
     local opts = {
         float = false,
+        count = count,
     }
 
     -- Only show floating diagnostics if they are otherwise not displayed
@@ -21,23 +22,19 @@ local function goto_diagnostic(forward)
         opts.float = true
     end
 
-    if forward then
-        vim.diagnostic.goto_next(opts)
-    else
-        vim.diagnostic.goto_prev(opts)
-    end
+    vim.diagnostic.jump(opts)
 end
 
 --- Move to the next diagnostic, automatically showing the diagnostics float if
 --- necessary.
 M.goto_next_diagnostic = function()
-    goto_diagnostic(true)
+    goto_diagnostic(1)
 end
 
 --- Move to the previous diagnostic, automatically showing the diagnostics float
 --- if necessary.
 M.goto_prev_diagnostic = function()
-    goto_diagnostic(false)
+    goto_diagnostic(-1)
 end
 
 --- shared LSP configuration callback
