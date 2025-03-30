@@ -142,7 +142,7 @@ in
     servarr = {
       enableAll = true;
       autobrr = {
-        enable = false;
+        sessionSecretFile = secrets."servarr/autobrr/session-secret".path;
       };
       # ... But not Lidarr because I don't care for music that much
       lidarr = {
