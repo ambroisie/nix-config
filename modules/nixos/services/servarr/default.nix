@@ -6,6 +6,7 @@
 {
   imports = [
     ./bazarr.nix
+    ./jackett.nix
     ./prowlarr.nix
     (import ./starr.nix "lidarr")
     (import ./starr.nix "radarr")

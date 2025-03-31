@@ -145,6 +145,10 @@ in
       lidarr = {
         enable = false;
       };
+      # I only use Prowlarr nowadays
+      jackett = {
+        enable = false;
+      };
     };
     # Because I still need to play sysadmin
     ssh-server.enable = true;
