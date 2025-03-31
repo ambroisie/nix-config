@@ -7,7 +7,6 @@ let
   cfg = config.my.services.servarr;
 
   ports = {
-    bazarr = 6767;
     lidarr = 8686;
     radarr = 7878;
     readarr = 8787;
@@ -55,12 +54,12 @@ let
   ]);
 in
 {
+  imports = [
+    ./bazarr.nix
+  ];
+
   options.my.services.servarr = {
     enableAll = lib.mkEnableOption "media automation suite";
-
-    bazarr = {
-      enable = lib.mkEnableOption "Bazarr" // { default = cfg.enableAll; };;
-    };
 
     lidarr = {
       enable = lib.mkEnableOption "Lidarr" // { default = cfg.enableAll; };
@@ -80,8 +79,6 @@ in
   };
 
   config = (lib.mkMerge [
-    # Bazarr does not log authentication failures...
-    (mkFullConfig "bazarr")
     # Lidarr for music
     (mkFullConfig "lidarr")
     (mkFail2Ban "lidarr")
