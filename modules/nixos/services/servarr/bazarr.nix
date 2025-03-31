@@ -7,12 +7,20 @@ in
     enable = lib.mkEnableOption "Bazarr" // {
       default = config.my.services.servarr.enableAll;
     };
+
+    port = mkOption {
+      type = types.port;
+      default = 6767;
+      example = 8080;
+      description = "Internal port for webui";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     services.bazarr = {
       enable = true;
       group = "media";
+      listenPort = cfg.port;
     };
 
     # Set-up media group
@@ -20,7 +28,7 @@ in
 
     my.services.nginx.virtualHosts = {
       bazarr = {
-        port = 6767;
+        inherit (cfg) port;
       };
     };
 
