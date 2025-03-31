@@ -5,13 +5,11 @@ let
 
   jackettPort = 9117;
   nzbhydraPort = 5076;
-  prowlarrPort = 9696;
 in
 {
   options.my.services.indexers = with lib; {
     jackett.enable = mkEnableOption "Jackett torrent meta-indexer";
     nzbhydra.enable = mkEnableOption "NZBHydra2 usenet meta-indexer";
-    prowlarr.enable = mkEnableOption "Prowlarr torrent & usenet meta-indexer";
   };
 
   config = lib.mkMerge [
@@ -44,34 +42,6 @@ in
         nzbhydra = {
           port = nzbhydraPort;
         };
-      };
-    })
-
-    (lib.mkIf cfg.prowlarr.enable {
-      services.prowlarr = {
-        enable = true;
-      };
-
-      my.services.nginx.virtualHosts = {
-        prowlarr = {
-          port = prowlarrPort;
-        };
-      };
-
-      services.fail2ban.jails = {
-        prowlarr = ''
-          enabled = true
-          filter = prowlarr
-          action = iptables-allports
-        '';
-      };
-
-      environment.etc = {
-        "fail2ban/filter.d/prowlarr.conf".text = ''
-          [Definition]
-          failregex = ^.*\|Warn\|Auth\|Auth-Failure ip <HOST> username .*$
-          journalmatch = _SYSTEMD_UNIT=prowlarr.service
-        '';
       };
     })
   ];

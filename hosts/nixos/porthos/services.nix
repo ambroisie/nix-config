@@ -51,10 +51,6 @@ in
         passwordFile = secrets."forgejo/mail-password".path;
       };
     };
-    # Meta-indexers
-    indexers = {
-      prowlarr.enable = true;
-    };
     # Jellyfin media server
     jellyfin.enable = true;
     # Gitea mirrorig service
