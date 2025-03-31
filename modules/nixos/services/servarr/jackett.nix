@@ -7,11 +7,19 @@ in
     enable = lib.mkEnableOption "Jackett" // {
       default = config.my.services.servarr.enableAll;
     };
+
+    port = mkOption {
+      type = types.port;
+      default = 9117;
+      example = 8080;
+      description = "Internal port for webui";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     services.jackett = {
       enable = true;
+      inherit (cfg) port;
     };
 
     # Jackett wants to eat *all* my RAM if left to its own devices
@@ -24,7 +32,7 @@ in
 
     my.services.nginx.virtualHosts = {
       jackett = {
-        port = 9117;
+        inherit (cfg) port;
       };
     };
 
