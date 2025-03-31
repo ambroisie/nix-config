@@ -15,12 +15,25 @@ in
     enable = lib.mkEnableOption (lib.toSentenceCase starr) // {
       default = config.my.services.servarr.enableAll;
     };
+
+    port = mkOption {
+      type = types.port;
+      default = ports.${starr};
+      example = 8080;
+      description = "Internal port for webui";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     services.${starr} = {
       enable = true;
       group = "media";
+
+      settings = {
+        server = {
+          port = cfg.port;
+        };
+      };
     };
 
     # Set-up media group
@@ -28,7 +41,7 @@ in
 
     my.services.nginx.virtualHosts = {
       ${starr} = {
-        port = ports.${starr};
+        port = cfg.port;
       };
     };
 
