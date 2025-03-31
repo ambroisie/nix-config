@@ -149,6 +149,9 @@ in
       jackett = {
         enable = false;
       };
+      nzbhydra = {
+        enable = false;
+      };
     };
     # Because I still need to play sysadmin
     ssh-server.enable = true;

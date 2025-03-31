@@ -7,6 +7,7 @@
   imports = [
     ./bazarr.nix
     ./jackett.nix
+    ./nzbhydra.nix
     ./prowlarr.nix
     (import ./starr.nix "lidarr")
     (import ./starr.nix "radarr")
