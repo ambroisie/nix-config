@@ -17,6 +17,7 @@ in
     my.services.nginx.virtualHosts = {
       nzbhydra = {
         port = 5076;
+        websocketsLocations = [ "/" ];
       };
     };
 
