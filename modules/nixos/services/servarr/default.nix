@@ -19,6 +19,8 @@ let
       enable = true;
       group = "media";
     };
+    # Set-up media group
+    users.groups.media = { };
   };
 
   mkRedirection = service: {
@@ -54,34 +56,30 @@ let
 in
 {
   options.my.services.servarr = {
-    enable = lib.mkEnableOption "Media automation";
+    enableAll = lib.mkEnableOption "media automation suite";
 
     bazarr = {
-      enable = lib.my.mkDisableOption "Bazarr";
+      enable = lib.mkEnableOption "Bazarr" // { default = cfg.enableAll; };;
     };
 
     lidarr = {
-      enable = lib.my.mkDisableOption "Lidarr";
+      enable = lib.mkEnableOption "Lidarr" // { default = cfg.enableAll; };
     };
 
     radarr = {
-      enable = lib.my.mkDisableOption "Radarr";
+      enable = lib.mkEnableOption "Radarr" // { default = cfg.enableAll; };
     };
 
     readarr = {
-      enable = lib.my.mkDisableOption "Readarr";
+      enable = lib.mkEnableOption "Readarr" // { default = cfg.enableAll; };
     };
 
     sonarr = {
-      enable = lib.my.mkDisableOption "Sonarr";
+      enable = lib.mkEnableOption "Sonarr" // { default = cfg.enableAll; };
     };
   };
 
-  config = lib.mkIf cfg.enable (lib.mkMerge [
-    {
-      # Set-up media group
-      users.groups.media = { };
-    }
+  config = (lib.mkMerge [
     # Bazarr does not log authentication failures...
     (mkFullConfig "bazarr")
     # Lidarr for music
