@@ -144,7 +144,7 @@ in
     sabnzbd.enable = true;
     # The whole *arr software suite
     servarr = {
-      enable = true;
+      enableAll = true;
       # ... But not Lidarr because I don't care for music that much
       lidarr = {
         enable = false;
