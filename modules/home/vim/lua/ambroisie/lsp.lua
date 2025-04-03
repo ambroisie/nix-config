@@ -3,40 +3,6 @@ local M = {}
 -- Simplified LSP formatting configuration
 local lsp_format = require("lsp-format")
 
---- Move to the next/previous diagnostic, automatically showing the diagnostics
---- float if necessary.
---- @param count number whether to go count or backwards
-local function goto_diagnostic(count)
-    vim.validate({
-        count = { count, "number" },
-    })
-
-    local opts = {
-        float = false,
-        count = count,
-    }
-
-    -- Only show floating diagnostics if they are otherwise not displayed
-    local config = vim.diagnostic.config()
-    if not (config.virtual_text or config.virtual_lines) then
-        opts.float = true
-    end
-
-    vim.diagnostic.jump(opts)
-end
-
---- Move to the next diagnostic, automatically showing the diagnostics float if
---- necessary.
-M.goto_next_diagnostic = function()
-    goto_diagnostic(vim.v.count1)
-end
-
---- Move to the previous diagnostic, automatically showing the diagnostics float
---- if necessary.
-M.goto_prev_diagnostic = function()
-    goto_diagnostic(-vim.v.count1)
-end
-
 --- shared LSP configuration callback
 --- @param client native client configuration
 --- @param bufnr int? buffer number of the attached client
@@ -76,6 +42,10 @@ M.on_attach = function(client, bufnr)
         vim.diagnostic.config({
             virtual_text = text,
             virtual_lines = lines,
+            jump = {
+                -- Show float on jump if no diagnostic text is otherwise shown
+                float = not (text or lines),
+            },
         })
     end
 
