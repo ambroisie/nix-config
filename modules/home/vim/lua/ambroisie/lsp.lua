@@ -28,13 +28,13 @@ end
 --- Move to the next diagnostic, automatically showing the diagnostics float if
 --- necessary.
 M.goto_next_diagnostic = function()
-    goto_diagnostic(1)
+    goto_diagnostic(vim.v.count1)
 end
 
 --- Move to the previous diagnostic, automatically showing the diagnostics float
 --- if necessary.
 M.goto_prev_diagnostic = function()
-    goto_diagnostic(-1)
+    goto_diagnostic(-vim.v.count1)
 end
 
 --- shared LSP configuration callback
