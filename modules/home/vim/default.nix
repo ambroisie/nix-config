@@ -66,7 +66,6 @@ in
 
       # Completion
       luasnip # Snippet manager compatible with LSP
-      friendly-snippets # LSP snippets collection
       nvim-cmp # Completion engine
       cmp-async-path # More responsive path completion
       cmp-buffer # Words from open buffers
