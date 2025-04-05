@@ -92,12 +92,12 @@
 
         devShells = {
           default = pkgs.mkShell {
-            inputsFrom = with self.packages.${system}; [
-              project
+            inputsFrom = [
+              self.packages.${system}.project
             ];
 
             packages = with pkgs; [
-              clang-tools
+              self.checks.${system}.pre-commit.enabledPackages
             ];
 
             inherit (pre-commit) shellHook;

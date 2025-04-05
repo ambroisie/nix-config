@@ -88,14 +88,13 @@
 
         devShells = {
           default = pkgs.mkShell {
-            inputsFrom = with self.packages.${system}; [
-              project
+            inputsFrom = [
+              self.packages.${system}.project
             ];
 
             packages = with pkgs; [
-              clippy
               rust-analyzer
-              rustfmt
+              self.checks.${system}.pre-commit.enabledPackages
             ];
 
             RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
