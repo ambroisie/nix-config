@@ -22,7 +22,6 @@
       repo = "git-hooks.nix";
       ref = "master";
       inputs = {
-        flake-utils.follows = "futils";
         nixpkgs.follows = "nixpkgs";
       };
     };
