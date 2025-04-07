@@ -6,13 +6,15 @@ let
     (config.my.home.wm.windowManager != null)
   ];
 
-  mkTerminalFeature = opt: flag:
+  mkTerminalFlag = tmuxVar: opt: flag:
     let
-      mkFlag = term: ''set -as terminal-features ",${term}:${flag}"'';
+      mkFlag = term: ''set -as ${tmuxVar} ",${term}:${flag}"'';
       enabledTerminals = lib.filterAttrs (_: v: v.${opt}) cfg.terminalFeatures;
       terminals = lib.attrNames enabledTerminals;
     in
     lib.concatMapStringsSep "\n" mkFlag terminals;
+
+  mkTerminalFeature = mkTerminalFlag "terminal-features";
 in
 {
   options.my.home.tmux = with lib; {
