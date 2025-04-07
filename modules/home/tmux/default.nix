@@ -15,6 +15,7 @@ let
     lib.concatMapStringsSep "\n" mkFlag terminals;
 
   mkTerminalFeatures = mkTerminalFlags "terminal-features";
+  mkTerminalOverrides = mkTerminalFlags "terminal-overrides";
 in
 {
   options.my.home.tmux = with lib; {
@@ -30,6 +31,8 @@ in
           hyperlinks = my.mkDisableOption "hyperlinks through OSC8";
 
           trueColor = my.mkDisableOption "24-bit (RGB) color support";
+
+          underscoreStyle = my.mkDisableOption "underscore style/color support";
         };
       });
 
@@ -128,6 +131,8 @@ in
       ${mkTerminalFeatures "hyperlinks" "hyperlinks"}
       # Force 24-bit color for each relevant $TERM
       ${mkTerminalFeatures "trueColor" "RGB"}
+      # Force underscore style/color for each relevant $TERM
+      ${mkTerminalFeatures "underscoreStyle" "usstyle"}
     '';
   };
 }
