@@ -6,13 +6,15 @@ let
     (config.my.home.wm.windowManager != null)
   ];
 
-  mkTerminalFlags = opt: flag:
+  mkTerminalFlags = tmuxVar: opt: flag:
     let
-      mkFlag = term: ''set -as terminal-features ",${term}:${flag}"'';
+      mkFlag = term: ''set -as ${tmuxVar} ",${term}:${flag}"'';
       enabledTerminals = lib.filterAttrs (_: v: v.${opt}) cfg.terminalFeatures;
       terminals = lib.attrNames enabledTerminals;
     in
     lib.concatMapStringsSep "\n" mkFlag terminals;
+
+  mkTerminalFeatures = mkTerminalFlags "terminal-features";
 in
 {
   options.my.home.tmux = with lib; {
@@ -123,9 +125,9 @@ in
       }
 
       # Force OSC8 hyperlinks for each relevant $TERM
-      ${mkTerminalFlags "hyperlinks" "hyperlinks"}
+      ${mkTerminalFeatures "hyperlinks" "hyperlinks"}
       # Force 24-bit color for each relevant $TERM
-      ${mkTerminalFlags "trueColor" "RGB"}
+      ${mkTerminalFeatures "trueColor" "RGB"}
     '';
   };
 }
