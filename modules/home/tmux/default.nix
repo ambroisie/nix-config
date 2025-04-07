@@ -30,6 +30,8 @@ in
           hyperlinks = my.mkDisableOption "hyperlinks through OSC8";
 
           trueColor = my.mkDisableOption "24-bit (RGB) color support";
+
+          underscoreStyle = my.mkDisableOption "underscore style/color support";
         };
       });
 
@@ -128,6 +130,8 @@ in
       ${mkTerminalFeature "hyperlinks" "hyperlinks"}
       # Force 24-bit color for each relevant $TERM
       ${mkTerminalFeature "trueColor" "RGB"}
+      # Force underscore style/color for each relevant $TERM
+      ${mkTerminalFeature "underscoreStyle" "usstyle"}
     '';
   };
 }
