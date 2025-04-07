@@ -15,6 +15,7 @@ let
     lib.concatMapStringsSep "\n" mkFlag terminals;
 
   mkTerminalFeature = mkTerminalFlag "terminal-features";
+  mkTerminalOverride = mkTerminalFlag "terminal-overrides";
 in
 {
   options.my.home.tmux = with lib; {
@@ -58,6 +59,20 @@ in
     terminal = "tmux-256color"; # I want accurate termcap info
     aggressiveResize = true; # Automatic resize when switching client size
 
+    # FIXME
+    # * Sixel support
+    # * OSC 133 prompt integration
+    # FIXME: when sensible-on-top is disabled: check if any of those are unset
+    # * tmux bind-key $prefix_without_ctrl last-window
+    # *
+    # * tmux bind-key C-b send-prefix: included
+    # * aggressive resize? done
+    # * tmux bind-key C-p previous-window: done
+    # * tmux bind-key C-n next-window: done
+    # * C-r to refresh my config: done
+    # * tmux set-option -g focus-events on: done
+
+    # FIXME: make PRs for `bind-key` description
     plugins = with pkgs.tmuxPlugins; builtins.filter (attr: attr != { }) [
       # Open high-lighted files in copy mode
       open
@@ -132,6 +147,9 @@ in
       ${mkTerminalFeature "trueColor" "RGB"}
       # Force underscore style/color for each relevant $TERM
       ${mkTerminalFeature "underscoreStyle" "usstyle"}
+      # FIXME: see https://github.com/folke/tokyonight.nvim#fix-undercurls-in-tmux for additional overrides
+      # ${mkTerminalOverride "underscoreStyle" "Smulx=\\E[4::%p1%dm"}
+      # ${mkTerminalOverride "underscoreStyle" "Setulc=\\E[58::2::::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m"}
     '';
   };
 }
