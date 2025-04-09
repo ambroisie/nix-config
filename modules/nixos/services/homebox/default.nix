@@ -19,6 +19,11 @@ in
     services.homebox = {
       enable = true;
 
+      # Automatic PostgreSQL provisioning
+      database = {
+        createLocally = true;
+      };
+
       settings = {
         # FIXME: mailer?
         HBOX_WEB_PORT = toString cfg.port;
