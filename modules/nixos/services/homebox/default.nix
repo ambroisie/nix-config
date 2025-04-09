@@ -33,6 +33,7 @@ in
     my.services.nginx.virtualHosts = {
       homebox = {
         inherit (cfg) port;
+        websocketsLocations = [ "/api" ];
       };
     };
 
