@@ -148,6 +148,9 @@ in
       autobrr = {
         sessionSecretFile = secrets."servarr/autobrr/session-secret".path;
       };
+      cross-seed = {
+        enable = false;
+      };
       # ... But not Lidarr because I don't care for music that much
       lidarr = {
         enable = false;
