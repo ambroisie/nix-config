@@ -149,7 +149,7 @@ in
         sessionSecretFile = secrets."servarr/autobrr/session-secret".path;
       };
       cross-seed = {
-        enable = false;
+        secretSettingsFile = secrets."servarr/cross-seed/configuration.json".path;
       };
       # ... But not Lidarr because I don't care for music that much
       lidarr = {
