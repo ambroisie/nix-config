@@ -15,12 +15,3 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "WinLeave" }, {
         vim.opt.signcolumn = "no"
     end,
 })
-
--- Never show the sign column in a terminal buffer
-vim.api.nvim_create_autocmd({ "TermOpen" }, {
-    pattern = "*",
-    group = signtoggle,
-    callback = function()
-        vim.opt.signcolumn = "no"
-    end,
-})
