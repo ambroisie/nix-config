@@ -13,8 +13,8 @@
       enablePassthrough = true;
 
       terminalFeatures = {
-        # HTerm uses `xterm-256color` as its `$TERM`, so use that here
-        xterm-256color = { };
+        # HTerm configured to use a more accurate terminfo entry than `xterm-256color`
+        hterm-256color = { };
       };
     };
 
