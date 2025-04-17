@@ -21,6 +21,8 @@
       terminalFeatures = {
         # HTerm configured to use a more accurate terminfo entry than `xterm-256color`
         hterm-256color = { };
+        # Terminal app uses `xterm.js`, not HTerm
+        "xterm.js" = { };
       };
     };
   };
