@@ -35,6 +35,8 @@
       terminalFeatures = {
         # HTerm uses `xterm-256color` as its `$TERM`, so use that here
         xterm-256color = { };
+        # Terminal app uses `xterm.js`, not HTerm
+        "xterm.js" = { };
       };
     };
   };
