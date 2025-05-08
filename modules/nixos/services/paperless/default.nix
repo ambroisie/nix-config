@@ -52,26 +52,26 @@ in
 
       mediaDir = lib.mkIf (cfg.documentPath != null) cfg.documentPath;
 
-      settings =
-        {
-          # Use SSO
-          PAPERLESS_ENABLE_HTTP_REMOTE_USER = true;
-          PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME = "HTTP_X_USER";
+      settings = {
+        # Use SSO
+        PAPERLESS_ENABLE_HTTP_REMOTE_USER = true;
+        PAPERLESS_ENABLE_HTTP_REMOTE_USER_API = true;
+        PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME = "HTTP_X_USER";
 
-          # Security settings
-          PAPERLESS_URL = "https://paperless.${config.networking.domain}";
+        # Security settings
+        PAPERLESS_URL = "https://paperless.${config.networking.domain}";
 
-          # OCR settings
-          PAPERLESS_OCR_LANGUAGE = "fra+eng";
+        # OCR settings
+        PAPERLESS_OCR_LANGUAGE = "fra+eng";
 
-          # Workers
-          PAPERLESS_TASK_WORKERS = 3;
-          PAPERLESS_THREADS_PER_WORKER = 4;
+        # Workers
+        PAPERLESS_TASK_WORKERS = 3;
+        PAPERLESS_THREADS_PER_WORKER = 4;
 
-          # Misc
-          PAPERLESS_TIME_ZONE = config.time.timeZone;
-          PAPERLESS_ADMIN_USER = cfg.username;
-        };
+        # Misc
+        PAPERLESS_TIME_ZONE = config.time.timeZone;
+        PAPERLESS_ADMIN_USER = cfg.username;
+      };
 
       # Admin password
       passwordFile = cfg.passwordFile;
