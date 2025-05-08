@@ -53,17 +53,13 @@ in
       mediaDir = lib.mkIf (cfg.documentPath != null) cfg.documentPath;
 
       settings =
-        let
-          paperlessDomain = "paperless.${config.networking.domain}";
-        in
         {
           # Use SSO
           PAPERLESS_ENABLE_HTTP_REMOTE_USER = true;
           PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME = "HTTP_X_USER";
 
           # Security settings
-          PAPERLESS_ALLOWED_HOSTS = paperlessDomain;
-          PAPERLESS_CORS_ALLOWED_HOSTS = "https://${paperlessDomain}";
+          PAPERLESS_URL = "https://paperless.${config.networking.domain}";
 
           # OCR settings
           PAPERLESS_OCR_LANGUAGE = "fra+eng";
