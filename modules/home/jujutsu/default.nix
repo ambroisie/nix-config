@@ -35,7 +35,7 @@ in
         };
 
         aliases = {
-          jj = [ "util" "exec" "--" "jj" ];
+          jj = [ ];
           # FIXME:
           # * topo sort by default (I think? test it)
           # * still not a big fan of the template
