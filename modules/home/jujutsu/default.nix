@@ -35,7 +35,7 @@ in
         };
 
         aliases = {
-          jj = [ "util" "exec" "--" "jj" ];
+          jj = [ ];
           # FIXME:
           # * still not a big fan of the template
           lol = [ "log" "-r" "..@" "-T" "builtin_log_oneline" ];
