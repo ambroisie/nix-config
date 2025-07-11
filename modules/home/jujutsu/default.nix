@@ -35,7 +35,7 @@ in
         };
 
         aliases = {
-          jj = [ "util" "exec" "--" "jj" ];
+          jj = [ ];
           lol = [ "log" "-r" "..@" "-T" "builtin_log_oneline" ];
           lola = [ "lol" "-r" "all()" ];
         };
