@@ -21,5 +21,9 @@ in
         # Do not keep me from using the app just to force an update
         SKIP_HOST_UPDATE = true;
       };
+
+    xdg.mimeApps.defaultApplications = {
+      "x-scheme-handler/discord" = "discord.desktop";
+    };
   };
 }
