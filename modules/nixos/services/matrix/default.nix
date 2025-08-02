@@ -14,6 +14,26 @@ let
   clientPort = { public = 443; private = 11339; };
   domain = config.networking.domain;
   matrixDomain = "matrix.${domain}";
+
+  serverConfig = {
+    "m.server" = "${matrixDomain}:${toString federationPort.public}";
+  };
+  clientConfig = {
+    "m.homeserver" = {
+      "base_url" = "https://${matrixDomain}";
+      "server_name" = domain;
+    };
+    "m.identity_server" = {
+      "base_url" = "https://vector.im";
+    };
+  };
+
+  # ACAO required to allow element-web on any URL to request this json file
+  mkWellKnown = data: ''
+    default_type application/json;
+    add_header Access-Control-Allow-Origin *;
+    return 200 '${builtins.toJSON data}';
+  '';
 in
 {
   options.my.services.matrix = with lib; {
@@ -96,15 +116,7 @@ in
       chat = {
         root = pkgs.element-web.override {
           conf = {
-            default_server_config = {
-              "m.homeserver" = {
-                "base_url" = "https://${matrixDomain}";
-                "server_name" = domain;
-              };
-              "m.identity_server" = {
-                "base_url" = "https://vector.im";
-              };
-            };
+            default_server_config = clientConfig;
             showLabsSettings = true;
             defaultCountryCode = "FR"; # cocorico
             roomDirectory = {
@@ -176,28 +188,8 @@ in
         forceSSL = true;
         useACMEHost = domain;
 
-        locations."= /.well-known/matrix/server".extraConfig =
-          let
-            server = { "m.server" = "${matrixDomain}:${toString federationPort.public}"; };
-          in
-          ''
-            add_header Content-Type application/json;
-            return 200 '${builtins.toJSON server}';
-          '';
-
-        locations."= /.well-known/matrix/client".extraConfig =
-          let
-            client = {
-              "m.homeserver" = { "base_url" = "https://${matrixDomain}"; };
-              "m.identity_server" = { "base_url" = "https://vector.im"; };
-            };
-            # ACAO required to allow element-web on any URL to request this json file
-          in
-          ''
-            add_header Content-Type application/json;
-            add_header Access-Control-Allow-Origin *;
-            return 200 '${builtins.toJSON client}';
-          '';
+        locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
+        locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
       };
     };
 
