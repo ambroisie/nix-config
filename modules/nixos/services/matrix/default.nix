@@ -117,10 +117,11 @@ in
         root = pkgs.element-web.override {
           conf = {
             default_server_config = clientConfig;
-            showLabsSettings = true;
-            defaultCountryCode = "FR"; # cocorico
-            roomDirectory = {
+            show_labs_settings = true;
+            default_country_code = "FR"; # cocorico
+            room_directory = {
               "servers" = [
+                domain
                 "matrix.org"
                 "mozilla.org"
               ];
