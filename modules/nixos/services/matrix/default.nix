@@ -10,13 +10,11 @@
 let
   cfg = config.my.services.matrix;
 
-  federationPort = { public = 8448; private = 11338; };
-  clientPort = { public = 443; private = 11339; };
   domain = config.networking.domain;
   matrixDomain = "matrix.${domain}";
 
   serverConfig = {
-    "m.server" = "${matrixDomain}:${toString federationPort.public}";
+    "m.server" = "${matrixDomain}:443";
   };
   clientConfig = {
     "m.homeserver" = {
@@ -38,6 +36,13 @@ in
 {
   options.my.services.matrix = with lib; {
     enable = mkEnableOption "Matrix Synapse";
+
+    port = mkOption {
+      type = types.port;
+      default = 8448;
+      example = 8008;
+      description = "Internal port for listeners";
+    };
 
     secretFile = mkOption {
       type = with types; nullOr str;
@@ -78,22 +83,22 @@ in
         enable_registration = false;
 
         listeners = [
-          # Federation
           {
+            inherit (cfg) port;
             bind_addresses = [ "::1" ];
-            port = federationPort.private;
-            tls = false; # Terminated by nginx.
+            type = "http";
+            tls = false;
             x_forwarded = true;
-            resources = [{ names = [ "federation" ]; compress = false; }];
-          }
-
-          # Client
-          {
-            bind_addresses = [ "::1" ];
-            port = clientPort.private;
-            tls = false; # Terminated by nginx.
-            x_forwarded = true;
-            resources = [{ names = [ "client" ]; compress = false; }];
+            resources = [
+              {
+                names = [ "client" ];
+                compress = true;
+              }
+              {
+                names = [ "federation" ];
+                compress = false;
+              }
+            ];
           }
         ];
 
@@ -130,11 +135,8 @@ in
         };
       };
       # Dummy VHosts for port collision detection
-      matrix-federation = {
-        port = federationPort.private;
-      };
-      matrix-client = {
-        port = clientPort.private;
+      matrix-dummy = {
+        inherit (cfg) port;
       };
     };
 
@@ -144,45 +146,15 @@ in
         onlySSL = true;
         useACMEHost = domain;
 
-        locations =
-          let
-            proxyToClientPort = {
-              proxyPass = "http://[::1]:${toString clientPort.private}";
-            };
-          in
-          {
-            # Or do a redirect instead of the 404, or whatever is appropriate
-            # for you. But do not put a Matrix Web client here! See the
-            # Element web section below.
-            "/".return = "404";
+        locations = {
+          # Or do a redirect instead of the 404, or whatever is appropriate
+          # for you. But do not put a Matrix Web client here! See the
+          # Element web section below.
+          "/".return = "404";
 
-            "/_matrix" = proxyToClientPort;
-            "/_synapse/client" = proxyToClientPort;
-          };
-
-        listen = [
-          { addr = "0.0.0.0"; port = clientPort.public; ssl = true; }
-          { addr = "[::]"; port = clientPort.public; ssl = true; }
-        ];
-
-      };
-
-      # same as above, but listening on the federation port
-      "${matrixDomain}_federation" = {
-        onlySSL = true;
-        serverName = matrixDomain;
-        useACMEHost = domain;
-
-        locations."/".return = "404";
-
-        locations."/_matrix" = {
-          proxyPass = "http://[::1]:${toString federationPort.private}";
+          "/_matrix".proxyPass = "http://[::1]:${toString cfg.port}";
+          "/_synapse/client".proxyPass = "http://[::1]:${toString cfg.port}";
         };
-
-        listen = [
-          { addr = "0.0.0.0"; port = federationPort.public; ssl = true; }
-          { addr = "[::]"; port = federationPort.public; ssl = true; }
-        ];
       };
 
       "${domain}" = {
@@ -196,11 +168,6 @@ in
 
     # For administration tools.
     environment.systemPackages = [ pkgs.matrix-synapse ];
-
-    networking.firewall.allowedTCPPorts = [
-      clientPort.public
-      federationPort.public
-    ];
 
     my.services.backup = {
       paths = [
