@@ -146,7 +146,7 @@ in
             "/".return = "404";
 
             "/_matrix".proxyPass = "http://[::1]:${toString cfg.port}";
-            "/_synapse/client".proxyPass = "http://[::1]:${toString cfg.port}";
+            "/_synapse".proxyPass = "http://[::1]:${toString cfg.port}";
           };
         };
       };
