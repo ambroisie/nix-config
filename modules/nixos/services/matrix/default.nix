@@ -134,29 +134,26 @@ in
           };
         };
       };
-      # Dummy VHosts for port collision detection
-      matrix-dummy = {
+      matrix = {
+        # Somewhat unused, but necessary for port collision detection
         inherit (cfg) port;
+
+        extraConfig = {
+          locations = {
+            # Or do a redirect instead of the 404, or whatever is appropriate
+            # for you. But do not put a Matrix Web client here! See the
+            # Element web section below.
+            "/".return = "404";
+
+            "/_matrix".proxyPass = "http://[::1]:${toString cfg.port}";
+            "/_synapse/client".proxyPass = "http://[::1]:${toString cfg.port}";
+          };
+        };
       };
     };
 
     # Those are too complicated to use my wrapper...
     services.nginx.virtualHosts = {
-      ${matrixDomain} = {
-        onlySSL = true;
-        useACMEHost = domain;
-
-        locations = {
-          # Or do a redirect instead of the 404, or whatever is appropriate
-          # for you. But do not put a Matrix Web client here! See the
-          # Element web section below.
-          "/".return = "404";
-
-          "/_matrix".proxyPass = "http://[::1]:${toString cfg.port}";
-          "/_synapse/client".proxyPass = "http://[::1]:${toString cfg.port}";
-        };
-      };
-
       "${domain}" = {
         forceSSL = true;
         useACMEHost = domain;
