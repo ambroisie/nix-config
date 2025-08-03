@@ -10,6 +10,8 @@
 let
   cfg = config.my.services.matrix;
 
+  adminPkg = pkgs.synapse-admin-etkecc;
+
   domain = config.networking.domain;
   matrixDomain = "matrix.${domain}";
 
@@ -147,6 +149,22 @@ in
 
             "/_matrix".proxyPass = "http://[::1]:${toString cfg.port}";
             "/_synapse".proxyPass = "http://[::1]:${toString cfg.port}";
+
+            "= /admin".return = "307 /admin/";
+            "/admin/" = {
+              alias = "${adminPkg}/";
+              priority = 500;
+              tryFiles = "$uri $uri/ /index.html";
+            };
+            "~ ^/admin/.*\\.(?:css|js|jpg|jpeg|gif|png|svg|ico|woff|woff2|ttf|eot|webp)$" = {
+              priority = 400;
+              root = adminPkg;
+              extraConfig = ''
+                rewrite ^/admin/(.*)$ /$1 break;
+                expires 30d;
+                more_set_headers "Cache-Control: public";
+              '';
+            };
           };
         };
       };
