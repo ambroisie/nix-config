@@ -1,10 +1,4 @@
-# Matrix homeserver setup, using different endpoints for federation and client
-# traffic. The main trick for this is defining two nginx servers endpoints for
-# matrix.domain.com, each listening on different ports.
-#
-# Configuration shamelessly stolen from [1]
-#
-# [1]: https://github.com/alarsyo/nixos-config/blob/main/services/matrix.nix
+# Matrix homeserver setup.
 { config, lib, pkgs, ... }:
 
 let
