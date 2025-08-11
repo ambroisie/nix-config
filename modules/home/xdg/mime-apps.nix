@@ -44,7 +44,7 @@ in
         spreadsheet = "spreadsheet editor";
         text = "word processor";
       };
-      terminal = "terminal";
+      terminal = "terminal"; # FIXME: should it also set `xdg.terminal-exec.settings.default`?
       torrent = "bittorrent client";
     };
   };
