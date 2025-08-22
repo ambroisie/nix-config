@@ -4,7 +4,7 @@ let
   inherit (config.my.home.terminal) colors;
 in
 {
-  config = lib.mkIf (cfg.program == "alacritty") {
+  config = lib.mkIf (cfg.default == "alacritty") {
     programs.alacritty = {
       enable = true;
 
