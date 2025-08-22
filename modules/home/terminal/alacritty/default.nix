@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  cfg = config.my.home.terminal;
+  cfg = config.my.home.terminal.alacritty;
   inherit (config.my.home.terminal) colors;
 in
 {
@@ -8,9 +8,15 @@ in
     default = mkOption {
       type = with types; nullOr (enum [ "alacritty" ]);
     };
+
+    alacritty = {
+      enable = mkEnableOption "alacritty" // {
+        default = config.my.home.terminal.default == "alacritty";
+      };
+    };
   };
 
-  config = lib.mkIf (cfg.default == "alacritty") {
+  config = lib.mkIf cfg.enable {
     programs.alacritty = {
       enable = true;
 
