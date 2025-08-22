@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.my.home.terminal;
+  cfg = config.my.home.terminal.termite;
   inherit (config.my.home.terminal) colors;
 in
 {
@@ -8,9 +8,15 @@ in
     default = mkOption {
       type = with types; nullOr (enum [ "termite" ]);
     };
+
+    termite = {
+      enable = mkEnableOption "termite" // {
+        default = config.my.home.terminal.default == "termite";
+      };
+    };
   };
 
-  config = lib.mkIf (cfg.default == "termite") {
+  config = lib.mkIf cfg.enable {
     programs.termite = {
       enable = true;
 
