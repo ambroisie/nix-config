@@ -4,7 +4,7 @@ let
   inherit (config.my.home.terminal) colors;
 in
 {
-  config = lib.mkIf (cfg.program == "termite") {
+  config = lib.mkIf (cfg.default == "termite") {
     programs.termite = {
       enable = true;
 
