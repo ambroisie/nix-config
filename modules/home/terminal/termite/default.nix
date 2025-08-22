@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.my.home.terminal;
+  inherit (config.my.home.terminal) colors;
 in
 {
   config = lib.mkIf (cfg.program == "termite") {
@@ -24,11 +25,11 @@ in
 
 
       # Colors
-      backgroundColor = cfg.colors.background;
-      cursorColor = cfg.colors.cursor;
-      foregroundColor = cfg.colors.foreground;
-      foregroundBoldColor = cfg.colors.foregroundBold;
-      colorsExtra = with cfg.colors; ''
+      backgroundColor = colors.background;
+      cursorColor = colors.cursor;
+      foregroundColor = colors.foreground;
+      foregroundBoldColor = colors.foregroundBold;
+      colorsExtra = with colors; ''
         # Normal colors
         color0 = ${black}
         color1 = ${red}
