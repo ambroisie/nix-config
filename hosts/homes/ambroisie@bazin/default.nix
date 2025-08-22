@@ -22,6 +22,10 @@
       package = pkgs.emptyDirectory;
     };
 
+    jujutsu = {
+      package = pkgs.emptyDirectory;
+    };
+
     tmux = {
       # I use scripts that use the passthrough sequence often on this host
       enablePassthrough = true;
