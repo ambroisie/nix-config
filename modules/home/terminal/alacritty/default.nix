@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.my.home.terminal;
+  inherit (config.my.home.terminal) colors;
 in
 {
   config = lib.mkIf (cfg.program == "alacritty") {
@@ -14,36 +15,36 @@ in
 
         colors = {
           primary = {
-            background = cfg.colors.background;
-            foreground = cfg.colors.foreground;
+            background = colors.background;
+            foreground = colors.foreground;
 
-            bright_foreground = cfg.colors.foregroundBold;
+            bright_foreground = colors.foregroundBold;
           };
 
           cursor = {
-            cursor = cfg.colors.cursor;
+            cursor = colors.cursor;
           };
 
           normal = {
-            black = cfg.colors.black;
-            red = cfg.colors.red;
-            green = cfg.colors.green;
-            yellow = cfg.colors.yellow;
-            blue = cfg.colors.blue;
-            magenta = cfg.colors.magenta;
-            cyan = cfg.colors.cyan;
-            white = cfg.colors.white;
+            black = colors.black;
+            red = colors.red;
+            green = colors.green;
+            yellow = colors.yellow;
+            blue = colors.blue;
+            magenta = colors.magenta;
+            cyan = colors.cyan;
+            white = colors.white;
           };
 
           bright = {
-            black = cfg.colors.blackBold;
-            red = cfg.colors.redBold;
-            green = cfg.colors.greenBold;
-            yellow = cfg.colors.yellowBold;
-            blue = cfg.colors.blueBold;
-            magenta = cfg.colors.magentaBold;
-            cyan = cfg.colors.cyanBold;
-            white = cfg.colors.whiteBold;
+            black = colors.blackBold;
+            red = colors.redBold;
+            green = colors.greenBold;
+            yellow = colors.yellowBold;
+            blue = colors.blueBold;
+            magenta = colors.magentaBold;
+            cyan = colors.cyanBold;
+            white = colors.whiteBold;
           };
         };
       };
