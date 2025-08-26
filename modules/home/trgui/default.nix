@@ -13,5 +13,9 @@ in
     home.packages = [
       cfg.package
     ];
+
+    my.home.xdg.mime-apps = {
+      applications.torrent = "TrguiNG.desktop";
+    };
   };
 }
