@@ -38,6 +38,14 @@
       };
     };
 
+    xdg = {
+      mime-apps = {
+        applications = {
+          browser = "garcon_host_browser.desktop";
+        };
+      };
+    };
+
     zsh = {
       notify = {
         enable = true;
