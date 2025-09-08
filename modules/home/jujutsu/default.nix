@@ -49,6 +49,7 @@ in
         };
 
         # FIXME: git equivalents
+        # I'd like a better formatted blame (more like delta's?)
         # blame = {
         #   coloring = "repeatedLines";
         #   markIgnoredLines = true;
