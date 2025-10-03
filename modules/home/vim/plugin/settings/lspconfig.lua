@@ -30,38 +30,20 @@ vim.lsp.config("*", {
     on_attach = lsp.on_attach,
 })
 
--- C/C++
-if utils.is_executable("clangd") then
-    vim.lsp.enable("clangd")
-end
-
--- Haskell
-if utils.is_executable("haskell-language-server-wrapper") then
-    vim.lsp.enable("hls")
-end
-
--- Nix
-if utils.is_executable("nil") then
-    vim.lsp.enable("nil_ls")
-end
-
--- Python
-if utils.is_executable("pyright") then
-    vim.lsp.enable("pyright")
-end
-
-if utils.is_executable("ruff") then
-    vim.lsp.enable("ruff")
-end
-
--- Rust
-if utils.is_executable("rust-analyzer") then
-    vim.lsp.enable("rust_analyzer")
-end
-
--- Shell
-if utils.is_executable("bash-language-server") then
-    vim.lsp.config("bashls", {
+local servers = {
+    -- C/C++
+    clangd = {},
+    -- Haskell
+    hls = {},
+    -- Nix
+    nil_ls = {},
+    -- Python
+    pyright = {},
+    ruff = {},
+    -- Rust
+    rust_analyzer = {},
+    -- Shell
+    bashls = {
         filetypes = { "bash", "sh", "zsh" },
         settings = {
             bashIde = {
@@ -73,20 +55,17 @@ if utils.is_executable("bash-language-server") then
                 },
             },
         },
-    })
-    vim.lsp.enable("bashls")
-end
+    },
+    -- Starlark
+    starpls = {},
+    -- Generic
+    harper_ls = {},
+    typos_lsp = {},
+}
 
--- Starlark
-if utils.is_executable("starpls") then
-    vim.lsp.enable("starpls")
-end
-
--- Generic
-if utils.is_executable("harper-ls") then
-    vim.lsp.enable("harper_ls")
-end
-
-if utils.is_executable("typos-lsp") then
-    vim.lsp.enable("typos_lsp")
+for server, config in pairs(servers) do
+    if not vim.tbl_isempty(config) then
+        vim.lsp.config(server, config)
+    end
+    vim.lsp.enable(server)
 end
