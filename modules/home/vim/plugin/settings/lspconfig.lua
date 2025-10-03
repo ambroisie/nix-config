@@ -1,4 +1,3 @@
-local lspconfig = require("lspconfig")
 local lsp = require("ambroisie.lsp")
 local utils = require("ambroisie.utils")
 
@@ -25,59 +24,45 @@ vim.diagnostic.config({
 -- Inform servers we are able to do completion, snippets, etc...
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+-- Shared configuration
+vim.lsp.config("*", {
+    capabilities = capabilities,
+    on_attach = lsp.on_attach,
+})
+
 -- C/C++
 if utils.is_executable("clangd") then
-    lspconfig.clangd.setup({
-        capabilities = capabilities,
-        on_attach = lsp.on_attach,
-    })
+    vim.lsp.enable("clangd")
 end
 
 -- Haskell
 if utils.is_executable("haskell-language-server-wrapper") then
-    lspconfig.hls.setup({
-        capabilities = capabilities,
-        on_attach = lsp.on_attach,
-    })
+    vim.lsp.enable("hls")
 end
 
 -- Nix
 if utils.is_executable("nil") then
-    lspconfig.nil_ls.setup({
-        capabilities = capabilities,
-        on_attach = lsp.on_attach,
-    })
+    vim.lsp.enable("nil_ls")
 end
 
 -- Python
 if utils.is_executable("pyright") then
-    lspconfig.pyright.setup({
-        capabilities = capabilities,
-        on_attach = lsp.on_attach,
-    })
+    vim.lsp.enable("pyright")
 end
 
 if utils.is_executable("ruff") then
-    lspconfig.ruff.setup({
-        capabilities = capabilities,
-        on_attach = lsp.on_attach,
-    })
+    vim.lsp.enable("ruff")
 end
 
 -- Rust
 if utils.is_executable("rust-analyzer") then
-    lspconfig.rust_analyzer.setup({
-        capabilities = capabilities,
-        on_attach = lsp.on_attach,
-    })
+    vim.lsp.enable("rust_analyzer")
 end
 
 -- Shell
 if utils.is_executable("bash-language-server") then
-    lspconfig.bashls.setup({
+    vim.lsp.config("bashls", {
         filetypes = { "bash", "sh", "zsh" },
-        capabilities = capabilities,
-        on_attach = lsp.on_attach,
         settings = {
             bashIde = {
                 shfmt = {
@@ -89,27 +74,19 @@ if utils.is_executable("bash-language-server") then
             },
         },
     })
+    vim.lsp.enable("bashls")
 end
 
 -- Starlark
 if utils.is_executable("starpls") then
-    lspconfig.starpls.setup({
-        capabilities = capabilities,
-        on_attach = lsp.on_attach,
-    })
+    vim.lsp.enable("starpls")
 end
 
 -- Generic
 if utils.is_executable("harper-ls") then
-    lspconfig.harper_ls.setup({
-        capabilities = capabilities,
-        on_attach = lsp.on_attach,
-    })
+    vim.lsp.enable("harper_ls")
 end
 
 if utils.is_executable("typos-lsp") then
-    lspconfig.typos_lsp.setup({
-        capabilities = capabilities,
-        on_attach = lsp.on_attach,
-    })
+    vim.lsp.enable("typos_lsp")
 end
