@@ -40,6 +40,11 @@ in
           lola = [ "lol" "-r" "all()" ];
         };
 
+        ui = {
+          # Stop nagging me about it, though I am not a fan of its UI.
+          diff-editor = ":builtin";
+        };
+
         templates = {
           # Equivalent to `commit.verbose = true` in Git
           draft_commit_description = "commit_description_verbose(self)";
