@@ -41,6 +41,8 @@ in
         };
 
         ui = {
+          # Stop nagging me about it, though I am not a fan of its UI.
+          diff-editor = ":builtin";
           # I don't like word-diff
           diff-formatter = ":git";
           # Does not honor `$PAGER` (anymore)
