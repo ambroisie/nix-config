@@ -52,6 +52,7 @@ in
 
     # `jj log -p` does not use `delta`
     # https://github.com/jj-vcs/jj/issues/4142
+    # FIXME: use `enableJujutsuIntegration` (https://github.com/nix-community/home-manager/pull/8070)
     programs.jujutsu = lib.mkIf cfg.jujutsu.enable {
       settings = {
         merge-tools = {
