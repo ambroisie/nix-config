@@ -209,7 +209,7 @@
       },
       "original": {
         "owner": "nix-community",
-        "ref": "master",
+        "ref": "main",
         "repo": "NUR",
         "type": "github"
       }
