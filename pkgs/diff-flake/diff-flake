@@ -32,7 +32,7 @@ add_home() {
     FLAKE_OUTPUTS+=("homeConfigurations.\"$1\".activationPackage")
 }
 
-add_host() {
+add_nixos() {
     FLAKE_OUTPUTS+=("nixosConfigurations.\"$1\".config.system.build.toplevel")
 }
 
@@ -70,7 +70,7 @@ usage() {
     print_err "    specify the name of a home-manager output configuration whose"
     print_err "    closure should be diffed, can be used multiple times"
     print_err "    if no configuration name is given, defaults to current username"
-    print_err "  --host [name]"
+    print_err "  --nixos [name]"
     print_err "    specify the name of a NixOS output configuration whose"
     print_err "    closure should be diffed, can be used multiple times"
     print_err "    if no host name is given, defaults to current hostname"
@@ -133,12 +133,12 @@ parse_args() {
                     add_home "$USER"
                 fi
                 ;;
-            --host)
+            --nixos)
                 if [ $# -gt 0 ] && ! is_option "$1"; then
-                    add_host "$1"
+                    add_nixos "$1"
                     shift
                 else
-                    add_host "$(hostname)"
+                    add_nixos "$(hostname)"
                 fi
                 ;;
             --shell)
@@ -225,8 +225,8 @@ if [ "${#FLAKE_OUTPUTS[@]}" -eq 0 ]; then
     for home in $(list_home_configurations); do
         add_home "$home"
     done
-    for host in $(list_nixos_configurations); do
-        add_host "$host"
+    for nixos in $(list_nixos_configurations); do
+        add_nixos "$nixos"
     done
     for shell in $(list_dev_shells); do
         add_shell "$shell"
