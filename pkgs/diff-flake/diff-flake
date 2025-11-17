@@ -24,6 +24,10 @@ current_system() {
     nix eval --raw --impure --expr 'builtins.currentSystem'
 }
 
+add_darwin() {
+    FLAKE_OUTPUTS+=("darwinConfigurations.\"$1\".config.system.build.toplevel")
+}
+
 add_home() {
     FLAKE_OUTPUTS+=("homeConfigurations.\"$1\".activationPackage")
 }
@@ -54,6 +58,10 @@ usage() {
     print_err "  -p, --previous-rev"
     print_err "    which git revision should be considered the 'previous' state,"
     print_err "    defaults to HEAD~"
+    print_err "  --darwin [name]"
+    print_err "    specify the name of a nix-darwin output configuration whose"
+    print_err "    closure should be diffed, can be used multiple times"
+    print_err "    if no host name is given, defaults to current hostname"
     print_err "  --home [name]"
     print_err "    specify the name of a home-manager output configuration whose"
     print_err "    closure should be diffed, can be used multiple times"
@@ -101,6 +109,14 @@ parse_args() {
                 PREVIOUS_REV="$(git rev-parse "$1")"
                 shift
                 ;;
+            --darwin)
+                if [ $# -gt 0 ] && ! is_option "$1"; then
+                    add_darwin "$1"
+                    shift
+                else
+                    add_darwin "$(hostname)"
+                fi
+                ;;
             --home)
                 if [ $# -gt 0 ] && ! is_option "$1"; then
                     add_home "$1"
@@ -136,6 +152,12 @@ parse_args() {
                 ;;
         esac
     done
+}
+
+list_darwin_configurations() {
+    nix eval '.#darwinConfigurations' \
+        --apply 'attrs: with builtins; concatStringsSep "\n" (attrNames attrs)' \
+        --raw
 }
 
 list_home_configurations() {
@@ -175,6 +197,9 @@ diff_output() {
 parse_args "$@"
 
 if [ "${#FLAKE_OUTPUTS[@]}" -eq 0 ]; then
+    for darwin in $(list_darwin_configurations); do
+        add_darwin "$darwin"
+    done
     for home in $(list_home_configurations); do
         add_home "$home"
     done
