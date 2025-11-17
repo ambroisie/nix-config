@@ -77,6 +77,8 @@ in
         MemoryMax = "33%";
         # Avoid errors due to high number of open files.
         LimitNOFILE = 1048576;
+        # Longer stop timeout to finish all torrents
+        TimeoutStopSec = "5m";
       };
     };
 
