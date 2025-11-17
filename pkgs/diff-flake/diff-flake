@@ -41,6 +41,10 @@ add_shell() {
     FLAKE_OUTPUTS+=("devShells.\"$(current_system)\".\"$1\".inputDerivation")
 }
 
+add_system() {
+    FLAKE_OUTPUTS+=("systemConfigs.\"$1\".config.system.build.toplevel")
+}
+
 usage() {
     print_err "Usage: $0 [option]... [-- [nix build option]...]"
     print_err ""
@@ -74,6 +78,10 @@ usage() {
     print_err "    specify a specific devShell configuration name whose closure"
     print_err "    should be diffed, can be used multiple times"
     print_err "    if no name is given, defaults to 'default'"
+    print_err "  --system [name]"
+    print_err "    specify the name of a system-manager output configuration whose"
+    print_err "    closure should be diffed, can be used multiple times"
+    print_err "    if no host name is given, defaults to current hostname"
     print_err ""
     print_err "when no flake outputs are specified, automatically queries for"
     print_err "all NixOS configurations, and devShells for current system"
@@ -141,6 +149,14 @@ parse_args() {
                     add_shell "default"
                 fi
                 ;;
+            --system)
+                if [ $# -gt 0 ] && ! is_option "$1"; then
+                    add_system "$1"
+                    shift
+                else
+                    add_system "$(hostname)"
+                fi
+                ;;
             --)
                 NIX_BUILD_ARGS=("$@")
                 break
@@ -178,6 +194,12 @@ list_dev_shells() {
         --raw
 }
 
+list_system_configurations() {
+    nix eval '.#systemConfigs' \
+        --apply 'attrs: with builtins; concatStringsSep "\n" (attrNames attrs)' \
+        --raw
+}
+
 diff_output() {
     local PREV NEW
     PREV="$(mktemp --dry-run)"
@@ -208,6 +230,9 @@ if [ "${#FLAKE_OUTPUTS[@]}" -eq 0 ]; then
     done
     for shell in $(list_dev_shells); do
         add_shell "$shell"
+    done
+    for system in $(list_system_configurations); do
+        add_system "$system"
     done
 fi
 
