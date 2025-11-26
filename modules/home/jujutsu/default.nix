@@ -45,6 +45,8 @@ in
           diff-editor = ":builtin";
           # I don't like word-diff
           diff-formatter = ":git";
+          # Stop nagging me about it, though I am not a fan of its UI.
+          merge-editor = ":builtin";
           # Does not honor `$PAGER` (anymore)
           pager = lib.mkDefault config.home.sessionVariables.PAGER;
         };
