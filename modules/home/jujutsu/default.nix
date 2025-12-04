@@ -43,6 +43,8 @@ in
         ui = {
           # I don't like word-diff
           diff-formatter = ":git";
+          # Does not honor `$PAGER` (anymore)
+          pager = lib.mkDefault config.home.sessionVariables.PAGER;
         };
 
         "--scope" = [
