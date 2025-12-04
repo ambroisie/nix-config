@@ -40,6 +40,11 @@ in
           lola = [ "lol" "-r" "all()" ];
         };
 
+        ui = {
+          # I don't like word-diff
+          diff-formatter = ":git";
+        };
+
         "--scope" = [
           # Multiple identities
           {
