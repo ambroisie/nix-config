@@ -19,6 +19,7 @@ in
     };
 
     xdg.configFile."lesskey".text = ''
+      #command
       # Quit without clearing the screen on `Q`
       Q toggle-option -!^Predraw-on-quit\nq
     '';
