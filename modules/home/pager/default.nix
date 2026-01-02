@@ -9,6 +9,16 @@ in
 
 
   config = lib.mkIf cfg.enable {
+    programs.less = {
+      enable = true;
+
+      config = ''
+        #command
+        # Quit without clearing the screen on `Q`
+        Q toggle-option -!^Predraw-on-quit\nq
+      '';
+    };
+
     home.sessionVariables = {
       # My default pager
       PAGER = "less";
@@ -17,11 +27,5 @@ in
       # Better XDG compliance
       LESSHISTFILE = "${config.xdg.stateHome}/less/history";
     };
-
-    xdg.configFile."lesskey".text = ''
-      #command
-      # Quit without clearing the screen on `Q`
-      Q toggle-option -!^Predraw-on-quit\nq
-    '';
   };
 }
