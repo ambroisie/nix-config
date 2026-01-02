@@ -22,8 +22,19 @@ in
     home.sessionVariables = {
       # My default pager
       PAGER = "less";
-      # Clear the screen on start and exit
-      LESS = "-R -+X -c";
+      # Set `LESS` in the environment so it overrides git's pager (and others)
+      LESS =
+        let
+          options = {
+            # Always use the alternate screen (so that it is cleared on exit)
+            "+no-init" = true;
+            # Write text top-down, rather than from the bottom
+            clear-screen = true;
+            # Interpret (some) escape sequences
+            RAW-CONTROL-CHARS = true;
+          };
+        in
+        lib.concatStringsSep " " (lib.cli.toCommandLineGNU { } options);
       # Better XDG compliance
       LESSHISTFILE = "${config.xdg.stateHome}/less/history";
     };
