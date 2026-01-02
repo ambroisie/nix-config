@@ -35,8 +35,6 @@ in
           };
         in
         lib.concatStringsSep " " (lib.cli.toCommandLineGNU { } options);
-      # Better XDG compliance
-      LESSHISTFILE = "${config.xdg.stateHome}/less/history";
     };
   };
 }
