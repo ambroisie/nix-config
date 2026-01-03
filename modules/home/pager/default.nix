@@ -48,6 +48,8 @@ in
             clear-screen = true;
             # Interpret (some) escape sequences
             RAW-CONTROL-CHARS = true;
+            # Use colored text in search and UI
+            use-color = true;
           };
         in
         lib.concatStringsSep " " (lib.cli.toCommandLineGNU { } options);
