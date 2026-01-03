@@ -16,6 +16,22 @@ in
         #command
         # Quit without clearing the screen on `Q`
         Q toggle-option -!^Predraw-on-quit\nq
+
+        #line-edit
+        # readline-style command editing
+        ^p up
+        ^n down
+        ^b left
+        ^f right
+        ^a home
+        ^e end
+        \eb word-left
+        \ef word-right
+        ^w word-backspace
+        \ed word-delete
+        # Simulate delete to start/end of line by repeating word-wise actions
+        ^u word-backspace ${lib.strings.replicate 100 "^w"}
+        ^k word-delete ${lib.strings.replicate 100 "\\ed"}
       '';
     };
 
