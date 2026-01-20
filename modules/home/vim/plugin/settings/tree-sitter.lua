@@ -1,4 +1,4 @@
-local ts_config = require("nvim-treesitter.configs")
+local treesitter = require("nvim-treesitter")
 local ts_select = require("nvim-treesitter-textobjects.select")
 local ts_move = require("nvim-treesitter-textobjects.move")
 local utils = require("ambroisie.utils")
@@ -54,17 +54,6 @@ local moves = {
 wk.add(objects)
 wk.add(moves)
 
-ts_config.setup({
-    highlight = {
-        enable = true,
-        -- Avoid duplicate highlighting
-        additional_vim_regex_highlighting = false,
-    },
-    indent = {
-        enable = true,
-    },
-})
-
 require("nvim-treesitter-textobjects").setup({
     select = {
         -- Jump to matching text objects
@@ -74,4 +63,33 @@ require("nvim-treesitter-textobjects").setup({
         -- Add to jump list
         set_jumps = true,
     },
+})
+
+-- Automatically setup treesitter for supported filetypes
+local function treesitter_try_attach(buf, language)
+    -- Try to load language
+    -- NOTE: the best way I found to check if a filetype has a grammar
+    if not vim.treesitter.language.add(language) then
+        return false
+    end
+
+    -- Syntax highlighting
+    vim.treesitter.start(buf, language)
+    -- Indentation
+    vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+
+    return true
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*",
+    group = vim.api.nvim_create_augroup("treesitter_attach", { clear = true }),
+    callback = function(args)
+        local buf, filetype = args.buf, args.match
+        local language = vim.treesitter.language.get_lang(filetype)
+        if not language then
+            return
+        end
+        treesitter_try_attach(buf, language)
+    end,
 })

@@ -60,8 +60,8 @@ in
       nvim-lspconfig # Easy LSP configuration
       lsp-format-nvim # Simplified formatting configuration
       none-ls-nvim # LSP integration for linters and formatters
-      nvim-treesitter-legacy.withAllGrammars # Better highlighting
-      nvim-treesitter-textobjects-legacy # More textobjects
+      nvim-treesitter.withAllGrammars # Better highlighting
+      nvim-treesitter-textobjects # More textobjects
       plenary-nvim # 'null-ls', 'telescope' dependency
 
       # Completion
