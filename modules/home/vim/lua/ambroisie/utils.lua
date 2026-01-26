@@ -34,20 +34,6 @@ M.is_ssh = function()
     return false
 end
 
---- list all active LSP clients for specific buffer, or all buffers
---- @param bufnr int? buffer number
---- @return table all active LSP client names
-M.list_lsp_clients = function(bufnr)
-    local clients = vim.lsp.get_clients({ bufnr = bufnr })
-    local names = {}
-
-    for _, client in ipairs(clients) do
-        table.insert(names, client.name)
-    end
-
-    return names
-end
-
 --- partially apply a function with given arguments
 M.partial = function(f, ...)
     local a = { ... }
