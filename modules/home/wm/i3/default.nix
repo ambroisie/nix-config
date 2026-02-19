@@ -387,5 +387,10 @@ in
         };
       };
     };
+
+    # Use a grey background
+    xsession.profileExtra = ''
+      ${lib.getExe pkgs.xsetroot} -solid '#333333'
+    '';
   };
 }
