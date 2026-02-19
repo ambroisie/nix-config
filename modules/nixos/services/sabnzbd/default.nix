@@ -13,6 +13,11 @@ in
     services.sabnzbd = {
       enable = true;
       group = "media";
+
+      # Don't warn about the config file
+      configFile = null;
+      # I want to configure servers outside of Nix
+      allowConfigWrite = true;
     };
 
     # Set-up media group
