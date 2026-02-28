@@ -17,7 +17,7 @@ in
   options.my.home = with lib; {
     terminal = {
       default = mkOption {
-        type = with types; nullOr (enum [ "alacritty" "termite" ]);
+        type = with types; nullOr (enum [ ]);
         default = null;
         example = "termite";
         description = "Which default terminal to use for home session";
