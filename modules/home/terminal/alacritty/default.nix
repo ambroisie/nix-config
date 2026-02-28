@@ -4,6 +4,12 @@ let
   inherit (config.my.home.terminal) colors;
 in
 {
+  options.my.home.terminal = with lib; {
+    default = mkOption {
+      type = with types; nullOr (enum [ "alacritty" ]);
+    };
+  };
+
   config = lib.mkIf (cfg.default == "alacritty") {
     programs.alacritty = {
       enable = true;
