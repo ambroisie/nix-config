@@ -25,7 +25,7 @@ in
         # Use my configured terminal
         term
         # Make it easy to pick out with a window class name
-        "--class tridactyl_editor"
+        "--title=tridactyl_editor"
         # Open vim with the cursor in the correct position
         vimCommandLine
       ];

@@ -136,7 +136,7 @@ in
           inherit modifier;
 
           criteria = [
-            { class = "^tridactyl_editor$"; }
+            { title = "^tridactyl_editor$"; }
             { class = "^Blueman-.*$"; }
             { title = "^htop$"; }
             { class = "^Thunderbird$"; instance = "Mailnews"; window_role = "filterlist"; }
