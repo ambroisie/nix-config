@@ -4,11 +4,19 @@ let
 
   term = config.my.home.terminal.default;
 
-  vimCommandLine = {
-    alacritty = ''-e "vim" "%f" "+normal!%lGzv%c|"'';
-    # Termite wants the whole command in a single argument...
-    termite = ''-e "vim %f '+normal!%lGzv%c|'"'';
-  };
+  vimCommandLine =
+    let
+      # Termite wants the whole command in a single argument...
+      brokenExecCommand = {
+        termite = true;
+      };
+      # Assume most other terminals are sane and not broken...
+      isBroken = brokenExecCommand.${term} or false;
+    in
+    if isBroken then
+      ''-e "vim %f '+normal!%lGzv%c|'"''
+    else
+      ''-e "vim" "%f" "+normal!%lGzv%c|"'';
 in
 {
   config = lib.mkIf cfg.enable {
@@ -19,7 +27,7 @@ in
         # Make it easy to pick out with a window class name
         "--class tridactyl_editor"
         # Open vim with the cursor in the correct position
-        vimCommandLine.${term}
+        vimCommandLine
       ];
     };
   };
