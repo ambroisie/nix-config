@@ -93,7 +93,7 @@ in
         type = types.int;
         default = 15;
         example = 1;
-        description = "Inactive time interval to lock the screen automatically";
+        description = "Inactive time interval (in minutes) to lock the screen automatically";
       };
     };
   };
