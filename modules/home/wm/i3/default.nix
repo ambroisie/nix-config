@@ -71,6 +71,9 @@ in
       xdotool # Used by 'rofi-rbw', in a mapping
     ];
 
+    # Set `i3lock` as the (default) lock command
+    my.home.wm.screen-lock.command = lib.mkDefault "${lib.getExe pkgs.i3lock} -n -c 000000";
+
     xsession.windowManager.i3 = {
       enable = true;
 
