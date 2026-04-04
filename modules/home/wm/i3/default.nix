@@ -56,6 +56,12 @@ let
     '';
 in
 {
+  options.my.home.wm = with lib; {
+    windowManager = mkOption {
+      type = with types; nullOr (enum [ "i3" ]);
+    };
+  };
+
   config = lib.mkIf isEnabled {
     home.packages = with pkgs; [
       ambroisie.dragger # drag-and-drop from the CLI
