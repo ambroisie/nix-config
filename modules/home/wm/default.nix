@@ -68,7 +68,7 @@ in
     };
 
     screen-lock = {
-      enable = mkRelatedOption "automatic X screen locker" [ "i3" ];
+      enable = mkRelatedOption "automatic screen locker" [ "i3" ];
 
       command = mkOption {
         type = types.str;
