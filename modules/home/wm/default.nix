@@ -20,7 +20,7 @@ in
 
   options.my.home.wm = with lib; {
     windowManager = mkOption {
-      type = with types; nullOr (enum [ "i3" ]);
+      type = with types; nullOr (enum [ ]);
       default = null;
       example = "i3";
       description = "Which window manager to use for home session";
