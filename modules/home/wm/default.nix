@@ -27,7 +27,7 @@ in
     };
 
     cursor = {
-      enable = mkRelatedOption "dunst configuration" [ "i3" ];
+      enable = mkRelatedOption "cursor configuration" [ "i3" ];
     };
 
     dunst = {
