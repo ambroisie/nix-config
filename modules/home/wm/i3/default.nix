@@ -47,10 +47,14 @@ let
       if ${systemctlUser} is-active xautolock-session.service; then
         ${systemctlUser} stop --user xautolock-session.service
         xset s off
+        xset s 0 0
+        xset -dpms
         ${notify} "Disabled Xautolock"
       else
         ${systemctlUser} start xautolock-session.service
         xset s on
+        xset s 0 0
+        xset +dpms
         ${notify} "Enabled Xautolock"
       fi
     '';
