@@ -2,13 +2,19 @@
 let
   cfg = config.my.home.wm.screen-lock;
 
-  notificationCmd =
-    let
-      duration = toString (cfg.notify.delay * 1000);
-      notifyCmd = "${lib.getExe pkgs.libnotify} -u critical -t ${duration}";
-    in
-    # Needs to be surrounded by quotes for systemd to launch it correctly
-    ''"${notifyCmd} -- 'Locking in ${toString cfg.notify.delay} seconds'"'';
+  lockNotifier = pkgs.writeShellApplication {
+    name = "lock-notifier";
+    runtimeInputs = [
+      pkgs.libnotify
+    ];
+    text = ''
+      duration=${toString cfg.notify.delay}
+      notify-send \
+        -u critical \
+        -t "$((duration * 1000))" -- \
+        "Locking in $duration seconds"
+    '';
+  };
 in
 {
   config = lib.mkIf cfg.enable {
@@ -24,7 +30,7 @@ in
           "-notify"
           "${toString cfg.notify.delay}"
           "-notifier"
-          notificationCmd
+          (lib.getExe lockNotifier)
         ];
       };
     };
