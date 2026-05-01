@@ -32,9 +32,6 @@ in
   config.programs.firefox = lib.mkIf cfg.enable {
     enable = true;
 
-    # FIXME: migrate to `XDG_CONFIG_HOME`
-    configPath = ".mozilla/firefox";
-
     package = pkgs.firefox.override {
       nativeMessagingHosts = ([ ]
         ++ lib.optional cfg.tridactyl.enable pkgs.tridactyl-native
