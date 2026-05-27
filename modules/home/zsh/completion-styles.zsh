@@ -15,6 +15,8 @@ zstyle ':completion:*' list-dirs-first true
 zstyle ':completion:*' squeeze-slashes true
 # Add colors to processes for kill completion
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+# Separate man sections
+zstyle ':completion:*:manuals' separate-sections true
 
 # match uppercase from lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
