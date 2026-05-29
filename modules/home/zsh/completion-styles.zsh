@@ -28,6 +28,9 @@ zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' '*?.old'
 # on processes completion complete all user processes
 # shellcheck disable=2016
 zstyle ':completion:*:processes' command 'ps -au$USER'
+# Make kill completion more verbose
+# shellcheck disable=2016
+zstyle ':completion:*:*:kill:*:processes' command 'ps -u$USER -o pid,time,args -w -w'
 
 # Completion formatting and messages
 zstyle ':completion:*' verbose yes
