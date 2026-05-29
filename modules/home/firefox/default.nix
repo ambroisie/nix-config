@@ -64,6 +64,7 @@ in
           "browser.newtabpage.activity-stream.section.highlights.includePocket" = false; # Disable pocket
           "browser.tabs.groups.smart.enabled" = false; # No AI
           "browser.tabs.groups.smart.userEnabled" = false; # No AI
+          "browser.urlbar.quicksuggest.enabled" = false; # Sponsored recommendations
           "browser.urlbar.trimURLs" = false; # Always show the `http://` prefix
           "extensions.ml.enabled" = false; # No AI
           "extensions.pocket.enabled" = false; # Disable pocket
