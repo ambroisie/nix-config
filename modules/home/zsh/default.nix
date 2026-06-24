@@ -103,6 +103,9 @@ in
 
         fastSyntaxHighlighting = {
           enable = true;
+          settings = {
+            chroma-nix = "→chroma/-subcommand.ch";
+          };
         };
 
         localVariables = {
