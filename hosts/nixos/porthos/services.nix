@@ -123,11 +123,6 @@ in
       passwordFile = secrets."paperless/password".path;
       secretKeyFile = secrets."paperless/secret-key".path;
     };
-    # Sometimes, editing PDFs is useful
-    pdf-edit = {
-      enable = true;
-      loginFile = secrets."pdf-edit/login".path;
-    };
     # Regular backups
     postgresql-backup.enable = true;
     # RSS provider for websites that do not provide any feeds
@@ -157,6 +152,11 @@ in
     };
     # Because I still need to play sysadmin
     ssh-server.enable = true;
+    # Sometimes, editing PDFs is useful
+    stirling-pdf = {
+      enable = true;
+      loginFile = secrets."stirling-pdf/login".path;
+    };
     # Torrent client and webui
     transmission = {
       enable = true;
