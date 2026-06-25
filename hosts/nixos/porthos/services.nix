@@ -23,6 +23,10 @@ in
       passwordFile = secrets."backup/password".path;
       credentialsFile = secrets."backup/credentials".path;
     };
+    # Sometimes, editing PDFs is useful
+    bentopdf = {
+      enable = true;
+    };
     # My blog and related hosts
     blog.enable = true;
     calibre-web = {
