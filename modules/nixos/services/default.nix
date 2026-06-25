@@ -6,6 +6,7 @@
     ./aria
     ./audiobookshelf
     ./backup
+    ./bentopdf
     ./blog
     ./calibre-web
     ./drone
