@@ -156,11 +156,6 @@ in
     };
     # Because I still need to play sysadmin
     ssh-server.enable = true;
-    # Sometimes, editing PDFs is useful
-    stirling-pdf = {
-      enable = true;
-      loginFile = secrets."stirling-pdf/login".path;
-    };
     # Torrent client and webui
     transmission = {
       enable = true;
