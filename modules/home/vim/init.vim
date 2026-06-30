@@ -81,6 +81,9 @@ set updatetime=250
 " Disable all mouse integrations
 set mouse=
 
+" Use a single-line box for floating window borders
+set winborder=single
+
 " Setup some overrides for gruvbox
 lua << EOF
 local gruvbox = require("gruvbox")
