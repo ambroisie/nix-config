@@ -5,7 +5,7 @@
       default = pkgs.mkShellNoCC {
         name = "NixOS-config";
 
-        nativeBuildInputs = with pkgs; [
+        packages = with pkgs; [
           nixpkgs-fmt
         ];
 
