@@ -7,10 +7,10 @@
 
         packages = with pkgs; [
           nixpkgs-fmt
-        ];
+        ] ++ config.pre-commit.settings.enabledPackages;
 
         shellHook = ''
-          ${config.pre-commit.installationScript}
+          ${config.pre-commit.shellHook}
         '';
       };
     };
