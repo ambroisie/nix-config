@@ -15,5 +15,16 @@ in
 
       inherit (cfg) package;
     };
+
+    config.my.home.xdg.mime-apps = lib.mkIf cfg.enable {
+      applications.office = {
+        database = [ "libreoffice-base.desktop" ];
+        formula = [ "libreoffice-math.desktop" ];
+        graphics = [ "libreoffice-draw.desktop" ];
+        presentation = [ "libreoffice-impress.desktop" ];
+        spreadsheet = [ "libreoffice-calc.desktop" ];
+        text = [ "libreoffice-writer.desktop" ];
+      };
+    };
   };
 }
